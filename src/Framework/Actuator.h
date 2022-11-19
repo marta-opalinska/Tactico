@@ -18,6 +18,8 @@ public:
 	//std::list<Device*> deviceList;
 	Actuator(ActuatorDriver& m_driver);
 	Actuator(ActuatorDriver& m_driver, std::string name);
+	void start();
+	void stop();
 	//Actuator(ActuatorDriver driver, std::string name, Device device);
 	//addToDevice(Device device);
 	//removeFromDevice(Device device);

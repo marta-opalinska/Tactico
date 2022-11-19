@@ -20,3 +20,12 @@ Actuator::Actuator(ActuatorDriver& driver)
 	this->name.append(std::to_string(id));
 };
 
+void Actuator::start()
+{
+	this->m_driver.startActuator();
+};
+
+void Actuator::stop()
+{
+	this->m_driver.stopActuator();
+};
