@@ -7,6 +7,7 @@
 #include "Actuator.h"
 #include <string.h>
 #include <string>
+#include "HapticDevice.h"
 
 
 // TODO: Reference additional headers your program requires here.

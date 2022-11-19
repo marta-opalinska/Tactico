@@ -15,14 +15,13 @@ public:
 	Actuator() = delete;
 	std::string name;
 	ActuatorDriver m_driver;
-	//std::list<Device*> deviceList;
-	Actuator(ActuatorDriver& m_driver);
-	Actuator(ActuatorDriver& m_driver, std::string name);
+	// std::list<Device*> deviceList;
+	Actuator(ActuatorDriver &m_driver);
+	Actuator(ActuatorDriver &m_driver, std::string name);
 	void start();
 	void stop();
-	//Actuator(ActuatorDriver driver, std::string name, Device device);
-	//addToDevice(Device device);
-	//removeFromDevice(Device device);
+	// Actuator(ActuatorDriver driver, std::string name, Device device);
+	// addToDevice(Device device);
+	// removeFromDevice(Device device);
 	~Actuator() = default;
 };
-

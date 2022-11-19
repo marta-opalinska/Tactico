@@ -46,9 +46,8 @@ void ActuatorDriver::editGPIO(int new_GPIO)
 	this->setLowGPIO();
 	this->GPIO_pin = new_GPIO;
 	this->initGPIO();
-}
-;
+};
 
-//void ActuatorDriver::play(int time)
+// void ActuatorDriver::play(int time)
 //{
-//}
+// }
