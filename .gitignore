@@ -34,3 +34,5 @@
 # Platformio & VS
 .pio
 .vs
+Debug/
+Release/
