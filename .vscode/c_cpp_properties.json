@@ -8,8 +8,8 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Visual Studio/Tactico/include",
-                "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Visual Studio/Tactico/src",
+                "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/include",
+                "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/src",
                 "C:/Users/User/.platformio/packages/framework-arduino-mbed/cores/arduino",
                 "C:/Users/User/.platformio/packages/framework-arduino-mbed/cores/arduino/api/deprecated",
                 "C:/Users/User/.platformio/packages/framework-arduino-mbed/cores/arduino/api/deprecated-avr-comp",
@@ -56,8 +56,8 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Visual Studio/Tactico/include",
-                    "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Visual Studio/Tactico/src",
+                    "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/include",
+                    "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/src",
                     "C:/Users/User/.platformio/packages/framework-arduino-mbed/cores/arduino",
                     "C:/Users/User/.platformio/packages/framework-arduino-mbed/cores/arduino/api/deprecated",
                     "C:/Users/User/.platformio/packages/framework-arduino-mbed/cores/arduino/api/deprecated-avr-comp",

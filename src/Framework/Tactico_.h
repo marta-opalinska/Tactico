@@ -1,8 +1,8 @@
 ﻿// Tactico_.h : Include file for standard system include files,
 // or project specific include files.
 
-
-#include <iostream>
+#pragma once
+// #include <iostream>
 #include "ActuatorDriver.h"
 #include "Actuator.h"
 #include <string.h>

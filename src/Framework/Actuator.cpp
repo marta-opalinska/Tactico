@@ -1,6 +1,4 @@
-#pragma once
 #include "Actuator.h"
-#include <string>
 
 int Actuator::nextID = 0;
 std::string Actuator::defaultName = "actuator_";

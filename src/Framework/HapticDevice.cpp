@@ -29,6 +29,20 @@ void HapticDevice::removeActuator(int actuatorIndex)
     this->m_actuatorsList.erase(this->m_actuatorsList.begin() + actuatorIndex);
 };
 
+
+// Remove based on actuator name
+void HapticDevice::removeActuator(std::string name)
+{
+    int i = 0;
+    for (auto &ac : this->m_actuatorsList) {
+        if(ac->name == name){
+           this->removeActuator(i);
+        }
+       i++; 
+    }
+};
+
+
 void HapticDevice::startActuators()
 {
     for (auto &ac : m_actuatorsList) {

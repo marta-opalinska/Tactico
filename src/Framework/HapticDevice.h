@@ -16,6 +16,7 @@ public:
     void addActuator(Actuator* actuator);
     void removeActuator(Actuator* actuator);
     void removeActuator(int actuatorIndex);
+    void removeActuator(std::string name);
     void startActuators();
     void stopActuators();
 };
