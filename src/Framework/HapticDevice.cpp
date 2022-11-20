@@ -1,13 +1,32 @@
-#include "Framework/HapticDevice.h"
+#include "HapticDevice.h"
 
-HapticDevice::HapticDevice(std::vector<Actuator *> actuatorsList)
+int HapticDevice::nextID = 0;
+std::string HapticDevice::defaultName = "device_";
+
+HapticDevice::HapticDevice(std::vector<Actuator *> actuatorsList, std::string name /*=""*/)
 {
     this->m_actuatorsList = actuatorsList;
+    this->id = ++nextID;
+    if (name == ""){
+        this->m_name = defaultName;
+	    this->m_name.append(std::to_string(id));
+    }
+    else{this->m_name = name;}
 }
 
-HapticDevice::HapticDevice(Actuator *signleActuator)
+HapticDevice::HapticDevice(Actuator *signleActuator, std::string name /*=""*/)
 {
     this->m_actuatorsList.push_back(signleActuator);
+    this->id = ++nextID;
+    if (name == ""){
+        this->m_name = defaultName;
+	    this->m_name.append(std::to_string(id));
+    }
+    else{this->m_name = name;}
+}
+
+void HapticDevice::renameDevice(std::string name){
+    this->m_name = name;
 }
 
 void HapticDevice::addActuator(Actuator *actuator)
@@ -42,13 +61,28 @@ void HapticDevice::removeActuator(std::string name)
     int i = 0;
     for (auto &ac : this->m_actuatorsList)
     {
-        if (ac->name == name)
+        if (ac->m_name == name)
         {
             this->removeActuator(i);
         }
         i++;
     }
 };
+
+void HapticDevice::swapActuator(Actuator *oldActuator, Actuator *newActuator){
+    this->addActuator(newActuator);
+
+    int position = 0;
+    for (auto &ac : this->m_actuatorsList)
+    {
+        if (ac == oldActuator)
+        {
+            break;
+        }
+        position++;
+    }
+    std::iter_swap(this->m_actuatorsList.begin() + position, this->m_actuatorsList.end());
+}
 
 void HapticDevice::startActuators()
 {

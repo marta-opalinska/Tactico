@@ -8,21 +8,21 @@ Actuator::Actuator(ActuatorDriver& driver, std::string name)
 	:m_driver(driver)
 {
 	this->id = ++nextID;
-	this->name = name;
+	this->m_name = name;
 };
 
 Actuator::Actuator(ActuatorDriver& driver)
 	:m_driver(driver)
 {
 	this->id = ++nextID;
-	this->name = defaultName;
-	this->name.append(std::to_string(id));
+	this->m_name = defaultName;
+	this->m_name.append(std::to_string(id));
 };
 
 void Actuator::start()
 {
 	Serial.print("Actuator ");
-	Serial.print(this->name.c_str());
+	Serial.print(this->m_name.c_str());
 	Serial.print(": \n");
 	this->m_driver.startActuator();
 };
@@ -30,7 +30,7 @@ void Actuator::start()
 void Actuator::stop()
 {
 	Serial.print("Actuator ");
-	Serial.print(this->name.c_str());
+	Serial.print(this->m_name.c_str());
 	Serial.print(": \n");
 	this->m_driver.stopActuator();
 };

@@ -13,7 +13,7 @@ protected:
 
 public:
 	Actuator() = delete;
-	std::string name;
+	std::string m_name;
 	ActuatorDriver m_driver;
 	// std::list<Device*> deviceList;
 	Actuator(ActuatorDriver &m_driver);

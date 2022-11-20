@@ -1,6 +1,7 @@
+#pragma once
 #include "Actuator.h"
 #include <vector>
-#include "Step.cpp"
+#include "Step.h"
 
 class Activity
 {

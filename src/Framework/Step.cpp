@@ -1,6 +1,4 @@
-#include "Actuator.h"
-#include "Arduino.h"
-
+#include "Step.h"
 // class StepWait{
 
 // }
@@ -8,35 +6,6 @@
 // class Step{
 
 // }
-
-// struct {
-//   Actuator* actuator;
-//   bool isStart;
-// } Step;
-
-class Step
-{
-protected:
-    Step() = default;
-    ~Step() = default;
-
-public:
-    void play();
-};
-
-class StepActuator : public Step
-{
-protected:
-    StepActuator() = default;
-
-public:
-    // tep() = default;
-    StepActuator(Actuator *actuator, bool isStart);
-    ~StepActuator() = default;
-    Actuator *actuator;
-    bool isStart;
-    void play();
-};
 
 StepActuator::StepActuator(Actuator *actuator, bool isStart)
 {
@@ -56,20 +25,7 @@ void StepActuator::play()
     }
 }
 
-class StepWait : public Step
-{
-protected:
-    StepWait() = default;
-
-public:
-    // tep() = default;
-    StepWait(int miliseconds);
-    ~StepWait() = default;
-    int waitTime;
-    void play();
-};
-
-StepWait::StepWait(int miliseconds)
+StepWait::StepWait(unsigned int miliseconds)
 {
     this->waitTime = miliseconds;
 }
@@ -77,4 +33,4 @@ StepWait::StepWait(int miliseconds)
 void StepWait::play()
 {
     delay(this->waitTime);
-}
+};
