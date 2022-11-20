@@ -1,11 +1,4 @@
 #include "Step.h"
-// class StepWait{
-
-// }
-
-// class Step{
-
-// }
 
 StepActuator::StepActuator(Actuator *actuator, bool isStart)
 {
