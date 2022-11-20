@@ -19,10 +19,10 @@ protected:
 
 public:
     // tep() = default;
-    StepActuator(Actuator *actuator, bool isStart);
+    StepActuator(Actuator& actuator, bool isStart);
     ~StepActuator() = default;
-    Actuator *actuator;
-    bool isStart;
+    Actuator& m_actuator;
+    bool m_isStart;
     void play();
 };
 
@@ -35,6 +35,6 @@ public:
     // tep() = default;
     StepWait(unsigned int miliseconds);
     ~StepWait() = default;
-    unsigned int waitTime;
+    unsigned int m_waitTime;
     void play();
 };

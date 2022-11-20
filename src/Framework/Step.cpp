@@ -1,29 +1,25 @@
 #include "Step.h"
 
-StepActuator::StepActuator(Actuator *actuator, bool isStart)
-{
-    this->actuator = actuator;
-    this->isStart = isStart;
-}
+StepActuator::StepActuator(Actuator& actuator, bool isStart)
+    : m_actuator(actuator)
+    , m_isStart(isStart){}
 
 void StepActuator::play()
 {
-    if (this->isStart)
+    if (this->m_isStart)
     {
-        this->actuator->start();
+        this->m_actuator->start();
     }
     else
     {
-        this->actuator->stop();
+        this->m_actuator->stop();
     }
 }
 
 StepWait::StepWait(unsigned int miliseconds)
-{
-    this->waitTime = miliseconds;
-}
+    : m_waitTime(miliseconds){}
 
 void StepWait::play()
 {
-    delay(this->waitTime);
+    delay(this->m_waitTime);
 };
