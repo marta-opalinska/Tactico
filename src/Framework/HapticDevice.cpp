@@ -3,9 +3,7 @@
 int HapticDevice::nextID = 0;
 const std::string HapticDevice::defaultName = "device_";
 
-// void calculate(vector<Example>& v)
-
-HapticDevice::HapticDevice(std::vector<Actuator &> actuatorsList, const std::string& name /*=""*/)
+HapticDevice::HapticDevice(std::vector<Actuator *> actuatorsList,  const std::string & name /*=""*/)
     : m_actuatorsList(actuatorsList)
 {
     this->id = ++nextID;
@@ -16,7 +14,7 @@ HapticDevice::HapticDevice(std::vector<Actuator &> actuatorsList, const std::str
     else{this->m_name = name;}
 }
 
-HapticDevice::HapticDevice(Actuator& signleActuator, const std::string& name /*=""*/)
+HapticDevice::HapticDevice(Actuator *signleActuator,  const std::string & name /*=""*/)
 {
     this->m_actuatorsList.push_back(signleActuator);
     this->id = ++nextID;
@@ -27,16 +25,17 @@ HapticDevice::HapticDevice(Actuator& signleActuator, const std::string& name /*=
     else{this->m_name = name;}
 }
 
-void HapticDevice::renameDevice(const std::string& name){
-    this->m_name = name;
-}
+void HapticDevice::renameDevice(const std::string & name)
+    {
+        this->m_name = name;
+    }
 
-void HapticDevice::addActuator(Actuator& actuator)
+void HapticDevice::addActuator(Actuator *actuator)
 {
     this->m_actuatorsList.push_back(actuator);
 };
 
-void HapticDevice::addActuators(std::vector<Actuator &> actuatorsVector)
+void HapticDevice::addActuators(std::vector<Actuator *> actuatorsVector)
 {
     for (auto ac : actuatorsVector)
     {
@@ -44,7 +43,7 @@ void HapticDevice::addActuators(std::vector<Actuator &> actuatorsVector)
     }
 };
 
-void HapticDevice::removeActuator(Actuator& actuator)
+void HapticDevice::removeActuator(Actuator *actuator)
 {
     // v.erase(std::remove_if(v.begin(), v.end(), IsOdd), v.end());
     // The erase–remove idiom which is a common C++ technique
@@ -58,7 +57,7 @@ void HapticDevice::removeActuator(int actuatorIndex)
 };
 
 // Remove based on actuator name
-void HapticDevice::removeActuator(const std::string& name)
+void HapticDevice::removeActuator( const std::string & name)
 {
     int i = 0;
     for (auto &ac : this->m_actuatorsList)
@@ -71,7 +70,7 @@ void HapticDevice::removeActuator(const std::string& name)
     }
 };
 
-void HapticDevice::swapActuator(Actuator& oldActuator, Actuator& newActuator){
+void HapticDevice::swapActuator(Actuator *oldActuator, Actuator *newActuator){
     this->addActuator(newActuator);
 
     int position = 0;

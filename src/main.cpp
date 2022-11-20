@@ -26,13 +26,13 @@ void loop()
 	Actuator ac_2(d, s);
 	Actuator ac_3(d);
 	d.editGPIO(10);
-	std::vector<Actuator &> rightHandActuators = {&ac_2, &ac_3};
+	std::vector<Actuator *> rightHandActuators = {&ac_2, &ac_3};
 	HapticDevice right_hand(rightHandActuators);
 	right_hand.startActuators();
 	delay(500);
 	right_hand.stopActuators();
 	delay(500);
-	right_hand.addActuator(ac);
+	right_hand.addActuator(&ac);
 	right_hand.startActuators();
 	delay(500);
 	right_hand.stopActuators();

@@ -8,11 +8,11 @@ void StepActuator::play()
 {
     if (this->m_isStart)
     {
-        this->m_actuator->start();
+        this->m_actuator.start();
     }
     else
     {
-        this->m_actuator->stop();
+        this->m_actuator.stop();
     }
 }
 
