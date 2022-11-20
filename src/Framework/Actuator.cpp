@@ -2,13 +2,13 @@
 #include "Arduino.h"
 
 int Actuator::nextID = 0;
-std::string Actuator::defaultName = "actuator_";
+const std::string Actuator::defaultName = "actuator_";
 
-Actuator::Actuator(ActuatorDriver& driver, std::string name)
-	:m_driver(driver)
+Actuator::Actuator(ActuatorDriver& driver, const std::string& name)
+	: m_driver(driver)
+	, m_name(name)
 {
 	this->id = ++nextID;
-	this->m_name = name;
 };
 
 Actuator::Actuator(ActuatorDriver& driver)
@@ -32,5 +32,5 @@ void Actuator::stop()
 	Serial.print("Actuator ");
 	Serial.print(this->m_name.c_str());
 	Serial.print(": \n");
-	this->m_driver.stopActuator();
+	this->m_driver.startActuator();
 };

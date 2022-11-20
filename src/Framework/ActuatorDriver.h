@@ -4,7 +4,7 @@ class ActuatorDriver
 
 {
 protected:
-	int GPIO_pin;
+	int m_GPIO_pin;
 	void initGPIO();
 	void setHighGPIO();
 	void setLowGPIO();

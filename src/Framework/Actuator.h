@@ -8,20 +8,21 @@ class Actuator
 
 protected:
 	static int nextID;
-	static std::string defaultName;
+	const static std::string defaultName;
 	int id;
+	ActuatorDriver m_driver;
 
 public:
 	Actuator() = delete;
 	std::string m_name;
-	ActuatorDriver m_driver;
 	// std::list<Device*> deviceList;
-	Actuator(ActuatorDriver &m_driver);
-	Actuator(ActuatorDriver &m_driver, std::string name);
+	Actuator(ActuatorDriver& m_driver);
+	Actuator(ActuatorDriver& m_driver, const std::string& name);
 	void start();
 	void stop();
 	// Actuator(ActuatorDriver driver, std::string name, Device device);
 	// addToDevice(Device device);
 	// removeFromDevice(Device device);
+	void setDriver(ActuatorDriver& m_driver);
 	~Actuator() = default;
 };
