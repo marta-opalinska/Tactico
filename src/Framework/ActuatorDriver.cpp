@@ -29,7 +29,7 @@ void ActuatorDriver::setLowGPIO()
 void ActuatorDriver::startActuator()
 {
 	this->setHighGPIO();
-	Serial.print("Actuator START, GPIO ");
+	Serial.print("Actuator Driver START, GPIO ");
 	Serial.print(this->m_GPIO_pin);
 	Serial.print("\n");
 };

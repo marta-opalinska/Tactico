@@ -58,5 +58,7 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "*.x": "cpp"
-    }
+    },
+    "editor.tabCompletion": "on",
+    "diffEditor.codeLens": true
 }

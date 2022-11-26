@@ -10,7 +10,7 @@ protected:
 	static int nextID;
 	const static std::string defaultName;
 	int id;
-	ActuatorDriver m_driver;
+	ActuatorDriver& m_driver;
 
 public:
 	Actuator() = delete;
