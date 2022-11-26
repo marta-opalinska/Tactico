@@ -8,6 +8,7 @@
 #include <string.h>
 #include <string>
 #include "HapticDevice.h"
+#include "Action.h"
 
 
 // TODO: Reference additional headers your program requires here.

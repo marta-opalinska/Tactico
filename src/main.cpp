@@ -21,6 +21,7 @@ void setup()
 	Serial.print("------------------------------------- \n");
 }
 
+
 void loop()
 {
 	delay(1000);
@@ -30,45 +31,65 @@ void loop()
 		ActuatorDriver driver_1(8);
 		ActuatorDriver driver_2(12);
 		ActuatorDriver driver_3(15);
+		ActuatorDriver driver_4(17);
 		Serial.print("Iniatiation of drivers done. \n");
 		std::string s = "ac_1";
-		Actuator ac(driver_1);
-		ac.start();
-		delay(500);
-		ac.stop();
+		Actuator ac_1(driver_1,s);
 		driver_1.editGPIO(10);
-		ac.start();
-		delay(500);
-		ac.stop();
-		setupDone = true;
-		
-		
 
 
-		// Actuator ac_2(driver_2, s);
-		// Actuator ac_3(driver_3);
+		Actuator ac_2(driver_2);
+		Actuator ac_3(driver_3);
 	
-		// std::vector<Actuator *> rightHandActuators = {&ac_2, &ac_3};
+		// std::vector<Actuator *> rightHandActuators = {&ac_1, &ac_2};
 		// HapticDevice right_hand(rightHandActuators);
+		// Serial.print("Starting RIGHT HAND. \n");
+		// right_hand.addActuator(&ac_3);
 		// right_hand.startActuators();
 		// delay(500);
+		// Serial.print("Stoping RIGHT HAND. \n");
 		// right_hand.stopActuators();
+		// ac_3.setDriver(driver_4);
 		// delay(500);
-		// right_hand.addActuator(&ac);
+		// Serial.print("Starting RIGHT HAND. \n");
 		// right_hand.startActuators();
 		// delay(500);
+		// Serial.print("Stoping RIGHT HAND. \n");
 		// right_hand.stopActuators();
+
+		// delay(500);
+
+		// right_hand.removeActuator("ac_1");
+		// right_hand.removeActuator(&ac_2);
+		// Serial.print("Starting RIGHT HAND. \n");
+		// right_hand.startActuators();
+		// delay(500);		
+		// Serial.print("Stoping RIGHT HAND. \n");
+		// right_hand.stopActuators();
+
+		// right_hand.addActuator(&ac_1);
+		// // right_hand.swapActuator(&ac_3, &ac_2);
+		// Serial.print("Before swap:  \n");
+		// Serial.print("Starting RIGHT HAND. \n");
+		// right_hand.startActuators();
+		// delay(500);		
+		// Serial.print("Stoping RIGHT HAND. \n");
+		// right_hand.stopActuators();
+
+		Action left;
+		left.addStep(ac_1, true);
+		left.addWait(500);
+		left.addStep(ac_2, true);
+		left.addWait(500);
+		left.addStep(ac_1, false);
+		left.addStep(ac_2, false);
+		
+		left.play();
+
+		setupDone = true;
 	}
 	Serial.print("------------------------------------- \n");
 
-	// digitalWrite(LED_BUILTIN, HIGH);  // set the LED on
-	// delay(1000);               // wait for a second
-	// digitalWrite(LED_BUILTIN, LOW);   // set the LED off
-	// delay(1000);  // wait for a second
 	Serial.print("Loop ... \n");
 	delay(15000);
-	// cout << "Hello CMake." << endl;
-	// cout << ac.name << endl;
-	// cout << ac_2.name << endl;
-	// cout << ac_3.name << endl;
 }

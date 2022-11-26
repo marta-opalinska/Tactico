@@ -32,5 +32,10 @@ void Actuator::stop()
 	Serial.print("Actuator ");
 	Serial.print(this->m_name.c_str());
 	Serial.print(": \n");
-	this->m_driver.startActuator();
+	this->m_driver.stopActuator();
+};
+
+void Actuator::setDriver(ActuatorDriver& driver)
+{
+	this->m_driver = driver;
 };

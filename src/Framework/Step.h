@@ -2,17 +2,14 @@
 #include "Actuator.h"
 #include "Arduino.h"
 
-class Step
+class IStep
 {
-protected:
-    Step() = default;
-    ~Step() = default;
-
 public:
-    void play();
+    virtual void play() = 0;
+    virtual void printStep() = 0;
 };
 
-class StepActuator : public Step
+class StepActuator : public IStep
 {
 protected:
     StepActuator() = default;
@@ -24,9 +21,10 @@ public:
     Actuator& m_actuator;
     bool m_isStart;
     void play();
+    void printStep();
 };
 
-class StepWait : public Step
+class StepWait : public IStep
 {
 protected:
     StepWait() = default;
@@ -37,4 +35,5 @@ public:
     ~StepWait() = default;
     unsigned int m_waitTime;
     void play();
+    void printStep();
 };

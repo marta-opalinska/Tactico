@@ -22,9 +22,9 @@ public:
     void addActuator(Actuator *actuator);
     void addActuators(std::vector<Actuator *> actuatorsVector);
     void removeActuator(Actuator *actuator);
-    void removeActuator(int actuatorIndex);
+    void removeActuator(int actuatorPosition);
     void removeActuator(const std::string & name);
-    void swapActuator(Actuator *oldActuator, Actuator *newActuator);
+    // void swapActuator(Actuator* oldActuator, Actuator* newActuator);
     void startActuators();
     void stopActuators();
 };

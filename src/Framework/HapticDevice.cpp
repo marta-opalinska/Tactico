@@ -1,4 +1,5 @@
 #include "HapticDevice.h"
+#include "Arduino.h"
 
 int HapticDevice::nextID = 0;
 const std::string HapticDevice::defaultName = "device_";
@@ -51,9 +52,9 @@ void HapticDevice::removeActuator(Actuator *actuator)
 };
 
 // Index calculated from 0 an according to adding to the list
-void HapticDevice::removeActuator(int actuatorIndex)
+void HapticDevice::removeActuator(int actuatorPosition)
 {
-    this->m_actuatorsList.erase(this->m_actuatorsList.begin() + actuatorIndex);
+    this->m_actuatorsList.erase(this->m_actuatorsList.begin() + actuatorPosition);
 };
 
 // Remove based on actuator name
@@ -70,20 +71,23 @@ void HapticDevice::removeActuator( const std::string & name)
     }
 };
 
-void HapticDevice::swapActuator(Actuator *oldActuator, Actuator *newActuator){
-    this->addActuator(newActuator);
+// void HapticDevice::swapActuator(Actuator* oldActuator, Actuator* newActuator){
+//     this->addActuator(newActuator);
 
-    int position = 0;
-    for (auto &ac : this->m_actuatorsList)
-    {
-        if (ac == oldActuator)
-        {
-            break;
-        }
-        position++;
-    }
-    std::iter_swap(this->m_actuatorsList.begin() + position, this->m_actuatorsList.end());
-}
+//     int position = 0;
+//     for (auto &ac : this->m_actuatorsList)
+//     {
+//         Serial.print(position);
+//         if (ac == oldActuator)
+//         {
+//             Serial.print("FOUND \n");
+//             break;
+//         }
+//         position++;
+//     }
+
+//     std::iter_swap(this->m_actuatorsList.begin() + position, this->m_actuatorsList.end());
+// }
 
 void HapticDevice::startActuators()
 {

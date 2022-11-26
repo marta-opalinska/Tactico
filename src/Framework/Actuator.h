@@ -23,6 +23,6 @@ public:
 	// Actuator(ActuatorDriver driver, std::string name, Device device);
 	// addToDevice(Device device);
 	// removeFromDevice(Device device);
-	void setDriver(ActuatorDriver& m_driver);
+	void setDriver(ActuatorDriver& driver);
 	~Actuator() = default;
 };

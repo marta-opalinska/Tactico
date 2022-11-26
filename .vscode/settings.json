@@ -60,5 +60,6 @@
         "*.x": "cpp"
     },
     "editor.tabCompletion": "on",
-    "diffEditor.codeLens": true
+    "diffEditor.codeLens": true,
+    "sonarlint.pathToCompileCommands": "${workspaceFolder}\\compile_commands.json"
 }
