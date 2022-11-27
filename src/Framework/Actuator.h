@@ -1,6 +1,7 @@
 #pragma once
 #include "ActuatorDriver.h"
 #include <string>
+#include "HardwareLayer.h"
 // #include <list>
 
 class Actuator

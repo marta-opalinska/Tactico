@@ -1,6 +1,7 @@
 #pragma once
 #include "Actuator.h"
-#include "Arduino.h"
+#include "HardwareLayer.h"
+#include "string.h"
 
 class IStep
 {

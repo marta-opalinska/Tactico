@@ -1,5 +1,5 @@
 #include "Actuator.h"
-#include "Arduino.h"
+
 
 int Actuator::nextID = 0;
 const std::string Actuator::defaultName = "actuator_";
@@ -21,17 +21,19 @@ Actuator::Actuator(ActuatorDriver& driver)
 
 void Actuator::start()
 {
-	Serial.print("Actuator ");
-	Serial.print(this->m_name.c_str());
-	Serial.print(": \n");
+	std::string s = "Actuator ";
+	s.append(this->m_name);
+	s.append(": \n");
+	printTactico(s);
 	this->m_driver.startActuator();
 };
 
 void Actuator::stop()
 {
-	Serial.print("Actuator ");
-	Serial.print(this->m_name.c_str());
-	Serial.print(": \n");
+	std::string s = "Actuator ";
+	s.append(this->m_name);
+	s.append(": \n");
+	printTactico(s);
 	this->m_driver.stopActuator();
 };
 

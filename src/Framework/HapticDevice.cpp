@@ -1,5 +1,4 @@
 #include "HapticDevice.h"
-#include "Arduino.h"
 
 int HapticDevice::nextID = 0;
 const std::string HapticDevice::defaultName = "device_";

@@ -29,17 +29,19 @@ void ActuatorDriver::setLowGPIO()
 void ActuatorDriver::startActuator()
 {
 	this->setHighGPIO();
-	Serial.print("Actuator Driver START, GPIO ");
-	Serial.print(this->m_GPIO_pin);
-	Serial.print("\n");
+	std::string s = "Actuator Driver START, GPIO ";
+	s.append( std::to_string(this->m_GPIO_pin));
+	s.append("\n");
+	printTactico(s);
 };
 
 void ActuatorDriver::stopActuator()
 {
 	this->setLowGPIO();
-	Serial.print("Actuator STOP, GPIO ");
-	Serial.print(this->m_GPIO_pin);
-	Serial.print("\n");
+	std::string s = "Actuator Driver STOP, GPIO ";
+	s.append( std::to_string(this->m_GPIO_pin));
+	s.append("\n");
+	printTactico(s);
 }
 void ActuatorDriver::editGPIO(int new_GPIO)
 {

@@ -76,15 +76,20 @@ void loop()
 		// Serial.print("Stoping RIGHT HAND. \n");
 		// right_hand.stopActuators();
 
-		Action left;
-		left.addStep(ac_1, true);
-		left.addWait(500);
-		left.addStep(ac_2, true);
-		left.addWait(500);
-		left.addStep(ac_1, false);
-		left.addStep(ac_2, false);
+		// Action left;
+		// left.addStep(ac_1, true);
+		// left.addWait(500);
+		// left.addStep(ac_2, true);
+		// left.addWait(500);
+		// left.addStep(ac_1, false);
+		// left.addStep(ac_2, false);
 		
-		left.play();
+		// left.play();
+
+		std::vector<Modulation> mod_1{{200,true}, {200, false}, {100, true}, {100, false}};
+		Pattern p_1(mod_1);
+		std::shared_ptr<Actuator> ac_1_ptr = std::make_shared<Actuator>(ac_1);
+		p_1.play(ac_1_ptr);
 
 		setupDone = true;
 	}

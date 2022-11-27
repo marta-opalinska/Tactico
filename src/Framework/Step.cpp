@@ -1,5 +1,5 @@
 #include "Step.h"
-#include "string.h"
+
 
 StepActuator::StepActuator(Actuator& actuator, bool isStart)
     : m_actuator(actuator)
@@ -19,8 +19,12 @@ void StepActuator::play()
 
 void StepActuator::printStep()
 {
-    Serial.println(String(this->m_actuator.m_name.c_str()) + " : " + (this->m_isStart ? "Start": "Stop"));
-    // return ", " +this->m_actuator.m_name + " : " + (this->m_isStart ? "Start": "Stop");
+    std::string s = "STEP: ";
+    s.append(this->m_actuator.m_name);
+	s.append(": ");
+    s.append(this->m_isStart ? "Start": "Stop");
+	s.append("\n");
+	printTactico(s);
 }
 
 StepWait::StepWait(unsigned int miliseconds)
@@ -28,15 +32,15 @@ StepWait::StepWait(unsigned int miliseconds)
 
 void StepWait::play()
 {
-    Serial.println("Waiting for : " + String(this->m_waitTime));
-    delay(this->m_waitTime);
+    waitForMiliseconds(this->m_waitTime);
 };
 
 void StepWait::printStep()
 {
-    Serial.println("Wait for : " + String(this->m_waitTime));
-    // Serial.print(
-
-    //     this.
-    // );
+    std::string s = "STEP: ";
+    s.append("Wait for : ");
+	s.append(": ");
+    s.append(std::to_string(this->m_waitTime));
+	s.append("\n");
+	printTactico(s);
 }
