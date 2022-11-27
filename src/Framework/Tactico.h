@@ -6,6 +6,7 @@
 #include "Arduino.h"
 
 #include "ActuatorDriver.h"
+#include "ActuatorDriverGPIO.h"
 #include "Actuator.h"
 #include <string.h>
 #include <string>

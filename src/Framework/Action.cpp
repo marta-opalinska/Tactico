@@ -4,7 +4,6 @@
 //TODO ???????
 void Action::addStep(Actuator& actuator, bool isStart)
 {
-    StepActuator newStep(actuator, isStart);
     this->m_activitySteps.push_back(std::make_shared<StepActuator>(actuator, isStart));
 
 }
@@ -40,6 +39,13 @@ void Action::removeStep(int stepPosition)
 // void Activity::replaceStep(int stepToReplaceID, Actuator* actuator, bool isStart)
 // {
 // }
+ std::vector<std::shared_ptr<IStep>> Action::getSteps(){
+    return this->m_activitySteps;
+ };
+
+void Action::setSteps(std::vector<std::shared_ptr<IStep>> activitySteps){
+    this->m_activitySteps = activitySteps;
+}
 
 void Action::play()
 {

@@ -11,16 +11,22 @@ struct Modulation {
     bool isOn;
 };
 
-class Pattern
+class IPattern
+{
+public:
+    virtual void play(std::shared_ptr<Actuator> ac) = 0;
+};
+
+
+class PatternPWM : public IPattern
 {
 private:
-    Pattern() = default;
+    PatternPWM() = default;
     std::vector<Modulation> m_switching_modulation;
 public:
     // applyPattern(Actuator actuator)
-    Pattern(std::vector<Modulation> switching_modulation);
+    PatternPWM(std::vector<Modulation> switching_modulation);
     void setModulation(std::vector<Modulation> switching_modulation);
     void play(std::shared_ptr<Actuator> ac);
-    void stop(std::shared_ptr<Actuator> ac);
-    ~Pattern() = default;
+    ~PatternPWM() = default;
 };

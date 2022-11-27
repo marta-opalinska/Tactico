@@ -4,14 +4,14 @@
 int Actuator::nextID = 0;
 const std::string Actuator::defaultName = "actuator_";
 
-Actuator::Actuator(ActuatorDriver& driver, const std::string& name)
+Actuator::Actuator(std::shared_ptr<IActuatorDriver> driver, const std::string& name)
 	: m_driver(driver)
 	, m_name(name)
 {
 	this->id = ++nextID;
 };
 
-Actuator::Actuator(ActuatorDriver& driver)
+Actuator::Actuator(std::shared_ptr<IActuatorDriver> driver)
 	:m_driver(driver)
 {
 	this->id = ++nextID;
@@ -25,7 +25,7 @@ void Actuator::start()
 	s.append(this->m_name);
 	s.append(": \n");
 	printTactico(s);
-	this->m_driver.startActuator();
+	this->m_driver->startActuator();
 };
 
 void Actuator::stop()
@@ -34,10 +34,10 @@ void Actuator::stop()
 	s.append(this->m_name);
 	s.append(": \n");
 	printTactico(s);
-	this->m_driver.stopActuator();
+	this->m_driver->stopActuator();
 };
 
-void Actuator::setDriver(ActuatorDriver& driver)
+void Actuator::setDriver(std::shared_ptr<IActuatorDriver> driver)
 {
 	this->m_driver = driver;
 };
