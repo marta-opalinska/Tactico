@@ -3,7 +3,7 @@
 int HapticDevice::nextID = 0;
 const std::string HapticDevice::defaultName = "device_";
 
-HapticDevice::HapticDevice(std::vector<Actuator *> actuatorsList,  const std::string & name /*=""*/)
+HapticDevice::HapticDevice(std::vector<std::shared_ptr<IActuator>> actuatorsList,  const std::string & name /*=""*/)
     : m_actuatorsList(actuatorsList)
 {
     this->id = ++nextID;
@@ -14,7 +14,7 @@ HapticDevice::HapticDevice(std::vector<Actuator *> actuatorsList,  const std::st
     else{this->m_name = name;}
 }
 
-HapticDevice::HapticDevice(Actuator *signleActuator,  const std::string & name /*=""*/)
+HapticDevice::HapticDevice(std::shared_ptr<IActuator> signleActuator,  const std::string & name /*=""*/)
 {
     this->m_actuatorsList.push_back(signleActuator);
     this->id = ++nextID;
@@ -30,12 +30,12 @@ void HapticDevice::renameDevice(const std::string & name)
         this->m_name = name;
     }
 
-void HapticDevice::addActuator(Actuator *actuator)
+void HapticDevice::addActuator(std::shared_ptr<IActuator> actuator)
 {
     this->m_actuatorsList.push_back(actuator);
 };
 
-void HapticDevice::addActuators(std::vector<Actuator *> actuatorsVector)
+void HapticDevice::addActuators(std::vector<std::shared_ptr<IActuator>> actuatorsVector)
 {
     for (auto ac : actuatorsVector)
     {
@@ -43,7 +43,7 @@ void HapticDevice::addActuators(std::vector<Actuator *> actuatorsVector)
     }
 };
 
-void HapticDevice::removeActuator(Actuator *actuator)
+void HapticDevice::removeActuator(std::shared_ptr<IActuator> actuator)
 {
     // v.erase(std::remove_if(v.begin(), v.end(), IsOdd), v.end());
     // The erase–remove idiom which is a common C++ technique

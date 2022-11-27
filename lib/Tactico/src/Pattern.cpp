@@ -9,7 +9,7 @@ void PatternPWM::setModulation(std::vector<Modulation> switching_modulation)
     this->m_switching_modulation = switching_modulation;
 }
 
-void PatternPWM::play(std::shared_ptr<Actuator> ac)
+void PatternPWM::play(std::shared_ptr<IActuator> ac)
 {
     for (auto m : this->m_switching_modulation){
         // if()

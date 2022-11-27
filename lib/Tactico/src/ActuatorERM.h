@@ -1,11 +1,9 @@
-#pragma once
-#include "ActuatorDriver.h"
-#include <string>
-#include "HardwareLayer.h"
 #include <memory>
-// #include <list>
+#include <vector>
+#include "Step.h"
+#include <Interfaces/IActuator.h>
 
-class Actuator
+class ActuatorERM : public IActuator
 {
 
 protected:
@@ -15,16 +13,16 @@ protected:
 	std::shared_ptr<IActuatorDriver> m_driver;
 
 public:
-	Actuator() = delete;
+	ActuatorERM() = delete;
 	std::string m_name;
 	// std::list<Device*> deviceList;
-	Actuator(std::shared_ptr<IActuatorDriver> driver);
-	Actuator(std::shared_ptr<IActuatorDriver> driver, const std::string& name);
+	ActuatorERM(std::shared_ptr<IActuatorDriver> driver);
+	ActuatorERM(std::shared_ptr<IActuatorDriver> driver, const std::string& name);
 	void start();
 	void stop();
 	// Actuator(ActuatorDriverGPIO driver, std::string name, Device device);
 	// addToDevice(Device device);
 	// removeFromDevice(Device device);
 	void setDriver(std::shared_ptr<IActuatorDriver> driver);
-	~Actuator() = default;
+	~ActuatorERM() = default;
 };

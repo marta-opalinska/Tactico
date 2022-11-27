@@ -7,5 +7,4 @@ public:
 	virtual void initDriver() = 0;
 	virtual void startActuator() = 0;
 	virtual void stopActuator() = 0;
-	virtual void editDriver() =0;
 };

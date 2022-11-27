@@ -5,13 +5,14 @@
 // #include <iostream>
 #include "Arduino.h"
 
-#include "ActuatorDriver.h"
+#include <Interfaces/IActuatorDriver.h>
 #include "ActuatorDriverGPIO.h"
-#include "Actuator.h"
-#include <string.h>
+#include <Interfaces/IActuator.h>
+#include <string>
 #include <string>
 #include "HapticDevice.h"
 #include "Action.h"
 #include "Pattern.h"
+#include "ActuatorERM.h"
 
 // TODO: Reference additional headers your program requires here.

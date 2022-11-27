@@ -1,7 +1,7 @@
 #include "Step.h"
 
 
-StepActuator::StepActuator(Actuator& actuator, bool isStart)
+StepActuator::StepActuator(IActuator& actuator, bool isStart)
     : m_actuator(actuator)
     , m_isStart(isStart){}
 

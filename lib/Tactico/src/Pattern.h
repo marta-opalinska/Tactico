@@ -1,5 +1,5 @@
 #pragma once
-#include "Actuator.h"
+#include <Interfaces/IActuator.h>
 #include <vector>
 #include <memory>
 #include "Tactico.h"
@@ -14,7 +14,7 @@ struct Modulation {
 class IPattern
 {
 public:
-    virtual void play(std::shared_ptr<Actuator> ac) = 0;
+    virtual void play(std::shared_ptr<IActuator> ac) = 0;
 };
 
 
@@ -27,6 +27,6 @@ public:
     // applyPattern(Actuator actuator)
     PatternPWM(std::vector<Modulation> switching_modulation);
     void setModulation(std::vector<Modulation> switching_modulation);
-    void play(std::shared_ptr<Actuator> ac);
+    void play(std::shared_ptr<IActuator> ac);
     ~PatternPWM() = default;
 };

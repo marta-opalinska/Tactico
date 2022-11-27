@@ -1,9 +1,8 @@
 #pragma once
-#include "Actuator.h"
+#include <Interfaces/IActuator.h>
 #include <memory>
 #include <vector>
 #include "Step.h"
-#include "Actuator.h"
 
 class Action
 {
@@ -12,7 +11,7 @@ private:
 public:
     Action() = default;
     ~Action() = default;
-    void addStep(Actuator& actuator, bool isStart);
+    void addStep(IActuator& actuator, bool isStart);
     void addStep(std::shared_ptr<IStep> step);
     void addWait(int miliseconds);
     void addWait(std::shared_ptr<StepWait> stepWait);

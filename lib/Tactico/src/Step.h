@@ -1,5 +1,5 @@
 #pragma once
-#include "Actuator.h"
+#include <Interfaces/IActuator.h>
 #include "HardwareLayer.h"
 #include "string.h"
 
@@ -17,9 +17,9 @@ protected:
 
 public:
     // tep() = default;
-    StepActuator(Actuator& actuator, bool isStart);
+    StepActuator(IActuator& actuator, bool isStart);
     ~StepActuator() = default;
-    Actuator& m_actuator;
+    IActuator& m_actuator;
     bool m_isStart;
     void play();
     void printStep();

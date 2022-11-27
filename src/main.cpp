@@ -1,6 +1,6 @@
 #include "Arduino.h"
 // Tactico framework imports
-#include "Framework/Tactico.h"
+#include <Tactico.h>
 
 // #include <iostream>
 // #include "Framework/ActuatorDriverGPIO.h"
@@ -29,31 +29,31 @@ void loop()
 		Serial.print("------------------------------------- \n");
 		Serial.print("Initiating Drivers... \n");
 
-		std::shared_ptr<IActuatorDriver> driver_1 = std::make_shared<ActuatorDriverGPIO>(8);
-		// ActuatorDriverGPIO driver_2(12);
-		std::shared_ptr<IActuatorDriver> driver_2 = std::make_shared<ActuatorDriverGPIO>(12);
-		// ActuatorDriverGPIO driver_3(15);
-		std::shared_ptr<IActuatorDriver> driver_3 = std::make_shared<ActuatorDriverGPIO>(15);
-		// ActuatorDriverGPIO driver_4(17);
-		std::shared_ptr<IActuatorDriver> driver_4 = std::make_shared<ActuatorDriverGPIO>(17);
+		std::shared_ptr<ActuatorDriverGPIO> driver_1 = std::make_shared<ActuatorDriverGPIO>(8);
+		std::shared_ptr<ActuatorDriverGPIO> driver_2 = std::make_shared<ActuatorDriverGPIO>(12);
+		std::shared_ptr<ActuatorDriverGPIO> driver_3 = std::make_shared<ActuatorDriverGPIO>(15);
+		std::shared_ptr<ActuatorDriverGPIO> driver_4 = std::make_shared<ActuatorDriverGPIO>(17);
 		Serial.print("Iniatiation of drivers done. \n");
 		std::string s = "ac_1";
-		Actuator ac_1(driver_1,s);
+
+		// ActuatorERM ac_1(driver_1,s);
 		// driver_1->e
+		std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1,s);
+		driver_1->editDriver(10);
 
+		std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
+		std::shared_ptr<ActuatorERM> ac_3 = std::make_shared<ActuatorERM>(driver_3);
 
-		Actuator ac_2(driver_2);
-		Actuator ac_3(driver_3);
-	
-		std::vector<Actuator *> rightHandActuators = {&ac_1, &ac_2};
-		HapticDevice right_hand(rightHandActuators);
+		// ActuatorERM ac_2(driver_2);
+		// ActuatorERM ac_3(driver_3);
+		HapticDevice right_hand({ac_1, ac_2});
 		Serial.print("Starting RIGHT HAND. \n");
-		right_hand.addActuator(&ac_3);
+		right_hand.addActuator(ac_3);
 		right_hand.startActuators();
 		delay(500);
 		Serial.print("Stoping RIGHT HAND. \n");
 		right_hand.stopActuators();
-		ac_3.setDriver(driver_4);
+		ac_3->setDriver(driver_4);
 		delay(500);
 		Serial.print("Starting RIGHT HAND. \n");
 		right_hand.startActuators();
@@ -61,7 +61,7 @@ void loop()
 		Serial.print("Stoping RIGHT HAND. \n");
 		right_hand.stopActuators();
 
-		delay(500);
+		// delay(500);
 
 		// right_hand.removeActuator("ac_1");
 		// right_hand.removeActuator(&ac_2);
@@ -90,10 +90,10 @@ void loop()
 		
 		// left.play();
 
-		std::vector<Modulation> mod_1{{200,true}, {200, false}, {100, true}, {100, false}};
-		PatternPWM p_1(mod_1);
-		std::shared_ptr<Actuator> ac_1_ptr = std::make_shared<Actuator>(ac_1);
-		p_1.play(ac_1_ptr);
+		// std::vector<Modulation> mod_1{{200,true}, {200, false}, {100, true}, {100, false}};
+		// PatternPWM p_1(mod_1);
+		// std::shared_ptr<ActuatorERM> ac_1_ptr = std::make_shared<ActuatorERM>(ac_1);
+		// p_1.play(ac_1_ptr);
 
 		setupDone = true;
 	}

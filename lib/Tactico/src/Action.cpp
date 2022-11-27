@@ -1,8 +1,8 @@
 #include "Action.h"
-#include "string.h"
+#include "string"
 
 //TODO ???????
-void Action::addStep(Actuator& actuator, bool isStart)
+void Action::addStep(IActuator& actuator, bool isStart)
 {
     this->m_activitySteps.push_back(std::make_shared<StepActuator>(actuator, isStart));
 

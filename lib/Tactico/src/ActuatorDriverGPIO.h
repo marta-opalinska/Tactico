@@ -1,5 +1,5 @@
 #pragma once
-#include "ActuatorDriver.h"
+#include <Interfaces/IActuatorDriver.h>
 #include "HardwareLayer.h"
 
 class ActuatorDriverGPIO : public IActuatorDriver
