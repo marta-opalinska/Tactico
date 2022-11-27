@@ -1,18 +1,16 @@
 #include "ActuatorERM.h"
 
-
 int ActuatorERM::nextID = 0;
 const std::string ActuatorERM::defaultName = "actuator_";
 
-ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver, const std::string& name)
-	: m_driver(driver)
-	, m_name(name)
+ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver, const std::string &name)
+	: m_driver(driver), m_name(name)
 {
 	this->id = ++nextID;
 };
 
 ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver)
-	:m_driver(driver)
+	: m_driver(driver)
 {
 	this->id = ++nextID;
 	this->m_name = defaultName;

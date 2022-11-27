@@ -14,7 +14,7 @@ protected:
 	const static std::string defaultName;
 	int id;
     std::vector<std::shared_ptr<IActuator>> m_actuatorsList;
-    std::map<std::string, std::shared_ptr<Action>> deviceActions;
+    std::map<std::string, std::shared_ptr<Action>> m_deviceActions;
 
 public:
     std::string m_name;
@@ -28,8 +28,9 @@ public:
     void removeActuator(std::shared_ptr<IActuator> actuator);
     void removeActuator(int actuatorPosition);
     void removeActuator(const std::string & name);
-    void 
-    // void swapActuator(Actuator* oldActuator, Actuator* newActuator);
+    void addActions(std::map<std::string, std::shared_ptr<Action>> additinalDeviceActions);
+    void addAction(std::shared_ptr<Action> deviceAction, std::string actionName);
+    void playAction(std::string actionName);
     void startActuators();
     void stopActuators();
 };

@@ -7,7 +7,7 @@
 // #include "Framework/Actuator.h"
 // #include <string.h>
 // #include <string>
-	
+
 int setupDone;
 
 void setup()
@@ -16,16 +16,15 @@ void setup()
 	setupDone = false;
 
 	// pinMode(LED_BUILTIN, OUTPUT); // set pin as output
-	
 
 	Serial.print("------------------------------------- \n");
 }
 
-
 void loop()
 {
 	delay(1000);
-	if (!setupDone){
+	if (!setupDone)
+	{
 		Serial.print("------------------------------------- \n");
 		Serial.print("Initiating Drivers... \n");
 
@@ -38,7 +37,7 @@ void loop()
 
 		// ActuatorERM ac_1(driver_1,s);
 		// driver_1->e
-		std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1,s);
+		std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1, s);
 		driver_1->editDriver(10);
 
 		std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
@@ -47,19 +46,19 @@ void loop()
 		// ActuatorERM ac_2(driver_2);
 		// ActuatorERM ac_3(driver_3);
 		HapticDevice right_hand({ac_1, ac_2});
-		Serial.print("Starting RIGHT HAND. \n");
-		right_hand.addActuator(ac_3);
-		right_hand.startActuators();
-		delay(500);
-		Serial.print("Stoping RIGHT HAND. \n");
-		right_hand.stopActuators();
-		ac_3->setDriver(driver_4);
-		delay(500);
-		Serial.print("Starting RIGHT HAND. \n");
-		right_hand.startActuators();
-		delay(500);
-		Serial.print("Stoping RIGHT HAND. \n");
-		right_hand.stopActuators();
+		// Serial.print("Starting RIGHT HAND. \n");
+		// right_hand.addActuator(ac_3);
+		// right_hand.startActuators();
+		// delay(500);
+		// Serial.print("Stoping RIGHT HAND. \n");
+		// right_hand.stopActuators();
+		// ac_3->setDriver(driver_4);
+		// delay(500);
+		// Serial.print("Starting RIGHT HAND. \n");
+		// right_hand.startActuators();
+		// delay(500);
+		// Serial.print("Stoping RIGHT HAND. \n");
+		// right_hand.stopActuators();
 
 		// delay(500);
 
@@ -67,7 +66,7 @@ void loop()
 		// right_hand.removeActuator(&ac_2);
 		// Serial.print("Starting RIGHT HAND. \n");
 		// right_hand.startActuators();
-		// delay(500);		
+		// delay(500);
 		// Serial.print("Stoping RIGHT HAND. \n");
 		// right_hand.stopActuators();
 
@@ -76,18 +75,22 @@ void loop()
 		// Serial.print("Before swap:  \n");
 		// Serial.print("Starting RIGHT HAND. \n");
 		// right_hand.startActuators();
-		// delay(500);		
+		// delay(500);
 		// Serial.print("Stoping RIGHT HAND. \n");
 		// right_hand.stopActuators();
 
-		// Action left;
-		// left.addStep(ac_1, true);
-		// left.addWait(500);
-		// left.addStep(ac_2, true);
-		// left.addWait(500);
-		// left.addStep(ac_1, false);
-		// left.addStep(ac_2, false);
-		
+		std::shared_ptr<Action> left = std::make_shared<Action>();
+		left->addStep(ac_1, true);
+		left->addWait(500);
+		left->addStep(ac_2, true);
+		left->addWait(500);
+		left->addStep(ac_1, false);
+		left->addStep(ac_2, false);
+
+		right_hand.addAction(left, "left");
+
+		right_hand.playAction("left");
+
 		// left.play();
 
 		// std::vector<Modulation> mod_1{{200,true}, {200, false}, {100, true}, {100, false}};

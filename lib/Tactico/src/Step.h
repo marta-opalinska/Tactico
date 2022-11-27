@@ -17,9 +17,9 @@ protected:
 
 public:
     // tep() = default;
-    StepActuator(IActuator& actuator, bool isStart);
+    StepActuator(std::shared_ptr<IActuator> actuator, bool isStart);
     ~StepActuator() = default;
-    IActuator& m_actuator;
+    std::shared_ptr<IActuator> m_actuator;
     bool m_isStart;
     void play();
     void printStep();

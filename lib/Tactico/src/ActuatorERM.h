@@ -17,7 +17,7 @@ public:
 	std::string m_name;
 	// std::list<Device*> deviceList;
 	ActuatorERM(std::shared_ptr<IActuatorDriver> driver);
-	ActuatorERM(std::shared_ptr<IActuatorDriver> driver, const std::string& name);
+	ActuatorERM(std::shared_ptr<IActuatorDriver> driver, const std::string &name);
 	void start();
 	void stop();
 	// Actuator(ActuatorDriverGPIO driver, std::string name, Device device);

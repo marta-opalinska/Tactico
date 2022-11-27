@@ -1,7 +1,6 @@
 #pragma once
 #include "ActuatorDriverGPIO.h"
 
-
 ActuatorDriverGPIO::ActuatorDriverGPIO(int GPIO_pin)
 	: m_GPIO_pin(GPIO_pin)
 {
@@ -30,7 +29,7 @@ void ActuatorDriverGPIO::startActuator()
 {
 	this->setHighGPIO();
 	std::string s = "Actuator Driver START, GPIO ";
-	s.append( std::to_string(this->m_GPIO_pin));
+	s.append(std::to_string(this->m_GPIO_pin));
 	s.append("\n");
 	printTactico(s);
 };
@@ -39,7 +38,7 @@ void ActuatorDriverGPIO::stopActuator()
 {
 	this->setLowGPIO();
 	std::string s = "Actuator Driver STOP, GPIO ";
-	s.append( std::to_string(this->m_GPIO_pin));
+	s.append(std::to_string(this->m_GPIO_pin));
 	s.append("\n");
 	printTactico(s);
 }

@@ -8,14 +8,15 @@ protected:
 	int m_GPIO_pin;
 	void setHighGPIO();
 	void setLowGPIO();
+
 public:
 	ActuatorDriverGPIO() = delete;
 	ActuatorDriverGPIO(int GPIO_pin);
 	~ActuatorDriverGPIO() = default;
-    void initDriver();
+	void initDriver();
 	void startActuator();
 	void stopActuator();
 	void editDriver(int new_GPIO);
-	//play(PatternPWM pattern);
-	//void playInterval(int time);
+	// play(PatternPWM pattern);
+	// void playInterval(int time);
 };

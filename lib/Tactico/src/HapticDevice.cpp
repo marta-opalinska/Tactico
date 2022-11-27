@@ -3,32 +3,40 @@
 int HapticDevice::nextID = 0;
 const std::string HapticDevice::defaultName = "device_";
 
-HapticDevice::HapticDevice(std::vector<std::shared_ptr<IActuator>> actuatorsList,  const std::string & name /*=""*/)
+HapticDevice::HapticDevice(std::vector<std::shared_ptr<IActuator>> actuatorsList, const std::string &name /*=""*/)
     : m_actuatorsList(actuatorsList)
 {
     this->id = ++nextID;
-    if (name == ""){
+    if (name == "")
+    {
         this->m_name = defaultName;
-	    this->m_name.append(std::to_string(id));
+        this->m_name.append(std::to_string(id));
     }
-    else{this->m_name = name;}
-}
-
-HapticDevice::HapticDevice(std::shared_ptr<IActuator> signleActuator,  const std::string & name /*=""*/)
-{
-    this->m_actuatorsList.push_back(signleActuator);
-    this->id = ++nextID;
-    if (name == ""){
-        this->m_name = defaultName;
-	    this->m_name.append(std::to_string(id));
-    }
-    else{this->m_name = name;}
-}
-
-void HapticDevice::renameDevice(const std::string & name)
+    else
     {
         this->m_name = name;
     }
+}
+
+HapticDevice::HapticDevice(std::shared_ptr<IActuator> signleActuator, const std::string &name /*=""*/)
+{
+    this->m_actuatorsList.push_back(signleActuator);
+    this->id = ++nextID;
+    if (name == "")
+    {
+        this->m_name = defaultName;
+        this->m_name.append(std::to_string(id));
+    }
+    else
+    {
+        this->m_name = name;
+    }
+}
+
+void HapticDevice::renameDevice(const std::string &name)
+{
+    this->m_name = name;
+}
 
 void HapticDevice::addActuator(std::shared_ptr<IActuator> actuator)
 {
@@ -57,7 +65,7 @@ void HapticDevice::removeActuator(int actuatorPosition)
 };
 
 // Remove based on actuator name
-void HapticDevice::removeActuator( const std::string & name)
+void HapticDevice::removeActuator(const std::string &name)
 {
     int i = 0;
     for (auto &ac : this->m_actuatorsList)
@@ -70,23 +78,16 @@ void HapticDevice::removeActuator( const std::string & name)
     }
 };
 
-// void HapticDevice::swapActuator(Actuator* oldActuator, Actuator* newActuator){
-//     this->addActuator(newActuator);
+void HapticDevice::addActions(std::map<std::string, std::shared_ptr<Action>> additinalDeviceActions) {
+    this->m_deviceActions.insert(additinalDeviceActions.begin(), additinalDeviceActions.end());
+}
 
-//     int position = 0;
-//     for (auto &ac : this->m_actuatorsList)
-//     {
-//         Serial.print(position);
-//         if (ac == oldActuator)
-//         {
-//             Serial.print("FOUND \n");
-//             break;
-//         }
-//         position++;
-//     }
-
-//     std::iter_swap(this->m_actuatorsList.begin() + position, this->m_actuatorsList.end());
-// }
+void HapticDevice::addAction(std::shared_ptr<Action> deviceAction, std::string actionName) {
+    this->m_deviceActions[actionName] = deviceAction;
+}
+void HapticDevice::playAction(std::string actionName) {
+    this->m_deviceActions[actionName]->play();
+}
 
 void HapticDevice::startActuators()
 {

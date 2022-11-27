@@ -1,11 +1,9 @@
 #include "Action.h"
 #include "string"
 
-//TODO ???????
-void Action::addStep(IActuator& actuator, bool isStart)
+void Action::addStep(std::shared_ptr<IActuator> actuator, bool isStart)
 {
     this->m_activitySteps.push_back(std::make_shared<StepActuator>(actuator, isStart));
-
 }
 
 void Action::addStep(std::shared_ptr<IStep> step)
@@ -39,19 +37,21 @@ void Action::removeStep(int stepPosition)
 // void Activity::replaceStep(int stepToReplaceID, Actuator* actuator, bool isStart)
 // {
 // }
- std::vector<std::shared_ptr<IStep>> Action::getSteps(){
+std::vector<std::shared_ptr<IStep>> Action::getSteps()
+{
     return this->m_activitySteps;
- };
+};
 
-void Action::setSteps(std::vector<std::shared_ptr<IStep>> activitySteps){
+void Action::setSteps(std::vector<std::shared_ptr<IStep>> activitySteps)
+{
     this->m_activitySteps = activitySteps;
 }
 
 void Action::play()
 {
-    for (auto step : this->m_activitySteps){
+    for (auto step : this->m_activitySteps)
+    {
         step->printStep();
         step->play();
     }
-    
 }

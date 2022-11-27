@@ -18,7 +18,7 @@ public:
 	std::string m_name;
 	// ActuatorERM(std::shared_ptr<IActuatorDriver> driver);
 	// ActuatorERM(std::shared_ptr<IActuatorDriver> driver, const std::string& name);
-	virtual void start() =0;
-	virtual void stop()= 0;
-	virtual void setDriver(std::shared_ptr<IActuatorDriver> driver)= 0;
+	virtual void start() = 0;
+	virtual void stop() = 0;
+	virtual void setDriver(std::shared_ptr<IActuatorDriver> driver) = 0;
 };
