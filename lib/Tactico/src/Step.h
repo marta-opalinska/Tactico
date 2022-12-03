@@ -1,42 +1,41 @@
 #pragma once
 
 #include <Interfaces/IActuator.h>
-#include "HardwareLayer.h"
+
 #include <memory>
-#include "string.h"
+#include <string>
 
-class IStep
-{
+#include "HardwareLayer.h"
+
+class IStep {
  public:
-    virtual void play() = 0;
-    virtual void printStep() = 0;
+  virtual void play() = 0;
+  virtual void printStep() = 0;
 };
 
-class StepActuator : public IStep
-{
+class StepActuator : public IStep {
  protected:
-    StepActuator() = default;
+  StepActuator() = default;
 
  public:
-    // tep() = default;
-    StepActuator(std::shared_ptr<IActuator> actuator, bool isStart);
-    ~StepActuator() = default;
-    std::shared_ptr<IActuator> m_actuator;
-    bool m_isStart;
-    void play();
-    void printStep();
+  // tep() = default;
+  StepActuator(std::shared_ptr<IActuator> actuator, bool isStart);
+  ~StepActuator() = default;
+  std::shared_ptr<IActuator> m_actuator;
+  bool m_isStart;
+  void play();
+  void printStep();
 };
 
-class StepWait : public IStep
-{
+class StepWait : public IStep {
  protected:
-    StepWait() = default;
+  StepWait() = default;
 
  public:
-    // tep() = default;
-    explicit StepWait(unsigned int miliseconds);
-    ~StepWait() = default;
-    unsigned int m_waitTime;
-    void play();
-    void printStep();
+  // tep() = default;
+  explicit StepWait(unsigned int miliseconds);
+  ~StepWait() = default;
+  unsigned int m_waitTime;
+  void play();
+  void printStep();
 };

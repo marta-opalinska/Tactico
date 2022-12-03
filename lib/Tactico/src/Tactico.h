@@ -4,17 +4,18 @@
 #pragma once
 // #include <iostream>
 
-
+#include <Interfaces/IActuator.h>
 #include <Interfaces/IActuatorDriver.h>
 
-#include <Interfaces/IActuator.h>
 #include <string>
-#include "HapticDevice.h"
-#include "Action.h"
-#include "Pattern.h"
-#include "ActuatorERM.h"
 
+#include "Action.h"
 #include "ActuatorDriverGPIO.h"
+#include "ActuatorERM.h"
+#include "HapticDevice.h"
+#include "Pattern.h"
 #include "Arduino.h"
+#undef min
+#undef max
 
 // TODO: Reference additional headers your program requires here.
