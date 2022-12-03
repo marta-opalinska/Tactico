@@ -9,20 +9,22 @@ ActuatorDriverGPIO::ActuatorDriverGPIO(int GPIO_pin)
 
 void ActuatorDriverGPIO::initDriver()
 {
-	pinMode(this->m_GPIO_pin, OUTPUT);
-	Serial.print("Set GPIO ");
-	Serial.print(this->m_GPIO_pin);
-	Serial.print(" as OUTPUT.\n");
+	setPinModeTactico(this->m_GPIO_pin, OUTPUT);
+	std::string s = "Set GPIO ";
+	s.append(std::to_string(this->m_GPIO_pin));
+	s.append(" as OUTPUT.\n");
+	printTactico(s);
 };
 
 void ActuatorDriverGPIO::setHighGPIO()
 {
-	digitalWrite(this->m_GPIO_pin, HIGH);
+	setPinStatusTactico(this->m_GPIO_pin, HIGH);
+
 };
 
 void ActuatorDriverGPIO::setLowGPIO()
 {
-	digitalWrite(this->m_GPIO_pin, LOW);
+	setPinStatusTactico(this->m_GPIO_pin, LOW);
 };
 
 void ActuatorDriverGPIO::startActuator()

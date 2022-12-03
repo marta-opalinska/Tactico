@@ -78,15 +78,32 @@ void HapticDevice::removeActuator(const std::string &name)
     }
 };
 
-void HapticDevice::addActions(std::map<std::string, std::shared_ptr<Action>> additinalDeviceActions) {
+void HapticDevice::addActions(std::map<std::string, std::shared_ptr<Action>> additinalDeviceActions)
+{
     this->m_deviceActions.insert(additinalDeviceActions.begin(), additinalDeviceActions.end());
 }
 
-void HapticDevice::addAction(std::shared_ptr<Action> deviceAction, std::string actionName) {
+void HapticDevice::addAction(std::shared_ptr<Action> deviceAction, std::string actionName)
+{
     this->m_deviceActions[actionName] = deviceAction;
 }
-void HapticDevice::playAction(std::string actionName) {
+void HapticDevice::playAction(std::string actionName)
+{
     this->m_deviceActions[actionName]->play();
+}
+
+void HapticDevice::removeAction(std::string actionName)
+{
+    this->m_deviceActions.erase(actionName);
+}
+
+//TODO !!!! return list of strings of actions
+void HapticDevice::getActions() {
+
+}
+
+void HapticDevice::cleanActions() {
+    this->m_deviceActions.clear();
 }
 
 void HapticDevice::startActuators()

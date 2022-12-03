@@ -1,5 +1,5 @@
-#include "Arduino.h"
 #include "HardwareLayer.h"
+
 
 void waitForMiliseconds(int miliseconds){
     delay(miliseconds);
@@ -12,3 +12,12 @@ void waitForMiliseconds(int miliseconds){
 void printTactico(const std::string s){
     Serial.print(s.c_str());
 };
+
+void setPinStatusTactico(const int pinNumber, int pinStatus){
+    digitalWrite(pinNumber, pinStatus);
+};
+
+void setPinModeTactico(const int pinNumber, int pinModeStatus){
+    pinMode(pinNumber, pinModeStatus);
+};
+

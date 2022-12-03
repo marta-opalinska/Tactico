@@ -30,7 +30,11 @@ public:
     void removeActuator(const std::string & name);
     void addActions(std::map<std::string, std::shared_ptr<Action>> additinalDeviceActions);
     void addAction(std::shared_ptr<Action> deviceAction, std::string actionName);
+    void removeAction(std::string actionName);
     void playAction(std::string actionName);
+    void getActions();
+    //TODO 
+    void cleanActions();
     void startActuators();
     void stopActuators();
 };

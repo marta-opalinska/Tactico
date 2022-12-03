@@ -3,10 +3,10 @@
 
 #pragma once
 // #include <iostream>
-#include "Arduino.h"
+
 
 #include <Interfaces/IActuatorDriver.h>
-#include "ActuatorDriverGPIO.h"
+
 #include <Interfaces/IActuator.h>
 #include <string>
 #include <string>
@@ -14,5 +14,8 @@
 #include "Action.h"
 #include "Pattern.h"
 #include "ActuatorERM.h"
+
+#include "ActuatorDriverGPIO.h"
+#include "Arduino.h"
 
 // TODO: Reference additional headers your program requires here.
