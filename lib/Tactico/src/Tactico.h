@@ -9,7 +9,6 @@
 
 #include <Interfaces/IActuator.h>
 #include <string>
-#include <string>
 #include "HapticDevice.h"
 #include "Action.h"
 #include "Pattern.h"

@@ -7,10 +7,10 @@
 
 class Action
 {
-private:
+ private:
     std::vector<std::shared_ptr<IStep>> m_activitySteps;
 
-public:
+ public:
     Action() = default;
     ~Action() = default;
     void addStep(std::shared_ptr<IActuator> actuator, bool isStart);

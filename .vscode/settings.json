@@ -62,5 +62,8 @@
     "editor.tabCompletion": "on",
     "diffEditor.codeLens": true,
     "sonarlint.pathToCompileCommands": "${workspaceFolder}\\compile_commands.json",
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "C_Cpp.codeAnalysis.clangTidy.checks.disabled": [
+        "clang-diagnostic-error"
+    ]
 }

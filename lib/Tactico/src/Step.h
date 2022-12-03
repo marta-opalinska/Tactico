@@ -1,21 +1,23 @@
 #pragma once
+
 #include <Interfaces/IActuator.h>
 #include "HardwareLayer.h"
+#include <memory>
 #include "string.h"
 
 class IStep
 {
-public:
+ public:
     virtual void play() = 0;
     virtual void printStep() = 0;
 };
 
 class StepActuator : public IStep
 {
-protected:
+ protected:
     StepActuator() = default;
 
-public:
+ public:
     // tep() = default;
     StepActuator(std::shared_ptr<IActuator> actuator, bool isStart);
     ~StepActuator() = default;
@@ -27,12 +29,12 @@ public:
 
 class StepWait : public IStep
 {
-protected:
+ protected:
     StepWait() = default;
 
-public:
+ public:
     // tep() = default;
-    StepWait(unsigned int miliseconds);
+    explicit StepWait(unsigned int miliseconds);
     ~StepWait() = default;
     unsigned int m_waitTime;
     void play();
