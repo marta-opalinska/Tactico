@@ -6,6 +6,15 @@
 
 #include "Step.h"
 
+/**
+ * @class Action
+ * @brief Class that can store multistep activity that can be performed on
+ * multiple actuators
+ * @details There are two typed of steps that an action can consist of :
+ * StepWait (delay between two actions) and StepStepActuator (action that is
+ * performed on a specific Actuator)
+ * @param m_activitySteps vector of steps that belongs to the activity.
+ */
 class Action {
  private:
   std::vector<std::shared_ptr<IStep>> m_activitySteps;

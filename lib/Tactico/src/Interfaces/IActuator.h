@@ -5,21 +5,32 @@
 #include <string>
 
 #include "HardwareLayer.h"
-// #include <list>
+
+/**
+ * @interface
+ * @brief Interface for actuator - the interface is implemented by ActuatorERM
+ * and ActuatorLRA classes
+ */
 
 class IActuator {
  protected:
-  // static int nextID;
-  // const static std::string defaultName;
   int id;
   std::shared_ptr<IActuatorDriver> m_driver;
 
+  // const std::string defaultName;
+
  public:
   std::string m_name;
-  // ActuatorERM(std::shared_ptr<IActuatorDriver> driver);
-  // ActuatorERM(std::shared_ptr<IActuatorDriver> driver, const std::string&
-  // name);
+  IActuator(std::shared_ptr<IActuatorDriver> driver, const std::string &name)
+      : m_driver(driver), m_name(name) {}
+  explicit IActuator(std::shared_ptr<IActuatorDriver> driver) : m_driver(driver) {}
+
   virtual void start() = 0;
   virtual void stop() = 0;
+  /**
+   * @brief Assign Driver object to the actuator
+   *
+   * @param driver ActuatorDriver object to assign
+   */
   virtual void setDriver(std::shared_ptr<IActuatorDriver> driver) = 0;
 };

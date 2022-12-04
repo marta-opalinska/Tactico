@@ -6,24 +6,45 @@
 
 #include "Step.h"
 
+/**
+ * @class ActuatorERM
+ * @brief Class that stores information and methods for ERM actuator type. It
+ * implements IActuator interface.
+ * @implements IActuator
+ * @param m_driver requirered parameter, links the actuator with the driver
+ * @param m_name optional parameter, actuator custom name
+ *
+ */
 class ActuatorERM : public IActuator {
  protected:
   static int nextID;
-  const static std::string defaultName;
-  int id;
-  std::shared_ptr<IActuatorDriver> m_driver;
+  // static const char defaultName[14];  // = "actuatorERM"
+  static const std::string defaultName;  // = "actuatorERM"
 
  public:
   ActuatorERM() = delete;
-  std::string m_name;
-  // std::list<Device*> deviceList;
+  /**
+   * @brief Construct a new ERM Actuator object
+   *
+   * @param driver required parameter, ActuatorDriver object to control the
+   * physical interface
+   */
   explicit ActuatorERM(std::shared_ptr<IActuatorDriver> driver);
+  /**
+   * @brief Construct a new ERM Actuator object with a custom name
+   *
+   * @param driver required parameter, ActuatorDriver object to control the
+   * physical interface
+   * @param name custom Actuator name
+   */
   ActuatorERM(std::shared_ptr<IActuatorDriver> driver, const std::string &name);
   void start();
   void stop();
-  // Actuator(ActuatorDriverGPIO driver, std::string name, Device device);
-  // addToDevice(Device device);
-  // removeFromDevice(Device device);
+  /**
+   * @brief Assign Driver object to the actuator
+   *
+   * @param driver ActuatorDriver object to assign
+   */
   void setDriver(std::shared_ptr<IActuatorDriver> driver);
   ~ActuatorERM() = default;
 };

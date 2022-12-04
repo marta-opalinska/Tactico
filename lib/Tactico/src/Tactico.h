@@ -13,7 +13,7 @@
 #include "ActuatorDriverGPIO.h"
 #include "ActuatorERM.h"
 #include "HapticDevice.h"
-#include "Pattern.h"
+#include "PatternPWM.h"
 #include "Arduino.h"
 #undef min
 #undef max

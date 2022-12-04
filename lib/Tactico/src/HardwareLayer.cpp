@@ -7,6 +7,7 @@ void waitForMiliseconds(int miliseconds) {
   s.append("\n");
   printTactico(s);
 }
+
 void printTactico(const std::string s) { Serial.print(s.c_str()); }
 
 void setPinStatusTactico(const int pinNumber, int pinStatus) {
