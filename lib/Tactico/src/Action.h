@@ -22,7 +22,7 @@ class Action {
  public:
   Action() = default;
   ~Action() = default;
-  void addStep(std::shared_ptr<IActuator> actuator, bool isStart);
+  void addStep(std::shared_ptr<IActuator> actuator, std::shared_ptr<IPattern> pattern);
   void addStep(std::shared_ptr<IStep> step);
   void addWait(int miliseconds);
   void addWait(std::shared_ptr<StepWait> stepWait);

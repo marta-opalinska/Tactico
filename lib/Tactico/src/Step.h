@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 
+#include "Interfaces/IPattern.h"
 #include "HardwareLayer.h"
 
 /**
@@ -33,10 +34,10 @@ class StepActuator : public IStep {
 
  public:
   // tep() = default;
-  StepActuator(std::shared_ptr<IActuator> actuator, bool isStart);
+  StepActuator(std::shared_ptr<IActuator> actuator, std::shared_ptr<IPattern> pattern);
   ~StepActuator() = default;
   std::shared_ptr<IActuator> m_actuator;
-  bool m_isStart;
+  std::shared_ptr<IPattern> m_pattern;
   void play();
   void printStep();
 };

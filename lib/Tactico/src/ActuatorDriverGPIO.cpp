@@ -46,7 +46,7 @@ int ActuatorDriverGPIO::getDriverPin() {
   return this->m_GPIO_pin;
 }
 
+// void ActuatorDriverGPIO::play(IPattern pattern){
 
-// void ActuatorDriverGPIO::play(int time)
-//{
 // }
+

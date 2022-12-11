@@ -94,10 +94,11 @@ void HapticDevice::removeAction(std::string actionName) {
   this->m_deviceActions.erase(actionName);
 }
 
-// TODO !!!! return list of strings of actions
-void HapticDevice::getActions() {}
+std::map<std::string, std::shared_ptr<Action>> HapticDevice::getActions() {
+return this->m_deviceActions;
+}
 
-void HapticDevice::cleanActions() { this->m_deviceActions.clear(); }
+void HapticDevice::clearActions() { this->m_deviceActions.clear(); }
 
 void HapticDevice::startActuators() {
   for (auto &ac : m_actuatorsList) {

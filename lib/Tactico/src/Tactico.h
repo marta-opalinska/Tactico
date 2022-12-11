@@ -6,8 +6,10 @@
 #pragma once
 // #include <iostream>
 
+// #include <Interfaces/IActuator.h>
 #include <Interfaces/IActuator.h>
 #include <Interfaces/IActuatorDriver.h>
+#include <Interfaces/IPattern.h>
 
 #include <string>
 

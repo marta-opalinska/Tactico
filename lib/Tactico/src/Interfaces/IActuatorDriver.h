@@ -1,5 +1,7 @@
 #pragma once
 #include "HardwareLayer.h"
+// #include <Interfaces/IPattern.h>
+#include <memory>
 
 /**
  * @interface IActuatorDriver
@@ -27,4 +29,11 @@ class IActuatorDriver {
    */
 
   virtual void stopActuator() = 0;
+
+  // /**
+  //  * @brief Sends signal to play a specific pattern
+  //  * 
+  //  * @param pattern pattern to play
+  //  */
+  // virtual void play(std::shared_ptr<IPattern> pattern) = 0;
 };

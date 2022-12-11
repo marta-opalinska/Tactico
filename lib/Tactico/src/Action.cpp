@@ -2,9 +2,9 @@
 
 #include "string"
 
-void Action::addStep(std::shared_ptr<IActuator> actuator, bool isStart) {
+void Action::addStep(std::shared_ptr<IActuator> actuator, std::shared_ptr<IPattern> pattern) {
   this->m_activitySteps.push_back(
-      std::make_shared<StepActuator>(actuator, isStart));
+      std::make_shared<StepActuator>(actuator, pattern));
 }
 
 void Action::addStep(std::shared_ptr<IStep> step) {

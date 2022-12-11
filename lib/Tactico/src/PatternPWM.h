@@ -1,7 +1,6 @@
 #pragma once
 #include <Interfaces/IActuator.h>
 
-#include <memory>
 #include <vector>
 
 #include "HardwareLayer.h"
@@ -35,5 +34,6 @@ class PatternPWM : public IPattern {
   explicit PatternPWM(std::vector<ModulationPWM> switching_modulation);
   void setModulation(std::vector<ModulationPWM> switching_modulation);
   void play(std::shared_ptr<IActuator> ac);
+  std::string patternToString();
   ~PatternPWM() = default;
 };

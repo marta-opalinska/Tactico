@@ -1,21 +1,18 @@
 #include "Step.h"
 
-StepActuator::StepActuator(std::shared_ptr<IActuator> actuator, bool isStart)
-    : m_actuator(actuator), m_isStart(isStart) {}
+StepActuator::StepActuator(std::shared_ptr<IActuator> actuator,
+                           std::shared_ptr<IPattern> pattern)
+    : m_actuator(actuator), m_pattern(pattern) {}
 
 void StepActuator::play() {
-  if (this->m_isStart) {
-    this->m_actuator->start();
-  } else {
-    this->m_actuator->stop();
-  }
+  this->m_pattern->play(this->m_actuator);
 }
 
 void StepActuator::printStep() {
   std::string s = "STEP: ";
   s.append(this->m_actuator->m_name);
   s.append(": ");
-  s.append(this->m_isStart ? "Start" : "Stop");
+  s.append(this->m_pattern->patternToString());
   s.append("\n");
   printTactico(s);
 }

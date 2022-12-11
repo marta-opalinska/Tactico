@@ -3,9 +3,7 @@
 // Arduino min and max function provides errors for NRF5280 chipset.
 #include <unity.h>
 #include "Tactico.h"
-
 #include <Arduino.h>
-
 // clang-format on
 
 void setUp(void) {
@@ -21,14 +19,14 @@ void test_default_actuator_name(void) {
 }
 
 void test_create_actuators_driver_GPIO(void) {
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(8);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(12);
-  std::shared_ptr<ActuatorDriverGPIO> driver_3 =
-      std::make_shared<ActuatorDriverGPIO>(15);
-  std::shared_ptr<ActuatorDriverGPIO> driver_4 =
-      std::make_shared<ActuatorDriverGPIO>(17);
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(8);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(12);
+  std::shared_ptr<ActuatorDriverI2C> driver_3 =
+      std::make_shared<ActuatorDriverI2C>(15);
+  std::shared_ptr<ActuatorDriverI2C> driver_4 =
+      std::make_shared<ActuatorDriverI2C>(17);
   TEST_ASSERT_EQUAL(8, driver_1->getDriverPin());
   TEST_ASSERT_EQUAL(12, driver_2->getDriverPin());
   TEST_ASSERT_EQUAL(15, driver_3->getDriverPin());
@@ -36,8 +34,8 @@ void test_create_actuators_driver_GPIO(void) {
 }
 
 void test_create_actuators_ERM_with_driver_GPIO(void) {
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(14);
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(14);
   std::string s = "ac_1";
   std::shared_ptr<ActuatorERM> ac_1 =
       std::make_shared<ActuatorERM>(driver_1, s);
@@ -45,8 +43,8 @@ void test_create_actuators_ERM_with_driver_GPIO(void) {
   TEST_ASSERT(driver_1 == ac_1->getDriver());
   TEST_ASSERT("ac_1" == ac_1->m_name);
 
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(12);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(12);
   std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
   TEST_ASSERT(driver_2 == ac_2->getDriver());
   TEST_ASSERT("actuator_2" == ac_1->m_name);
@@ -54,8 +52,8 @@ void test_create_actuators_ERM_with_driver_GPIO(void) {
 
 void test_start_actuator_ERM(void) {
   int driverPin = PIN_BUTTON3;
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin);
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   ac_1->start();
   waitForMiliseconds(200);
@@ -65,8 +63,8 @@ void test_start_actuator_ERM(void) {
 
 void test_stop_actuator_ERM(void) {
   int driverPin = PIN_BUTTON3;
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin);
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   ac_1->start();
   waitForMiliseconds(200);
@@ -77,8 +75,8 @@ void test_stop_actuator_ERM(void) {
 
 void test_swap_driver_GPIO_pin(void) {
   int driverPin = PIN_BUTTON3;
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin);
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   ac_1->start();
   waitForMiliseconds(200);
@@ -93,11 +91,11 @@ void test_swap_driver_GPIO_pin(void) {
 
 void test_swap_driver(void) {
   int driverPin1 = PIN_BUTTON3;
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin1);
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin1);
   int driverPin2 = PIN_BUTTON1;
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin2);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(driverPin2);
   driver_2->stopActuator();
 
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
@@ -112,11 +110,191 @@ void test_swap_driver(void) {
   TEST_ASSERT_EQUAL(1, digitalRead(driverPin2));
 }
 
-void test_create_haptic_device(void) {
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(1);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(2);
+void test_actuator_step_start(void) {
+  int driverPin = 2;
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin);
+  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
+  std::vector<ModulationPWM> mod_1 = {{200, true}};
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+
+  StepActuator s1 = StepActuator(ac_1, p_1);
+
+  driver_1->stopActuator();
+  waitForMiliseconds(200);
+  s1.play();
+  setPinModeTactico(driverPin, INPUT);
+
+  TEST_ASSERT_EQUAL(1, digitalRead(driverPin));
+}
+
+void test_actuator_step_stop(void) {
+  int driverPin = 2;
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin);
+  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
+  std::vector<ModulationPWM> mod_1 = {{200, false}};
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+
+  StepActuator s1 = StepActuator(ac_1, p_1);
+
+  driver_1->startActuator();
+  waitForMiliseconds(200);
+  s1.play();
+  setPinModeTactico(driverPin, INPUT);
+
+  TEST_ASSERT_EQUAL(0, digitalRead(driverPin));
+}
+
+void test_action_create(void) {
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(2);
+
+  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
+  std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
+
+  ac_1->stop();
+  ac_2->start();
+
+  std::shared_ptr<Action> a_left = std::make_shared<Action>();
+
+  std::vector<ModulationPWM> mod_1 = {{200, true}};
+  std::vector<ModulationPWM> mod_2 = {{200, false}};
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
+
+  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, p_1);
+  std::shared_ptr<StepWait> s2 = std::make_shared<StepWait>(500);
+  std::shared_ptr<StepActuator> s3 = std::make_shared<StepActuator>(ac_2, p_2);
+
+  a_left->addStep(s1);
+  a_left->addStep(s2);
+  a_left->addStep(s3);
+
+  std::vector<std::shared_ptr<IStep>> stepsList = a_left->getSteps();
+  std::vector<std::shared_ptr<IStep>> expectedStepsList = {s1, s2, s3};
+  TEST_ASSERT(expectedStepsList == stepsList);
+}
+
+void test_action_set_steps(void) {
+  int driverPin1 = 4;
+  int driverPin2 = 2;
+  int driverPin3 = 3;
+
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(driverPin2);
+  std::shared_ptr<ActuatorDriverI2C> driver_3 =
+      std::make_shared<ActuatorDriverI2C>(driverPin3);
+
+  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
+  std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
+  std::shared_ptr<ActuatorERM> ac_3 = std::make_shared<ActuatorERM>(driver_3);
+
+  ac_1->stop();
+  ac_2->start();
+  ac_3->start();
+
+  std::shared_ptr<Action> a_left = std::make_shared<Action>();
+
+  std::vector<ModulationPWM> mod_1 = {{200, true}};
+  std::vector<ModulationPWM> mod_2 = {{200, false}};
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
+
+  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, p_1);
+  std::shared_ptr<StepWait> s2 = std::make_shared<StepWait>(500);
+  std::shared_ptr<StepActuator> s3 = std::make_shared<StepActuator>(ac_2, p_2);
+  std::shared_ptr<StepActuator> s4 = std::make_shared<StepActuator>(ac_3, p_2);
+
+  a_left->setSteps({s1, s2, s3, s4});
+
+  std::vector<std::shared_ptr<IStep>> stepsList = a_left->getSteps();
+  std::vector<std::shared_ptr<IStep>> expectedStepsList = {s1, s2, s3, s4};
+  TEST_ASSERT(expectedStepsList == stepsList);
+}
+
+void test_action_remove_step(void) {
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(2);
+
+  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
+  std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
+
+  ac_1->stop();
+  ac_2->start();
+
+  std::shared_ptr<Action> a_left = std::make_shared<Action>();
+
+  std::vector<ModulationPWM> mod_1 = {{200, true}};
+  std::vector<ModulationPWM> mod_2 = {{200, false}};
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
+
+  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, p_1);
+  std::shared_ptr<StepWait> s2 = std::make_shared<StepWait>(500);
+  std::shared_ptr<StepActuator> s3 = std::make_shared<StepActuator>(ac_2, p_2);
+
+  a_left->addStep(s1);
+  a_left->addStep(s2);
+  a_left->addStep(s3);
+  a_left->removeStep(1);
+  a_left->removeStep(0);
+  a_left->addStep(s2);
+  a_left->addStep(s1);
+
+  std::vector<std::shared_ptr<IStep>> stepsList = a_left->getSteps();
+  std::vector<std::shared_ptr<IStep>> expectedStepsList = {s3, s2, s1};
+  TEST_ASSERT(expectedStepsList == stepsList);
+}
+
+void test_action_play(void) {
+  int driverPin1 = 4;
+  int driverPin2 = 2;
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(driverPin2);
+
+  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
+  std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
+
+  ac_1->stop();
+  ac_2->start();
+
+  std::shared_ptr<Action> a_left = std::make_shared<Action>();
+
+  std::vector<ModulationPWM> mod_1 = {{200, true}};
+  std::vector<ModulationPWM> mod_2 = {{200, false}};
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
+
+  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, p_1);
+  std::shared_ptr<StepWait> s2 = std::make_shared<StepWait>(500);
+  std::shared_ptr<StepActuator> s3 = std::make_shared<StepActuator>(ac_2, p_2);
+
+  a_left->addStep(s1);
+  a_left->addStep(s2);
+  a_left->addStep(s3);
+  a_left->play();
+
+  setPinModeTactico(driverPin1, INPUT);
+  setPinModeTactico(driverPin2, INPUT);
+
+  TEST_ASSERT_EQUAL(1, digitalRead(driverPin1));
+  TEST_ASSERT_EQUAL(0, digitalRead(driverPin2));
+}
+
+void test_haptic_device_create(void) {
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(2);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
 
@@ -128,13 +306,13 @@ void test_create_haptic_device(void) {
   TEST_ASSERT(expectedDeviceActuatorsList == deviceActuatorsList);
 }
 
-void test_add_actuator_to_haptic_device(void) {
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(1);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(2);
-  std::shared_ptr<ActuatorDriverGPIO> driver_3 =
-      std::make_shared<ActuatorDriverGPIO>(3);
+void test_haptic_device_add_actuator(void) {
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(2);
+  std::shared_ptr<ActuatorDriverI2C> driver_3 =
+      std::make_shared<ActuatorDriverI2C>(3);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
   std::shared_ptr<ActuatorERM> ac_3 = std::make_shared<ActuatorERM>(driver_3);
@@ -148,13 +326,13 @@ void test_add_actuator_to_haptic_device(void) {
   TEST_ASSERT(expectedDeviceActuatorsList == deviceActuatorsList);
 }
 
-void test_add_actuators_to_haptic_device(void) {
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(1);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(2);
-  std::shared_ptr<ActuatorDriverGPIO> driver_3 =
-      std::make_shared<ActuatorDriverGPIO>(3);
+void test_haptic_device_add_actuators(void) {
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(2);
+  std::shared_ptr<ActuatorDriverI2C> driver_3 =
+      std::make_shared<ActuatorDriverI2C>(3);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
   std::shared_ptr<ActuatorERM> ac_3 = std::make_shared<ActuatorERM>(driver_3);
@@ -168,15 +346,15 @@ void test_add_actuators_to_haptic_device(void) {
   TEST_ASSERT(expectedDeviceActuatorsList == deviceActuatorsList);
 }
 
-void test_remove_actuators_from_haptic_device(void) {
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(1);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(2);
-  std::shared_ptr<ActuatorDriverGPIO> driver_3 =
-      std::make_shared<ActuatorDriverGPIO>(3);
-  std::shared_ptr<ActuatorDriverGPIO> driver_4 =
-      std::make_shared<ActuatorDriverGPIO>(4);
+void test_haptic_device_remove_actuators(void) {
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(2);
+  std::shared_ptr<ActuatorDriverI2C> driver_3 =
+      std::make_shared<ActuatorDriverI2C>(3);
+  std::shared_ptr<ActuatorDriverI2C> driver_4 =
+      std::make_shared<ActuatorDriverI2C>(4);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
   std::shared_ptr<ActuatorERM> ac_3 = std::make_shared<ActuatorERM>(driver_3);
@@ -192,15 +370,15 @@ void test_remove_actuators_from_haptic_device(void) {
   TEST_ASSERT(expectedDeviceActuatorsList == deviceActuatorsList);
 }
 
-void test_remove_haptic_device_clear_actuators_list(void) {
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(1);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(2);
-  std::shared_ptr<ActuatorDriverGPIO> driver_3 =
-      std::make_shared<ActuatorDriverGPIO>(3);
-  std::shared_ptr<ActuatorDriverGPIO> driver_4 =
-      std::make_shared<ActuatorDriverGPIO>(4);
+void test_haptic_device_clear_actuators_list(void) {
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(2);
+  std::shared_ptr<ActuatorDriverI2C> driver_3 =
+      std::make_shared<ActuatorDriverI2C>(3);
+  std::shared_ptr<ActuatorDriverI2C> driver_4 =
+      std::make_shared<ActuatorDriverI2C>(4);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
   std::shared_ptr<ActuatorERM> ac_3 = std::make_shared<ActuatorERM>(driver_3);
@@ -213,15 +391,14 @@ void test_remove_haptic_device_clear_actuators_list(void) {
   std::vector<std::shared_ptr<IActuator>> expectedDeviceActuatorsList = {};
   TEST_ASSERT(expectedDeviceActuatorsList == deviceActuatorsList);
 }
-/////////////////////////////////////////////////////////
 
 void test_haptic_device_start_actuators(void) {
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(1);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(2);
-  std::shared_ptr<ActuatorDriverGPIO> driver_3 =
-      std::make_shared<ActuatorDriverGPIO>(3);
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(2);
+  std::shared_ptr<ActuatorDriverI2C> driver_3 =
+      std::make_shared<ActuatorDriverI2C>(3);
 
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
@@ -245,12 +422,12 @@ void test_haptic_device_start_actuators(void) {
 }
 
 void test_haptic_device_stop_actuators(void) {
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(1);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(2);
-  std::shared_ptr<ActuatorDriverGPIO> driver_3 =
-      std::make_shared<ActuatorDriverGPIO>(3);
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(2);
+  std::shared_ptr<ActuatorDriverI2C> driver_3 =
+      std::make_shared<ActuatorDriverI2C>(3);
 
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
@@ -271,173 +448,210 @@ void test_haptic_device_stop_actuators(void) {
   TEST_ASSERT_EQUAL(0, digitalRead(3));
 }
 
-// void test_wait_step_create(void) {
-//     IStep s = StepWait(500);
-
-// }
-
-void test_actuator_step_start(void) {
-  int driverPin = 1;
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin);
-  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
-  StepActuator s1 = StepActuator(ac_1, true);
-
-  driver_1->stopActuator();
-  waitForMiliseconds(200);
-  s1.play();
-  setPinModeTactico(driverPin, INPUT);
-
-  TEST_ASSERT_EQUAL(1, digitalRead(driverPin));
-}
-
-void test_actuator_step_stop(void) {
-  int driverPin = 1;
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin);
-  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
-  StepActuator s1 = StepActuator(ac_1, false);
-
-  driver_1->startActuator();
-  waitForMiliseconds(200);
-  s1.play();
-  setPinModeTactico(driverPin, INPUT);
-
-  TEST_ASSERT_EQUAL(0, digitalRead(driverPin));
-}
-
-void test_action_create(void) {
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(1);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(2);
-
-  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
-  std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
-
-  ac_1->stop();
-  ac_2->start();
-
-  std::shared_ptr<Action> a_left = std::make_shared<Action>();
-
-  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, true);
-  std::shared_ptr<StepWait> s2 = std::make_shared<StepWait>(500);
-  std::shared_ptr<StepActuator> s3 =
-      std::make_shared<StepActuator>(ac_2, false);
-
-  a_left->addStep(s1);
-  a_left->addStep(s2);
-  a_left->addStep(s3);
-
-  std::vector<std::shared_ptr<IStep>> stepsList = a_left->getSteps();
-  std::vector<std::shared_ptr<IStep>> expectedStepsList = {s1, s2, s3};
-  TEST_ASSERT(expectedStepsList == stepsList);
-}
-
-void test_action_set_steps(void) {
-  int driverPin1 = 1;
+void test_haptic_device_add_actions(void) {
+  int driverPin1 = 4;
   int driverPin2 = 2;
-  int driverPin3 = 3;
-
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin1);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin2);
-  std::shared_ptr<ActuatorDriverGPIO> driver_3 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin3);
-
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(driverPin2);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
-  std::shared_ptr<ActuatorERM> ac_3 = std::make_shared<ActuatorERM>(driver_3);
-
-  ac_1->stop();
-  ac_2->start();
-  ac_3->start();
-
-  std::shared_ptr<Action> a_left = std::make_shared<Action>();
-
-  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, true);
-  std::shared_ptr<StepWait> s2 = std::make_shared<StepWait>(500);
-  std::shared_ptr<StepActuator> s3 =
-      std::make_shared<StepActuator>(ac_2, false);
-  std::shared_ptr<StepActuator> s4 =
-      std::make_shared<StepActuator>(ac_3, false);
-
-  a_left->setSteps({s1, s2, s3, s4});
-
-  std::vector<std::shared_ptr<IStep>> stepsList = a_left->getSteps();
-  std::vector<std::shared_ptr<IStep>> expectedStepsList = {s1, s2, s3, s4};
-  TEST_ASSERT(expectedStepsList == stepsList);
-}
-
-void test_action_remove_step(void) {
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(1);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(2);
-
-  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
-  std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
-
   ac_1->stop();
   ac_2->start();
 
   std::shared_ptr<Action> a_left = std::make_shared<Action>();
-
-  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, true);
+  std::shared_ptr<Action> a_right = std::make_shared<Action>();
+  std::shared_ptr<Action> a_center = std::make_shared<Action>();
+  std::vector<ModulationPWM> mod_1 = {{200, true}};
+  std::vector<ModulationPWM> mod_2 = {{200, false}};
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
+  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, p_1);
   std::shared_ptr<StepWait> s2 = std::make_shared<StepWait>(500);
-  std::shared_ptr<StepActuator> s3 =
-      std::make_shared<StepActuator>(ac_2, false);
+  std::shared_ptr<StepActuator> s3 = std::make_shared<StepActuator>(ac_2, p_2);
 
   a_left->addStep(s1);
   a_left->addStep(s2);
   a_left->addStep(s3);
-  a_left->removeStep(1);
-  a_left->removeStep(0);
-  a_left->addStep(s2);
-  a_left->addStep(s1);
 
-  std::vector<std::shared_ptr<IStep>> stepsList = a_left->getSteps();
-  std::vector<std::shared_ptr<IStep>> expectedStepsList = {s3, s2, s1};
-  TEST_ASSERT(expectedStepsList == stepsList);
+  a_right->addStep(s3);
+  a_right->addStep(s2);
+  a_right->addStep(s1);
+
+  a_center->addStep(s1);
+  a_center->addStep(s3);
+
+  HapticDevice right_hand({ac_1, ac_2});
+  right_hand.addAction(a_left, "a_left");
+  std::map<std::string, std::shared_ptr<Action>> additionalActions;
+  additionalActions["a_right"] = a_right;
+  additionalActions["a_center"] = a_center;
+  right_hand.addActions(additionalActions);
+
+  std::map<std::string, std::shared_ptr<Action>> actionList =
+      right_hand.getActions();
+  std::map<std::string, std::shared_ptr<Action>> expectedActionList;
+  expectedActionList["a_left"] = a_left;
+  expectedActionList["a_right"] = a_right;
+  expectedActionList["a_center"] = a_center;
+  TEST_ASSERT(expectedActionList == actionList);
 }
 
-void test_action_play(void) {
-  int driverPin1 = 1;
+void test_haptic_device_remove_actions(void) {
+  int driverPin1 = 4;
   int driverPin2 = 2;
-  std::shared_ptr<ActuatorDriverGPIO> driver_1 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin1);
-  std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-      std::make_shared<ActuatorDriverGPIO>(driverPin2);
-
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(driverPin2);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
-
   ac_1->stop();
   ac_2->start();
+  HapticDevice right_hand({ac_1, ac_2});
 
   std::shared_ptr<Action> a_left = std::make_shared<Action>();
-
-  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, true);
+  std::shared_ptr<Action> a_right = std::make_shared<Action>();
+  std::shared_ptr<Action> a_center = std::make_shared<Action>();
+  std::vector<ModulationPWM> mod_1 = {{200, true}};
+  std::vector<ModulationPWM> mod_2 = {{200, false}};
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
+  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, p_1);
   std::shared_ptr<StepWait> s2 = std::make_shared<StepWait>(500);
-  std::shared_ptr<StepActuator> s3 =
-      std::make_shared<StepActuator>(ac_2, false);
+  std::shared_ptr<StepActuator> s3 = std::make_shared<StepActuator>(ac_2, p_2);
 
   a_left->addStep(s1);
   a_left->addStep(s2);
   a_left->addStep(s3);
-  a_left->play();
 
-  setPinModeTactico(driverPin1, INPUT);
-  setPinModeTactico(driverPin2, INPUT);
+  a_right->addStep(s3);
+  a_right->addStep(s2);
+  a_right->addStep(s1);
 
-  TEST_ASSERT_EQUAL(1, digitalRead(driverPin1));
-  TEST_ASSERT_EQUAL(0, digitalRead(driverPin2));
+  a_center->addStep(s1);
+  a_center->addStep(s3);
+
+  std::map<std::string, std::shared_ptr<Action>> additionalActions;
+  additionalActions["a_center"] = a_center;
+  additionalActions["a_left"] = a_left;
+  additionalActions["a_right"] = a_right;
+  right_hand.addActions(additionalActions);
+
+  right_hand.removeAction("a_center");
+
+  std::map<std::string, std::shared_ptr<Action>> actionList =
+      right_hand.getActions();
+  std::map<std::string, std::shared_ptr<Action>> expectedActionList;
+  expectedActionList["a_left"] = a_left;
+  expectedActionList["a_right"] = a_right;
+  TEST_ASSERT(expectedActionList == actionList);
+
+  right_hand.removeAction("a_right");
+  actionList = right_hand.getActions();
+  expectedActionList.erase("a_right");
+  TEST_ASSERT(expectedActionList == actionList);
 }
 
-void test_dd(void) {}
-void test_dddd(void) {}
-void test_dddww(void) {}
+void test_haptic_device_clear_actions(void) {
+  int driverPin1 = 4;
+  int driverPin2 = 2;
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(driverPin2);
+  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
+  std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
+  ac_1->stop();
+  ac_2->start();
+  HapticDevice right_hand({ac_1, ac_2});
+
+  std::shared_ptr<Action> a_left = std::make_shared<Action>();
+  std::shared_ptr<Action> a_right = std::make_shared<Action>();
+  std::shared_ptr<Action> a_center = std::make_shared<Action>();
+  std::vector<ModulationPWM> mod_1 = {{200, true}};
+  std::vector<ModulationPWM> mod_2 = {{200, false}};
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
+  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, p_1);
+  std::shared_ptr<StepWait> s2 = std::make_shared<StepWait>(500);
+  std::shared_ptr<StepActuator> s3 = std::make_shared<StepActuator>(ac_2, p_2);
+
+  a_left->addStep(s1);
+  a_left->addStep(s2);
+  a_left->addStep(s3);
+
+  a_right->addStep(s3);
+  a_right->addStep(s2);
+  a_right->addStep(s1);
+
+  a_center->addStep(s1);
+  a_center->addStep(s3);
+
+  std::map<std::string, std::shared_ptr<Action>> additionalActions;
+  additionalActions["a_center"] = a_center;
+  additionalActions["a_left"] = a_left;
+  additionalActions["a_right"] = a_right;
+  right_hand.addActions(additionalActions);
+
+  std::map<std::string, std::shared_ptr<Action>> actionList =
+      right_hand.getActions();
+  std::map<std::string, std::shared_ptr<Action>> expectedActionList;
+  expectedActionList["a_left"] = a_left;
+  expectedActionList["a_right"] = a_right;
+  expectedActionList["a_center"] = a_center;
+  TEST_ASSERT(expectedActionList == actionList);
+
+  right_hand.clearActions();
+  actionList = right_hand.getActions();
+  expectedActionList.clear();
+  TEST_ASSERT(expectedActionList == actionList);
+}
+
+void test_haptic_device_play_action(void) {
+  int driverPin1 = 4;
+  int driverPin2 = 2;
+  std::shared_ptr<ActuatorDriverI2C> driver_1 =
+      std::make_shared<ActuatorDriverI2C>(driverPin1);
+  std::shared_ptr<ActuatorDriverI2C> driver_2 =
+      std::make_shared<ActuatorDriverI2C>(driverPin2);
+  std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
+  std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
+  ac_1->stop();
+  ac_2->start();
+  HapticDevice right_hand({ac_1, ac_2});
+
+  std::shared_ptr<Action> a_left = std::make_shared<Action>();
+  std::shared_ptr<Action> a_right = std::make_shared<Action>();
+  std::vector<ModulationPWM> mod_1 = {{200, true}};
+  std::vector<ModulationPWM> mod_2 = {{200, false}};
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
+  std::shared_ptr<StepActuator> s1 = std::make_shared<StepActuator>(ac_1, p_1);
+  std::shared_ptr<StepWait> s2 = std::make_shared<StepWait>(500);
+  std::shared_ptr<StepActuator> s3 = std::make_shared<StepActuator>(ac_2, p_2);
+
+  a_left->addStep(s1);
+  a_left->addStep(s2);
+  a_left->addStep(s3);
+
+  a_right->addStep(s3);
+  a_right->addStep(s2);
+  a_right->addStep(s1);
+
+  std::map<std::string, std::shared_ptr<Action>> additionalActions;
+  additionalActions["a_left"] = a_left;
+
+  right_hand.addActions(additionalActions);
+  right_hand.playAction("a_left");
+
+  setPinModeTactico(1, INPUT);
+  setPinModeTactico(2, INPUT);
+
+  TEST_ASSERT_EQUAL(1, digitalRead(1));
+  TEST_ASSERT_EQUAL(0, digitalRead(2));
+}
 
 void setup() {
   // NOTE!!! Wait for >2 secs
@@ -452,20 +666,23 @@ void setup() {
   RUN_TEST(test_stop_actuator_ERM);
   RUN_TEST(test_swap_driver_GPIO_pin);
   RUN_TEST(test_swap_driver);
-  RUN_TEST(test_create_haptic_device);
-  RUN_TEST(test_add_actuator_to_haptic_device);
-  RUN_TEST(test_add_actuators_to_haptic_device);
-  RUN_TEST(test_remove_actuators_from_haptic_device);
-  RUN_TEST(test_remove_haptic_device_clear_actuators_list);
-  RUN_TEST(test_haptic_device_start_actuators);
-  RUN_TEST(test_haptic_device_stop_actuators);
   RUN_TEST(test_actuator_step_start);
   RUN_TEST(test_actuator_step_stop);
-  /////////////////////////////////////////
   RUN_TEST(test_action_create);
   RUN_TEST(test_action_set_steps);
   RUN_TEST(test_action_play);
   RUN_TEST(test_action_remove_step);
+  RUN_TEST(test_haptic_device_create);
+  RUN_TEST(test_haptic_device_add_actuator);
+  RUN_TEST(test_haptic_device_add_actuators);
+  RUN_TEST(test_haptic_device_remove_actuators);
+  RUN_TEST(test_haptic_device_clear_actuators_list);
+  RUN_TEST(test_haptic_device_start_actuators);
+  RUN_TEST(test_haptic_device_stop_actuators);
+  RUN_TEST(test_haptic_device_add_actions);
+  RUN_TEST(test_haptic_device_remove_actions);
+  RUN_TEST(test_haptic_device_clear_actions);
+  RUN_TEST(test_haptic_device_play_action);
 }
 
 // uint8_t i = 0;

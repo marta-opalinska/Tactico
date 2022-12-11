@@ -19,6 +19,17 @@ void PatternPWM::play(std::shared_ptr<IActuator> ac) {
   }
 }
 
+std::string PatternPWM::patternToString() {
+  std::string s = "";
+  for (auto m : this->m_modulation_sequence) {
+    s.append(std::to_string(m.isOn));
+    s.append(" ");
+    s.append(std::to_string(m.duration));
+    s.append(", ");
+  }
+  return s;
+}
+
 // void Pattern::stop(std::shared_ptr<Actuator> ac)
 // {
 // }
