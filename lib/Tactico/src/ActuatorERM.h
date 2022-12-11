@@ -1,3 +1,4 @@
+#pragma once
 #include <Interfaces/IActuator.h>
 
 #include <memory>
@@ -5,6 +6,10 @@
 #include <vector>
 
 #include "Step.h"
+
+#ifndef ACTUATOR_DEFAULT_NAME
+#define ACTUATOR_DEFAULT_NAME "actuator_"
+#endif
 
 /**
  * @class ActuatorERM
@@ -46,5 +51,6 @@ class ActuatorERM : public IActuator {
    * @param driver ActuatorDriver object to assign
    */
   void setDriver(std::shared_ptr<IActuatorDriver> driver);
+  std::shared_ptr<IActuatorDriver> getDriver();
   ~ActuatorERM() = default;
 };

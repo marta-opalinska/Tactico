@@ -68,6 +68,14 @@ void HapticDevice::removeActuator(const std::string &name) {
   }
 }
 
+// Provides a list of actuators that are a part of the haptics device
+std::vector<std::shared_ptr<IActuator>> HapticDevice::getActuatorsList() {
+  return this->m_actuatorsList;
+}
+
+// Clean actuators list
+void HapticDevice::clearActuatorsList() { this->m_actuatorsList.clear(); }
+
 void HapticDevice::addActions(
     std::map<std::string, std::shared_ptr<Action>> additinalDeviceActions) {
   this->m_deviceActions.insert(additinalDeviceActions.begin(),

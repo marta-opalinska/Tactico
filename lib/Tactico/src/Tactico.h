@@ -1,4 +1,6 @@
-﻿// Tactico_.h : Include file for standard system include files,
+﻿
+
+// Tactico_.h : Include file for standard system include files,
 // or project specific include files.
 
 #pragma once
@@ -12,9 +14,11 @@
 #include "Action.h"
 #include "ActuatorDriverGPIO.h"
 #include "ActuatorERM.h"
+#include "Arduino.h"
 #include "HapticDevice.h"
 #include "PatternPWM.h"
-#include "Arduino.h"
+#include "HardwareLayer.h"
+
 #undef min
 #undef max
 

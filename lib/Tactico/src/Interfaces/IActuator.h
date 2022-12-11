@@ -32,5 +32,6 @@ class IActuator {
    *
    * @param driver ActuatorDriver object to assign
    */
+  virtual std::shared_ptr<IActuatorDriver> getDriver() = 0;
   virtual void setDriver(std::shared_ptr<IActuatorDriver> driver) = 0;
 };

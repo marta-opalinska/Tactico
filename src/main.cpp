@@ -50,8 +50,9 @@ void loop() {
 
     // ActuatorERM ac_1(driver_1,s);
     // driver_1->e
-    std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1, s);
-    driver_1->editDriver(10);
+    std::shared_ptr<ActuatorERM> ac_1 =
+        std::make_shared<ActuatorERM>(driver_1, s);
+    driver_1->setDriverPin(10);
 
     std::shared_ptr<ActuatorERM> ac_3 = std::make_shared<ActuatorERM>(driver_3);
     std::shared_ptr<ActuatorERM> ac_2 = std::make_shared<ActuatorERM>(driver_2);
@@ -106,8 +107,8 @@ void loop() {
 
     // left.play();
 
-    // std::vector<ModulationPWM> mod_1{{200,true}, {200, false}, {100, true}, {100, false}}; 
-	// PatternPWM p_1(mod_1); std::shared_ptr<ActuatorERM>
+    // std::vector<ModulationPWM> mod_1{{200,true}, {200, false}, {100, true},
+    // {100, false}}; PatternPWM p_1(mod_1); std::shared_ptr<ActuatorERM>
     // ac_1_ptr = std::make_shared<ActuatorERM>(ac_1); p_1.play(ac_1_ptr);
 
     setupDone = true;

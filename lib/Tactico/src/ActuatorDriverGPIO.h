@@ -25,7 +25,8 @@ class ActuatorDriverGPIO : public IActuatorDriver {
   void initDriver();
   void startActuator();
   void stopActuator();
-  void editDriver(int new_GPIO);
+  int getDriverPin();
+  void setDriverPin(int new_GPIO);
   // play(PatternPWM pattern);
   // void playInterval(int time);
 };

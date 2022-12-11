@@ -14,11 +14,11 @@ void ActuatorDriverGPIO::initDriver() {
 }
 
 void ActuatorDriverGPIO::setHighGPIO() {
-  setPinStatusTactico(this->m_GPIO_pin, HIGH);
+  setPinStatusTactico(this->m_GPIO_pin, 1);
 }
 
 void ActuatorDriverGPIO::setLowGPIO() {
-  setPinStatusTactico(this->m_GPIO_pin, LOW);
+  setPinStatusTactico(this->m_GPIO_pin, 0);
 }
 
 void ActuatorDriverGPIO::startActuator() {
@@ -36,11 +36,16 @@ void ActuatorDriverGPIO::stopActuator() {
   s.append("\n");
   printTactico(s);
 }
-void ActuatorDriverGPIO::editDriver(int new_GPIO) {
+void ActuatorDriverGPIO::setDriverPin(int new_GPIO) {
   this->setLowGPIO();
   this->m_GPIO_pin = new_GPIO;
   this->initDriver();
 }
+
+int ActuatorDriverGPIO::getDriverPin() {
+  return this->m_GPIO_pin;
+}
+
 
 // void ActuatorDriverGPIO::play(int time)
 //{

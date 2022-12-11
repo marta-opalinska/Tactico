@@ -41,13 +41,15 @@ class HapticDevice {
   void removeActuator(std::shared_ptr<IActuator> actuator);
   void removeActuator(int actuatorPosition);
   void removeActuator(const std::string& name);
+  std::vector<std::shared_ptr<IActuator>> getActuatorsList();
+  void clearActuatorsList();
   void addActions(
       std::map<std::string, std::shared_ptr<Action>> additinalDeviceActions);
   void addAction(std::shared_ptr<Action> deviceAction, std::string actionName);
   void removeAction(std::string actionName);
   void playAction(std::string actionName);
   void getActions();
-  // TODO
+  // TODO(,e) these functions
   void cleanActions();
   void startActuators();
   void stopActuators();

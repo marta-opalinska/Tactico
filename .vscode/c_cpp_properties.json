@@ -17,6 +17,7 @@
                 "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5/SDK/components/toolchain",
                 "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5/SDK/components/toolchain/CMSIS/Include",
                 "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/variants/nRF52DK",
+                "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/.pio/libdeps/nordicnrf52/Unity/src",
                 "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/libraries/SPI",
                 "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/libraries/Wire",
                 ""
@@ -33,6 +34,7 @@
                     "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5/SDK/components/toolchain",
                     "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5/SDK/components/toolchain/CMSIS/Include",
                     "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/variants/nRF52DK",
+                    "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/.pio/libdeps/nordicnrf52/Unity/src",
                     "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/libraries/SPI",
                     "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/libraries/Wire",
                     ""

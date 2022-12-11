@@ -70,3 +70,5 @@ void ActuatorERM::stop() {
 void ActuatorERM::setDriver(std::shared_ptr<IActuatorDriver> driver) {
   this->m_driver = driver;
 }
+
+std::shared_ptr<IActuatorDriver> ActuatorERM::getDriver() { return this->m_driver; }
