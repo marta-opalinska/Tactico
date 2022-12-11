@@ -15,7 +15,7 @@ void PatternPWM::play(std::shared_ptr<IActuator> ac) {
     } else {
       ac->stop();
     }
-    waitForMiliseconds(m.duration);
+    waitFor(m.duration);
   }
 }
 

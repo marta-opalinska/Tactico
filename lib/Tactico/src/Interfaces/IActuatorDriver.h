@@ -1,6 +1,6 @@
 #pragma once
 #include "HardwareLayer.h"
-// #include <Interfaces/IPattern.h>
+#include <Interfaces/IPattern.h>
 #include <memory>
 
 /**

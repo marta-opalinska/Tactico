@@ -19,7 +19,7 @@ void StepActuator::printStep() {
 
 StepWait::StepWait(unsigned int miliseconds) : m_waitTime(miliseconds) {}
 
-void StepWait::play() { waitForMiliseconds(this->m_waitTime); }
+void StepWait::play() { waitFor(this->m_waitTime); }
 
 void StepWait::printStep() {
   std::string s = "STEP: ";

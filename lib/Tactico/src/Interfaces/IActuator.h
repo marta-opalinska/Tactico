@@ -6,12 +6,14 @@
 
 #include "HardwareLayer.h"
 
+
+class IActuatorDriver;
+
 /**
  * @interface
  * @brief Interface for actuator - the interface is implemented by ActuatorERM
  * and ActuatorLRA classes
  */
-
 class IActuator {
  protected:
   int id;

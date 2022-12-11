@@ -2,7 +2,8 @@
 #include <memory>
 #include <string>
 #include "IActuator.h"
-// #include <Interfaces/IActuator.h>
+
+class IActuator;
 
 /**
  * @interface IPattern

@@ -56,7 +56,7 @@ void test_start_actuator_ERM(void) {
       std::make_shared<ActuatorDriverI2C>(driverPin);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   ac_1->start();
-  waitForMiliseconds(200);
+  waitFor(200);
   setPinModeTactico(driverPin, INPUT);
   TEST_ASSERT_EQUAL(1, digitalRead(driverPin));
 }
@@ -67,7 +67,7 @@ void test_stop_actuator_ERM(void) {
       std::make_shared<ActuatorDriverI2C>(driverPin);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   ac_1->start();
-  waitForMiliseconds(200);
+  waitFor(200);
   ac_1->stop();
   setPinModeTactico(driverPin, INPUT);
   TEST_ASSERT_EQUAL(0, digitalRead(driverPin));
@@ -79,12 +79,12 @@ void test_swap_driver_GPIO_pin(void) {
       std::make_shared<ActuatorDriverI2C>(driverPin);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   ac_1->start();
-  waitForMiliseconds(200);
+  waitFor(200);
   ac_1->stop();
   driverPin = PIN_BUTTON2;
   driver_1->setDriverPin(driverPin);
   ac_1->start();
-  waitForMiliseconds(200);
+  waitFor(200);
   setPinModeTactico(driverPin, INPUT);
   TEST_ASSERT_EQUAL(HIGH, digitalRead(driverPin));
 }
@@ -100,12 +100,12 @@ void test_swap_driver(void) {
 
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   ac_1->start();
-  waitForMiliseconds(200);
+  waitFor(200);
   ac_1->stop();
 
   ac_1->setDriver(driver_2);
   ac_1->start();
-  waitForMiliseconds(200);
+  waitFor(200);
   setPinModeTactico(driverPin2, INPUT);
   TEST_ASSERT_EQUAL(1, digitalRead(driverPin2));
 }
@@ -121,7 +121,7 @@ void test_actuator_step_start(void) {
   StepActuator s1 = StepActuator(ac_1, p_1);
 
   driver_1->stopActuator();
-  waitForMiliseconds(200);
+  waitFor(200);
   s1.play();
   setPinModeTactico(driverPin, INPUT);
 
@@ -139,7 +139,7 @@ void test_actuator_step_stop(void) {
   StepActuator s1 = StepActuator(ac_1, p_1);
 
   driver_1->startActuator();
-  waitForMiliseconds(200);
+  waitFor(200);
   s1.play();
   setPinModeTactico(driverPin, INPUT);
 
@@ -436,7 +436,7 @@ void test_haptic_device_stop_actuators(void) {
   HapticDevice right_hand({ac_1, ac_2, ac_3});
 
   right_hand.startActuators();
-  waitForMiliseconds(200);
+  waitFor(200);
   right_hand.stopActuators();
 
   setPinModeTactico(1, INPUT);
@@ -656,7 +656,7 @@ void test_haptic_device_play_action(void) {
 void setup() {
   // NOTE!!! Wait for >2 secs
   // if board doesn't support software reset via Serial.DTR/RTS
-  waitForMiliseconds(2000);
+  waitFor(2000);
 
   //  Begin unit testing
   UNITY_BEGIN();  // IMPORTANT LINE!
