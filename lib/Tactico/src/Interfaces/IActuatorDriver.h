@@ -1,6 +1,6 @@
 #pragma once
 #include "HardwareLayer.h"
-#include <Interfaces/IPattern.h>
+#include <Interfaces/IWaveform.h>
 #include <memory>
 
 /**
@@ -16,24 +16,24 @@ class IActuatorDriver {
    *
    */
 
-  virtual void initDriver() = 0;
+  virtual void init() = 0;
   /**
    * @brief Sends signal to the assigned interface to start it.
    *
    */
 
-  virtual void startActuator() = 0;
+  virtual void play() = 0;
   /**
    * @brief Sends signal to the assigned interface object to stop it.
    *
    */
 
-  virtual void stopActuator() = 0;
+  virtual void stop() = 0;
 
   // /**
   //  * @brief Sends signal to play a specific pattern
   //  * 
   //  * @param pattern pattern to play
   //  */
-  // virtual void play(std::shared_ptr<IPattern> pattern) = 0;
+  // virtual void play(std::shared_ptr<IWaveform> pattern) = 0;
 };

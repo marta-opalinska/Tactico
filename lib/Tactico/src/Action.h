@@ -11,7 +11,7 @@
  * @brief Class that can store multistep activity that can be performed on
  * multiple actuators
  * @details There are two typed of steps that an action can consist of :
- * StepWait (delay between two actions) and StepStepActuator (action that is
+ * WaitStepImpl (delay between two actions) and StepStepActuator (action that is
  * performed on a specific Actuator)
  * @param m_activitySteps vector of steps that belongs to the activity.
  */
@@ -22,10 +22,10 @@ class Action {
  public:
   Action() = default;
   ~Action() = default;
-  void addStep(std::shared_ptr<IActuator> actuator, std::shared_ptr<IPattern> pattern);
+  void addStep(std::shared_ptr<IActuator> actuator, std::shared_ptr<IWaveform> pattern);
   void addStep(std::shared_ptr<IStep> step);
   void addWait(int miliseconds);
-  void addWait(std::shared_ptr<StepWait> stepWait);
+  void addWait(std::shared_ptr<WaitStepImpl> stepWait);
   // removes single step
   void removeStep(int stepPosition);
   std::vector<std::shared_ptr<IStep>> getSteps();

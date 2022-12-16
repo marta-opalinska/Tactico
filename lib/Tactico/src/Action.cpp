@@ -2,9 +2,9 @@
 
 #include "string"
 
-void Action::addStep(std::shared_ptr<IActuator> actuator, std::shared_ptr<IPattern> pattern) {
+void Action::addStep(std::shared_ptr<IActuator> actuator, std::shared_ptr<IWaveform> pattern) {
   this->m_activitySteps.push_back(
-      std::make_shared<StepActuator>(actuator, pattern));
+      std::make_shared<ActuatorStepImpl>(actuator, pattern));
 }
 
 void Action::addStep(std::shared_ptr<IStep> step) {
@@ -12,10 +12,10 @@ void Action::addStep(std::shared_ptr<IStep> step) {
 }
 
 void Action::addWait(int miliseconds) {
-  this->m_activitySteps.push_back(std::make_shared<StepWait>(miliseconds));
+  this->m_activitySteps.push_back(std::make_shared<WaitStepImpl>(miliseconds));
 }
 
-void Action::addWait(std::shared_ptr<StepWait> stepWait) {
+void Action::addWait(std::shared_ptr<WaitStepImpl> stepWait) {
   this->m_activitySteps.push_back(stepWait);
 }
 

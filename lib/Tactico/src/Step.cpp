@@ -1,27 +1,27 @@
 #include "Step.h"
 
-StepActuator::StepActuator(std::shared_ptr<IActuator> actuator,
-                           std::shared_ptr<IPattern> pattern)
-    : m_actuator(actuator), m_pattern(pattern) {}
+ActuatorStepImpl::ActuatorStepImpl(std::shared_ptr<IActuator> actuator,
+                           std::shared_ptr<IWaveform> pattern)
+    : m_actuator(actuator), m_waveform(pattern) {}
 
-void StepActuator::play() {
-  this->m_pattern->play(this->m_actuator);
+void ActuatorStepImpl::play() {
+  this->m_waveform->play(this->m_actuator);
 }
 
-void StepActuator::printStep() {
+void ActuatorStepImpl::printStep() {
   std::string s = "STEP: ";
   s.append(this->m_actuator->m_name);
   s.append(": ");
-  s.append(this->m_pattern->patternToString());
+  s.append(this->m_waveform->patternToString());
   s.append("\n");
   printTactico(s);
 }
 
-StepWait::StepWait(unsigned int miliseconds) : m_waitTime(miliseconds) {}
+WaitStepImpl::WaitStepImpl(unsigned int miliseconds) : m_waitTime(miliseconds) {}
 
-void StepWait::play() { waitFor(this->m_waitTime); }
+void WaitStepImpl::play() { waitFor(this->m_waitTime); }
 
-void StepWait::printStep() {
+void WaitStepImpl::printStep() {
   std::string s = "STEP: ";
   s.append("Wait for : ");
   s.append(": ");

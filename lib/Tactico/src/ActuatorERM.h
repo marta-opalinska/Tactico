@@ -43,7 +43,7 @@ class ActuatorERM : public IActuator {
    * @param name custom Actuator name
    */
   ActuatorERM(std::shared_ptr<IActuatorDriver> driver, const std::string &name);
-  void start();
+  void play();
   void stop();
   /**
    * @brief Assign Driver object to the actuator

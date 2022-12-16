@@ -5,7 +5,7 @@
 #include <memory>
 #include <string>
 
-#include "Interfaces/IPattern.h"
+#include "Interfaces/IWaveform.h"
 #include "HardwareLayer.h"
 
 /**
@@ -28,35 +28,35 @@ class IStep {
  * @param m_actuator actuator that the action is assigned to
  *
  */
-class StepActuator : public IStep {
+class ActuatorStepImpl : public IStep {
  protected:
-  StepActuator() = default;
+  ActuatorStepImpl() = default;
 
  public:
   // tep() = default;
-  StepActuator(std::shared_ptr<IActuator> actuator, std::shared_ptr<IPattern> pattern);
-  ~StepActuator() = default;
+  ActuatorStepImpl(std::shared_ptr<IActuator> actuator, std::shared_ptr<IWaveform> pattern);
+  ~ActuatorStepImpl() = default;
   std::shared_ptr<IActuator> m_actuator;
-  std::shared_ptr<IPattern> m_pattern;
+  std::shared_ptr<IWaveform> m_waveform;
   void play();
   void printStep();
 };
 
 /**
- * @class StepWait
+ * @class WaitStepImpl
  * @implements IStep
  * @brief Class that stores the wait time between two steps in the Action.
  * @param m_waitTime value of the wait in miliseconds
  *
  */
-class StepWait : public IStep {
+class WaitStepImpl : public IStep {
  protected:
-  StepWait() = default;
+  WaitStepImpl() = default;
 
  public:
   // tep() = default;
-  explicit StepWait(unsigned int miliseconds);
-  ~StepWait() = default;
+  explicit WaitStepImpl(unsigned int miliseconds);
+  ~WaitStepImpl() = default;
   unsigned int m_waitTime;
   void play();
   void printStep();

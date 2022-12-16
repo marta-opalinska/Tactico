@@ -2,10 +2,10 @@
 #include "ActuatorDriverGPIO.h"
 
 ActuatorDriverGPIO::ActuatorDriverGPIO(int GPIO_pin) : m_GPIO_pin(GPIO_pin) {
-  this->initDriver();
+  this->init();
 }
 
-void ActuatorDriverGPIO::initDriver() {
+void ActuatorDriverGPIO::init() {
   setPinModeTactico(this->m_GPIO_pin, OUTPUT);
   std::string s = "Set GPIO ";
   s.append(std::to_string(this->m_GPIO_pin));
@@ -21,7 +21,7 @@ void ActuatorDriverGPIO::setLowGPIO() {
   setPinStatusTactico(this->m_GPIO_pin, 0);
 }
 
-void ActuatorDriverGPIO::startActuator() {
+void ActuatorDriverGPIO::play() {
   this->setHighGPIO();
   std::string s = "Actuator Driver START, GPIO ";
   s.append(std::to_string(this->m_GPIO_pin));
@@ -29,24 +29,24 @@ void ActuatorDriverGPIO::startActuator() {
   printTactico(s);
 }
 
-void ActuatorDriverGPIO::stopActuator() {
+void ActuatorDriverGPIO::stop() {
   this->setLowGPIO();
   std::string s = "Actuator Driver STOP, GPIO ";
   s.append(std::to_string(this->m_GPIO_pin));
   s.append("\n");
   printTactico(s);
 }
-void ActuatorDriverGPIO::setDriverPin(int new_GPIO) {
+void ActuatorDriverGPIO::setPin(int new_GPIO) {
   this->setLowGPIO();
   this->m_GPIO_pin = new_GPIO;
-  this->initDriver();
+  this->init();
 }
 
-int ActuatorDriverGPIO::getDriverPin() {
+int ActuatorDriverGPIO::getPin() {
   return this->m_GPIO_pin;
 }
 
-// void ActuatorDriverGPIO::play(IPattern pattern){
+// void ActuatorDriverGPIO::play(IWaveform pattern){
 
 // }
 

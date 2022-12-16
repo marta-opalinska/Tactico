@@ -22,11 +22,11 @@ class ActuatorDriverGPIO : public IActuatorDriver {
   explicit ActuatorDriverGPIO(int GPIO_pin);
   ActuatorDriverGPIO() = delete;
   ~ActuatorDriverGPIO() = default;
-  void initDriver();
-  void startActuator();
-  void stopActuator();
-  int getDriverPin();
-  void setDriverPin(int new_GPIO);
-  // void play(IPattern pattern);
+  void init();
+  void play();
+  void stop();
+  int getPin();
+  void setPin(int new_GPIO);
+  // void play(IWaveform pattern);
   // void playInterval(int time);
 };

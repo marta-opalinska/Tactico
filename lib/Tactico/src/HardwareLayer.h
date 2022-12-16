@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include <Wire.h>
 #include <Arduino.h>
 #undef min
 #undef max
@@ -56,29 +57,29 @@ void setPinModeTactico(const int pinNumber, int pinModeStatus);
 /**
  * @brief Enables the I2C hardware
 
- * 
+ *
  */
-void i2c_begin(); 
+void i2c_begin();
 
 /**
  * @brief Disables the I2C hardware
- * 
+ *
  */
 void i2c_end();
 
-
 /**
  * @brief Initiate an I2C write operation, array of char.
- * 
+ *
  * @param address the 7 bit I2C slave address
  * @param registerAddress address of the register you wish to access
  * @param data array of characters
  */
-void i2c_write(int address, int registerAddress, int data); 
+void i2c_write(int address, int registerAddress, int data);
 
 /**
- * @brief Initiate a read operation of a specific number of bytes staring from register address
- * 
+ * @brief Initiate a read operation of a specific number of bytes staring from
+ * register address
+ *
  * @param address the 7 bit I2C slave address
  * @param registerAddress starting register address to read data from
  * @param numberBytes the number of bytes to be read

@@ -102,7 +102,7 @@ void HapticDevice::clearActions() { this->m_deviceActions.clear(); }
 
 void HapticDevice::startActuators() {
   for (auto &ac : m_actuatorsList) {
-    ac->start();
+    ac->play();
   }
 }
 

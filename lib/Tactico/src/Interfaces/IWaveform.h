@@ -6,12 +6,13 @@
 class IActuator;
 
 /**
- * @interface IPattern
+ * @interface IWaveform
  * @brief
  *
  */
-class IPattern {
+class IWaveform {
  public:
   virtual void play(std::shared_ptr<IActuator> ac) = 0;
+  virtual void init() = 0;
   virtual std::string patternToString() = 0;
 };

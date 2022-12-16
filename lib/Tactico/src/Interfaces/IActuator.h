@@ -27,7 +27,7 @@ class IActuator {
       : m_driver(driver), m_name(name) {}
   explicit IActuator(std::shared_ptr<IActuatorDriver> driver) : m_driver(driver) {}
 
-  virtual void start() = 0;
+  virtual void play() = 0;
   virtual void stop() = 0;
   /**
    * @brief Assign Driver object to the actuator

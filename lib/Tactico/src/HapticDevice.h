@@ -48,7 +48,6 @@ class HapticDevice {
       std::map<std::string, std::shared_ptr<Action>> additinalDeviceActions);
   void addAction(std::shared_ptr<Action> deviceAction, std::string actionName);
   void removeAction(std::string actionName);
-  // TODO unit tests!
   void playAction(std::string actionName);
   std::map<std::string, std::shared_ptr<Action>> getActions();
   void clearActions();

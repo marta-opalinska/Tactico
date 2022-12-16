@@ -1,4 +1,3 @@
-
 // Tactico framework imports
 #include <Tactico.h>
 
@@ -52,29 +51,17 @@ void loop() {
     std::vector<ModulationPWM> mod_1 = {
         {300, true}, {200, false}, {100, true}, {50, false}, {50, true}};
     // std::vector<ModulationPWM> mod_2 = {{200, false}};
-    std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
-    // std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
-    std::shared_ptr<StepActuator> s1 =
-        std::make_shared<StepActuator>(ac_1, p_1);
-    std::shared_ptr<StepWait> s2 = std::make_shared<StepWait>(1500);
-    std::shared_ptr<StepActuator> s3 =
-        std::make_shared<StepActuator>(ac_1, p_1);
+    std::shared_ptr<IWaveform> p_1 = std::make_shared<WaveformPWM>(mod_1);
+    // std::shared_ptr<IWaveform> p_2 = std::make_shared<WaveformPWM>(mod_2);
+    std::shared_ptr<ActuatorStepImpl> s1 =
+        std::make_shared<ActuatorStepImpl>(ac_1, p_1);
+    std::shared_ptr<WaitStepImpl> s2 = std::make_shared<WaitStepImpl>(1500);
+    std::shared_ptr<ActuatorStepImpl> s3 =
+        std::make_shared<ActuatorStepImpl>(ac_1, p_1);
 
     a_left->addStep(s1);
     a_left->addStep(s2);
     a_left->addStep(s3);
-
-    // delay(2000);
-    // ac_1->start();
-    // delay(2000);
-    // // pinMode(1, OUTPUT);
-    // ac_1->stop();
-    // delay(2000);
-    // // pinMode(1, OUTPUT);
-    // ac_1->start();
-    // delay(2000);
-    // // pinMode(1, OUTPUT);
-    // ac_1->stop();
 
     std::map<std::string, std::shared_ptr<Action>> additionalActions;
     additionalActions["a_left"] = a_left;
@@ -103,7 +90,7 @@ void loop() {
   //   // driver_1->e
   //   std::shared_ptr<ActuatorERM> ac_1 =
   //       std::make_shared<ActuatorERM>(driver_1, s);
-  //   driver_1->setDriverPin(10);
+  //   driver_1->setPin(10);
 
   //   std::shared_ptr<ActuatorERM> ac_3 =
   //   std::make_shared<ActuatorERM>(driver_3); std::shared_ptr<ActuatorERM>
@@ -161,7 +148,7 @@ void loop() {
 
   //   // std::vector<ModulationPWM> mod_1{{200,true}, {200, false}, {100,
   //   true},
-  //   // {100, false}}; PatternPWM p_1(mod_1); std::shared_ptr<ActuatorERM>
+  //   // {100, false}}; WaveformPWM p_1(mod_1); std::shared_ptr<ActuatorERM>
   //   // ac_1_ptr = std::make_shared<ActuatorERM>(ac_1); p_1.play(ac_1_ptr);
 
   //   setupDone = true;

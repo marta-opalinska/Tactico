@@ -9,7 +9,7 @@
 // #include <Interfaces/IActuator.h>
 #include <Interfaces/IActuator.h>
 #include <Interfaces/IActuatorDriver.h>
-#include <Interfaces/IPattern.h>
+#include <Interfaces/IWaveform.h>
 
 #include <string>
 
@@ -18,7 +18,7 @@
 #include "ActuatorERM.h"
 #include "Arduino.h"
 #include "HapticDevice.h"
-#include "PatternPWM.h"
+#include "WaveformPWM.h"
 #include "HardwareLayer.h"
 
 #undef min

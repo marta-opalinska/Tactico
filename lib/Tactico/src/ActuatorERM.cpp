@@ -19,7 +19,7 @@
 //   s.append(this->m_name);
 //   s.append(": \n");
 //   printTactico(s);
-//   this->m_driver->startActuator();
+//   this->m_driver->play();
 // }
 
 // void ActuatorERM::stop() {
@@ -27,7 +27,7 @@
 //   s.append(this->m_name);
 //   s.append(": \n");
 //   printTactico(s);
-//   this->m_driver->stopActuator();
+//   this->m_driver->stop();
 // }
 
 // void ActuatorERM::setDriver(std::shared_ptr<IActuatorDriver> driver) {
@@ -51,12 +51,12 @@ ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver)
   // this->m_name.append(std::to_string(id));
 }
 
-void ActuatorERM::start() {
+void ActuatorERM::play() {
   std::string s = "Actuator ";
   s.append(this->m_name);
   s.append(": \n");
   printTactico(s);
-  this->m_driver->startActuator();
+  this->m_driver->play();
 }
 
 void ActuatorERM::stop() {
@@ -64,7 +64,7 @@ void ActuatorERM::stop() {
   s.append(this->m_name);
   s.append(": \n");
   printTactico(s);
-  this->m_driver->stopActuator();
+  this->m_driver->stop();
 }
 
 void ActuatorERM::setDriver(std::shared_ptr<IActuatorDriver> driver) {

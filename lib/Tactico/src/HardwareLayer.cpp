@@ -17,3 +17,8 @@ void setPinStatusTactico(const int pinNumber, int pinStatus) {
 void setPinModeTactico(const int pinNumber, int pinModeStatus) {
   pinMode(pinNumber, pinModeStatus);
 }
+
+void i2c_begin(){
+  Wire.begin();
+  
+}
