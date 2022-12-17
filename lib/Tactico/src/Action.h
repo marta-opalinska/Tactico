@@ -1,8 +1,10 @@
 #pragma once
 #include <Interfaces/IActuator.h>
+#include <Interfaces/IPattern.h>
 
 #include <memory>
 #include <vector>
+#include <string>
 
 #include "Step.h"
 
@@ -22,7 +24,7 @@ class Action {
  public:
   Action() = default;
   ~Action() = default;
-  void addStep(std::shared_ptr<IActuator> actuator, std::shared_ptr<IWaveform> pattern);
+  void addStep(std::shared_ptr<IActuator> actuator, std::shared_ptr<IPattern> pattern);
   void addStep(std::shared_ptr<IStep> step);
   void addWait(int miliseconds);
   void addWait(std::shared_ptr<WaitStepImpl> stepWait);

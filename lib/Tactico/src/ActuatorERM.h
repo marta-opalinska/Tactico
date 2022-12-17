@@ -2,14 +2,19 @@
 #include <Interfaces/IActuator.h>
 
 #include <memory>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
+#include "Interfaces/IPattern.h"
+#include "PatternPWM.h"
 #include "Step.h"
 
 #ifndef ACTUATOR_DEFAULT_NAME
 #define ACTUATOR_DEFAULT_NAME "actuator_"
 #endif
+
+class PatternPWM;
 
 /**
  * @class ActuatorERM
@@ -25,6 +30,7 @@ class ActuatorERM : public IActuator {
   static int nextID;
   // static const char defaultName[14];  // = "actuatorERM"
   static const std::string defaultName;  // = "actuatorERM"
+  // bool playPWM(std::shared_ptr<PatternPWM> patternPWM);
 
  public:
   ActuatorERM() = delete;
@@ -43,8 +49,12 @@ class ActuatorERM : public IActuator {
    * @param name custom Actuator name
    */
   ActuatorERM(std::shared_ptr<IActuatorDriver> driver, const std::string &name);
-  void play();
-  void stop();
+  // void play();
+  // void play(std::shared_ptr<IPattern> pattern);
+
+  bool play(std::shared_ptr<IPattern> pattern);
+  // void playDRV2505L(std::shared_ptr<PatternPWM> patternPWM);
+  // void stop();
   /**
    * @brief Assign Driver object to the actuator
    *
@@ -52,5 +62,6 @@ class ActuatorERM : public IActuator {
    */
   void setDriver(std::shared_ptr<IActuatorDriver> driver);
   std::shared_ptr<IActuatorDriver> getDriver();
+  ActuatorType getType();
   ~ActuatorERM() = default;
 };

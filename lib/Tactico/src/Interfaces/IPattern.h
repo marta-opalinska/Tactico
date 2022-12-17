@@ -1,18 +1,25 @@
 #pragma once
 #include <memory>
 #include <string>
+
 #include "IActuator.h"
 
 class IActuator;
 
 /**
- * @interface IWaveform
+ * @interface IPattern
  * @brief
  *
  */
-class IWaveform {
+
+enum PatternType { ePWM, eDRV2505L };
+
+class IPattern {
+ protected:
+  PatternType m_type;
+
  public:
-  virtual void play(std::shared_ptr<IActuator> ac) = 0;
   virtual void init() = 0;
   virtual std::string patternToString() = 0;
+  virtual PatternType getType() = 0;
 };

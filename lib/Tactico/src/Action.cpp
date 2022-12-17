@@ -1,8 +1,7 @@
 #include "Action.h"
 
-#include "string"
 
-void Action::addStep(std::shared_ptr<IActuator> actuator, std::shared_ptr<IWaveform> pattern) {
+void Action::addStep(std::shared_ptr<IActuator> actuator, std::shared_ptr<IPattern> pattern) {
   this->m_activitySteps.push_back(
       std::make_shared<ActuatorStepImpl>(actuator, pattern));
 }

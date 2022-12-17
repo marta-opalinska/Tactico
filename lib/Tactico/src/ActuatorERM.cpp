@@ -1,25 +1,37 @@
 #include "ActuatorERM.h"
 
-// int ActuatorERM::nextID = 0;
+int ActuatorERM::nextID = 0;
+// const char ActuatorERM::defaultName[14] = "actuatorERM_";
+const std::string ActuatorERM::defaultName = "actuator_";
 
-// ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
-//                          const std::string &name)
-//     : IActuator(driver, name) {
-//   this->id = ++nextID;
-// }
+ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
+                         const std::string &name)
+    : IActuator(driver, name) {
+  this->id = ++nextID;
+  this->m_type = ERM;
+}
 
-// ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver)
-//     : IActuator(driver,
-//     std::string(IActuator::defaultName).append(std::to_string(nextID))) {
-//   this->id = ++nextID;
-// }
+ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver)
+    : IActuator(driver) {
+  this->id = ++nextID;
+  this->m_name = std::string(this->defaultName).append(std::to_string(id));
+  this->m_type = ERM;
+}
 
-// void ActuatorERM::start() {
-//   std::string s = "Actuator ";
-//   s.append(this->m_name);
-//   s.append(": \n");
-//   printTactico(s);
-//   this->m_driver->play();
+bool ActuatorERM::play(std::shared_ptr<IPattern> pattern) {
+  PatternType type = pattern->getType();
+  if ( type == ePWM  || type == eDRV2505L) {
+    return this->m_driver->play(pattern);
+  } else {
+    printTactico(
+        "Invalid argument - ActuatorERM does not support this type of "
+        "Pattern");
+    return false;
+  }
+}
+
+// bool ActuatorERM::playPWM(std::shared_ptr<PatternPWM> pattern) {
+//   return this->m_driver->play(pattern);
 // }
 
 // void ActuatorERM::stop() {
@@ -30,45 +42,12 @@
 //   this->m_driver->stop();
 // }
 
-// void ActuatorERM::setDriver(std::shared_ptr<IActuatorDriver> driver) {
-//   this->m_driver = driver;
-// }
-
-int ActuatorERM::nextID = 0;
-// const char ActuatorERM::defaultName[14] = "actuatorERM_";
-const std::string ActuatorERM::defaultName = "actuator_";
-
-ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
-                         const std::string &name)
-    : IActuator(driver, name) {
-  this->id = ++nextID;
-}
-
-ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver)
-    : IActuator(driver) {
-  this->id = ++nextID;
-  this->m_name = std::string(this->defaultName).append(std::to_string(id));
-  // this->m_name.append(std::to_string(id));
-}
-
-void ActuatorERM::play() {
-  std::string s = "Actuator ";
-  s.append(this->m_name);
-  s.append(": \n");
-  printTactico(s);
-  this->m_driver->play();
-}
-
-void ActuatorERM::stop() {
-  std::string s = "Actuator ";
-  s.append(this->m_name);
-  s.append(": \n");
-  printTactico(s);
-  this->m_driver->stop();
-}
-
 void ActuatorERM::setDriver(std::shared_ptr<IActuatorDriver> driver) {
   this->m_driver = driver;
 }
 
-std::shared_ptr<IActuatorDriver> ActuatorERM::getDriver() { return this->m_driver; }
+ActuatorType ActuatorERM::getType() { return this->m_type; }
+
+std::shared_ptr<IActuatorDriver> ActuatorERM::getDriver() {
+  return this->m_driver;
+}

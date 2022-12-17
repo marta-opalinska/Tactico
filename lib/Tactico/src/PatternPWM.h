@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "HardwareLayer.h"
-#include "Interfaces/IWaveform.h"
+#include "Interfaces/IPattern.h"
 #include "Tactico.h"
 
 /**
@@ -19,22 +19,24 @@ struct ModulationPWM {
 };
 
 /**
- * @class WaveformPWM
+ * @class PatternPWM
  * @brief
  * @param m_modulation_sequence vector or modulation sequence
  *
  */
-class WaveformPWM : public IWaveform {
+class PatternPWM : public IPattern {
  private:
-  WaveformPWM() = default;
-  std::vector<ModulationPWM> m_modulation_sequence;
+  PatternPWM() = default;
+  PatternType m_type = ePWM;
 
  public:
-  // applyWaveformPWM(Actuator actuator)
-  explicit WaveformPWM(std::vector<ModulationPWM> switching_modulation);
+  // applyPatternPWM(Actuator actuator)
+  std::vector<ModulationPWM> m_modulation_sequence;
+  explicit PatternPWM(std::vector<ModulationPWM> switching_modulation);
   void setModulation(std::vector<ModulationPWM> switching_modulation);
   void play(std::shared_ptr<IActuator> ac);
   void init();
   std::string patternToString();
-  ~WaveformPWM() = default;
+  PatternType getType();
+  ~PatternPWM() = default;
 };

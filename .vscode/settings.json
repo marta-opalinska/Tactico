@@ -57,7 +57,8 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "*.x": "cpp"
+        "*.x": "cpp",
+        "patternpwm.h": "c"
     },
     "editor.tabCompletion": "on",
     "diffEditor.codeLens": true,

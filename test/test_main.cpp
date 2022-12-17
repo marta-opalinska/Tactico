@@ -116,7 +116,7 @@ void test_actuator_step_start(void) {
       std::make_shared<ActuatorDriverGPIO>(driverPin);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   std::vector<ModulationPWM> mod_1 = {{200, true}};
-  std::shared_ptr<IWaveform> p_1 = std::make_shared<WaveformPWM>(mod_1);
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
 
   ActuatorStepImpl s1 = ActuatorStepImpl(ac_1, p_1);
 
@@ -134,7 +134,7 @@ void test_actuator_step_stop(void) {
       std::make_shared<ActuatorDriverGPIO>(driverPin);
   std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
   std::vector<ModulationPWM> mod_1 = {{200, false}};
-  std::shared_ptr<IWaveform> p_1 = std::make_shared<WaveformPWM>(mod_1);
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
 
   ActuatorStepImpl s1 = ActuatorStepImpl(ac_1, p_1);
 
@@ -162,8 +162,8 @@ void test_action_create(void) {
 
   std::vector<ModulationPWM> mod_1 = {{200, true}};
   std::vector<ModulationPWM> mod_2 = {{200, false}};
-  std::shared_ptr<IWaveform> p_1 = std::make_shared<WaveformPWM>(mod_1);
-  std::shared_ptr<IWaveform> p_2 = std::make_shared<WaveformPWM>(mod_2);
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
 
   std::shared_ptr<ActuatorStepImpl> s1 =
       std::make_shared<ActuatorStepImpl>(ac_1, p_1);
@@ -204,8 +204,8 @@ void test_action_set_steps(void) {
 
   std::vector<ModulationPWM> mod_1 = {{200, true}};
   std::vector<ModulationPWM> mod_2 = {{200, false}};
-  std::shared_ptr<IWaveform> p_1 = std::make_shared<WaveformPWM>(mod_1);
-  std::shared_ptr<IWaveform> p_2 = std::make_shared<WaveformPWM>(mod_2);
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
 
   std::shared_ptr<ActuatorStepImpl> s1 =
       std::make_shared<ActuatorStepImpl>(ac_1, p_1);
@@ -238,8 +238,8 @@ void test_action_remove_step(void) {
 
   std::vector<ModulationPWM> mod_1 = {{200, true}};
   std::vector<ModulationPWM> mod_2 = {{200, false}};
-  std::shared_ptr<IWaveform> p_1 = std::make_shared<WaveformPWM>(mod_1);
-  std::shared_ptr<IWaveform> p_2 = std::make_shared<WaveformPWM>(mod_2);
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
 
   std::shared_ptr<ActuatorStepImpl> s1 =
       std::make_shared<ActuatorStepImpl>(ac_1, p_1);
@@ -278,8 +278,8 @@ void test_action_play(void) {
 
   std::vector<ModulationPWM> mod_1 = {{200, true}};
   std::vector<ModulationPWM> mod_2 = {{200, false}};
-  std::shared_ptr<IWaveform> p_1 = std::make_shared<WaveformPWM>(mod_1);
-  std::shared_ptr<IWaveform> p_2 = std::make_shared<WaveformPWM>(mod_2);
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
 
   std::shared_ptr<ActuatorStepImpl> s1 =
       std::make_shared<ActuatorStepImpl>(ac_1, p_1);
@@ -474,8 +474,8 @@ void test_haptic_device_add_actions(void) {
   std::shared_ptr<Action> a_center = std::make_shared<Action>();
   std::vector<ModulationPWM> mod_1 = {{200, true}};
   std::vector<ModulationPWM> mod_2 = {{200, false}};
-  std::shared_ptr<IWaveform> p_1 = std::make_shared<WaveformPWM>(mod_1);
-  std::shared_ptr<IWaveform> p_2 = std::make_shared<WaveformPWM>(mod_2);
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
   std::shared_ptr<ActuatorStepImpl> s1 =
       std::make_shared<ActuatorStepImpl>(ac_1, p_1);
   std::shared_ptr<WaitStepImpl> s2 = std::make_shared<WaitStepImpl>(500);
@@ -527,8 +527,8 @@ void test_haptic_device_remove_actions(void) {
   std::shared_ptr<Action> a_center = std::make_shared<Action>();
   std::vector<ModulationPWM> mod_1 = {{200, true}};
   std::vector<ModulationPWM> mod_2 = {{200, false}};
-  std::shared_ptr<IWaveform> p_1 = std::make_shared<WaveformPWM>(mod_1);
-  std::shared_ptr<IWaveform> p_2 = std::make_shared<WaveformPWM>(mod_2);
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
   std::shared_ptr<ActuatorStepImpl> s1 =
       std::make_shared<ActuatorStepImpl>(ac_1, p_1);
   std::shared_ptr<WaitStepImpl> s2 = std::make_shared<WaitStepImpl>(500);
@@ -585,8 +585,8 @@ void test_haptic_device_clear_actions(void) {
   std::shared_ptr<Action> a_center = std::make_shared<Action>();
   std::vector<ModulationPWM> mod_1 = {{200, true}};
   std::vector<ModulationPWM> mod_2 = {{200, false}};
-  std::shared_ptr<IWaveform> p_1 = std::make_shared<WaveformPWM>(mod_1);
-  std::shared_ptr<IWaveform> p_2 = std::make_shared<WaveformPWM>(mod_2);
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
   std::shared_ptr<ActuatorStepImpl> s1 =
       std::make_shared<ActuatorStepImpl>(ac_1, p_1);
   std::shared_ptr<WaitStepImpl> s2 = std::make_shared<WaitStepImpl>(500);
@@ -641,8 +641,8 @@ void test_haptic_device_play_action(void) {
   std::shared_ptr<Action> a_right = std::make_shared<Action>();
   std::vector<ModulationPWM> mod_1 = {{200, true}};
   std::vector<ModulationPWM> mod_2 = {{200, false}};
-  std::shared_ptr<IWaveform> p_1 = std::make_shared<WaveformPWM>(mod_1);
-  std::shared_ptr<IWaveform> p_2 = std::make_shared<WaveformPWM>(mod_2);
+  std::shared_ptr<IPattern> p_1 = std::make_shared<PatternPWM>(mod_1);
+  std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
   std::shared_ptr<ActuatorStepImpl> s1 =
       std::make_shared<ActuatorStepImpl>(ac_1, p_1);
   std::shared_ptr<WaitStepImpl> s2 = std::make_shared<WaitStepImpl>(500);

@@ -1,9 +1,14 @@
 #pragma once
 #include <Interfaces/IActuatorDriver.h>
+#include <PatternPWM.h>
 
+#include <memory>
 #include <string>
 
 #include "HardwareLayer.h"
+
+class IPattern;
+class PatternPWM;
 
 /**
  * @class ActuatorDriverGPIO
@@ -15,18 +20,19 @@
 class ActuatorDriverGPIO : public IActuatorDriver {
  protected:
   int m_GPIO_pin;
-  void setHighGPIO();
-  void setLowGPIO();
+  void setGPIOHigh();
+  void setGPIOLow();
 
  public:
   explicit ActuatorDriverGPIO(int GPIO_pin);
   ActuatorDriverGPIO() = delete;
   ~ActuatorDriverGPIO() = default;
   void init();
-  void play();
-  void stop();
+  bool play(std::shared_ptr<IPattern> pattern);
+  // void stop();
   int getPin();
   void setPin(int new_GPIO);
-  // void play(IWaveform pattern);
+  DriverType getType();
+  // void play(IPattern pattern);
   // void playInterval(int time);
 };

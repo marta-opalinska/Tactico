@@ -5,7 +5,7 @@
 #include <memory>
 #include <string>
 
-#include "Interfaces/IWaveform.h"
+#include "Interfaces/IPattern.h"
 #include "HardwareLayer.h"
 
 /**
@@ -34,10 +34,10 @@ class ActuatorStepImpl : public IStep {
 
  public:
   // tep() = default;
-  ActuatorStepImpl(std::shared_ptr<IActuator> actuator, std::shared_ptr<IWaveform> pattern);
+  ActuatorStepImpl(std::shared_ptr<IActuator> actuator, std::shared_ptr<IPattern> pattern);
   ~ActuatorStepImpl() = default;
   std::shared_ptr<IActuator> m_actuator;
-  std::shared_ptr<IWaveform> m_waveform;
+  std::shared_ptr<IPattern> m_pattern;
   void play();
   void printStep();
 };

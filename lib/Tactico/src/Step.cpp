@@ -1,18 +1,18 @@
 #include "Step.h"
 
 ActuatorStepImpl::ActuatorStepImpl(std::shared_ptr<IActuator> actuator,
-                           std::shared_ptr<IWaveform> pattern)
-    : m_actuator(actuator), m_waveform(pattern) {}
+                           std::shared_ptr<IPattern> pattern)
+    : m_actuator(actuator), m_pattern(pattern) {}
 
 void ActuatorStepImpl::play() {
-  this->m_waveform->play(this->m_actuator);
+  this->m_actuator->play(this->m_pattern);
 }
 
 void ActuatorStepImpl::printStep() {
   std::string s = "STEP: ";
   s.append(this->m_actuator->m_name);
   s.append(": ");
-  s.append(this->m_waveform->patternToString());
+  s.append(this->m_pattern->patternToString());
   s.append("\n");
   printTactico(s);
 }

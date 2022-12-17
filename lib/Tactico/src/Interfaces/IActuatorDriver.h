@@ -1,6 +1,6 @@
 #pragma once
 #include "HardwareLayer.h"
-#include <Interfaces/IWaveform.h>
+#include <Interfaces/IPattern.h>
 #include <memory>
 
 /**
@@ -9,7 +9,12 @@
  * ActuatorDriverGPIO class
  *
  */
+enum DriverType { GPIO, I2C };
+
 class IActuatorDriver {
+ protected:
+  DriverType m_type;
+
  public:
   /**
    * @brief Starts initialisation of the driver
@@ -17,23 +22,26 @@ class IActuatorDriver {
    */
 
   virtual void init() = 0;
+
   /**
-   * @brief Sends signal to the assigned interface to start it.
+   * @brief Sends signal to the assigned interface to play a Pattern.
    *
    */
 
-  virtual void play() = 0;
+  virtual bool play(std::shared_ptr<IPattern> pattern) = 0;
   /**
    * @brief Sends signal to the assigned interface object to stop it.
    *
    */
 
-  virtual void stop() = 0;
+  // virtual void stop() = 0;
+
+  virtual DriverType getType() = 0;
 
   // /**
   //  * @brief Sends signal to play a specific pattern
-  //  * 
+  //  *
   //  * @param pattern pattern to play
   //  */
-  // virtual void play(std::shared_ptr<IWaveform> pattern) = 0;
+  // virtual void play(std::shared_ptr<IPattern> pattern) = 0;
 };

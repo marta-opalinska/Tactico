@@ -18,9 +18,10 @@ void ActuatorDriverI2C::init() {
   if (!this->m_I2C_Initialised) {
     i2c_begin();
   }
+  this->m_type = I2C;
 }
 
-// void ActuatorDriverI2C::setHighGPIO() {
+// void ActuatorDriverI2C::setGPIOHigh() {
 //   setPinStatusTactico(this->m_GPIO_pin, 1);
 // }
 
@@ -29,7 +30,7 @@ void ActuatorDriverI2C::init() {
 // }
 
 // void ActuatorDriverI2C::play() {
-//   this->setHighGPIO();
+//   this->setGPIOHigh();
 //   std::string s = "Actuator Driver START, GPIO ";
 //   s.append(std::to_string(this->m_GPIO_pin));
 //   s.append("\n");
@@ -53,6 +54,6 @@ void ActuatorDriverI2C::init() {
 //   return this->m_GPIO_pin;
 // }
 
-// void ActuatorDriverI2C::play(IWaveform pattern){
+// void ActuatorDriverI2C::play(IPattern pattern){
 
 // }
