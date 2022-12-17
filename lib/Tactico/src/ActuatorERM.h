@@ -10,8 +10,8 @@
 #include "PatternPWM.h"
 #include "Step.h"
 
-#ifndef ACTUATOR_DEFAULT_NAME
-#define ACTUATOR_DEFAULT_NAME "actuator_"
+#ifndef ACTUATOR_ERM_DEFAULT_NAME
+#define ACTUATOR_ERM_DEFAULT_NAME "actuatorERM_"
 #endif
 
 class PatternPWM;
@@ -28,9 +28,6 @@ class PatternPWM;
 class ActuatorERM : public IActuator {
  protected:
   static int nextID;
-  // static const char defaultName[14];  // = "actuatorERM"
-  static const std::string defaultName;  // = "actuatorERM"
-  // bool playPWM(std::shared_ptr<PatternPWM> patternPWM);
 
  public:
   ActuatorERM() = delete;

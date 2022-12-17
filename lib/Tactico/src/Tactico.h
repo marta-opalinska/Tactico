@@ -16,6 +16,7 @@
 #include "Action.h"
 #include "ActuatorDriverGPIO.h"
 #include "ActuatorERM.h"
+#include "ActuatorLRA.h"
 #include "Arduino.h"
 #include "HapticDevice.h"
 #include "PatternPWM.h"

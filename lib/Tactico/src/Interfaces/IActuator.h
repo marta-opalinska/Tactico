@@ -36,6 +36,7 @@ class IActuator {
 
   // virtual void play() = 0;
   virtual bool play(std::shared_ptr<IPattern> pattern) = 0;
+  // virtual void test() = 0;
   /**
    * @brief Assign Driver object to the actuator
    *

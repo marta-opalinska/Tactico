@@ -1,26 +1,27 @@
 #include "ActuatorLRA.h"
 
 int ActuatorLRA::nextID = 0;
-// const char ActuatorLRA::defaultName[14] = "actuatorERM_";
-const std::string ActuatorLRA::defaultName = "actuator_";
 
 ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
-                         const std::string &name)
+                         int resonantFrequency, const std::string &name)
     : IActuator(driver, name) {
   this->id = ++nextID;
+  this->m_resonantFrequency = resonantFrequency;
   this->m_type = ERM;
 }
 
-ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver)
+ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
+                         int resonantFrequency)
     : IActuator(driver) {
   this->id = ++nextID;
-  this->m_name = std::string(this->defaultName).append(std::to_string(id));
+  this->m_resonantFrequency = resonantFrequency;
+  this->m_name = std::string(ACTUATOR_LRA_DEFAULT_NAME).append(std::to_string(id));
   this->m_type = ERM;
 }
 
 bool ActuatorLRA::play(std::shared_ptr<IPattern> pattern) {
   PatternType type = pattern->getType();
-  if ( type == ePWM  || type == eDRV2505L) {
+  if (type == eDRV2505L) {
     return this->m_driver->play(pattern);
   } else {
     printTactico(

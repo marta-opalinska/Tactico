@@ -10,8 +10,8 @@
 #include "PatternPWM.h"
 #include "Step.h"
 
-#ifndef ACTUATOR_DEFAULT_NAME
-#define ACTUATOR_DEFAULT_NAME "actuator_"
+#ifndef ACTUATOR_LRA_DEFAULT_NAME
+#define ACTUATOR_LRA_DEFAULT_NAME "actuatorLRA_"
 #endif
 
 class PatternPWM;
@@ -28,19 +28,17 @@ class PatternPWM;
 class ActuatorLRA : public IActuator {
  protected:
   static int nextID;
-  // static const char defaultName[14];  // = "actuatorERM"
-  static const std::string defaultName;  // = "actuatorERM"
-  // bool playPWM(std::shared_ptr<PatternPWM> patternPWM);
 
  public:
   ActuatorLRA() = delete;
+  int m_resonantFrequency;
   /**
    * @brief Construct a new ERM Actuator object
    *
    * @param driver required parameter, ActuatorDriver object to control the
    * physical interface
    */
-  explicit ActuatorLRA(std::shared_ptr<IActuatorDriver> driver);
+  explicit ActuatorLRA(std::shared_ptr<IActuatorDriver> driver, int resonantFrequency);
   /**
    * @brief Construct a new ERM Actuator object with a custom name
    *
@@ -48,7 +46,7 @@ class ActuatorLRA : public IActuator {
    * physical interface
    * @param name custom Actuator name
    */
-  ActuatorLRA(std::shared_ptr<IActuatorDriver> driver, const std::string &name);
+  ActuatorLRA(std::shared_ptr<IActuatorDriver> driver, int resonantFrequency, const std::string &name);
 
   bool play(std::shared_ptr<IPattern> pattern);
 
