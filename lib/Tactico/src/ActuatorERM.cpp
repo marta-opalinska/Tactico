@@ -3,22 +3,24 @@
 int ActuatorERM::nextID = 0;
 
 ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
-                         const std::string &name)
-    : IActuator(driver, name) {
+                         int ratedVoltage, int overdriveVoltage, const std::string &name)
+    : IActuator(driver, ratedVoltage, overdriveVoltage, name) {
   this->id = ++nextID;
   this->m_type = ERM;
 }
 
-ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver)
-    : IActuator(driver) {
+ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
+                         int ratedVoltage, int overdriveVoltage)
+    : IActuator(driver, ratedVoltage, overdriveVoltage) {
   this->id = ++nextID;
-  this->m_name = std::string(ACTUATOR_ERM_DEFAULT_NAME).append(std::to_string(id));
+  this->m_name =
+      std::string(ACTUATOR_ERM_DEFAULT_NAME).append(std::to_string(id));
   this->m_type = ERM;
 }
 
 bool ActuatorERM::play(std::shared_ptr<IPattern> pattern) {
   PatternType type = pattern->getType();
-  if ( type == ePWM  || type == eDRV2505L) {
+  if (type == ePWM || type == eDRV2505L) {
     return this->m_driver->play(pattern);
   } else {
     printTactico(

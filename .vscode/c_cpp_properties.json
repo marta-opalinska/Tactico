@@ -11,6 +11,9 @@
                 "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/include",
                 "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/src",
                 "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/lib/Tactico/src",
+                "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/.pio/libdeps/nordicnrf52/Adafruit DRV2605 Library",
+                "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/.pio/libdeps/nordicnrf52/Adafruit BusIO",
+                "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/libraries/SPI",
                 "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/libraries/Wire",
                 "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5",
                 "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5/SDK/components/drivers_nrf/delay",
@@ -18,7 +21,7 @@
                 "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5/SDK/components/toolchain",
                 "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5/SDK/components/toolchain/CMSIS/Include",
                 "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/variants/nRF52DK",
-                "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/libraries/SPI",
+                "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/.pio/libdeps/nordicnrf52/Unity/src",
                 ""
             ],
             "browse": {
@@ -27,6 +30,9 @@
                     "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/include",
                     "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/src",
                     "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/lib/Tactico/src",
+                    "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/.pio/libdeps/nordicnrf52/Adafruit DRV2605 Library",
+                    "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/.pio/libdeps/nordicnrf52/Adafruit BusIO",
+                    "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/libraries/SPI",
                     "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/libraries/Wire",
                     "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5",
                     "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5/SDK/components/drivers_nrf/delay",
@@ -34,7 +40,7 @@
                     "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5/SDK/components/toolchain",
                     "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/cores/nRF5/SDK/components/toolchain/CMSIS/Include",
                     "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/variants/nRF52DK",
-                    "C:/Users/User/.platformio/packages/framework-arduinonordicnrf5/libraries/SPI",
+                    "c:/Users/User/Desktop/Studia/Bath/Dissertation/Code/Tactico/.pio/libdeps/nordicnrf52/Unity/src",
                     ""
                 ]
             },

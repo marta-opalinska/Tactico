@@ -3,19 +3,22 @@
 int ActuatorLRA::nextID = 0;
 
 ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
+                         int ratedVoltage, int overdriveVoltage,
                          int resonantFrequency, const std::string &name)
-    : IActuator(driver, name) {
+    : IActuator(driver, ratedVoltage, overdriveVoltage, name) {
   this->id = ++nextID;
   this->m_resonantFrequency = resonantFrequency;
   this->m_type = ERM;
 }
 
 ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
+                         int ratedVoltage, int overdriveVoltage,
                          int resonantFrequency)
-    : IActuator(driver) {
+    : IActuator(driver, ratedVoltage, overdriveVoltage) {
   this->id = ++nextID;
   this->m_resonantFrequency = resonantFrequency;
-  this->m_name = std::string(ACTUATOR_LRA_DEFAULT_NAME).append(std::to_string(id));
+  this->m_name =
+      std::string(ACTUATOR_LRA_DEFAULT_NAME).append(std::to_string(id));
   this->m_type = ERM;
 }
 

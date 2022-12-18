@@ -33,14 +33,13 @@ void setup() {
 void loop() {
   delay(1000);
   if (!setupDone) {
-    int driverPin1 = PIN_BUTTON1;
+    int driverPin1 = 2;
     // driverPin1 = 22;
     // int driverPin2 = 2;
     std::shared_ptr<ActuatorDriverGPIO> driver_1 =
         std::make_shared<ActuatorDriverGPIO>(driverPin1);
-    // std::shared_ptr<ActuatorDriverGPIO> driver_2 =
-    //     std::make_shared<ActuatorDriverGPIO>(driverPin2);
-    std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1);
+
+    std::shared_ptr<ActuatorERM> ac_1 = std::make_shared<ActuatorERM>(driver_1, 2, 3);
     // std::shared_ptr<ActuatorERM> ac_2 =
     // std::make_shared<ActuatorERM>(driver_2);
     HapticDevice right_hand(ac_1);

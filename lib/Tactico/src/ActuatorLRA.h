@@ -32,21 +32,33 @@ class ActuatorLRA : public IActuator {
  public:
   ActuatorLRA() = delete;
   int m_resonantFrequency;
+
   /**
-   * @brief Construct a new ERM Actuator object
+   * @brief Construct a new LRA Actuator object
    *
    * @param driver required parameter, ActuatorDriver object to control the
    * physical interface
+   * @param ratedVoltage the standard DC voltage for the actuator
+   * @param overdriveVoltage the maximum allowable DC voltage
+   * @param resonantFrequency the LRA actuator resonant frequency (can be found in the datasheet)
+   * 
    */
-  explicit ActuatorLRA(std::shared_ptr<IActuatorDriver> driver, int resonantFrequency);
+  explicit ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
+                       int ratedVoltage, int overdriveVoltage,
+                       int resonantFrequency);
   /**
-   * @brief Construct a new ERM Actuator object with a custom name
+   * @brief Construct a new LRA Actuator object with a custom name
    *
    * @param driver required parameter, ActuatorDriver object to control the
    * physical interface
+   * @param ratedVoltage the standard DC voltage for the actuator
+   * @param overdriveVoltage the maximum allowable DC voltage
+   * @param resonantFrequency the LRA actuator resonant frequency (can be found in the datasheet)
    * @param name custom Actuator name
    */
-  ActuatorLRA(std::shared_ptr<IActuatorDriver> driver, int resonantFrequency, const std::string &name);
+  ActuatorLRA(std::shared_ptr<IActuatorDriver> driver, int ratedVoltage,
+              int overdriveVoltage, int resonantFrequency,
+              const std::string &name);
 
   bool play(std::shared_ptr<IPattern> pattern);
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <Interfaces/IActuator.h>
+#include <SPI.h>
 
 #include <algorithm>
 #include <map>

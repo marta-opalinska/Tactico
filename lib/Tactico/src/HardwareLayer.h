@@ -84,4 +84,4 @@ void i2c_write(int address, int registerAddress, int data);
  * @param registerAddress starting register address to read data from
  * @param numberBytes the number of bytes to be read
  */
-void i2c_read(int address, int registerAddress, int numberBytes);
+int i2c_read(int address, int reg, int numberBytes);

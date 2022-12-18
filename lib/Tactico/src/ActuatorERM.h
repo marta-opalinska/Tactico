@@ -36,16 +36,22 @@ class ActuatorERM : public IActuator {
    *
    * @param driver required parameter, ActuatorDriver object to control the
    * physical interface
+   * @param ratedVoltage the standard DC voltage for the actuator
+   * @param overdriveVoltage the maximum allowable DC voltage
    */
-  explicit ActuatorERM(std::shared_ptr<IActuatorDriver> driver);
+  explicit ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
+                       int ratedVoltage, int overdriveVoltage);
   /**
    * @brief Construct a new ERM Actuator object with a custom name
    *
    * @param driver required parameter, ActuatorDriver object to control the
    * physical interface
+   * @param ratedVoltage the standard DC voltage for the actuator
+   * @param overdriveVoltage the maximum allowable DC voltage
    * @param name custom Actuator name
    */
-  ActuatorERM(std::shared_ptr<IActuatorDriver> driver, const std::string &name);
+  ActuatorERM(std::shared_ptr<IActuatorDriver> driver, int ratedVoltage,
+              int overdriveVoltage, const std::string &name);
   // void play();
   // void play(std::shared_ptr<IPattern> pattern);
 

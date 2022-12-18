@@ -2,12 +2,10 @@
 #include <Interfaces/IActuatorDriver.h>
 #include <Interfaces/IPattern.h>
 
-
 #include <memory>
 #include <string>
 
 #include "HardwareLayer.h"
-
 
 class IPattern;
 class IActuatorDriver;
@@ -18,7 +16,7 @@ class IActuatorDriver;
  * and ActuatorLRA classes
  */
 
-enum ActuatorType { ERM, LRA};
+enum ActuatorType { ERM, LRA };
 
 class IActuator {
  protected:
@@ -30,9 +28,19 @@ class IActuator {
 
  public:
   std::string m_name;
-  IActuator(std::shared_ptr<IActuatorDriver> driver, const std::string &name)
-      : m_driver(driver), m_name(name) {}
-  explicit IActuator(std::shared_ptr<IActuatorDriver> driver) : m_driver(driver) {}
+  int m_ratedVoltage;
+  int m_overdriveVoltage;
+  IActuator(std::shared_ptr<IActuatorDriver> driver, int ratedVoltage,
+            int overdriveVoltage, const std::string &name)
+      : m_driver(driver),
+        m_name(name),
+        m_ratedVoltage(ratedVoltage),
+        m_overdriveVoltage(overdriveVoltage) {}
+  explicit IActuator(std::shared_ptr<IActuatorDriver> driver, int ratedVoltage,
+                     int overdriveVoltage)
+      : m_driver(driver),
+        m_ratedVoltage(ratedVoltage),
+        m_overdriveVoltage(overdriveVoltage) {}
 
   // virtual void play() = 0;
   virtual bool play(std::shared_ptr<IPattern> pattern) = 0;
