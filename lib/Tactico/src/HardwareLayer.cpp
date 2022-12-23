@@ -18,14 +18,41 @@ void setPinModeTactico(const int pinNumber, int pinModeStatus) {
   pinMode(pinNumber, pinModeStatus);
 }
 
-void i2c_begin() { Wire.begin(); }
+void i2c_begin() {
+  Wire.begin();
 
-void i2c_write(int address, int reg, int data) {
+  // // Enabling communication with servo 1-5
+  // Wire.beginTransmission(TCA9554_adr);
+  // Wire.write(CONF_IO_REG);
+  // Wire.write(0xFF);
+  // Wire.endTransmission();
+
+  // // setting servo 1-5 to active
+  // Wire.beginTransmission(TCA9554_adr);
+  // Wire.write(OUT_CHANNEL_REG);
+  // Wire.write(0xFF);
+  // Wire.endTransmission();
+
+  // // for some reason TCA9548 configuration only works when 0-3 motors
+  // // are configured separately from 4-7 motors
+  // Wire.beginTransmission(TCA9548_adr);
+  // Wire.write(0x0F);
+  // Wire.endTransmission();
+}
+
+void i2c_write_reg(int address, int reg, int data) {
   Wire.beginTransmission(address);
   Wire.write(reg);
   Wire.write(data);
   Wire.endTransmission();
 }
+
+void i2c_write(int address, int reg) {
+  Wire.beginTransmission(address);
+  Wire.write(reg);
+}
+
+void i2c_endTransmission() { Wire.endTransmission(); }
 
 int i2c_read(int address, int reg, int numberBytes) {
   int reading = 0;

@@ -27,7 +27,7 @@ struct ModulationPWM {
 class PatternPWM : public IPattern {
  private:
   PatternPWM() = default;
-  PatternType m_type = ePWM;
+  PatternType m_type = eDRV2505L;
 
  public:
   // applyPatternPWM(Actuator actuator)

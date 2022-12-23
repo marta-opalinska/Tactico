@@ -12,7 +12,7 @@ class IActuator;
  *
  */
 
-enum PatternType { ePWM, eDRV2505L };
+enum PatternType { ePWM, eDRV2505L};
 
 class IPattern {
  protected:

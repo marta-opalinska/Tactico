@@ -8,7 +8,7 @@ ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
     : IActuator(driver, ratedVoltage, overdriveVoltage, name) {
   this->id = ++nextID;
   this->m_resonantFrequency = resonantFrequency;
-  this->m_type = ERM;
+  this->m_type = LRA;
 }
 
 ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
@@ -19,7 +19,7 @@ ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
   this->m_resonantFrequency = resonantFrequency;
   this->m_name =
       std::string(ACTUATOR_LRA_DEFAULT_NAME).append(std::to_string(id));
-  this->m_type = ERM;
+  this->m_type = LRA;
 }
 
 bool ActuatorLRA::play(std::shared_ptr<IPattern> pattern) {

@@ -15,11 +15,13 @@
 
 #include "Action.h"
 #include "ActuatorDriverGPIO.h"
+#include "ActuatorDriverI2C.h"
 #include "ActuatorERM.h"
 #include "ActuatorLRA.h"
 #include "Arduino.h"
 #include "HapticDevice.h"
 #include "PatternPWM.h"
+#include "PatternDRV2605L.h"
 #include "HardwareLayer.h"
 
 #undef min
