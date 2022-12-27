@@ -73,8 +73,10 @@
 #define DRV2605_REG_VBAT 0x21      ///< Vbat voltage-monitor register
 #define DRV2605_REG_LRARESON 0x22  ///< LRA resonance-period register
 
-#define WAIT_BETWEEN_EFFECTS_MULTIPLIER 30                         // 10ms x waitBetweenEffectsMultiplier
-#define WAIT_BETWEEN_EFFECTS 128 + WAIT_BETWEEN_EFFECTS_MULTIPLIER // MSB + 10ms x 30 - 300 ms delay
+#define WAIT_BETWEEN_EFFECTS_MULTIPLIER \
+  30  // 10ms x waitBetweenEffectsMultiplier
+#define WAIT_BETWEEN_EFFECTS \
+  128 + WAIT_BETWEEN_EFFECTS_MULTIPLIER  // MSB + 10ms x 30 - 300 ms delay
 
 struct I2CCommands {
   int address;
@@ -91,6 +93,7 @@ class ActuatorDriverI2C : public IActuatorDriver {
   std::vector<I2CCommands> m_initialCommands;
   int m_goPin;
   int m_driverID;
+  ActuatorType m_actuatorType;
   void initDRV2505L();
   void init(std::vector<I2CCommands> initialCommands);
   // int calculateRatedVoltageReg();
@@ -100,7 +103,6 @@ class ActuatorDriverI2C : public IActuatorDriver {
   void setWaveform(int slot, int w);
   void connectToMotor();
   void wait_for_motor_available();
-
 
  public:
   // explicit ActuatorDriverI2C(int address);
@@ -120,6 +122,12 @@ class ActuatorDriverI2C : public IActuatorDriver {
   int getAddress();
   void sendCommand(int address, int sendRegister, int data);
   void setAddress(int address);
+  bool config(ActuatorType type, float ratedVoltage, float overdriveVoltage,
+              int frequency = 300);
+  void sendVoltages(ActuatorType type, float ratedVoltage,
+                    float overdriveVoltage, int frequency);
+  void sendType(ActuatorType type);
+
   DriverType getType();
   // play(PatternPWM pattern);
   // void playInterval(int time);

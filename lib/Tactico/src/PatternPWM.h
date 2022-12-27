@@ -34,7 +34,7 @@ class PatternPWM : public IPattern {
   std::vector<ModulationPWM> m_modulation_sequence;
   explicit PatternPWM(std::vector<ModulationPWM> switching_modulation);
   void setModulation(std::vector<ModulationPWM> switching_modulation);
-  void play(std::shared_ptr<IActuator> ac);
+  // void play(std::shared_ptr<IActuator> ac);
   void init();
   std::string patternToString();
   PatternType getType();

@@ -28,16 +28,16 @@ class IActuator {
 
  public:
   std::string m_name;
-  int m_ratedVoltage;
-  int m_overdriveVoltage;
-  IActuator(std::shared_ptr<IActuatorDriver> driver, int ratedVoltage,
-            int overdriveVoltage, const std::string &name)
+  float m_ratedVoltage;
+  float m_overdriveVoltage;
+  IActuator(std::shared_ptr<IActuatorDriver> driver, float ratedVoltage,
+            float overdriveVoltage, const std::string &name)
       : m_driver(driver),
         m_name(name),
         m_ratedVoltage(ratedVoltage),
         m_overdriveVoltage(overdriveVoltage) {}
-  explicit IActuator(std::shared_ptr<IActuatorDriver> driver, int ratedVoltage,
-                     int overdriveVoltage)
+  explicit IActuator(std::shared_ptr<IActuatorDriver> driver,
+                     float ratedVoltage, float overdriveVoltage)
       : m_driver(driver),
         m_ratedVoltage(ratedVoltage),
         m_overdriveVoltage(overdriveVoltage) {}
@@ -52,5 +52,6 @@ class IActuator {
    */
   virtual std::shared_ptr<IActuatorDriver> getDriver() = 0;
   virtual void setDriver(std::shared_ptr<IActuatorDriver> driver) = 0;
+  virtual void configureDriver() = 0;
   virtual ActuatorType getType() = 0;
 };

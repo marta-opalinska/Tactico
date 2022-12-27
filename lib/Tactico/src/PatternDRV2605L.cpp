@@ -1,4 +1,5 @@
 #include "PatternDRV2605L.h"
+#include "DRV2605L_EFFECTS.h"
 
 PatternDRV2605L::PatternDRV2605L(int patternIndex)
     : m_patternIndex(patternIndex) {

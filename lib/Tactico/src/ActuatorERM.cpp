@@ -3,19 +3,30 @@
 int ActuatorERM::nextID = 0;
 
 ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
-                         int ratedVoltage, int overdriveVoltage, const std::string &name)
+                         float ratedVoltage, float overdriveVoltage,
+                         const std::string &name)
     : IActuator(driver, ratedVoltage, overdriveVoltage, name) {
   this->id = ++nextID;
   this->m_type = ERM;
+  this->configureDriver();
 }
 
 ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
-                         int ratedVoltage, int overdriveVoltage)
+                         float ratedVoltage, float overdriveVoltage)
     : IActuator(driver, ratedVoltage, overdriveVoltage) {
   this->id = ++nextID;
   this->m_name =
       std::string(ACTUATOR_ERM_DEFAULT_NAME).append(std::to_string(id));
   this->m_type = ERM;
+  this->configureDriver();
+}
+
+void ActuatorERM::configureDriver() {
+  DriverType type = m_driver->getType();
+  if (type == I2C) {
+    auto driverDRV2505L(std::static_pointer_cast<ActuatorDriverI2C>(m_driver));
+    driverDRV2505L->config(ERM, m_ratedVoltage, m_overdriveVoltage, 300);
+  }
 }
 
 bool ActuatorERM::play(std::shared_ptr<IPattern> pattern) {

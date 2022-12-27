@@ -40,7 +40,7 @@ class ActuatorERM : public IActuator {
    * @param overdriveVoltage the maximum allowable DC voltage
    */
   explicit ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
-                       int ratedVoltage, int overdriveVoltage);
+                       float ratedVoltage, float overdriveVoltage);
   /**
    * @brief Construct a new ERM Actuator object with a custom name
    *
@@ -50,12 +50,13 @@ class ActuatorERM : public IActuator {
    * @param overdriveVoltage the maximum allowable DC voltage
    * @param name custom Actuator name
    */
-  ActuatorERM(std::shared_ptr<IActuatorDriver> driver, int ratedVoltage,
-              int overdriveVoltage, const std::string &name);
+  ActuatorERM(std::shared_ptr<IActuatorDriver> driver, float ratedVoltage,
+              float overdriveVoltage, const std::string &name);
   // void play();
   // void play(std::shared_ptr<IPattern> pattern);
 
   bool play(std::shared_ptr<IPattern> pattern);
+  void configureDriver();
   // void playDRV2505L(std::shared_ptr<PatternPWM> patternPWM);
   // void stop();
   /**
