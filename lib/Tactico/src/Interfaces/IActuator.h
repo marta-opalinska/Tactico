@@ -16,7 +16,7 @@ class IActuatorDriver;
  * and ActuatorLRA classes
  */
 
-enum ActuatorType { ERM, LRA };
+enum ActuatorType { eERM, eLRA };
 
 class IActuator {
  protected:

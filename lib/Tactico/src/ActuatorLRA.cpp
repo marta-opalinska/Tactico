@@ -8,7 +8,7 @@ ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
     : IActuator(driver, ratedVoltage, overdriveVoltage, name) {
   this->id = ++nextID;
   this->m_resonantFrequency = resonantFrequency;
-  this->m_type = LRA;
+  this->m_type = eLRA;
   this->configureDriver();
 }
 
@@ -20,15 +20,15 @@ ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
   this->m_resonantFrequency = resonantFrequency;
   this->m_name =
       std::string(ACTUATOR_LRA_DEFAULT_NAME).append(std::to_string(id));
-  this->m_type = LRA;
+  this->m_type = eLRA;
   this->configureDriver();
 }
 
 void ActuatorLRA::configureDriver() {
   DriverType type = m_driver->getType();
-  if (type == I2C) {
+  if (type == eI2C) {
     auto driverDRV2505L(std::static_pointer_cast<ActuatorDriverI2C>(m_driver));
-    driverDRV2505L->config(LRA, m_ratedVoltage, m_overdriveVoltage,
+    driverDRV2505L->config(eLRA, m_ratedVoltage, m_overdriveVoltage,
                            m_resonantFrequency);
   }
 }

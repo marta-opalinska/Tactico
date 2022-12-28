@@ -9,7 +9,7 @@
  * ActuatorDriverGPIO class
  *
  */
-enum DriverType { GPIO, I2C };
+enum DriverType { eGPIO, eI2C };
 
 class IActuatorDriver {
  protected:

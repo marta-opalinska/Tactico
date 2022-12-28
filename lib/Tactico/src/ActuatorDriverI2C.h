@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "HardwareLayer.h"
+#include "PatternDRV2605L.h"
 
 // /**
 //  * @class ActuatorDriverI2C
@@ -78,6 +79,8 @@
 #define WAIT_BETWEEN_EFFECTS \
   128 + WAIT_BETWEEN_EFFECTS_MULTIPLIER  // MSB + 10ms x 30 - 300 ms delay
 
+class PatternDRV2605L;
+
 struct I2CCommands {
   int address;
   int registerAddress;
@@ -118,8 +121,7 @@ class ActuatorDriverI2C : public IActuatorDriver {
   ~ActuatorDriverI2C() = default;
   void init();
   bool play(std::shared_ptr<IPattern> pattern);
-  void stop();
-  int getAddress();
+  bool playInOrder(std::shared_ptr<PatternDRV2605L> pattern, int orderNumber);
   void sendCommand(int address, int sendRegister, int data);
   void setAddress(int address);
   bool config(ActuatorType type, float ratedVoltage, float overdriveVoltage,

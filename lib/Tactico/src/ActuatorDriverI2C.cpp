@@ -40,16 +40,16 @@ void ActuatorDriverI2C::init(std::vector<I2CCommands> initialCommands) {
     printTactico("I2c Init done.");
   }
 
-  this->m_type = I2C;
+  this->m_type = eI2C;
   // TODO loop on each command!!!
   //  initDRV2505();
 }
 
 void ActuatorDriverI2C::init() {
-  // if (!this->m_I2C_Initialised) {
-  i2c_begin();
-  // }
-  this->m_type = I2C;
+  if (!this->m_I2C_Initialised) {
+    i2c_begin();
+  }
+  this->m_type = eI2C;
 
   // Enabling communication with servo 1-8
   i2c_write_reg(TCA9554_ADDR, CONF_IO_REG, 0xFF);
@@ -58,17 +58,12 @@ void ActuatorDriverI2C::init() {
   // all the servos that need to be activate and mistakenly distctivate some of
   // them
   i2c_write_reg(TCA9554_ADDR, OUT_CHANNEL_REG, 0xFF);
-
-  // int activeMotor = pow(2, this->m_driverID);
-  // // activate the communication with the servo
-  // i2c_write(TCA9548_ADDR, activeMotor);
-  // i2c_endTransmission();
-
   this->initDRV2505L();
 }
 
 void ActuatorDriverI2C::initDRV2505L() {
   this->connectToMotor();
+
   // commands for driver innitiation
   this->writeRegister(DRV2605_REG_MODE, 0x00);  // out of standby
 
@@ -98,27 +93,24 @@ void ActuatorDriverI2C::initDRV2505L() {
   this->writeRegister(DRV2605_REG_MODE, DRV2605_MODE_EXTTRIGEDGE);
   // resetting waveform
   this->setWaveform(0, 0);
-
-  this->sendType(LRA);
-
-  this->sendVoltages(LRA, 3, 3.3, 300);
 }
 
 void ActuatorDriverI2C::sendType(ActuatorType type) {
   this->m_actuatorType = type;
 
-  if (this->m_actuatorType == LRA) {
+  if (this->m_actuatorType == eLRA) {
     this->writeRegister(DRV2605_REG_FEEDBACK,
                         this->readRegister(DRV2605_REG_FEEDBACK) | 0x80);
   }
 
-  if (this->m_actuatorType == ERM) {
+  if (this->m_actuatorType == eERM) {
     this->writeRegister(DRV2605_REG_FEEDBACK,
                         this->readRegister(DRV2605_REG_FEEDBACK) & 0x7F);
   }
 }
 void ActuatorDriverI2C::sendVoltages(ActuatorType type, float ratedVoltage,
-                                     float overdriveVoltage, int frequency = 300) {
+                                     float overdriveVoltage,
+                                     int frequency = 300) {
   // setting rated voltage
   this->writeRegister(DRV2605_REG_RATEDV, 0x68);
   // setting max voltage
@@ -136,31 +128,43 @@ int ActuatorDriverI2C::readRegister(int reg) {
   return i2c_read(DRV2605_ADDR, reg, 1);
 }
 
-bool ActuatorDriverI2C::play(std::shared_ptr<IPattern> pattern) {
-  // connect to motor
-  printTactico("Play....");
-  printTactico(std::to_string(this->m_driverID));
+bool ActuatorDriverI2C::playInOrder(std::shared_ptr<PatternDRV2605L> pattern,
+                                    int orderNumber) {
   this->connectToMotor();
-
   wait_for_motor_available();
-
-  this->setWaveform(0, 48);
-  this->setWaveform(1, WAIT_BETWEEN_EFFECTS);
-  this->setWaveform(2, 48);
-  this->setWaveform(3, WAIT_BETWEEN_EFFECTS);
-  this->setWaveform(4, 48);
-  this->setWaveform(5, WAIT_BETWEEN_EFFECTS);
-  this->setWaveform(6, 0);  // end of waveforms
-
-  this->m_goPin = 12;
-  digitalWrite(m_goPin, HIGH);
-  delay(250);
-  digitalWrite(m_goPin, LOW);
-  // wait for the actuator to finish
-  while (this->readRegister(0x0C)) {
-  };
-  this->setWaveform(0, 0);
+  this->setWaveform(orderNumber, pattern->m_patternIndex);
   return true;
+}
+
+bool ActuatorDriverI2C::play(std::shared_ptr<IPattern> pattern) {
+  if (pattern->getType() == eDRV2505L) {
+    this->connectToMotor();
+    wait_for_motor_available();
+    // TODO setting pattern index!
+    auto DRV2605LPattern(std::static_pointer_cast<PatternDRV2605L>(pattern));
+    this->setWaveform(0, DRV2605LPattern->m_patternIndex);
+    this->setWaveform(1, WAIT_BETWEEN_EFFECTS);
+    this->setWaveform(2, 48);
+    this->setWaveform(3, WAIT_BETWEEN_EFFECTS);
+    this->setWaveform(4, 48);
+    this->setWaveform(5, WAIT_BETWEEN_EFFECTS);
+    this->setWaveform(6, 0);  // end of waveforms
+
+    this->m_goPin = 12;
+    digitalWrite(m_goPin, HIGH);
+    delay(250);
+    digitalWrite(m_goPin, LOW);
+    // wait for the actuator to finish
+    while (this->readRegister(0x0C)) {
+    };
+    this->setWaveform(0, 0);
+    return true;
+  } else {
+    printTactico(
+        "Invalid argument - ActuatorDriverI2C does not support this type of "
+        "Pattern");
+  }
+  return false;
 }
 
 void ActuatorDriverI2C::connectToMotor() {
@@ -178,9 +182,6 @@ void ActuatorDriverI2C::wait_for_motor_available() {
   };
   return;
 }
-
-void ActuatorDriverI2C::stop() {}
-int ActuatorDriverI2C::getAddress() { return DRV2605_ADDR; }
 void ActuatorDriverI2C::sendCommand(int address, int sendRegister, int data) {}
 DriverType ActuatorDriverI2C::getType() { return this->m_type; }
 
@@ -190,40 +191,3 @@ bool ActuatorDriverI2C::config(ActuatorType type, float ratedVoltage,
   this->sendVoltages(type, ratedVoltage, overdriveVoltage);
   return true;
 }
-
-// void ActuatorDriverI2C::setGPIOHigh() {
-//   setPinStatusTactico(this->m_GPIO_pin, 1);
-// }
-
-// void ActuatorDriverI2C::setLowGPIO() {
-//   setPinStatusTactico(this->m_GPIO_pin, 0);
-// }
-
-// void ActuatorDriverI2C::play() {
-//   this->setGPIOHigh();
-//   std::string s = "Actuator Driver START, GPIO ";
-//   s.append(std::to_string(this->m_GPIO_pin));
-//   s.append("\n");
-//   printTactico(s);
-// }
-
-// void ActuatorDriverI2C::stop() {
-//   this->setLowGPIO();
-//   std::string s = "Actuator Driver STOP, GPIO ";
-//   s.append(std::to_string(this->m_GPIO_pin));
-//   s.append("\n");
-//   printTactico(s);
-// }
-// void ActuatorDriverI2C::setPin(int new_GPIO) {
-//   this->setLowGPIO();
-//   this->m_GPIO_pin = new_GPIO;
-//   this->init();
-// }
-
-// int ActuatorDriverI2C::getPin() {
-//   return this->m_GPIO_pin;
-// }
-
-// void ActuatorDriverI2C::play(IPattern pattern){
-
-// }

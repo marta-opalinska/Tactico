@@ -63,10 +63,13 @@ void loop() {
 
     std::shared_ptr<ActuatorDriverI2C> driver_3 =
         std::make_shared<ActuatorDriverI2C>(driverGoPin2, 1);
+    std::shared_ptr<ActuatorLRA> ac_3 =
+        std::make_shared<ActuatorLRA>(driver_3, 2, 3, 100, "myLRA");
 
-    std::shared_ptr<PatternDRV2605L> p_2 = std::make_shared<PatternDRV2605L>(48);
+    std::shared_ptr<PatternDRV2605L> p_2 =
+        std::make_shared<PatternDRV2605L>(48);
     driver_2->play(p_2);
-    delay(1000);
+    delay(2000);
     driver_3->play(p_2);
     // std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
     // std::shared_ptr<ActuatorStepImpl> s1 =
