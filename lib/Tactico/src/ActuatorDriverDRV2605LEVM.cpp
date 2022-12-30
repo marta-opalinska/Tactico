@@ -58,43 +58,17 @@ void ActuatorDriverDRV2605LEVM::initDRV2505L() {
   // setting external trigger
   this->writeRegister(DRV2605_REG_MODE, DRV2605_MODE_EXTTRIGEDGE);
   // resetting waveform
-  this->setWaveform(0, 0);
+  resetSequence();
 }
 
-void ActuatorDriverDRV2605LEVM::setWaveform(int slot, int w) {
-  this->writeRegister(DRV2605_REG_WAVESEQ1 + slot, w);
-}
-
-bool ActuatorDriverDRV2605LEVM::playInOrder(
-    std::shared_ptr<PatternDRV2605L> pattern, int orderNumber) {
-  this->connectToMotor();
-  wait_for_motor_available();
-  this->setWaveform(orderNumber, pattern->m_patternIndex);
-  return true;
-}
-
-bool ActuatorDriverDRV2605LEVM::play(std::shared_ptr<IPattern> pattern) {
+bool ActuatorDriverDRV2605LEVM::setWaveform(int orderNumber,
+                                            std::shared_ptr<IPattern> pattern) {
   if (pattern->getType() == eDRV2505L) {
     this->connectToMotor();
     wait_for_motor_available();
-    // TODO setting pattern index!
     auto DRV2605LPattern(std::static_pointer_cast<PatternDRV2605L>(pattern));
-    this->setWaveform(0, DRV2605LPattern->m_patternIndex);
-    this->setWaveform(1, WAIT_BETWEEN_EFFECTS);
-    this->setWaveform(2, 48);
-    this->setWaveform(3, WAIT_BETWEEN_EFFECTS);
-    this->setWaveform(4, 48);
-    this->setWaveform(5, WAIT_BETWEEN_EFFECTS);
-    this->setWaveform(6, 0);  // end of waveforms
-
-    this->m_goPin = 12;
-    digitalWrite(m_goPin, HIGH);
-    delay(250);
-    digitalWrite(m_goPin, LOW);
-    // wait for the actuator to finish
-    while (this->readRegister(0x0C)) {
-    }
-    this->setWaveform(0, 0);
+    this->writeRegister(DRV2605_REG_WAVESEQ1 + orderNumber,
+                        DRV2605LPattern->m_patternIndex);
     return true;
   } else {
     printTactico(
@@ -103,6 +77,33 @@ bool ActuatorDriverDRV2605LEVM::play(std::shared_ptr<IPattern> pattern) {
         "Pattern");
   }
   return false;
+}
+
+bool ActuatorDriverDRV2605LEVM::play(std::shared_ptr<IPattern> pattern) {
+  if (!this->setWaveform(0, pattern)) {
+    return false;
+  }
+  this->setWaveform(1, pattern);
+  this->setWaveform(2, pattern);
+
+  // this->setWaveform(1, WAIT_BETWEEN_EFFECTS);
+  go();
+  resetSequence();
+  return true;
+}
+
+void ActuatorDriverDRV2605LEVM::go() {
+  digitalWrite(this->m_goPin, HIGH);
+  delay(100);
+  digitalWrite(this->m_goPin, LOW);
+  while (this->readRegister(0x0C)) {
+  }
+}
+
+void ActuatorDriverDRV2605LEVM::resetSequence() {
+  this->connectToMotor();
+  wait_for_motor_available();
+  this->writeRegister(DRV2605_REG_WAVESEQ1 + 0, 0);
 }
 
 void ActuatorDriverDRV2605LEVM::connectToMotor() {

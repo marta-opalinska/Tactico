@@ -90,6 +90,17 @@ void loop() {
     delay(2000);
     driver_4->play(p_2);
 
+    std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_5 =
+        std::make_shared<ActuatorDriverDRV2605LEVM>(3, driverGoPin2);
+    std::shared_ptr<ActuatorERM> ac_5 =
+        std::make_shared<ActuatorERM>(driver_5, 3, 3.2, "myERM");
+
+    // std::shared_ptr<PatternDRV2605L> p_2 =8
+    //     std::make_shared<PatternDRV2605L>(48);
+    driver_5->play(p_2);
+    delay(2000);
+    driver_5->play(p_2);
+
     // std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
     // std::shared_ptr<ActuatorStepImpl> s1 =
     //     std::make_shared<ActuatorStepImpl>(ac_1, p_1);
