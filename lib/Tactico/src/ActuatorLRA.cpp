@@ -27,7 +27,7 @@ ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
 }
 
 void ActuatorLRA::configureDriver() {
-  DriverType type = m_driver->getType();
+  ActuatorDriverType type = m_driver->getType();
   if (type == eI2C) {
     auto driverDRV2505L(std::static_pointer_cast<ActuatorDriverDRV2605LEVM>(m_driver));
     driverDRV2505L->config(eLRA, m_ratedVoltage, m_overdriveVoltage,

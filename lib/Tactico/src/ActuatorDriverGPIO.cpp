@@ -61,5 +61,5 @@ void ActuatorDriverGPIO::setPin(int new_GPIO) {
 
 int ActuatorDriverGPIO::getPin() { return this->m_GPIO_pin; }
 
-DriverType ActuatorDriverGPIO::getType() { return this->m_type; }
+ActuatorDriverType ActuatorDriverGPIO::getType() { return this->m_type; }
 

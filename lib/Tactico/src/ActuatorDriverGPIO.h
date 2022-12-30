@@ -1,3 +1,5 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #pragma once
 #include <Interfaces/IActuatorDriver.h>
 #include <PatternPWM.h>
@@ -32,7 +34,7 @@ class ActuatorDriverGPIO : public IActuatorDriver {
   // void stop();
   int getPin();
   void setPin(int new_GPIO);
-  DriverType getType();
+  ActuatorDriverType getType();
   // void play(IPattern pattern);
   // void playInterval(int time);
 };

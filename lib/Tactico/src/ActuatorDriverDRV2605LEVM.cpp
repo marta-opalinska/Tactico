@@ -1,58 +1,21 @@
 /** Copyright 2022 <Marta Opalinska> **/
 #include "ActuatorDriverDRV2605LEVM.h"
 
-bool ActuatorDriverDRV2605LEVM::m_I2C_Initialised = false;
+// bool ActuatorDriverDRV2605LEVM::m_I2C_Initialised = false;
 
-ActuatorDriverDRV2605LEVM::ActuatorDriverDRV2605LEVM(int goPin, int driverID)
-    : m_goPin(goPin), m_driverID(driverID) {
-  this->init();
+ActuatorDriverDRV2605LEVM::ActuatorDriverDRV2605LEVM(int driverID, int goPin)
+    : m_driverID(driverID) {
+  this->m_goPin = goPin;
   this->m_usesGoPinFlag = true;
-  setPinModeTactico(this->m_goPin, OUTPUT);
+  this->m_type = eDRV2505L_EVBOARD;
+  this->m_address = DRV2605_ADDR;
   this->m_needsPreconfigration = true;
-}
-
-ActuatorDriverDRV2605LEVM::ActuatorDriverDRV2605LEVM(
-    std::vector<I2CCommands> initialCommands)
-    : m_initialCommands(initialCommands) {
-  this->init(initialCommands);
-}
-
-ActuatorDriverDRV2605LEVM::ActuatorDriverDRV2605LEVM(
-    std::vector<I2CCommands> initialCommands, int goPin)
-    : m_initialCommands(initialCommands), m_goPin(goPin) {
   setPinModeTactico(this->m_goPin, OUTPUT);
-  this->init(initialCommands);
-}
-ActuatorDriverDRV2605LEVM::ActuatorDriverDRV2605LEVM(
-    std::vector<I2CCommands> initialCommands,
-    std::vector<I2CCommands> preStartCommands)
-    : m_initialCommands(initialCommands) {
-  this->init(initialCommands);
-}
-ActuatorDriverDRV2605LEVM::ActuatorDriverDRV2605LEVM(
-    std::vector<I2CCommands> initialCommands,
-    std::vector<I2CCommands> preStartCommands, int goPin)
-    : m_initialCommands(initialCommands), m_goPin(goPin) {
-  setPinModeTactico(this->m_goPin, OUTPUT);
-  this->init(initialCommands);
-}
-
-void ActuatorDriverDRV2605LEVM::init(std::vector<I2CCommands> initialCommands) {
-  if (!this->m_I2C_Initialised) {
-    i2c_begin();
-    m_I2C_Initialised = true;
-  }
-
-  this->m_type = eI2C;
-  // TODO loop on each command!!!
-  //  initDRV2505();
+  this->init();
 }
 
 void ActuatorDriverDRV2605LEVM::init() {
-  if (!this->m_I2C_Initialised) {
-    i2c_begin();
-  }
-  this->m_type = eI2C;
+  this->initI2CBus();
 
   // Enabling communication with servo 1-8
   i2c_write_reg(TCA9554_ADDR, CONF_IO_REG, 0xFF);
@@ -100,13 +63,6 @@ void ActuatorDriverDRV2605LEVM::initDRV2505L() {
 
 void ActuatorDriverDRV2605LEVM::setWaveform(int slot, int w) {
   this->writeRegister(DRV2605_REG_WAVESEQ1 + slot, w);
-}
-void ActuatorDriverDRV2605LEVM::writeRegister(int reg, int data) {
-  i2c_write_reg(DRV2605_ADDR, reg, data);
-}
-
-int ActuatorDriverDRV2605LEVM::readRegister(int reg) {
-  return i2c_read(DRV2605_ADDR, reg, 1);
 }
 
 bool ActuatorDriverDRV2605LEVM::playInOrder(
@@ -164,9 +120,8 @@ void ActuatorDriverDRV2605LEVM::wait_for_motor_available() {
   }
   return;
 }
-void ActuatorDriverDRV2605LEVM::sendCommand(int address, int sendRegister,
-                                            int data) {}
-DriverType ActuatorDriverDRV2605LEVM::getType() { return this->m_type; }
+
+ActuatorDriverType ActuatorDriverDRV2605LEVM::getType() { return this->m_type; }
 
 bool ActuatorDriverDRV2605LEVM::config(ActuatorType type, float ratedVoltage,
                                        float overdriveVoltage, int frequency) {
@@ -183,8 +138,7 @@ bool ActuatorDriverDRV2605LEVM::config(ActuatorType type, float ratedVoltage,
       printTactico("ActuatorDriverDRV2605LEVM: Actuator Type not supported.\n");
       return false;
   }
-  // this->sendType(type, ratedVoltage, overdriveVoltage);
-  // this->sendVoltages(type, ratedVoltage, overdriveVoltage);
+
   return true;
 }
 
@@ -200,7 +154,6 @@ bool ActuatorDriverDRV2605LEVM::setupLRA(float ratedVoltage,
                       this->readRegister(DRV2605_REG_FEEDBACK) | 0x80);
   // library type selection - only one LRA library available
   this->writeRegister(DRV2605_REG_LIBRARY, 0x06);
-  // TODO
   // calculating rated voltage register based on the datasheet with
   // default sample time value of 300 us
   float voltage_abs =

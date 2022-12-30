@@ -58,24 +58,29 @@ void loop() {
 
     int driverGoPin2 = 12;
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
-        std::make_shared<ActuatorDriverDRV2605LEVM>(driverGoPin2, 0);
+        std::make_shared<ActuatorDriverDRV2605LEVM>(0, driverGoPin2);
     std::shared_ptr<ActuatorLRA> ac_2 =
         std::make_shared<ActuatorLRA>(driver_2, 2.5, 2.7, 100, "myLRA");
 
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_3 =
-        std::make_shared<ActuatorDriverDRV2605LEVM>(driverGoPin2, 1);
+        std::make_shared<ActuatorDriverDRV2605LEVM>(1, driverGoPin2);
     std::shared_ptr<ActuatorLRA> ac_3 =
         std::make_shared<ActuatorLRA>(driver_3, 2.5, 2.7, 100, "myLRA");
 
     std::shared_ptr<PatternDRV2605L> p_2 =
         std::make_shared<PatternDRV2605L>(48);
+
+    Serial.print("Pattern 1 finished.");
     driver_2->play(p_2);
+    Serial.print("Pattern 2 finished.");
     delay(2000);
     driver_3->play(p_2);
+    Serial.print("Pattern 3 finished.");
+
     delay(3000);
 
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_4 =
-        std::make_shared<ActuatorDriverDRV2605LEVM>(driverGoPin2, 2);
+        std::make_shared<ActuatorDriverDRV2605LEVM>(2, driverGoPin2);
     std::shared_ptr<ActuatorERM> ac_4 =
         std::make_shared<ActuatorERM>(driver_4, 2, 2.5, "myERM");
 

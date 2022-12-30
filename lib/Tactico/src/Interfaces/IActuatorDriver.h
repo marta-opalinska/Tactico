@@ -13,11 +13,11 @@
  * ActuatorDriverGPIO class
  *
  */
-enum DriverType { eGPIO, eI2C };
+enum ActuatorDriverType { eGPIO, eI2C, eDRV2505L_EVBOARD};
 
 class IActuatorDriver {
  protected:
-  DriverType m_type;
+  ActuatorDriverType m_type;
 
  public:
   /**
@@ -46,7 +46,7 @@ class IActuatorDriver {
 
   // virtual void stop() = 0;
 
-  virtual DriverType getType() = 0;
+  virtual ActuatorDriverType getType() = 0;
 
   // /**
   //  * @brief Sends signal to play a specific pattern
