@@ -22,10 +22,11 @@ ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
 }
 
 void ActuatorERM::configureDriver() {
-  DriverType type = m_driver->getType();
+  DriverType type = this->m_driver->getType();
   if (type == eI2C) {
     auto driverDRV2505L(std::static_pointer_cast<ActuatorDriverI2C>(m_driver));
-    driverDRV2505L->config(eERM, m_ratedVoltage, m_overdriveVoltage, 300);
+    driverDRV2505L->config(eERM, this->m_ratedVoltage, this->m_overdriveVoltage,
+                           300);
   }
 }
 
@@ -55,6 +56,7 @@ bool ActuatorERM::play(std::shared_ptr<IPattern> pattern) {
 
 void ActuatorERM::setDriver(std::shared_ptr<IActuatorDriver> driver) {
   this->m_driver = driver;
+  this->configureDriver();
 }
 
 ActuatorType ActuatorERM::getType() { return this->m_type; }

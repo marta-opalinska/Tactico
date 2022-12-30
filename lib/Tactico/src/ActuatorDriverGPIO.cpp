@@ -2,6 +2,7 @@
 
 ActuatorDriverGPIO::ActuatorDriverGPIO(int GPIO_pin) : m_GPIO_pin(GPIO_pin) {
   this->init();
+  this->m_needsPreconfigration = false;
   this->m_type = eGPIO;
 }
 

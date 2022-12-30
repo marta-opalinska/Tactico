@@ -4,9 +4,10 @@ bool ActuatorDriverI2C::m_I2C_Initialised = false;
 
 ActuatorDriverI2C::ActuatorDriverI2C(int goPin, int driverID)
     : m_goPin(goPin), m_driverID(driverID) {
+  this->init();
   this->m_usesGoPinFlag = true;
   setPinModeTactico(this->m_goPin, OUTPUT);
-  this->init();
+  this->m_needsPreconfigration = true;
 }
 
 ActuatorDriverI2C::ActuatorDriverI2C(std::vector<I2CCommands> initialCommands)
@@ -88,33 +89,89 @@ void ActuatorDriverI2C::initDRV2505L() {
 
   // setting open-loop control drive
   this->writeRegister(DRV2605_REG_CONTROL3, 0x81);
-  this->writeRegister(DRV2605_REG_LIBRARY, 0x06);
+
   // setting external trigger
   this->writeRegister(DRV2605_REG_MODE, DRV2605_MODE_EXTTRIGEDGE);
   // resetting waveform
   this->setWaveform(0, 0);
 }
 
-void ActuatorDriverI2C::sendType(ActuatorType type) {
+void ActuatorDriverI2C::sendType(ActuatorType type, float ratedVoltage,
+                                 float overdriveVoltage) {
   this->m_actuatorType = type;
-
-  if (this->m_actuatorType == eLRA) {
-    this->writeRegister(DRV2605_REG_FEEDBACK,
-                        this->readRegister(DRV2605_REG_FEEDBACK) | 0x80);
-  }
-
-  if (this->m_actuatorType == eERM) {
-    this->writeRegister(DRV2605_REG_FEEDBACK,
-                        this->readRegister(DRV2605_REG_FEEDBACK) & 0x7F);
+  switch (type) {
+    case ActuatorType::eLRA: {
+      this->writeRegister(DRV2605_REG_FEEDBACK,
+                          this->readRegister(DRV2605_REG_FEEDBACK) | 0x80);
+      // library type selection - only one LRA library available
+      this->writeRegister(DRV2605_REG_LIBRARY, 0x06);
+      break;
+    }
+    case ActuatorType::eERM: {
+      this->writeRegister(DRV2605_REG_FEEDBACK,
+                          this->readRegister(DRV2605_REG_FEEDBACK) & 0x7F);
+      /** simplified library type selection - different categories depending on
+       the actuator voltage rating more info can be found in DRV2605L datasheet
+       (p.16) **/
+      int libraryNumber = 1;
+      if (ratedVoltage < 3.0 && overdriveVoltage < 3.0) {
+        libraryNumber = 2;
+      } else if (ratedVoltage < 3.2 && overdriveVoltage < 3.2) {
+        libraryNumber = 3;
+      } else {
+        libraryNumber = 7;
+      }
+      this->writeRegister(DRV2605_REG_LIBRARY, libraryNumber);
+      break;
+    }
+    default:
+      break;
   }
 }
 void ActuatorDriverI2C::sendVoltages(ActuatorType type, float ratedVoltage,
                                      float overdriveVoltage,
-                                     int frequency = 300) {
-  // setting rated voltage
-  this->writeRegister(DRV2605_REG_RATEDV, 0x68);
-  // setting max voltage
-  this->writeRegister(DRV2605_REG_CLAMPV, 0x92);
+                                     int frequency = 170) {
+  switch (type) {
+    case ActuatorType::eLRA: {
+      // CLOSE LOOP setup
+      this->writeRegister(DRV2605_REG_FEEDBACK,
+                          this->readRegister(DRV2605_REG_FEEDBACK) | 0x80);
+      // library type selection - only one LRA library available
+      this->writeRegister(DRV2605_REG_LIBRARY, 0x06);
+      // TODO
+      // calculating rated voltage register based on the datasheet with
+      // default sample time value of 300 us
+      float voltage_abs =
+          ratedVoltage * std::sqrt(1 - (4 * SAMPLE_TIME + 0.0003) * frequency);
+      int ratedVoltageReg = static_cast<int>((voltage_abs * 255) / 5.28);
+      // setting rated voltage
+      this->writeRegister(DRV2605_REG_RATEDV, ratedVoltageReg);
+      // calculating overdrive voltage clamp
+      int overdriveClamp = static_cast<int>((overdriveVoltage * 255) / 5.6);
+      // setting max voltage
+      this->writeRegister(DRV2605_REG_CLAMPV, overdriveClamp);
+      break;
+    }
+    case ActuatorType::eERM: {
+      // CLOSE LOOP setup
+      // registers set accordng to the driver DRV2605 datasheet
+      int ratedVoltageReg = static_cast<int>((ratedVoltage * 255) / 5.36);
+      // setting rated voltage
+      this->writeRegister(DRV2605_REG_RATEDV, ratedVoltageReg);
+      printTactico(std::to_string(ratedVoltageReg));
+      // setting max voltage with default drive time, blanking time and
+      // IdissTime
+      float voltagePeak =
+          overdriveVoltage *
+          ((DRIVE_TIME + IDISS_TIME + BLANKING_TIME) / (DRIVE_TIME - 0.0003));
+      int overdriveClamp = static_cast<int>((voltagePeak * 255) / 5.44);
+      printTactico(std::to_string(overdriveClamp));
+      this->writeRegister(DRV2605_REG_CLAMPV, overdriveClamp);
+      break;
+    }
+    default:
+      break;
+  }
 }
 
 void ActuatorDriverI2C::setWaveform(int slot, int w) {
@@ -187,7 +244,7 @@ DriverType ActuatorDriverI2C::getType() { return this->m_type; }
 
 bool ActuatorDriverI2C::config(ActuatorType type, float ratedVoltage,
                                float overdriveVoltage, int frequency) {
-  this->sendType(type);
+  this->sendType(type, ratedVoltage, overdriveVoltage);
   this->sendVoltages(type, ratedVoltage, overdriveVoltage);
   return true;
 }

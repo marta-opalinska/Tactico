@@ -5,8 +5,10 @@
 #include <memory>
 #include <string>
 
-#include "Interfaces/IPattern.h"
 #include "HardwareLayer.h"
+#include "Interfaces/IPattern.h"
+
+enum StepType { eActuator, eWait };
 
 /**
  * @interface IStep
@@ -15,13 +17,16 @@
  *
  */
 class IStep {
+ protected:
+  StepType m_type;
  public:
   virtual void play() = 0;
   virtual void printStep() = 0;
+  virtual StepType getType() = 0;
 };
 
 /**
- * @class SteoActuator
+ * @class ActuatorStep
  * @implements IStep
  * @brief Class that store information and methods for an individual actuator
  * activation.
@@ -34,12 +39,14 @@ class ActuatorStepImpl : public IStep {
 
  public:
   // tep() = default;
-  ActuatorStepImpl(std::shared_ptr<IActuator> actuator, std::shared_ptr<IPattern> pattern);
+  ActuatorStepImpl(std::shared_ptr<IActuator> actuator,
+                   std::shared_ptr<IPattern> pattern);
   ~ActuatorStepImpl() = default;
   std::shared_ptr<IActuator> m_actuator;
   std::shared_ptr<IPattern> m_pattern;
   void play();
   void printStep();
+  StepType getType();
 };
 
 /**
@@ -60,4 +67,5 @@ class WaitStepImpl : public IStep {
   unsigned int m_waitTime;
   void play();
   void printStep();
+  StepType getType();
 };

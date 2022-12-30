@@ -59,18 +59,31 @@ void loop() {
     std::shared_ptr<ActuatorDriverI2C> driver_2 =
         std::make_shared<ActuatorDriverI2C>(driverGoPin2, 0);
     std::shared_ptr<ActuatorLRA> ac_2 =
-        std::make_shared<ActuatorLRA>(driver_2, 2, 3, 100, "myLRA");
+        std::make_shared<ActuatorLRA>(driver_2, 2.5, 2.7, 100, "myLRA");
 
     std::shared_ptr<ActuatorDriverI2C> driver_3 =
         std::make_shared<ActuatorDriverI2C>(driverGoPin2, 1);
     std::shared_ptr<ActuatorLRA> ac_3 =
-        std::make_shared<ActuatorLRA>(driver_3, 2, 3, 100, "myLRA");
+        std::make_shared<ActuatorLRA>(driver_3, 2.5, 2.7, 100, "myLRA");
 
     std::shared_ptr<PatternDRV2605L> p_2 =
         std::make_shared<PatternDRV2605L>(48);
     driver_2->play(p_2);
     delay(2000);
     driver_3->play(p_2);
+    delay(3000);
+
+    std::shared_ptr<ActuatorDriverI2C> driver_4 =
+        std::make_shared<ActuatorDriverI2C>(driverGoPin2, 2);
+    std::shared_ptr<ActuatorERM> ac_4 =
+        std::make_shared<ActuatorERM>(driver_4, 2, 2.5, "myERM");
+
+    // std::shared_ptr<PatternDRV2605L> p_2 =8
+    //     std::make_shared<PatternDRV2605L>(48);
+    driver_4->play(p_2);
+    delay(2000);
+    driver_4->play(p_2);
+
     // std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
     // std::shared_ptr<ActuatorStepImpl> s1 =
     //     std::make_shared<ActuatorStepImpl>(ac_1, p_1);

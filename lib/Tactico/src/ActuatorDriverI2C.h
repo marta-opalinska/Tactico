@@ -52,32 +52,33 @@
 #define DRV2605_REG_SUSTAINNEG 0x0F  ///< Sustain time offset, negative register
 #define DRV2605_REG_BREAK 0x10       ///< Brake time offset register
 #define DRV2605_REG_AUDIOCTRL 0x11   ///< Audio-to-vibe control register
-#define DRV2605_REG_AUDIOLVL \
-  0x12  ///< Audio-to-vibe minimum input level register
-#define DRV2605_REG_AUDIOMAX \
-  0x13  ///< Audio-to-vibe maximum input level register
-#define DRV2605_REG_AUDIOOUTMIN \
-  0x14  ///< Audio-to-vibe minimum output drive register
-#define DRV2605_REG_AUDIOOUTMAX \
-  0x15  ///< Audio-to-vibe maximum output drive register
-#define DRV2605_REG_RATEDV 0x16  ///< Rated voltage register
-#define DRV2605_REG_CLAMPV 0x17  ///< Overdrive clamp voltage register
-#define DRV2605_REG_AUTOCALCOMP \
-  0x18  ///< Auto-calibration compensation result register
-#define DRV2605_REG_AUTOCALEMP \
-  0x19  ///< Auto-calibration back-EMF result register
-#define DRV2605_REG_FEEDBACK 0x1A  ///< Feedback control register
-#define DRV2605_REG_CONTROL1 0x1B  ///< Control1 Register
-#define DRV2605_REG_CONTROL2 0x1C  ///< Control2 Register
-#define DRV2605_REG_CONTROL3 0x1D  ///< Control3 Register
-#define DRV2605_REG_CONTROL4 0x1E  ///< Control4 Register
-#define DRV2605_REG_VBAT 0x21      ///< Vbat voltage-monitor register
-#define DRV2605_REG_LRARESON 0x22  ///< LRA resonance-period register
+#define DRV2605_REG_AUDIOLVL 0x12    ///< Audio-to-vibe minimum input level
+#define DRV2605_REG_AUDIOMAX 0x13    ///< Audio-to-vibe maximum input level
+#define DRV2605_REG_AUDIOOUTMIN 0x14  ///< Audio-to-vibe minimum output drive
+#define DRV2605_REG_AUDIOOUTMAX 0x15  ///< Audio-to-vibe maximum output drive
+#define DRV2605_REG_RATEDV 0x16       ///< Rated voltage register
+#define DRV2605_REG_CLAMPV 0x17       ///< Overdrive clamp voltage register
+#define DRV2605_REG_AUTOCALCOMP 0x18  ///< Auto-calibration compensation result
+#define DRV2605_REG_AUTOCALEMP 0x19   ///< Auto-calibration back-EMF result
+#define DRV2605_REG_FEEDBACK 0x1A     ///< Feedback control register
+#define DRV2605_REG_CONTROL1 0x1B     ///< Control1 Register
+#define DRV2605_REG_CONTROL2 0x1C     ///< Control2 Register
+#define DRV2605_REG_CONTROL3 0x1D     ///< Control3 Register
+#define DRV2605_REG_CONTROL4 0x1E     ///< Control4 Register
+#define DRV2605_REG_VBAT 0x21         ///< Vbat voltage-monitor register
+#define DRV2605_REG_LRARESON 0x22     ///< LRA resonance-period register
 
-#define WAIT_BETWEEN_EFFECTS_MULTIPLIER \
-  30  // 10ms x waitBetweenEffectsMultiplier
+// DEFAULT SETUP
+
+#define DRIVE_TIME 0.0048
+#define BLANKING_TIME 0.000075
+#define IDISS_TIME 0.000075
+#define SAMPLE_TIME 0.0003
+
+#define WAIT_BETWEEN_EFFECTS_MULTIPLIER 30  // 10ms x multiplier
+#define WAIT_EFFECT_MIN 128
 #define WAIT_BETWEEN_EFFECTS \
-  128 + WAIT_BETWEEN_EFFECTS_MULTIPLIER  // MSB + 10ms x 30 - 300 ms delay
+  128 + WAIT_BETWEEN_EFFECTS_MULTIPLIER  // MSB + 10ms x 30 = 300 ms delay
 
 class PatternDRV2605L;
 
@@ -128,7 +129,7 @@ class ActuatorDriverI2C : public IActuatorDriver {
               int frequency = 300);
   void sendVoltages(ActuatorType type, float ratedVoltage,
                     float overdriveVoltage, int frequency);
-  void sendType(ActuatorType type);
+  void sendType(ActuatorType type, float ratedVoltage, float overdriveVoltage);
 
   DriverType getType();
   // play(PatternPWM pattern);

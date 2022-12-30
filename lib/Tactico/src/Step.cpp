@@ -1,12 +1,12 @@
 #include "Step.h"
 
 ActuatorStepImpl::ActuatorStepImpl(std::shared_ptr<IActuator> actuator,
-                           std::shared_ptr<IPattern> pattern)
-    : m_actuator(actuator), m_pattern(pattern) {}
-
-void ActuatorStepImpl::play() {
-  this->m_actuator->play(this->m_pattern);
+                                   std::shared_ptr<IPattern> pattern)
+    : m_actuator(actuator), m_pattern(pattern) {
+  this->m_type = eActuator;
 }
+
+void ActuatorStepImpl::play() { this->m_actuator->play(this->m_pattern); }
 
 void ActuatorStepImpl::printStep() {
   std::string s = "STEP: ";
@@ -17,7 +17,11 @@ void ActuatorStepImpl::printStep() {
   printTactico(s);
 }
 
-WaitStepImpl::WaitStepImpl(unsigned int miliseconds) : m_waitTime(miliseconds) {}
+StepType ActuatorStepImpl::getType() { return this->m_type; }
+
+WaitStepImpl::WaitStepImpl(unsigned int miliseconds) : m_waitTime(miliseconds) {
+  this->m_type = eWait;
+}
 
 void WaitStepImpl::play() { waitFor(this->m_waitTime); }
 
@@ -29,3 +33,4 @@ void WaitStepImpl::printStep() {
   s.append("\n");
   printTactico(s);
 }
+StepType WaitStepImpl::getType() { return this->m_type; }

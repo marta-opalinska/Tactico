@@ -1,7 +1,9 @@
 #pragma once
-#include "HardwareLayer.h"
 #include <Interfaces/IPattern.h>
+
 #include <memory>
+
+#include "HardwareLayer.h"
 
 /**
  * @interface IActuatorDriver
@@ -17,10 +19,16 @@ class IActuatorDriver {
 
  public:
   /**
+   * @param m_needsPreconfigration defines if the driver needs to be
+   * preonfigured before the action can be played e.g. by sending the pattern
+   * before hitting GO.
+   *
+   */
+  bool m_needsPreconfigration;
+  /**
    * @brief Starts initialisation of the driver
    *
    */
-
   virtual void init() = 0;
 
   /**

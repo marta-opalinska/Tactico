@@ -47,6 +47,7 @@ bool ActuatorLRA::play(std::shared_ptr<IPattern> pattern) {
 
 void ActuatorLRA::setDriver(std::shared_ptr<IActuatorDriver> driver) {
   this->m_driver = driver;
+  this->configureDriver();
 }
 
 ActuatorType ActuatorLRA::getType() { return this->m_type; }

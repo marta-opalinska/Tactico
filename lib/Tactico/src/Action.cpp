@@ -55,7 +55,25 @@ void Action::setSteps(std::vector<std::shared_ptr<IStep>> activitySteps) {
 }
 
 // TODO add steps to all the actuators in the action
-void Action::setAction() {}
+void Action::setAction() {
+  //saving step number
+  int iterator = 0;
+  for (auto step : this->m_activitySteps) {
+    if (step->getType() == eActuator) {
+      auto actuatorStep(std::static_pointer_cast<ActuatorStepImpl>(step));
+      // actuator need to be preconfigured for an action
+      if (actuatorStep->m_actuator->getDriver()->m_needsPreconfigration) {
+        // TODO 
+      }
+    }
+    if (step->getType() == eWait) {
+      // TODO
+      // WAIT_EFFECT_MIN + WAIT_MULTIPLIER * time
+    }
+    step->printStep();
+    step->play();
+  }
+}
 void Action::play() {
   for (auto step : this->m_activitySteps) {
     step->printStep();
