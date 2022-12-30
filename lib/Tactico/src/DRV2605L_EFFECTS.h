@@ -1,3 +1,9 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
+// Effects definition taken from RV2605L datasheet
+
+#ifndef LIB_TACTICO_SRC_DRV2605L_EFFECTS_H_
+#define LIB_TACTICO_SRC_DRV2605L_EFFECTS_H_
 #define STRONG_CLICK_100 1
 #define STRONG_CLICK_60 2
 #define STRONG_CLICK_30 3
@@ -121,3 +127,4 @@
 #define SMOOTH_HUM_3_30 121
 #define SMOOTH_HUM_4_20 122
 #define SMOOTH_HUM_5_10 123
+#endif  // LIB_TACTICO_SRC_DRV2605L_EFFECTS_H_

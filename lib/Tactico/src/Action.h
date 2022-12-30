@@ -1,10 +1,11 @@
+/** copyright 2022 <Marta Opalinska> **/
 #pragma once
 #include <Interfaces/IActuator.h>
 #include <Interfaces/IPattern.h>
 
 #include <memory>
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "Step.h"
 
@@ -28,9 +29,10 @@ class Action {
   int m_nextStepID;
 
  public:
-  explicit Action();
+  Action();
   ~Action() = default;
-  void addStep(std::shared_ptr<IActuator> actuator, std::shared_ptr<IPattern> pattern);
+  void addStep(std::shared_ptr<IActuator> actuator,
+               std::shared_ptr<IPattern> pattern);
   void addStep(std::shared_ptr<IStep> step);
   void addWait(int miliseconds);
   void addWait(std::shared_ptr<WaitStepImpl> stepWait);

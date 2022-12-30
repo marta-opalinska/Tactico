@@ -1,3 +1,5 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #pragma once
 #include <Interfaces/IActuator.h>
 

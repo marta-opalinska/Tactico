@@ -1,3 +1,5 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #include "HardwareLayer.h"
 
 void waitFor(int miliseconds) {

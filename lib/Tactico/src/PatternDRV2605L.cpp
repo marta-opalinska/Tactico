@@ -1,4 +1,9 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #include "PatternDRV2605L.h"
+
+#include <string>
+
 #include "DRV2605L_EFFECTS.h"
 
 PatternDRV2605L::PatternDRV2605L(int patternIndex)

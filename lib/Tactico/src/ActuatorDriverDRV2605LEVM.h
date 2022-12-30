@@ -1,5 +1,4 @@
 /** Copyright 2022 <Marta Opalinska> **/
-
 #pragma once
 #include <Interfaces/IActuatorDriver.h>
 
@@ -7,26 +6,15 @@
 #include <string>
 #include <vector>
 
+#include "ActuatorDriverI2C.h"
 #include "HardwareLayer.h"
 #include "PatternDRV2605L.h"
+#include "DRV2605L_REG.h"
 
-/**
- * @class ActuatorDriverI2C
- * @brief Class that stores information and methods for Actuator Driver
- * controlled using GPI pin
- * @implements IActuatorDriver
- * @param m_GPIO_pin GPIO pin of the assigned Actuator
- */
-
-struct I2CCommands {
-  int address;
-  int registerAddress;
-  int data;
-};
-
+struct I2CCommands;
 class PatternDRV2605L;
 
-class ActuatorDriverI2C : public IActuatorDriver {
+class ActuatorDriverDRV2605LEVM : public IActuatorDriver {
  protected:
   static bool m_I2C_Initialised;
   bool m_usesGoPinFlag;
@@ -49,17 +37,19 @@ class ActuatorDriverI2C : public IActuatorDriver {
   bool setupERM(float ratedVoltage, float overdriveVoltage);
 
  public:
-  // explicit ActuatorDriverI2C(int address);
-  // explicit ActuatorDriverI2C(int goPin);
-  explicit ActuatorDriverI2C(std::vector<I2CCommands> initialCommands);
-  ActuatorDriverI2C(std::vector<I2CCommands> initialCommands, int goPin);
-  ActuatorDriverI2C(int goPin, int driverID);
-  ActuatorDriverI2C(std::vector<I2CCommands> initialCommands,
-                    std::vector<I2CCommands> preStartCommands);
-  ActuatorDriverI2C(std::vector<I2CCommands> initialCommands,
-                    std::vector<I2CCommands> preStartCommands, int goPin);
-  ActuatorDriverI2C() = delete;
-  ~ActuatorDriverI2C() = default;
+  // explicit ActuatorDriverDRV2605LEVM(int address);
+  // explicit ActuatorDriverDRV2605LEVM(int goPin);
+  explicit ActuatorDriverDRV2605LEVM(std::vector<I2CCommands> initialCommands);
+  ActuatorDriverDRV2605LEVM(std::vector<I2CCommands> initialCommands,
+                            int goPin);
+  ActuatorDriverDRV2605LEVM(int goPin, int driverID);
+  ActuatorDriverDRV2605LEVM(std::vector<I2CCommands> initialCommands,
+                            std::vector<I2CCommands> preStartCommands);
+  ActuatorDriverDRV2605LEVM(std::vector<I2CCommands> initialCommands,
+                            std::vector<I2CCommands> preStartCommands,
+                            int goPin);
+  ActuatorDriverDRV2605LEVM() = delete;
+  ~ActuatorDriverDRV2605LEVM() = default;
   void init();
   bool play(std::shared_ptr<IPattern> pattern);
   bool playInOrder(std::shared_ptr<PatternDRV2605L> pattern, int orderNumber);

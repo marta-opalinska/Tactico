@@ -58,13 +58,16 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "*.x": "cpp",
-        "patternpwm.h": "c"
+        "patternpwm.h": "c",
+        "actuatordriveri2c.h": "c"
     },
     "editor.tabCompletion": "on",
     "diffEditor.codeLens": true,
     "sonarlint.pathToCompileCommands": "${workspaceFolder}\\compile_commands.json",
     "C_Cpp.errorSquiggles": "Disabled",
     "C_Cpp.codeAnalysis.clangTidy.checks.disabled": [
+        "clang-diagnostic-error",
+        "clang-diagnostic-error",
         "clang-diagnostic-error",
         "clang-diagnostic-error"
     ]

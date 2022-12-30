@@ -1,3 +1,5 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #include "PatternPWM.h"
 
 PatternPWM::PatternPWM(std::vector<ModulationPWM> switching_modulation)

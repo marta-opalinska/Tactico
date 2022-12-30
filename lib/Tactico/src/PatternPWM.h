@@ -1,6 +1,9 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #pragma once
 #include <Interfaces/IActuator.h>
 
+#include <string>
 #include <vector>
 
 #include "HardwareLayer.h"
@@ -27,7 +30,6 @@ struct ModulationPWM {
 class PatternPWM : public IPattern {
  private:
   PatternPWM() = default;
-  PatternType m_type = eDRV2505L;
 
  public:
   // applyPatternPWM(Actuator actuator)

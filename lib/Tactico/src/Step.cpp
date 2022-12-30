@@ -1,3 +1,5 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #include "Step.h"
 
 ActuatorStepImpl::ActuatorStepImpl(std::shared_ptr<IActuator> actuator,

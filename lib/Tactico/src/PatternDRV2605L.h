@@ -1,11 +1,13 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #pragma once
 #include <Interfaces/IActuator.h>
 
+#include <string>
 #include <vector>
 
 #include "HardwareLayer.h"
 #include "Interfaces/IPattern.h"
-#include "Tactico.h"
 
 /**
  * @class PatternDRV2605L

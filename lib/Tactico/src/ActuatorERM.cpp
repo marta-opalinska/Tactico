@@ -1,3 +1,5 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #include "ActuatorERM.h"
 
 int ActuatorERM::nextID = 0;
@@ -24,7 +26,7 @@ ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
 void ActuatorERM::configureDriver() {
   DriverType type = this->m_driver->getType();
   if (type == eI2C) {
-    auto driverDRV2505L(std::static_pointer_cast<ActuatorDriverI2C>(m_driver));
+    auto driverDRV2505L(std::static_pointer_cast<ActuatorDriverDRV2605LEVM>(m_driver));
     driverDRV2505L->config(eERM, this->m_ratedVoltage, this->m_overdriveVoltage,
                            300);
   }

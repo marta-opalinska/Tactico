@@ -1,3 +1,5 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 // Tactico framework imports
 #include <Tactico.h>
 
@@ -55,14 +57,13 @@ void loop() {
     ac_1->play(p_1);
 
     int driverGoPin2 = 12;
-    int driverID = 2;
-    std::shared_ptr<ActuatorDriverI2C> driver_2 =
-        std::make_shared<ActuatorDriverI2C>(driverGoPin2, 0);
+    std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
+        std::make_shared<ActuatorDriverDRV2605LEVM>(driverGoPin2, 0);
     std::shared_ptr<ActuatorLRA> ac_2 =
         std::make_shared<ActuatorLRA>(driver_2, 2.5, 2.7, 100, "myLRA");
 
-    std::shared_ptr<ActuatorDriverI2C> driver_3 =
-        std::make_shared<ActuatorDriverI2C>(driverGoPin2, 1);
+    std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_3 =
+        std::make_shared<ActuatorDriverDRV2605LEVM>(driverGoPin2, 1);
     std::shared_ptr<ActuatorLRA> ac_3 =
         std::make_shared<ActuatorLRA>(driver_3, 2.5, 2.7, 100, "myLRA");
 
@@ -73,8 +74,8 @@ void loop() {
     driver_3->play(p_2);
     delay(3000);
 
-    std::shared_ptr<ActuatorDriverI2C> driver_4 =
-        std::make_shared<ActuatorDriverI2C>(driverGoPin2, 2);
+    std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_4 =
+        std::make_shared<ActuatorDriverDRV2605LEVM>(driverGoPin2, 2);
     std::shared_ptr<ActuatorERM> ac_4 =
         std::make_shared<ActuatorERM>(driver_4, 2, 2.5, "myERM");
 

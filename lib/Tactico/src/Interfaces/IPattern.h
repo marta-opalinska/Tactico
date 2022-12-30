@@ -1,3 +1,5 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #pragma once
 #include <memory>
 #include <string>
@@ -12,7 +14,7 @@ class IActuator;
  *
  */
 
-enum PatternType { ePWM, eDRV2505L};
+enum PatternType { ePWM, eDRV2505L };
 
 class IPattern {
  protected:

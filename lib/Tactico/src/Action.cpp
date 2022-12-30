@@ -1,3 +1,4 @@
+/** copyright 2022 <Marta Opalinska> **/
 #include "Action.h"
 
 Action::Action() { this->m_nextStepID = 0; }
@@ -56,14 +57,14 @@ void Action::setSteps(std::vector<std::shared_ptr<IStep>> activitySteps) {
 
 // TODO add steps to all the actuators in the action
 void Action::setAction() {
-  //saving step number
-  int iterator = 0;
+  // saving step number
+  // int iterator = 0;
   for (auto step : this->m_activitySteps) {
     if (step->getType() == eActuator) {
       auto actuatorStep(std::static_pointer_cast<ActuatorStepImpl>(step));
       // actuator need to be preconfigured for an action
       if (actuatorStep->m_actuator->getDriver()->m_needsPreconfigration) {
-        // TODO 
+        // TODO
       }
     }
     if (step->getType() == eWait) {
