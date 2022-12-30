@@ -107,6 +107,8 @@ class ActuatorDriverI2C : public IActuatorDriver {
   void setWaveform(int slot, int w);
   void connectToMotor();
   void wait_for_motor_available();
+  bool setupLRA(float ratedVoltage, float overdriveVoltage, int frequency);
+  bool setupERM(float ratedVoltage, float overdriveVoltage);
 
  public:
   // explicit ActuatorDriverI2C(int address);
@@ -127,10 +129,6 @@ class ActuatorDriverI2C : public IActuatorDriver {
   void setAddress(int address);
   bool config(ActuatorType type, float ratedVoltage, float overdriveVoltage,
               int frequency = 300);
-  void sendVoltages(ActuatorType type, float ratedVoltage,
-                    float overdriveVoltage, int frequency);
-  void sendType(ActuatorType type, float ratedVoltage, float overdriveVoltage);
-
   DriverType getType();
   // play(PatternPWM pattern);
   // void playInterval(int time);

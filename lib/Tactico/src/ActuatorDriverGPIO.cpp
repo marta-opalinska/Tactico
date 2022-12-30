@@ -51,25 +51,6 @@ bool ActuatorDriverGPIO::play(std::shared_ptr<IPattern> pattern) {
   return false;
 }
 
-// bool ActuatorDriverGPIO::playPWM(std::shared_ptr<PatternPWM> pattern) {
-//   for (auto m : pattern->m_modulation_sequence) {
-//     if (m.isOn) {
-//       this->setGPIOHigh();
-//     } else {
-//       this->setGPIOLow();
-//     }
-//     waitFor(m.duration);
-//   }
-//   return true;
-// }
-
-// void ActuatorDriverGPIO::stop() {
-//   this->setGPIOLow();
-//   std::string s = "Actuator Driver STOP, GPIO ";
-//   s.append(std::to_string(this->m_GPIO_pin));
-//   s.append("\n");
-//   printTactico(s);
-// }
 void ActuatorDriverGPIO::setPin(int new_GPIO) {
   this->setGPIOLow();
   this->m_GPIO_pin = new_GPIO;
@@ -79,6 +60,4 @@ void ActuatorDriverGPIO::setPin(int new_GPIO) {
 int ActuatorDriverGPIO::getPin() { return this->m_GPIO_pin; }
 
 DriverType ActuatorDriverGPIO::getType() { return this->m_type; }
-// void ActuatorDriverGPIO::play(IPattern pattern){
 
-// }
