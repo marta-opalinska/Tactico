@@ -65,6 +65,7 @@ class ActuatorLRA : public IActuator {
               const std::string &name);
 
   bool play(std::shared_ptr<IPattern> pattern);
+  void test();
   void configureDriver();
   /**
    * @brief Assign Driver object to the actuator

@@ -31,10 +31,8 @@ class ActuatorDriverGPIO : public IActuatorDriver {
   ~ActuatorDriverGPIO() = default;
   void init();
   bool play(std::shared_ptr<IPattern> pattern);
-  // void stop();
+  void test();
   int getPin();
   void setPin(int new_GPIO);
   ActuatorDriverType getType();
-  // void play(IPattern pattern);
-  // void playInterval(int time);
 };

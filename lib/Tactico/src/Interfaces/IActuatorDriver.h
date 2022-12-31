@@ -44,7 +44,7 @@ class IActuatorDriver {
    *
    */
 
-  // virtual void stop() = 0;
+  virtual void test() = 0;
 
   virtual ActuatorDriverType getType() = 0;
 

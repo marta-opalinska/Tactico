@@ -18,11 +18,6 @@ void ActuatorDriverI2C::init() {
   this->m_needsPreconfigration = true;
 }
 
-bool ActuatorDriverI2C::play(std::shared_ptr<IPattern> pattern) {
-  // fuction needs to be driver specific
-  return false;
-}
-
 void ActuatorDriverI2C::writeRegister(int reg, int data) {
   i2c_write_reg(this->m_address, reg, data);
 }

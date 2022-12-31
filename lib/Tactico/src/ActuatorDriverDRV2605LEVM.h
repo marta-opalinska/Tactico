@@ -34,10 +34,12 @@ class ActuatorDriverDRV2605LEVM : public ActuatorDriverI2C {
   void go();
   bool play(std::shared_ptr<IPattern> pattern);
   bool playInOrder(std::shared_ptr<PatternDRV2605L> pattern, int orderNumber);
+  void test();
   bool config(ActuatorType type, float ratedVoltage, float overdriveVoltage,
               int frequency = 300);
   void resetSequence();
   bool setWaveform(int orderNumber, std::shared_ptr<IPattern> pattern);
+  bool setWait(int orderNumber, int miliseconds);
 
   ActuatorDriverType getType();
 };

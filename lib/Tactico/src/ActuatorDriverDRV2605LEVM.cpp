@@ -79,17 +79,37 @@ bool ActuatorDriverDRV2605LEVM::setWaveform(int orderNumber,
   return false;
 }
 
+bool ActuatorDriverDRV2605LEVM::setWait(int orderNumber, int miliseconds) {
+  this->connectToMotor();
+  wait_for_motor_available();
+  // the wait time need to be setup in 7 bits - therefore the register value is
+  // need to be capped at 127
+  int milisecondsCapped = static_cast<int>(
+      static_cast<int>(miliseconds * WAIT_BETWEEN_EFFECTS_MULTIPLIER) % 127);
+  int timeToSend = WAIT_EFFECT_MSB + milisecondsCapped;
+
+  this->writeRegister(DRV2605_REG_WAVESEQ1 + orderNumber, timeToSend);
+  return true;
+}
+
 bool ActuatorDriverDRV2605LEVM::play(std::shared_ptr<IPattern> pattern) {
   if (!this->setWaveform(0, pattern)) {
     return false;
   }
-  this->setWaveform(1, pattern);
-  this->setWaveform(2, pattern);
-
-  // this->setWaveform(1, WAIT_BETWEEN_EFFECTS);
   go();
   resetSequence();
   return true;
+}
+
+void ActuatorDriverDRV2605LEVM::test() {
+  std::shared_ptr<PatternDRV2605L> testPattern =
+      std::make_shared<PatternDRV2605L>(48);
+  this->setWaveform(0, testPattern);
+  this->setWait(1, 300);
+  this->setWaveform(2, testPattern);
+  this->setWait(3, 300);
+  go();
+  resetSequence();
 }
 
 void ActuatorDriverDRV2605LEVM::go() {

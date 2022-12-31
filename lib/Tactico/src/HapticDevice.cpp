@@ -100,11 +100,11 @@ return this->m_deviceActions;
 
 void HapticDevice::clearActions() { this->m_deviceActions.clear(); }
 
-// void HapticDevice::startActuators() {
-//   for (auto &ac : m_actuatorsList) {
-//     ac->play();
-//   }
-// }
+void HapticDevice::testActuators() {
+  for (auto &ac : m_actuatorsList) {
+    ac->test();
+  }
+}
 
 // void HapticDevice::stopActuators() {
 //   for (auto &ac : m_actuatorsList) {

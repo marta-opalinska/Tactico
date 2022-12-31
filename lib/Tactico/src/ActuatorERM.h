@@ -54,13 +54,10 @@ class ActuatorERM : public IActuator {
    */
   ActuatorERM(std::shared_ptr<IActuatorDriver> driver, float ratedVoltage,
               float overdriveVoltage, const std::string &name);
-  // void play();
-  // void play(std::shared_ptr<IPattern> pattern);
 
   bool play(std::shared_ptr<IPattern> pattern);
+  void test();
   void configureDriver();
-  // void playDRV2505L(std::shared_ptr<PatternPWM> patternPWM);
-  // void stop();
   /**
    * @brief Assign Driver object to the actuator
    *

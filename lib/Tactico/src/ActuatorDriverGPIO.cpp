@@ -26,7 +26,7 @@ void ActuatorDriverGPIO::setGPIOHigh() {
 
 void ActuatorDriverGPIO::setGPIOLow() {
   setPinStatusTactico(this->m_GPIO_pin, 0);
-    std::string s = "Actuator Driver STOP, GPIO ";
+  std::string s = "Actuator Driver STOP, GPIO ";
   s.append(std::to_string(this->m_GPIO_pin));
   s.append("\n");
   printTactico(s);
@@ -53,6 +53,20 @@ bool ActuatorDriverGPIO::play(std::shared_ptr<IPattern> pattern) {
   return false;
 }
 
+void ActuatorDriverGPIO::test() {
+  this->setGPIOHigh();
+  waitFor(150);
+  this->setGPIOLow();
+  waitFor(150);
+  this->setGPIOHigh();
+  waitFor(150);
+  this->setGPIOLow();
+  waitFor(150);
+  this->setGPIOHigh();
+  waitFor(150);
+  this->setGPIOLow();
+}
+
 void ActuatorDriverGPIO::setPin(int new_GPIO) {
   this->setGPIOLow();
   this->m_GPIO_pin = new_GPIO;
@@ -62,4 +76,3 @@ void ActuatorDriverGPIO::setPin(int new_GPIO) {
 int ActuatorDriverGPIO::getPin() { return this->m_GPIO_pin; }
 
 ActuatorDriverType ActuatorDriverGPIO::getType() { return this->m_type; }
-

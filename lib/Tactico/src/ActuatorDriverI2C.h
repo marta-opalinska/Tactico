@@ -38,11 +38,10 @@ class ActuatorDriverI2C : public IActuatorDriver {
   ~ActuatorDriverI2C() = default;
   void initI2CBus();
   void init();
-  bool play(std::shared_ptr<IPattern> pattern);
+  virtual bool play(std::shared_ptr<IPattern> pattern) = 0;
+  virtual void test() = 0;
   int readRegister(int reg);
   void writeRegister(int reg, int data);
   void setAddress(int address);
   ActuatorDriverType getType();
-  // play(PatternPWM pattern);
-  // void playInterval(int time);
 };
