@@ -3,14 +3,29 @@
 #include <Interfaces/IActuator.h>
 #include <Interfaces/IPattern.h>
 
+#include <map>
 #include <memory>
 #include <string>
 #include <vector>
 
+#include "ActuatorDriverDRV2605LEVM.h"
 #include "Step.h"
 
 // the limit of DRV2605L driver when it comes to the steps saving
 #define MAX_STEPS 5
+
+/**
+ * @brief
+ *
+ */
+
+struct actuatorConfigData {
+  // the time (in miliseconds) passed from the last time the actuator was
+  // configured with play pattern (needed for waitTime preconfiguration)
+  int timeFromLastPattern;
+  // the latest used actuators patttern slot
+  int currentPatternSlot;
+};
 
 /**
  * @class Action
@@ -26,7 +41,14 @@ class Action {
  private:
   std::vector<std::shared_ptr<IStep>> m_activitySteps;
   std::vector<std::shared_ptr<IActuator>> m_actuators;
+  std::vector<int> m_goPins;
   int m_nextStepID;
+  void configureActuatorDriver(std::shared_ptr<IActuatorDriver> actuatorDriver,
+                               int slotCounter,
+                               std::shared_ptr<IPattern> pattern);
+  void configureActuatorDriverWait(
+      std::shared_ptr<IActuatorDriver> actuatorDriver, int patternSlot,
+      int waitTime);
 
  public:
   Action();
@@ -38,14 +60,8 @@ class Action {
   void addWait(std::shared_ptr<WaitStepImpl> stepWait);
   std::vector<std::shared_ptr<IStep>> getSteps();
   void setSteps(std::vector<std::shared_ptr<IStep>> activitySteps);
-  void setAction();
+  void configureAction();
   void clear();
-  // if the same step was duplicated it will remove all the steps that are
-  // associated with this pointer void removeStep(Step* step); replace single
-  // step void replaceStepByID(Step* stepToReplace, Actuator *actuator, bool
-  // isStart); if the same step was duplicated it will replace all the steps
-  // that are associated with this pointer void replaceStep(int stepToReplaceID,
-  // Actuator *actuator, bool isStart);
   void play();
-  void setAndPlay();
+  void ConfigureAndPlay();
 };

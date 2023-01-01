@@ -73,8 +73,7 @@ bool ActuatorDriverDRV2605LEVM::setWaveform(int orderNumber,
   } else {
     printTactico(
         "Invalid argument - ActuatorDriverDRV2605LEVM does not support this "
-        "type of "
-        "Pattern");
+        "type of Pattern \n");
   }
   return false;
 }
@@ -123,7 +122,9 @@ void ActuatorDriverDRV2605LEVM::go() {
 void ActuatorDriverDRV2605LEVM::resetSequence() {
   this->connectToMotor();
   wait_for_motor_available();
-  this->writeRegister(DRV2605_REG_WAVESEQ1 + 0, 0);
+  for (int i = 0; i < MAX_WAVEFORMS; i++) {
+    this->writeRegister(DRV2605_REG_WAVESEQ1 + i, 0);
+  }
 }
 
 void ActuatorDriverDRV2605LEVM::connectToMotor() {

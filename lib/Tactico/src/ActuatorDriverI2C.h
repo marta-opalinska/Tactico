@@ -43,5 +43,6 @@ class ActuatorDriverI2C : public IActuatorDriver {
   int readRegister(int reg);
   void writeRegister(int reg, int data);
   void setAddress(int address);
+  int getGoPin();
   ActuatorDriverType getType();
 };

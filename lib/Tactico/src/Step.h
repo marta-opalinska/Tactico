@@ -10,7 +10,7 @@
 #include "HardwareLayer.h"
 #include "Interfaces/IPattern.h"
 
-enum StepType { eActuator, eWait };
+enum StepType { eActuatorStep, eWaitStep };
 
 /**
  * @interface IStep

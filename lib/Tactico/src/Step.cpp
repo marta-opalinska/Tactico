@@ -5,7 +5,7 @@
 ActuatorStepImpl::ActuatorStepImpl(std::shared_ptr<IActuator> actuator,
                                    std::shared_ptr<IPattern> pattern)
     : m_actuator(actuator), m_pattern(pattern) {
-  this->m_type = eActuator;
+  this->m_type = eActuatorStep;
 }
 
 void ActuatorStepImpl::play() { this->m_actuator->play(this->m_pattern); }
@@ -22,7 +22,7 @@ void ActuatorStepImpl::printStep() {
 StepType ActuatorStepImpl::getType() { return this->m_type; }
 
 WaitStepImpl::WaitStepImpl(unsigned int miliseconds) : m_waitTime(miliseconds) {
-  this->m_type = eWait;
+  this->m_type = eWaitStep;
 }
 
 void WaitStepImpl::play() { waitFor(this->m_waitTime); }

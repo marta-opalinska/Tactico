@@ -15,8 +15,10 @@ void ActuatorDriverI2C::initI2CBus() {
 }
 void ActuatorDriverI2C::init() {
   this->initI2CBus();
-  this->m_needsPreconfigration = true;
+  this->m_needsPreconfigration = false;
 }
+
+int ActuatorDriverI2C::getGoPin() { return this->m_goPin; }
 
 void ActuatorDriverI2C::writeRegister(int reg, int data) {
   i2c_write_reg(this->m_address, reg, data);
