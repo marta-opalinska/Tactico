@@ -26,7 +26,7 @@ struct ModulationPWM {
 /**
  * @class PatternPWM
  * @implements IPattern
- * @brief Class that stores the Pulse Width Mudulation pattern (effect) that can
+ * @brief Class that stores the Pulse-Width Mudulation pattern (effect) that can
  * be applied to the actuator that support this type of driver.
  */
 class PatternPWM : public IPattern {
