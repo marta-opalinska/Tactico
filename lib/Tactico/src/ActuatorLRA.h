@@ -2,15 +2,15 @@
 
 #pragma once
 #include <Interfaces/IActuator.h>
+#include <Interfaces/IPattern.h>
+#include <Interfaces/IStep.h>
 
 #include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
 
-#include "Interfaces/IPattern.h"
 #include "PatternPWM.h"
-#include "Step.h"
 
 #ifndef ACTUATOR_LRA_DEFAULT_NAME
 #define ACTUATOR_LRA_DEFAULT_NAME "actuatorLRA_"

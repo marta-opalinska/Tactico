@@ -49,7 +49,9 @@ class HapticDevice {
       std::map<std::string, std::shared_ptr<Action>> additinalDeviceActions);
   void addAction(std::shared_ptr<Action> deviceAction, std::string actionName);
   void removeAction(std::string actionName);
+  void configureAction(std::string actionName);
   void playAction(std::string actionName);
+  void configureAndPlayAction(std::string actionName);
   std::map<std::string, std::shared_ptr<Action>> getActions();
   void clearActions();
   void testActuators();

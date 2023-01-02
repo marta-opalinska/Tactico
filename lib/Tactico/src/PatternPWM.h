@@ -2,13 +2,15 @@
 
 #pragma once
 #include <Interfaces/IActuator.h>
+#include <Interfaces/IPattern.h>
 
 #include <string>
 #include <vector>
 
-#include "HardwareLayer.h"
-#include "Interfaces/IPattern.h"
 #include "Tactico.h"
+// clang-format off
+#include "HardwareLayer.h"
+// clang-format on
 
 /**
  * @brief Structure for PWM modulation

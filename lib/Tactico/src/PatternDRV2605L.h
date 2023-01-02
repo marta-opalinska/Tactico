@@ -2,12 +2,13 @@
 
 #pragma once
 #include <Interfaces/IActuator.h>
+#include <Interfaces/IPattern.h>
 
 #include <string>
 #include <vector>
-
+// clang-format off
 #include "HardwareLayer.h"
-#include "Interfaces/IPattern.h"
+// clang-format on
 
 /**
  * @class PatternDRV2605L

@@ -7,8 +7,10 @@
 #include <string>
 #include <vector>
 
-#include "HardwareLayer.h"
 #include "PatternDRV2605L.h"
+// clang-format off
+#include "HardwareLayer.h"
+// clang-format on
 
 /**
  * @class ActuatorDriverI2C

@@ -6,8 +6,9 @@
 
 #include <memory>
 #include <string>
-
+// clang-format off
 #include "HardwareLayer.h"
+// clang-format on
 
 class IPattern;
 class PatternPWM;

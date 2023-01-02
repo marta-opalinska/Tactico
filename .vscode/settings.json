@@ -59,7 +59,11 @@
         "typeinfo": "cpp",
         "*.x": "cpp",
         "patternpwm.h": "c",
-        "actuatordriveri2c.h": "c"
+        "actuatordriveri2c.h": "c",
+        "iactuator.h": "c",
+        "ipattern.h": "c",
+        "actuatordriverdrv2605levm.h": "c",
+        "hardwarelayer.h": "c"
     },
     "editor.tabCompletion": "on",
     "diffEditor.codeLens": true,

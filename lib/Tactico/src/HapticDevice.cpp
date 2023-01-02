@@ -86,6 +86,15 @@ void HapticDevice::addAction(std::shared_ptr<Action> deviceAction,
                              std::string actionName) {
   this->m_deviceActions[actionName] = deviceAction;
 }
+
+void HapticDevice::configureAction(std::string actionName) {
+  this->m_deviceActions[actionName]->configureAction();
+}
+
+void HapticDevice::configureAndPlayAction(std::string actionName) {
+  this->m_deviceActions[actionName]->ConfigureAndPlay();
+}
+
 void HapticDevice::playAction(std::string actionName) {
   this->m_deviceActions[actionName]->play();
 }
@@ -95,7 +104,7 @@ void HapticDevice::removeAction(std::string actionName) {
 }
 
 std::map<std::string, std::shared_ptr<Action>> HapticDevice::getActions() {
-return this->m_deviceActions;
+  return this->m_deviceActions;
 }
 
 void HapticDevice::clearActions() { this->m_deviceActions.clear(); }

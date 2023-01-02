@@ -5,45 +5,30 @@ Action::Action() { this->m_nextStepID = 0; }
 
 void Action::addStep(std::shared_ptr<IActuator> actuator,
                      std::shared_ptr<IPattern> pattern) {
-  if (m_nextStepID >= MAX_STEPS) {
-    printTactico("Action maximum step excided.");
-    return;
-  }
   this->m_activitySteps.push_back(
       std::make_shared<ActuatorStepImpl>(actuator, pattern));
   // saving a vector of all the actator that are a part of this action
-  this->m_actuators.push_back(actuator);
+  this->m_actuators.insert(actuator);
   this->m_nextStepID++;
 }
 
 void Action::addStep(std::shared_ptr<IStep> step) {
-  if (m_nextStepID >= MAX_STEPS) {
-    printTactico("Action maximum step excided.");
-    return;
-  }
+
   if (step->getType() == eActuatorStep) {
     auto actuatorStep(std::static_pointer_cast<ActuatorStepImpl>(step));
     // saving a vector of all the actator that are a part of this action
-    this->m_actuators.push_back(actuatorStep->m_actuator);
+    this->m_actuators.insert(actuatorStep->m_actuator);
   }
   this->m_activitySteps.push_back(step);
   this->m_nextStepID++;
 }
 
 void Action::addWait(int miliseconds) {
-  if (m_nextStepID >= MAX_STEPS) {
-    printTactico("Action maximum step excided.");
-    return;
-  }
   this->m_activitySteps.push_back(std::make_shared<WaitStepImpl>(miliseconds));
   this->m_nextStepID++;
 }
 
 void Action::addWait(std::shared_ptr<WaitStepImpl> stepWait) {
-  if (m_nextStepID >= MAX_STEPS) {
-    printTactico("Action maximum step excided.");
-    return;
-  }
   this->m_activitySteps.push_back(stepWait);
   this->m_nextStepID++;
 }
@@ -60,6 +45,25 @@ std::vector<std::shared_ptr<IStep>> Action::getSteps() {
 
 void Action::setSteps(std::vector<std::shared_ptr<IStep>> activitySteps) {
   this->m_activitySteps = activitySteps;
+  for (auto step : activitySteps) {
+    if (step->getType() == eActuatorStep) {
+      auto actuatorStep(std::static_pointer_cast<ActuatorStepImpl>(step));
+      // saving a vector of all the actator that are a part of this action
+      this->m_actuators.insert(actuatorStep->m_actuator);
+    }
+  }
+}
+
+void Action::activateGoPins() {
+  for (int pin : this->m_goPins) {
+    setPinStatusTactico(pin, HIGH);
+  }
+}
+
+void Action::deactivateGoPins() {
+  for (int pin : this->m_goPins) {
+    setPinStatusTactico(pin, LOW);
+  }
 }
 
 void Action::configureActuatorDriver(
@@ -73,7 +77,7 @@ void Action::configureActuatorDriver(
       actuatorDriverDRV2605LEVM->setWaveform(slotCounter, pattern);
       // adding goPins to trigger for a play - multiple actuator can
       // be on the same goPin
-      m_goPins.push_back(actuatorDriverDRV2605LEVM->getGoPin());
+      m_goPins.insert(actuatorDriverDRV2605LEVM->getGoPin());
       break;
     }
     default: {
@@ -102,17 +106,17 @@ void Action::configureActuatorDriverWait(
   }
 }
 
-// TODO MAX STEPS
-
 void Action::configureAction() {
   // creating a map linking each actuator in the action with the time (in
   // miliseconds) passed from the last time the actuator was played (needed for
   // waitTime preconfiguration) and the latest used actuator's patttern slot
   std::map<std::shared_ptr<IActuator>, actuatorConfigData> actuatorsConfigData;
+
   for (auto actuator : this->m_actuators) {
-    // actuatorsConfigData.insert(std::make_pair(actuator, {{0, 0}}));
+
     actuatorsConfigData[actuator] = {0, 0};
   }
+
   // iterate through all the steps
   for (auto step : this->m_activitySteps) {
     step->printStep();
@@ -164,9 +168,13 @@ void Action::configureAction() {
   }
 }
 void Action::play() {
+  this->activateGoPins();
+  waitFor(50);
+  this->deactivateGoPins();
   for (auto step : this->m_activitySteps) {
-    step->printStep();
-    step->play();
+    if(!step->m_needsPreconfigration){
+      step->play();
+    }
   }
 }
 

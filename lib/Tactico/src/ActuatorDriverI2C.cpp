@@ -4,14 +4,16 @@
 
 bool ActuatorDriverI2C::m_I2C_Initialised = false;
 
-ActuatorDriverI2C::ActuatorDriverI2C() { this->initI2CBus(); }
+ActuatorDriverI2C::ActuatorDriverI2C() {
+  this->m_type = eI2C;
+  this->initI2CBus();
+}
 
 void ActuatorDriverI2C::initI2CBus() {
   if (!this->m_I2C_Initialised) {
     i2c_begin();
     m_I2C_Initialised = true;
   }
-  this->m_type = eI2C;
 }
 void ActuatorDriverI2C::init() {
   this->initI2CBus();

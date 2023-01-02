@@ -61,34 +61,48 @@ void ActuatorDriverDRV2605LEVM::initDRV2505L() {
   resetSequence();
 }
 
-bool ActuatorDriverDRV2605LEVM::setWaveform(int orderNumber,
+bool ActuatorDriverDRV2605LEVM::setWaveform(int slotNumber,
                                             std::shared_ptr<IPattern> pattern) {
-  if (pattern->getType() == eDRV2505L) {
-    this->connectToMotor();
-    wait_for_motor_available();
-    auto DRV2605LPattern(std::static_pointer_cast<PatternDRV2605L>(pattern));
-    this->writeRegister(DRV2605_REG_WAVESEQ1 + orderNumber,
-                        DRV2605LPattern->m_patternIndex);
-    return true;
-  } else {
-    printTactico(
-        "Invalid argument - ActuatorDriverDRV2605LEVM does not support this "
-        "type of Pattern \n");
+  if (slotNumber <= MAX_WAVEFORMS) {
+    if (pattern->getType() == eDRV2505L) {
+      this->connectToMotor();
+      wait_for_motor_available();
+      Serial.println((String) "Configurating Pattern.On slot " + slotNumber);
+      auto DRV2605LPattern(std::static_pointer_cast<PatternDRV2605L>(pattern));
+      this->writeRegister(DRV2605_REG_WAVESEQ1 + slotNumber,
+                          DRV2605LPattern->m_patternIndex);
+      return true;
+    } else {
+      printTactico(
+          "Invalid argument - ActuatorDriverDRV2605LEVM does not support this "
+          "type of Pattern \n");
+    }
+    return false;
   }
+  printTactico(
+      "Invalid slot number! Max number of waveforms per driver is "
+      "7.");
   return false;
 }
 
-bool ActuatorDriverDRV2605LEVM::setWait(int orderNumber, int miliseconds) {
-  this->connectToMotor();
-  wait_for_motor_available();
-  // the wait time need to be setup in 7 bits - therefore the register value is
-  // need to be capped at 127
-  int milisecondsCapped = static_cast<int>(
-      static_cast<int>(miliseconds * WAIT_BETWEEN_EFFECTS_MULTIPLIER) % 127);
-  int timeToSend = WAIT_EFFECT_MSB + milisecondsCapped;
-
-  this->writeRegister(DRV2605_REG_WAVESEQ1 + orderNumber, timeToSend);
-  return true;
+bool ActuatorDriverDRV2605LEVM::setWait(int slotNumber, int miliseconds) {
+  if (slotNumber <= MAX_WAVEFORMS) {
+    this->connectToMotor();
+    wait_for_motor_available();
+    // the wait time need to be setup in 7 bits - therefore the register value
+    // is need to be capped at 127
+    int milisecondsCapped = static_cast<int>(
+        static_cast<int>(miliseconds * WAIT_BETWEEN_EFFECTS_MULTIPLIER) % 127);
+    int timeToSend = WAIT_EFFECT_MSB + milisecondsCapped;
+    Serial.println((String) "Configurating Wait. Slot: " + slotNumber +
+                   ", time: " + miliseconds);
+    this->writeRegister(DRV2605_REG_WAVESEQ1 + slotNumber, timeToSend);
+    return true;
+  }
+  printTactico(
+      "Invalid slot number! Max number of waveforms per driver is "
+      "7.");
+  return false;
 }
 
 bool ActuatorDriverDRV2605LEVM::play(std::shared_ptr<IPattern> pattern) {
@@ -135,9 +149,9 @@ void ActuatorDriverDRV2605LEVM::connectToMotor() {
 }
 
 void ActuatorDriverDRV2605LEVM::wait_for_motor_available() {
-  if (this->readRegister(0x0C)) {
-    this->writeRegister(DRV2605_REG_GO, 0);
-  }
+  // if (this->readRegister(0x0C)) {
+  //   this->writeRegister(DRV2605_REG_GO, 0);
+  // }
   while (this->readRegister(0x0C)) {
   }
   return;

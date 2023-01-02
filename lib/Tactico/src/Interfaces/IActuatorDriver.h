@@ -1,11 +1,13 @@
 /** Copyright 2022 <Marta Opalinska> **/
 
 #pragma once
-#include <Interfaces/IPattern.h>
-
 #include <memory>
 
+#include "Interfaces/IPattern.h"
+
+// clang-format off
 #include "HardwareLayer.h"
+// clang-format on
 
 /**
  * @interface IActuatorDriver
@@ -13,7 +15,7 @@
  * ActuatorDriverGPIO class
  *
  */
-enum ActuatorDriverType { eGPIO, eI2C, eDRV2505L_EVBOARD};
+enum ActuatorDriverType { eGPIO, eI2C, eDRV2505L_EVBOARD };
 
 class IActuatorDriver {
  protected:

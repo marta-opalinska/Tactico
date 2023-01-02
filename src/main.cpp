@@ -16,9 +16,9 @@
 // #undef min
 // #undef max
 
-#include "Arduino.h"
-#undef min
-#undef max
+#include <Arduino.h>
+// #undef min
+// #undef max
 
 // #include <functional>
 int setupDone;
@@ -26,16 +26,19 @@ int setupDone;
 void setup() {
   Serial.begin(9600);
   setupDone = false;
+  //   while (!Serial) {
+  //     ;  // wait for serial port to connect. Needed for native USB
+  //   }
 
   // pinMode(LED_BUILTIN, OUTPUT); // set pin as output
-
+  delay(2000);
   Serial.print("------------------------------------- \n");
 }
 
 void loop() {
-  delay(1000);
   if (!setupDone) {
     int driverPin1 = 2;
+    // driverPin1 = PIN_BUTTON1;
     // driverPin1 = 22;
     // int driverPin2 = 2;
     std::shared_ptr<ActuatorDriverGPIO> driver_1 =
@@ -57,6 +60,7 @@ void loop() {
     ac_1->play(p_1);
 
     int driverGoPin2 = 12;
+    // driverGoPin2 = PIN_LED1;
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(0, driverGoPin2);
     std::shared_ptr<ActuatorLRA> ac_2 =
@@ -65,41 +69,117 @@ void loop() {
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_3 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(1, driverGoPin2);
     std::shared_ptr<ActuatorLRA> ac_3 =
-        std::make_shared<ActuatorLRA>(driver_3, 2.5, 2.7, 100, "myLRA");
-
-    std::shared_ptr<PatternDRV2605L> p_2 =
-        std::make_shared<PatternDRV2605L>(48);
-
-    Serial.print("Pattern 1 finished.");
-    driver_2->play(p_2);
-    Serial.print("Pattern 2 finished.");
-    delay(2000);
-    driver_3->play(p_2);
-    Serial.print("Pattern 3 finished.");
-
-    delay(3000);
+        std::make_shared<ActuatorLRA>(driver_3, 2.5, 2.7, 100, "myLRA_2");
 
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_4 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(2, driverGoPin2);
     std::shared_ptr<ActuatorERM> ac_4 =
         std::make_shared<ActuatorERM>(driver_4, 2, 2.5, "myERM");
 
-    // std::shared_ptr<PatternDRV2605L> p_2 =8
-    //     std::make_shared<PatternDRV2605L>(48);
-    driver_4->play(p_2);
-    delay(2000);
-    driver_4->play(p_2);
-
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_5 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(3, driverGoPin2);
     std::shared_ptr<ActuatorERM> ac_5 =
-        std::make_shared<ActuatorERM>(driver_5, 3, 3.2, "myERM");
+        std::make_shared<ActuatorERM>(driver_5, 3, 3.2, "myERM_2");
+
+    std::shared_ptr<PatternDRV2605L> p_2 =
+        std::make_shared<PatternDRV2605L>(47);
+
+    HapticDevice test_hand({ac_1, ac_2, ac_3, ac_4, ac_5});
+
+    // ac_2->test();
+    // delay(2000);
+    // ac_3->test();
+    // delay(2000);
+    // ac_4->test();
+    // delay(2000);
+    // ac_5->test();
+    // delay(2000);
+
+    std::shared_ptr<ActuatorStepImpl> s1a =
+        std::make_shared<ActuatorStepImpl>(ac_2, p_2);
+    std::shared_ptr<ActuatorStepImpl> s1b =
+        std::make_shared<ActuatorStepImpl>(ac_3, p_2);
+    std::shared_ptr<ActuatorStepImpl> s1c =
+        std::make_shared<ActuatorStepImpl>(ac_4, p_2);
+    std::shared_ptr<ActuatorStepImpl> s1d =
+        std::make_shared<ActuatorStepImpl>(ac_5, p_2);
+
+    std::shared_ptr<WaitStepImpl> s2 = std::make_shared<WaitStepImpl>(250);
+
+    std::shared_ptr<ActuatorStepImpl> s3 =
+        std::make_shared<ActuatorStepImpl>(ac_2, p_2);
+
+    std::shared_ptr<WaitStepImpl> s4 = std::make_shared<WaitStepImpl>(250);
+
+    std::shared_ptr<ActuatorStepImpl> s5 =
+        std::make_shared<ActuatorStepImpl>(ac_3, p_2);
+
+    std::shared_ptr<WaitStepImpl> s6 = std::make_shared<WaitStepImpl>(250);
+
+    std::shared_ptr<ActuatorStepImpl> s7 =
+        std::make_shared<ActuatorStepImpl>(ac_4, p_2);
+
+    std::shared_ptr<WaitStepImpl> s8 = std::make_shared<WaitStepImpl>(250);
+
+    std::shared_ptr<ActuatorStepImpl> s9 =
+        std::make_shared<ActuatorStepImpl>(ac_5, p_2);
+
+    std::shared_ptr<WaitStepImpl> s10 = std::make_shared<WaitStepImpl>(1000);
+
+    std::shared_ptr<Action> test_ac = std::make_shared<Action>();
+
+    test_ac->setSteps({s1a, s1b, s1c, s1d, s2, s3, s4, s5, s6, s7, s8, s9});
+
+    // test_ac->setSteps({s1a, s2, s4, s6, s8, s3});
+    delay(5000);
+    // test_ac->setSteps({s1a, s1b, s2, s4, s6, s8, s3});
+    test_hand.addAction(test_ac, "test");
+    test_ac->configureAction();
+    std::shared_ptr<PatternDRV2605L> reset =
+        std::make_shared<PatternDRV2605L>(48);
+    // driver_2->setWaveform(0, p_2);
+    // driver_2->setWait(1, 1000);
+    // driver_2->setWaveform(2, p_2);
+    // driver_2->setWaveform(3, reset);
+
+    digitalWrite(driverGoPin2, HIGH);
+
+    delay(50);
+
+    digitalWrite(driverGoPin2, LOW);
+
+    delay(5000);
+
+    test_ac->play();
+
+    delay(5000);
+
+    test_hand.configureAndPlayAction("test");
+
+    // test_ac->ConfigureAndPlay();
+
+    // driver_4->play(p_2);
+
+    // Serial.print("Pattern 1 finished.");
+    // driver_2->play(p_2);
+    // Serial.print("Pattern 2 finished.");
+    // delay(2000);
+    // driver_3->play(p_2);
+    // Serial.print("Pattern 3 finished.");
+
+    // delay(3000);
 
     // std::shared_ptr<PatternDRV2605L> p_2 =8
     //     std::make_shared<PatternDRV2605L>(48);
-    driver_5->play(p_2);
-    delay(2000);
-    driver_5->play(p_2);
+    // driver_4->play(p_2);
+    // delay(2000);
+    // driver_4->play(p_2);
+
+    // std::shared_ptr<PatternDRV2605L> p_2 =8
+    //     std::make_shared<PatternDRV2605L>(48);
+    // driver_5->play(p_2);
+    // delay(2000);
+    // driver_5->play(p_2);
 
     // std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
     // std::shared_ptr<ActuatorStepImpl> s1 =

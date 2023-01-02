@@ -8,8 +8,10 @@
 
 #include "ActuatorDriverI2C.h"
 #include "DRV2605L_REG.h"
-#include "HardwareLayer.h"
 #include "PatternDRV2605L.h"
+// clang-format off
+#include "HardwareLayer.h"
+// clang-format on
 
 struct I2CCommands;
 class PatternDRV2605L;
