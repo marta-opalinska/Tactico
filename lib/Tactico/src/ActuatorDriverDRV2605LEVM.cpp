@@ -6,7 +6,6 @@
 ActuatorDriverDRV2605LEVM::ActuatorDriverDRV2605LEVM(int driverID, int goPin)
     : m_driverID(driverID) {
   this->m_goPin = goPin;
-  this->m_usesGoPinFlag = true;
   this->m_type = eDRV2505L_EVBOARD;
   this->m_address = DRV2605_ADDR;
   this->m_needsPreconfigration = true;
@@ -24,10 +23,10 @@ void ActuatorDriverDRV2605LEVM::init() {
   // all the servos that need to be activate and mistakenly distctivate some of
   // them
   i2c_write_reg(TCA9554_ADDR, OUT_CHANNEL_REG, 0xFF);
-  this->initDRV2505L();
+  this->initDRV2605L();
 }
 
-void ActuatorDriverDRV2605LEVM::initDRV2505L() {
+void ActuatorDriverDRV2605LEVM::initDRV2605L() {
   this->connectToMotor();
 
   // commands for driver innitiation

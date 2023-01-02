@@ -43,7 +43,7 @@ class IPattern {
   /**
    * @brief Get the PatternType of the object
    *
-   * @return PatternType type
+   * @return PatternType
    */
   virtual PatternType getType() = 0;
 };

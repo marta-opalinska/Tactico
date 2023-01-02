@@ -23,16 +23,19 @@ class PatternPWM;
  * @brief Class that stores information and methods for ERM actuator type. It
  * implements IActuator interface.
  * @implements IActuator
- * @param m_driver requirered parameter, links the actuator with the driver
- * @param m_name optional parameter, actuator custom name
  *
  */
 class ActuatorERM : public IActuator {
  protected:
+  /**
+   * Unique ID seter
+   */
   static int nextID;
 
  public:
   ActuatorERM() = delete;
+  ~ActuatorERM() = default;
+
   /**
    * @brief Construct a new ERM Actuator object
    *
@@ -55,16 +58,44 @@ class ActuatorERM : public IActuator {
   ActuatorERM(std::shared_ptr<IActuatorDriver> driver, float ratedVoltage,
               float overdriveVoltage, const std::string &name);
 
-  bool play(std::shared_ptr<IPattern> pattern);
-  void test();
-  void configureDriver();
   /**
-   * @brief Assign Driver object to the actuator
+   * @brief Play the pattern supported by the actuator.
+   *
+   * @param pattern pattern to play
+   * @return true
+   * @return false
+   */
+  bool play(std::shared_ptr<IPattern> pattern);
+
+  /**
+   * @brief Test the motor vibration.
+   *
+   */
+  void test();
+
+  /**
+   * @brief Configure the actuator's driver.
+   *
+   */
+  void configDriver();
+  /**
+   * @brief Assign Driver object to the Actuator
    *
    * @param driver ActuatorDriver object to assign
    */
   void setDriver(std::shared_ptr<IActuatorDriver> driver);
+
+  /**
+   * @brief Get the actuator's Driver
+   *
+   * @return std::shared_ptr<IActuatorDriver>
+   */
   std::shared_ptr<IActuatorDriver> getDriver();
+
+  /**
+   * @brief Get the ActuatorType of the object
+   *
+   * @return ActuatorType
+   */
   ActuatorType getType();
-  ~ActuatorERM() = default;
 };

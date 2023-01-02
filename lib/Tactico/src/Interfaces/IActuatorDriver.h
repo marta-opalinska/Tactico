@@ -56,7 +56,7 @@ class IActuatorDriver {
   /**
    * @brief Get the driver's type
    *
-   * @return ActuatorDriverType driver's type
+   * @return ActuatorDriverType
    */
   virtual ActuatorDriverType getType() = 0;
 };

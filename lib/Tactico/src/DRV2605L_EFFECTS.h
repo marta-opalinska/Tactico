@@ -1,6 +1,6 @@
 /** Copyright 2022 <Marta Opalinska> **/
 
-// Effects definition taken from RV2605L datasheet
+// Effects (patterns) definition taken from DRV2605L datasheet
 
 #ifndef LIB_TACTICO_SRC_DRV2605L_EFFECTS_H_
 #define LIB_TACTICO_SRC_DRV2605L_EFFECTS_H_

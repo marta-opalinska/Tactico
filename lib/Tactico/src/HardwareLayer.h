@@ -1,3 +1,5 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #pragma once
 // clang-format off
 // Format need to be turned off - Arduino library need to be compiled as the last one 

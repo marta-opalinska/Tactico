@@ -13,7 +13,6 @@ void Action::addStep(std::shared_ptr<IActuator> actuator,
 }
 
 void Action::addStep(std::shared_ptr<IStep> step) {
-
   if (step->getType() == eActuatorStep) {
     auto actuatorStep(std::static_pointer_cast<ActuatorStep>(step));
     // saving a vector of all the actator that are a part of this action
@@ -106,14 +105,13 @@ void Action::configureActuatorDriverWait(
   }
 }
 
-void Action::configureAction() {
+void Action::configure() {
   // creating a map linking each actuator in the action with the time (in
   // miliseconds) passed from the last time the actuator was played (needed for
   // waitTime preconfiguration) and the latest used actuator's patttern slot
   std::map<std::shared_ptr<IActuator>, actuatorConfigData> actuatorsConfigData;
 
   for (auto actuator : this->m_actuators) {
-
     actuatorsConfigData[actuator] = {0, 0};
   }
 
@@ -172,13 +170,13 @@ void Action::play() {
   waitFor(50);
   this->deactivateGoPins();
   for (auto step : this->m_activitySteps) {
-    if(!step->m_needsPreconfigration){
+    if (!step->m_needsPreconfigration) {
       step->play();
     }
   }
 }
 
 void Action::ConfigureAndPlay() {
-  this->configureAction();
+  this->configure();
   this->play();
 }

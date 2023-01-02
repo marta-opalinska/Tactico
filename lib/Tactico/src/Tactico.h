@@ -1,12 +1,6 @@
 ﻿/** Copyright 2022 <Marta Opalinska> **/
 
-// Tactico_.h : Include file for standard system include files,
-// or project specific include files.
-
 #pragma once
-// #include <iostream>
-
-// #include <Interfaces/IActuator.h>
 #include <Interfaces/IActuator.h>
 #include <Interfaces/IActuatorDriver.h>
 #include <Interfaces/IPattern.h>
@@ -27,5 +21,3 @@
 
 #undef min
 #undef max
-
-// TODO: Reference additional headers your program requires here.

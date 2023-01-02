@@ -8,16 +8,14 @@
 
 #include <memory>
 #include <string>
-// clang-format off
+
 #include "HardwareLayer.h"
-// clang-format on
 
 /**
  * @class ActuatorStep
  * @implements IStep
  * @brief Class that store information and methods for an individual actuator
  * activation.
- * @param m_actuator actuator that the action is assigned to
  *
  */
 class ActuatorStep : public IStep {
@@ -25,13 +23,42 @@ class ActuatorStep : public IStep {
   ActuatorStep() = default;
 
  public:
-  // tep() = default;
-  ActuatorStep(std::shared_ptr<IActuator> actuator,
-                   std::shared_ptr<IPattern> pattern);
-  ~ActuatorStep() = default;
+  /**
+   * @brief actuator that the step is assigned to
+   *
+   */
   std::shared_ptr<IActuator> m_actuator;
+  /**
+   * @brief pattern that the step will perform
+   *
+   */
   std::shared_ptr<IPattern> m_pattern;
+  /**
+   * @brief Construct a new Actuator Step object
+   *
+   * @param actuator actuator that the step is assigned to
+   * @param pattern pattern that the step will perform
+   */
+  ActuatorStep(std::shared_ptr<IActuator> actuator,
+               std::shared_ptr<IPattern> pattern);
+  ~ActuatorStep() = default;
+
+  /**
+   * @brief Perform the pattern on the actuator.
+   *
+   */
   void play();
+
+  /**
+   * @brief Print the Step in Serial port as a String
+   *
+   */
   void printStep();
+
+  /**
+   * @brief Get the StepType of the object
+   *
+   * @return StepType
+   */
   StepType getType();
 };

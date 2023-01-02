@@ -11,7 +11,7 @@ ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
   this->id = ++nextID;
   this->m_resonantFrequency = resonantFrequency;
   this->m_type = eLRA;
-  this->configureDriver();
+  this->configDriver();
 }
 
 ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
@@ -23,10 +23,10 @@ ActuatorLRA::ActuatorLRA(std::shared_ptr<IActuatorDriver> driver,
   this->m_name =
       std::string(ACTUATOR_LRA_DEFAULT_NAME).append(std::to_string(id));
   this->m_type = eLRA;
-  this->configureDriver();
+  this->configDriver();
 }
 
-void ActuatorLRA::configureDriver() {
+void ActuatorLRA::configDriver() {
   ActuatorDriverType type = m_driver->getType();
   if (type == eI2C) {
     auto driverDRV2505L(
@@ -52,7 +52,7 @@ void ActuatorLRA::test() { this->m_driver->test(); }
 
 void ActuatorLRA::setDriver(std::shared_ptr<IActuatorDriver> driver) {
   this->m_driver = driver;
-  this->configureDriver();
+  this->configDriver();
 }
 
 ActuatorType ActuatorLRA::getType() { return this->m_type; }

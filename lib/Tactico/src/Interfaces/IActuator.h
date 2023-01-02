@@ -113,12 +113,12 @@ class IActuator {
    * @brief Trigger driver configuration.
    *
    */
-  virtual void configureDriver() = 0;
-  
+  virtual void configDriver() = 0;
+
   /**
    * @brief Get the object type (ActuatorType enum)
    *
-   * @return ActuatorType actuator's type
+   * @return ActuatorType
    */
   virtual ActuatorType getType() = 0;
 };

@@ -1,3 +1,5 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #include "HapticDevice.h"
 
 int HapticDevice::nextID = 0;
@@ -87,8 +89,8 @@ void HapticDevice::addAction(std::shared_ptr<Action> deviceAction,
   this->m_deviceActions[actionName] = deviceAction;
 }
 
-void HapticDevice::configureAction(std::string actionName) {
-  this->m_deviceActions[actionName]->configureAction();
+void HapticDevice::configure(std::string actionName) {
+  this->m_deviceActions[actionName]->configure();
 }
 
 void HapticDevice::configureAndPlayAction(std::string actionName) {

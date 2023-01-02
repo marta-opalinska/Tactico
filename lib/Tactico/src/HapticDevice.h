@@ -1,3 +1,5 @@
+/** Copyright 2022 <Marta Opalinska> **/
+
 #pragma once
 #include <Interfaces/IActuator.h>
 #include <SPI.h>
@@ -49,7 +51,7 @@ class HapticDevice {
       std::map<std::string, std::shared_ptr<Action>> additinalDeviceActions);
   void addAction(std::shared_ptr<Action> deviceAction, std::string actionName);
   void removeAction(std::string actionName);
-  void configureAction(std::string actionName);
+  void configure(std::string actionName);
   void playAction(std::string actionName);
   void configureAndPlayAction(std::string actionName);
   std::map<std::string, std::shared_ptr<Action>> getActions();

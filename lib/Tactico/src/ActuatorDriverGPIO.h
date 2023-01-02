@@ -6,9 +6,8 @@
 
 #include <memory>
 #include <string>
-// clang-format off
+
 #include "HardwareLayer.h"
-// clang-format on
 
 class IPattern;
 class PatternPWM;
@@ -16,24 +15,75 @@ class PatternPWM;
 /**
  * @class ActuatorDriverGPIO
  * @brief Class that stores information and methods for Actuator Driver
- * controlled using GPI pin
+ * controlled using GPI pin.
  * @implements IActuatorDriver
- * @param m_GPIO_pin GPIO pin of the assigned Actuator
  */
 class ActuatorDriverGPIO : public IActuatorDriver {
  protected:
+  /**
+   * GPIO pin to controll assigned Actuator
+   */
   int m_GPIO_pin;
+
+  /**
+   * Set m_GPIO_pin HIGH.
+   */
   void setGPIOHigh();
+
+  /**
+   * Set m_GPIO_pin LOW.
+   */
   void setGPIOLow();
 
  public:
+  /**
+   * @brief Construct a new Actuator Driver GPIO
+   *
+   * @param GPIO_pin pin to controll assigned Actuator
+   */
   explicit ActuatorDriverGPIO(int GPIO_pin);
   ActuatorDriverGPIO() = delete;
   ~ActuatorDriverGPIO() = default;
+
+  /**
+   * @brief Initiate the driver - GPIO pin
+   *
+   */
   void init();
+
+  /**
+   * @brief Play the pattern supported by the driver.
+   *
+   * @param pattern pattern to play
+   * @return true
+   * @return false
+   */
   bool play(std::shared_ptr<IPattern> pattern);
+
+  /**
+   * @brief Test the motor vibration.
+   *
+   */
   void test();
+
+  /**
+   * @brief Get the control GPIO pin
+   *
+   * @return int
+   */
   int getPin();
+
+  /**
+   * @brief Set the control GPIO pin
+   *
+   * @param new_GPIO GPIO pin
+   */
   void setPin(int new_GPIO);
+
+  /**
+   * @brief Get the ActuatorDriverType of the object
+   *
+   * @return ActuatorDriverType
+   */
   ActuatorDriverType getType();
 };

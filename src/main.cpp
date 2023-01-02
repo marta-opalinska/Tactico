@@ -134,7 +134,7 @@ void loop() {
     delay(5000);
     // test_ac->setSteps({s1a, s1b, s2, s4, s6, s8, s3});
     test_hand.addAction(test_ac, "test");
-    test_ac->configureAction();
+    test_ac->configure();
     std::shared_ptr<PatternDRV2605L> reset =
         std::make_shared<PatternDRV2605L>(48);
     // driver_2->setWaveform(0, p_2);

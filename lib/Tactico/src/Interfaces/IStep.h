@@ -52,7 +52,7 @@ class IStep {
   /**
    * @brief Get the StepType of the object
    *
-   * @return StepType type
+   * @return StepType
    */
   virtual StepType getType() = 0;
 };

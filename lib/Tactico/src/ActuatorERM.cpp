@@ -10,7 +10,7 @@ ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
     : IActuator(driver, ratedVoltage, overdriveVoltage, name) {
   this->id = ++nextID;
   this->m_type = eERM;
-  this->configureDriver();
+  this->configDriver();
 }
 
 ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
@@ -20,10 +20,10 @@ ActuatorERM::ActuatorERM(std::shared_ptr<IActuatorDriver> driver,
   this->m_name =
       std::string(ACTUATOR_ERM_DEFAULT_NAME).append(std::to_string(id));
   this->m_type = eERM;
-  this->configureDriver();
+  this->configDriver();
 }
 
-void ActuatorERM::configureDriver() {
+void ActuatorERM::configDriver() {
   ActuatorDriverType type = this->m_driver->getType();
   if (type == eI2C) {
     auto driverDRV2505L(
@@ -49,7 +49,7 @@ void ActuatorERM::test() { this->m_driver->test(); }
 
 void ActuatorERM::setDriver(std::shared_ptr<IActuatorDriver> driver) {
   this->m_driver = driver;
-  this->configureDriver();
+  this->configDriver();
 }
 
 ActuatorType ActuatorERM::getType() { return this->m_type; }

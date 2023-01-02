@@ -1,6 +1,6 @@
 /** Copyright 2022 <Marta Opalinska> **/
 
-// Dev board registers
+// DRV2605L evaluation board registers
 #ifndef LIB_TACTICO_SRC_DRV2605L_REG_H_
 
 #define LIB_TACTICO_SRC_DRV2605L_REG_H_
