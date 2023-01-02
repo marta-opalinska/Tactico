@@ -10,20 +10,20 @@
 #include "HardwareLayer.h"
 
 /**
- * @class WaitStepImpl
+ * @class WaitStep
  * @implements IStep
  * @brief Class that stores the wait time between two steps in the Action.
  * @param m_waitTime value of the wait in miliseconds
  *
  */
-class WaitStepImpl : public IStep {
+class WaitStep : public IStep {
  protected:
-  WaitStepImpl() = default;
+  WaitStep() = default;
 
  public:
   // tep() = default;
-  explicit WaitStepImpl(unsigned int miliseconds);
-  ~WaitStepImpl() = default;
+  explicit WaitStep(unsigned int miliseconds);
+  ~WaitStep() = default;
   unsigned int m_waitTime;
   void play();
   void printStep();

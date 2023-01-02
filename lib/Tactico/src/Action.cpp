@@ -6,7 +6,7 @@ Action::Action() { this->m_nextStepID = 0; }
 void Action::addStep(std::shared_ptr<IActuator> actuator,
                      std::shared_ptr<IPattern> pattern) {
   this->m_activitySteps.push_back(
-      std::make_shared<ActuatorStepImpl>(actuator, pattern));
+      std::make_shared<ActuatorStep>(actuator, pattern));
   // saving a vector of all the actator that are a part of this action
   this->m_actuators.insert(actuator);
   this->m_nextStepID++;
@@ -15,7 +15,7 @@ void Action::addStep(std::shared_ptr<IActuator> actuator,
 void Action::addStep(std::shared_ptr<IStep> step) {
 
   if (step->getType() == eActuatorStep) {
-    auto actuatorStep(std::static_pointer_cast<ActuatorStepImpl>(step));
+    auto actuatorStep(std::static_pointer_cast<ActuatorStep>(step));
     // saving a vector of all the actator that are a part of this action
     this->m_actuators.insert(actuatorStep->m_actuator);
   }
@@ -24,11 +24,11 @@ void Action::addStep(std::shared_ptr<IStep> step) {
 }
 
 void Action::addWait(int miliseconds) {
-  this->m_activitySteps.push_back(std::make_shared<WaitStepImpl>(miliseconds));
+  this->m_activitySteps.push_back(std::make_shared<WaitStep>(miliseconds));
   this->m_nextStepID++;
 }
 
-void Action::addWait(std::shared_ptr<WaitStepImpl> stepWait) {
+void Action::addWait(std::shared_ptr<WaitStep> stepWait) {
   this->m_activitySteps.push_back(stepWait);
   this->m_nextStepID++;
 }
@@ -47,7 +47,7 @@ void Action::setSteps(std::vector<std::shared_ptr<IStep>> activitySteps) {
   this->m_activitySteps = activitySteps;
   for (auto step : activitySteps) {
     if (step->getType() == eActuatorStep) {
-      auto actuatorStep(std::static_pointer_cast<ActuatorStepImpl>(step));
+      auto actuatorStep(std::static_pointer_cast<ActuatorStep>(step));
       // saving a vector of all the actator that are a part of this action
       this->m_actuators.insert(actuatorStep->m_actuator);
     }
@@ -123,7 +123,7 @@ void Action::configureAction() {
 
     switch (step->getType()) {
       case eActuatorStep: {
-        auto actuatorStep(std::static_pointer_cast<ActuatorStepImpl>(step));
+        auto actuatorStep(std::static_pointer_cast<ActuatorStep>(step));
         auto actuatorDriver = actuatorStep->m_actuator->getDriver();
         // checking if actuator needs to be preconfigured for an action
         if (actuatorDriver->m_needsPreconfigration) {
@@ -153,7 +153,7 @@ void Action::configureAction() {
         break;
       }
       case eWaitStep: {
-        auto waitStep(std::static_pointer_cast<WaitStepImpl>(step));
+        auto waitStep(std::static_pointer_cast<WaitStep>(step));
         for (auto actuator : this->m_actuators) {
           actuatorsConfigData[actuator].timeFromLastPattern +=
               waitStep->m_waitTime;

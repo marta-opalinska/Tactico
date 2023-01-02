@@ -20,15 +20,15 @@
  * @param m_actuator actuator that the action is assigned to
  *
  */
-class ActuatorStepImpl : public IStep {
+class ActuatorStep : public IStep {
  protected:
-  ActuatorStepImpl() = default;
+  ActuatorStep() = default;
 
  public:
   // tep() = default;
-  ActuatorStepImpl(std::shared_ptr<IActuator> actuator,
+  ActuatorStep(std::shared_ptr<IActuator> actuator,
                    std::shared_ptr<IPattern> pattern);
-  ~ActuatorStepImpl() = default;
+  ~ActuatorStep() = default;
   std::shared_ptr<IActuator> m_actuator;
   std::shared_ptr<IPattern> m_pattern;
   void play();

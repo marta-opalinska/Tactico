@@ -14,14 +14,12 @@
 #include "ActuatorStep.h"
 #include "WaitStep.h"
 
-// the limit of DRV2605L driver when it comes to the steps saving
-#define MAX_STEPS 13
-
 /**
- * @brief
+ * @brief Structure for actiator configuation data. It contains the time (in
+ * miliseconds) that passed from the last time the actuator was configured with
+ * play pattern (needed for waitTime preconfiguration) and the latest used actuators patttern slot.
  *
  */
-
 typedef struct {
   // the time (in miliseconds) passed from the last time the actuator was
   // configured with play pattern (needed for waitTime preconfiguration)
@@ -35,7 +33,7 @@ typedef struct {
  * @brief Class that can store multistep activity that can be performed on
  * multiple actuators
  * @details There are two typed of steps that an action can consist of :
- * WaitStepImpl (delay between two actions) and StepStepActuator (action that is
+ * WaitStep (delay between two actions) and StepStepActuator (action that is
  * performed on a specific Actuator)
  * @param m_activitySteps vector of steps that belongs to the activity.
  * @param m_actuators list of all the actuators that are in the action
@@ -62,7 +60,7 @@ class Action {
                std::shared_ptr<IPattern> pattern);
   void addStep(std::shared_ptr<IStep> step);
   void addWait(int miliseconds);
-  void addWait(std::shared_ptr<WaitStepImpl> stepWait);
+  void addWait(std::shared_ptr<WaitStep> stepWait);
   std::vector<std::shared_ptr<IStep>> getSteps();
   void setSteps(std::vector<std::shared_ptr<IStep>> activitySteps);
   void configureAction();

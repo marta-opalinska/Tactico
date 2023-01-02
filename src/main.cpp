@@ -95,36 +95,36 @@ void loop() {
     // ac_5->test();
     // delay(2000);
 
-    std::shared_ptr<ActuatorStepImpl> s1a =
-        std::make_shared<ActuatorStepImpl>(ac_2, p_2);
-    std::shared_ptr<ActuatorStepImpl> s1b =
-        std::make_shared<ActuatorStepImpl>(ac_3, p_2);
-    std::shared_ptr<ActuatorStepImpl> s1c =
-        std::make_shared<ActuatorStepImpl>(ac_4, p_2);
-    std::shared_ptr<ActuatorStepImpl> s1d =
-        std::make_shared<ActuatorStepImpl>(ac_5, p_2);
+    std::shared_ptr<ActuatorStep> s1a =
+        std::make_shared<ActuatorStep>(ac_2, p_2);
+    std::shared_ptr<ActuatorStep> s1b =
+        std::make_shared<ActuatorStep>(ac_3, p_2);
+    std::shared_ptr<ActuatorStep> s1c =
+        std::make_shared<ActuatorStep>(ac_4, p_2);
+    std::shared_ptr<ActuatorStep> s1d =
+        std::make_shared<ActuatorStep>(ac_5, p_2);
 
-    std::shared_ptr<WaitStepImpl> s2 = std::make_shared<WaitStepImpl>(250);
+    std::shared_ptr<WaitStep> s2 = std::make_shared<WaitStep>(250);
 
-    std::shared_ptr<ActuatorStepImpl> s3 =
-        std::make_shared<ActuatorStepImpl>(ac_2, p_2);
+    std::shared_ptr<ActuatorStep> s3 =
+        std::make_shared<ActuatorStep>(ac_2, p_2);
 
-    std::shared_ptr<WaitStepImpl> s4 = std::make_shared<WaitStepImpl>(250);
+    std::shared_ptr<WaitStep> s4 = std::make_shared<WaitStep>(250);
 
-    std::shared_ptr<ActuatorStepImpl> s5 =
-        std::make_shared<ActuatorStepImpl>(ac_3, p_2);
+    std::shared_ptr<ActuatorStep> s5 =
+        std::make_shared<ActuatorStep>(ac_3, p_2);
 
-    std::shared_ptr<WaitStepImpl> s6 = std::make_shared<WaitStepImpl>(250);
+    std::shared_ptr<WaitStep> s6 = std::make_shared<WaitStep>(250);
 
-    std::shared_ptr<ActuatorStepImpl> s7 =
-        std::make_shared<ActuatorStepImpl>(ac_4, p_2);
+    std::shared_ptr<ActuatorStep> s7 =
+        std::make_shared<ActuatorStep>(ac_4, p_2);
 
-    std::shared_ptr<WaitStepImpl> s8 = std::make_shared<WaitStepImpl>(250);
+    std::shared_ptr<WaitStep> s8 = std::make_shared<WaitStep>(250);
 
-    std::shared_ptr<ActuatorStepImpl> s9 =
-        std::make_shared<ActuatorStepImpl>(ac_5, p_2);
+    std::shared_ptr<ActuatorStep> s9 =
+        std::make_shared<ActuatorStep>(ac_5, p_2);
 
-    std::shared_ptr<WaitStepImpl> s10 = std::make_shared<WaitStepImpl>(1000);
+    std::shared_ptr<WaitStep> s10 = std::make_shared<WaitStep>(1000);
 
     std::shared_ptr<Action> test_ac = std::make_shared<Action>();
 
@@ -182,11 +182,11 @@ void loop() {
     // driver_5->play(p_2);
 
     // std::shared_ptr<IPattern> p_2 = std::make_shared<PatternPWM>(mod_2);
-    // std::shared_ptr<ActuatorStepImpl> s1 =
-    //     std::make_shared<ActuatorStepImpl>(ac_1, p_1);
-    // std::shared_ptr<WaitStepImpl> s2 = std::make_shared<WaitStepImpl>(1500);
-    // std::shared_ptr<ActuatorStepImpl> s3 =
-    //     std::make_shared<ActuatorStepImpl>(ac_1, p_1);
+    // std::shared_ptr<ActuatorStep> s1 =
+    //     std::make_shared<ActuatorStep>(ac_1, p_1);
+    // std::shared_ptr<WaitStep> s2 = std::make_shared<WaitStep>(1500);
+    // std::shared_ptr<ActuatorStep> s3 =
+    //     std::make_shared<ActuatorStep>(ac_1, p_1);
 
     // a_left->addStep(s1);
     // a_left->addStep(s2);

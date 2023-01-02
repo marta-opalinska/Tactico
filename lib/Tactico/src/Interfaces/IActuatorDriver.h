@@ -3,30 +3,33 @@
 #pragma once
 #include <memory>
 
+#include "HardwareLayer.h"
 #include "Interfaces/IPattern.h"
 
-// clang-format off
-#include "HardwareLayer.h"
-// clang-format on
-
 /**
- * @interface IActuatorDriver
- * @brief Interface for actuator driver - the interface is implemented by the
- * ActuatorDriverGPIO class
+ * @brief Enum of the possible actuator's driver types. It is used for driver
+ * specific methods.
  *
  */
 enum ActuatorDriverType { eGPIO, eI2C, eDRV2505L_EVBOARD };
 
+/**
+ * @interface IActuatorDriver
+ * @brief Interface for actuator driver - the interface is implemented by the
+ * ActuatorDriverGPIO, ActuatorDriverI2C and ActuatorDriverDRV2605LEVM classes
+ *
+ */
 class IActuatorDriver {
  protected:
+  /**
+   * actuator's driver type based on enum ActuatorDriverType
+   */
   ActuatorDriverType m_type;
 
  public:
   /**
-   * @param m_needsPreconfigration defines if the driver needs to be
-   * preonfigured before the action can be played e.g. by sending the pattern
-   * before hitting GO.
-   *
+   * defines if the driver needs to be preconfigured before the action can be
+   * played e.g. by sending the pattern before hitting GO.
    */
   bool m_needsPreconfigration;
   /**
@@ -36,24 +39,24 @@ class IActuatorDriver {
   virtual void init() = 0;
 
   /**
-   * @brief Sends signal to the assigned interface to play a Pattern.
+   * @brief Play a pattern
    *
+   * @param pattern shared pointer to the implementation of a Pattern instance
+   * @return true
+   * @return false
    */
-
   virtual bool play(std::shared_ptr<IPattern> pattern) = 0;
+
   /**
-   * @brief Sends signal to the assigned interface object to stop it.
+   * @brief Driver testing.
    *
    */
-
   virtual void test() = 0;
 
+  /**
+   * @brief Get the driver's type
+   *
+   * @return ActuatorDriverType driver's type
+   */
   virtual ActuatorDriverType getType() = 0;
-
-  // /**
-  //  * @brief Sends signal to play a specific pattern
-  //  *
-  //  * @param pattern pattern to play
-  //  */
-  // virtual void play(std::shared_ptr<IPattern> pattern) = 0;
 };

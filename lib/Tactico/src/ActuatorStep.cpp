@@ -2,7 +2,7 @@
 
 #include "ActuatorStep.h"
 
-ActuatorStepImpl::ActuatorStepImpl(std::shared_ptr<IActuator> actuator,
+ActuatorStep::ActuatorStep(std::shared_ptr<IActuator> actuator,
                                    std::shared_ptr<IPattern> pattern)
     : m_actuator(actuator), m_pattern(pattern) {
   this->m_type = eActuatorStep;
@@ -10,9 +10,9 @@ ActuatorStepImpl::ActuatorStepImpl(std::shared_ptr<IActuator> actuator,
       this->m_actuator->getDriver()->m_needsPreconfigration;
 }
 
-void ActuatorStepImpl::play() { this->m_actuator->play(this->m_pattern); }
+void ActuatorStep::play() { this->m_actuator->play(this->m_pattern); }
 
-void ActuatorStepImpl::printStep() {
+void ActuatorStep::printStep() {
   std::string s = "STEP: ";
   s.append(this->m_actuator->m_name);
   s.append(": ");
@@ -21,4 +21,4 @@ void ActuatorStepImpl::printStep() {
   printTactico(s);
 }
 
-StepType ActuatorStepImpl::getType() { return this->m_type; }
+StepType ActuatorStep::getType() { return this->m_type; }

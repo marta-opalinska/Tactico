@@ -2,14 +2,14 @@
 
 #include "WaitStep.h"
 
-WaitStepImpl::WaitStepImpl(unsigned int miliseconds) : m_waitTime(miliseconds) {
+WaitStep::WaitStep(unsigned int miliseconds) : m_waitTime(miliseconds) {
   this->m_type = eWaitStep;
   this->m_needsPreconfigration = false;
 }
 
-void WaitStepImpl::play() { waitFor(this->m_waitTime); }
+void WaitStep::play() { waitFor(this->m_waitTime); }
 
-void WaitStepImpl::printStep() {
+void WaitStep::printStep() {
   std::string s = "STEP: ";
   s.append("Wait for : ");
   s.append(": ");
@@ -17,4 +17,4 @@ void WaitStepImpl::printStep() {
   s.append("\n");
   printTactico(s);
 }
-StepType WaitStepImpl::getType() { return this->m_type; }
+StepType WaitStep::getType() { return this->m_type; }
