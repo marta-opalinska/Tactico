@@ -36,7 +36,7 @@ class IPattern {
   /**
    * @brief Pattern converted to string (helpful for serial output)
    *
-   * @return std::string saved pattern as a string
+   * @return std::string
    */
   virtual std::string patternToString() = 0;
 

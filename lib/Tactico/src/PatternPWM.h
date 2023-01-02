@@ -7,15 +7,15 @@
 #include <string>
 #include <vector>
 
-#include "Tactico.h"
-// clang-format off
 #include "HardwareLayer.h"
-// clang-format on
+#include "Tactico.h"
 
 /**
  * @brief Structure for PWM modulation
  * @details The structure consist of the duration of the pulse and if the signal
  * state (if is ON or OFF)
+ * @param duration duration of the pulse
+ * @param isOn flag defining if the state is ON or OFF
  *
  */
 struct ModulationPWM {
@@ -25,22 +25,51 @@ struct ModulationPWM {
 
 /**
  * @class PatternPWM
- * @brief
- * @param m_modulation_sequence vector or modulation sequence
- *
+ * @implements IPattern
+ * @brief Class that stores the Pulse Width Mudulation pattern (effect) that can
+ * be applied to the actuator that support this type of driver.
  */
 class PatternPWM : public IPattern {
  private:
   PatternPWM() = default;
 
  public:
-  // applyPatternPWM(Actuator actuator)
+  /**
+   * vector of modulation sequence
+   */
   std::vector<ModulationPWM> m_modulation_sequence;
+  /**
+   * @brief Construct a new PWM pattern
+   *
+   * @param switching_modulation PWM switching modulation made from
+   * ModulationPWM structure
+   */
   explicit PatternPWM(std::vector<ModulationPWM> switching_modulation);
-  void setModulation(std::vector<ModulationPWM> switching_modulation);
-  // void play(std::shared_ptr<IActuator> ac);
-  void init();
-  std::string patternToString();
-  PatternType getType();
   ~PatternPWM() = default;
+
+  /**
+   * @brief Set the Modulation object
+   *
+   * @param switching_modulation
+   */
+  void setModulation(std::vector<ModulationPWM> switching_modulation);
+
+  /**
+   * @brief Initiate the pattern
+   */
+  void init();
+
+  /**
+   * @brief Pattern converted to string (helpful for serial output)
+   *
+   * @return std::string
+   */
+  std::string patternToString();
+
+  /**
+   * @brief Get the PatternType object
+   *
+   * @return PatternType
+   */
+  PatternType getType();
 };

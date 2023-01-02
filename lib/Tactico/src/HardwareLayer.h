@@ -26,19 +26,6 @@
 #define DRV2605L_adr 0x5A
 #define CONF_IO_REG 0x03
 #define OUT_CHANNEL_REG 0x01
-// clang-format on
-
-// typedef enum PinStatusTactico
-// {
-//     LOW,
-//     HIGH
-// };
-
-// typedef enum PinModeTactico
-// {
-//     INPUT = 0x0,
-//     OUTPUT = 0x1
-// };
 
 /**
  * @brief Implements hardware wait/delay function
@@ -54,14 +41,14 @@ void waitFor(int miliseconds);
  */
 void printTactico(const std::string s);
 
+//**************** COMMANDS NECCESSARY FOR GPIO CONNECTION
+
 /**
  * @brief Implements hardware pin status setting
  *
  * @param pinNumber pin number
  * @param pinStatus expected pin status
  */
-
-// COMMANDS NECCESSARY FOR GPIO CONNECTION
 void setPinStatusTactico(const int pinNumber, int pinStatus);
 
 /**
@@ -72,11 +59,10 @@ void setPinStatusTactico(const int pinNumber, int pinStatus);
  */
 void setPinModeTactico(const int pinNumber, int pinModeStatus);
 
-// COMMANDS NECESSAY FOR I2C CONNECTION
+//**************** COMMANDS NECESSAY FOR I2C CONNECTION
 
 /**
  * @brief Enables the I2C hardware
-
  *
  */
 void i2c_begin();

@@ -30,10 +30,6 @@ HapticDevice::HapticDevice(std::shared_ptr<IActuator> signleActuator,
   }
 }
 
-void HapticDevice::renameDevice(const std::string &name) {
-  this->m_name = name;
-}
-
 void HapticDevice::addActuator(std::shared_ptr<IActuator> actuator) {
   this->m_actuatorsList.push_back(actuator);
 }
@@ -70,6 +66,8 @@ void HapticDevice::removeActuator(const std::string &name) {
   }
 }
 
+
+
 // Provides a list of actuators that are a part of the haptics device
 std::vector<std::shared_ptr<IActuator>> HapticDevice::getActuatorsList() {
   return this->m_actuatorsList;
@@ -79,9 +77,8 @@ std::vector<std::shared_ptr<IActuator>> HapticDevice::getActuatorsList() {
 void HapticDevice::clearActuatorsList() { this->m_actuatorsList.clear(); }
 
 void HapticDevice::addActions(
-    std::map<std::string, std::shared_ptr<Action>> additinalDeviceActions) {
-  this->m_deviceActions.insert(additinalDeviceActions.begin(),
-                               additinalDeviceActions.end());
+    std::map<std::string, std::shared_ptr<Action>> deviceActions) {
+  this->m_deviceActions.insert(deviceActions.begin(), deviceActions.end());
 }
 
 void HapticDevice::addAction(std::shared_ptr<Action> deviceAction,

@@ -38,13 +38,13 @@ class IStep {
    */
   bool m_needsPreconfigration;
   /**
-   * @brief play the step
+   * @brief Play the step.
    *
    */
   virtual void play() = 0;
 
   /**
-   * @brief print the step to the serial port
+   * @brief Print the step in the serial port (as String)
    *
    */
   virtual void printStep() = 0;

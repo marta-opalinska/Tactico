@@ -50,7 +50,7 @@ class ActuatorStep : public IStep {
   void play();
 
   /**
-   * @brief Print the Step in Serial port as a String
+   * @brief Print the step in the serial port (as String)
    *
    */
   void printStep();
