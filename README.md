@@ -30,15 +30,18 @@ As you could see on the above diagram there are multiple classes involved in the
 ### Actuator
 
 ![image info](./documentation/actuator_class.png)
-*Fig.1. An example of an actuator alongside the infomration from the datasheet that will be needed for the implementation.*
+*Fig.2. An example of an actuator alongside the infomration from the datasheet that will be needed for the implementation.*
 
 **Actuator** class is the center point of the framework - it can be consider as a digital twin of the physical actuator. All the most important properties of an actuator need to be defined in the object of this class - **type** (LRA, ERM etc.), **rated voltage**, **peak voltage**, **resonant frequency** (for LRA) and an **Actuator Driver** instance that controls it.  
 
 Currently two types of Actuators can be created - **ActuatorERM** and **ActuatorLRA**. They share most of the properties but they also have some specific ones. It is important to check which actuator you use so that the Actuator Driver is compatable with it (the driver can work differently depending on the actuator type).
 
 ### Actuator Driver
-Need to mention Hardware Layer file
 
+![image info](./documentation/driver_class.png)
+*Fig.3. Currently supported drivers.*
+
+**Actuator Driver** class defines the way how the motor is performing a haptic effect.
 
 **Hardware Layer**
 
