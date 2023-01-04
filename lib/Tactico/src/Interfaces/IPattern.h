@@ -6,7 +6,7 @@
 
 #include "IActuator.h"
 
-class IActuator;
+// class IActuator;
 
 /**
  * @brief Enum of the possible pattern types. It is used for pattern specific
