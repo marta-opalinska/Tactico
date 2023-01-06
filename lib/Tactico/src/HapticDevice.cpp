@@ -96,7 +96,7 @@ void HapticDevice::configure(std::string actionName) {
 void HapticDevice::configureAndPlayAction(std::string actionName) {
   // checking if an action exists
   if (m_deviceActions.count(actionName)) {
-    this->m_deviceActions[actionName]->ConfigureAndPlay();
+    this->m_deviceActions[actionName]->configureAndPlay();
   } else {
     printTactico("WARNING: Action not found \n");
   }

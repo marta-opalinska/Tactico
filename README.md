@@ -64,16 +64,24 @@ Currently two types of Actuators can be created - **ActuatorERM** and **Actuator
 
 **GPIO Driver**
 
-This is the type of a simple driver where the motor is connected to a single GPIO output and controlled using **Pulse Width Modulation Pattern**. To use this driver the following functions from **HardwareLayer** need to be implemented: waitFor, printTactico, setPinStatusTactico and setPinModeTactico from (more about it [here](#before-you-start)). 
+This is the type of a simple driver where the motor is connected to a single GPIO output and controlled using **Pulse Width Modulation Pattern**. To use this driver the following functions from **HardwareLayer.cpp** need to be implemented: waitFor, printTactico, setPinStatusTactico and setPinModeTactico from (more about it [here](#before-you-start)). 
 
 **DRV2605LEVM-MD**
 
+This type of the driver **requires I2C communication** - connection of three pins (CLC, SDA and GND), as well as implementation of I2C related commands in **HardwareLayer.cpp** file (more about it [here](#before-you-start)). In this particular class there is a forth hardware connection needed - GPIO **"GO" pin** that will trigger the haptic effect. 
+
+**ActuatorDriverDRV2605LEVM** uses the DRV2605L list of registers (specified in **DRV2605L_REG.h**) and the list of haptic effects (**DRV2605L_EFFECTS.h**). 
+
+This type od actuator driver **need preconfiguration** before any haptic effect is played! The preconfiguration allows the user to store an effect sequence in the physical DRV2605L driver's memory and play it when the "GO" pin is triggered ("GO" pin need to go HIGH). 
+
+Therefore, when this type of actuator is used as a part of the **Action** class instance, **configure() function need to be called before play()** (or configureAndPlay() which triggers the configuration and then the play of an Action). The advantage of the preconfiguration is that in this way Action Steps can be triggered in parallel (more about it [here](#action)). 
 
 ### Pattern & Step
 
 ![image info](./documentation/pattern_step_class.png)
 *Fig.4. Haptic Pattern and Step classes.*
 
+**Pattern**
 
 PWM Pattern and DRV2605L pattern type
 

@@ -180,5 +180,5 @@ class Action {
    * set up and plays the action.
    *
    */
-  void ConfigureAndPlay();
+  void configureAndPlay();
 };

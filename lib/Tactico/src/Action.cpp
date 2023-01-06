@@ -202,7 +202,7 @@ void Action::play() {
   }
 }
 
-void Action::ConfigureAndPlay() {
+void Action::configureAndPlay() {
   this->resetPreviousConfiguration();
   this->configure();
   this->play();

@@ -143,7 +143,7 @@ void loop() {
 
     // test_hand.configureAndPlayAction("test");
 
-    // test_ac->ConfigureAndPlay();
+    // test_ac->configureAndPlay();
 
     // driver_4->play(p_2);
 
