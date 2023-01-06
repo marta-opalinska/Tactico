@@ -8,13 +8,9 @@
 #include <memory>
 #include <vector>
 
-// #include <iostream>
-// #include "Framework/ActuatorDriverGPIO.h"
-// #include "Framework/Actuator.h"
-// #include <string.h>
-// #include <string>
-// #undef min
-// #undef max
+#define ARDUINNO_NANO_RED 22
+#define ARDUINNO_NANO_BLUE 24
+#define ARDUINNO_NANO_GREEN 23
 
 #include <Arduino.h>
 // #undef min
@@ -37,7 +33,7 @@ void setup() {
 
 void loop() {
   if (!setupDone) {
-    int driverPin1 = 2;
+    int driverPin1 = ARDUINNO_NANO_RED;
     // driverPin1 = PIN_BUTTON1;
     // driverPin1 = 22;
     // int driverPin2 = 2;
@@ -53,7 +49,7 @@ void loop() {
     std::shared_ptr<Action> a_left = std::make_shared<Action>();
     std::shared_ptr<Action> a_right = std::make_shared<Action>();
     std::vector<ModulationPWM> mod_1 = {
-        {300, true}, {200, false}, {100, true}, {50, false}, {50, true}};
+        {100, true}, {50, false}, {40, true}, {30, false}, {20, true}};
     // std::vector<ModulationPWM> mod_2 = {{200, false}};
     std::shared_ptr<PatternPWM> p_1 = std::make_shared<PatternPWM>(mod_1);
 
@@ -64,71 +60,50 @@ void loop() {
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(0, driverGoPin2);
     std::shared_ptr<ActuatorLRA> ac_2 =
-        std::make_shared<ActuatorLRA>(driver_2, 2.5, 2.7, 100, "myLRA");
+        std::make_shared<ActuatorLRA>(driver_2, 2.5, 2.7, 170, "myLRA");
 
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_3 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(1, driverGoPin2);
-    std::shared_ptr<ActuatorLRA> ac_3 =
-        std::make_shared<ActuatorLRA>(driver_3, 2.5, 2.7, 100, "myLRA_2");
+    std::shared_ptr<ActuatorERM> ac_3 =
+        std::make_shared<ActuatorERM>(driver_3, 2, 2.5, "myERM");
 
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_4 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(2, driverGoPin2);
-    std::shared_ptr<ActuatorERM> ac_4 =
-        std::make_shared<ActuatorERM>(driver_4, 2, 2.5, "myERM");
+    std::shared_ptr<ActuatorLRA> ac_4 =
+        std::make_shared<ActuatorLRA>(driver_4, 3.0, 3.2, 220, "myLRA_2");
 
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_5 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(3, driverGoPin2);
     std::shared_ptr<ActuatorERM> ac_5 =
-        std::make_shared<ActuatorERM>(driver_5, 3, 3.2, "myERM_2");
+        std::make_shared<ActuatorERM>(driver_5, 2, 2.5, "myERM_2");
 
     std::shared_ptr<PatternDRV2605L> p_2 =
         std::make_shared<PatternDRV2605L>(47);
 
     HapticDevice test_hand({ac_1, ac_2, ac_3, ac_4, ac_5});
 
-    // ac_2->test();
-    // delay(2000);
-    // ac_3->test();
-    // delay(2000);
-    // ac_4->test();
-    // delay(2000);
-    // ac_5->test();
-    // delay(2000);
+    test_hand.testActuators();
 
-    std::shared_ptr<ActuatorStep> s1a =
+    setPinStatusTactico(driverPin1, HIGH);
+
+    std::shared_ptr<ActuatorStep> s_ac2 =
         std::make_shared<ActuatorStep>(ac_2, p_2);
-    std::shared_ptr<ActuatorStep> s1b =
+    std::shared_ptr<ActuatorStep> s_ac3 =
         std::make_shared<ActuatorStep>(ac_3, p_2);
-    std::shared_ptr<ActuatorStep> s1c =
+    std::shared_ptr<ActuatorStep> s_ac4 =
         std::make_shared<ActuatorStep>(ac_4, p_2);
-    std::shared_ptr<ActuatorStep> s1d =
+    std::shared_ptr<ActuatorStep> s_ac5 =
         std::make_shared<ActuatorStep>(ac_5, p_2);
 
-    std::shared_ptr<WaitStep> s2 = std::make_shared<WaitStep>(250);
+    std::shared_ptr<ActuatorStep> s_PWM =
+        std::make_shared<ActuatorStep>(ac_1, p_1);
 
-    std::shared_ptr<ActuatorStep> s3 =
-        std::make_shared<ActuatorStep>(ac_2, p_2);
-
-    std::shared_ptr<WaitStep> s4 = std::make_shared<WaitStep>(250);
-
-    std::shared_ptr<ActuatorStep> s5 =
-        std::make_shared<ActuatorStep>(ac_3, p_2);
-
-    std::shared_ptr<WaitStep> s6 = std::make_shared<WaitStep>(250);
-
-    std::shared_ptr<ActuatorStep> s7 =
-        std::make_shared<ActuatorStep>(ac_4, p_2);
-
-    std::shared_ptr<WaitStep> s8 = std::make_shared<WaitStep>(250);
-
-    std::shared_ptr<ActuatorStep> s9 =
-        std::make_shared<ActuatorStep>(ac_5, p_2);
-
-    std::shared_ptr<WaitStep> s10 = std::make_shared<WaitStep>(1000);
+    std::shared_ptr<WaitStep> s_wait = std::make_shared<WaitStep>(250);
 
     std::shared_ptr<Action> test_ac = std::make_shared<Action>();
 
-    test_ac->setSteps({s1a, s1b, s1c, s1d, s2, s3, s4, s5, s6, s7, s8, s9});
+    test_ac->setSteps({s_PWM, s_ac2, s_ac3, s_ac4, s_ac5, s_wait, s_ac2, s_wait, s_ac3,
+                       s_wait, s_ac4, s_wait, s_ac5, s_PWM});
 
     // test_ac->setSteps({s1a, s2, s4, s6, s8, s3});
     delay(5000);
@@ -141,13 +116,6 @@ void loop() {
     // driver_2->setWait(1, 1000);
     // driver_2->setWaveform(2, p_2);
     // driver_2->setWaveform(3, reset);
-
-    digitalWrite(driverGoPin2, HIGH);
-
-    delay(50);
-
-    digitalWrite(driverGoPin2, LOW);
-
     delay(5000);
 
     test_ac->play();

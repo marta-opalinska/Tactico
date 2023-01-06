@@ -41,19 +41,22 @@ Currently two types of Actuators can be created - **ActuatorERM** and **Actuator
 ![image info](./documentation/driver_class.png)
 *Fig.3. Currently supported drivers.*
 
-**Actuator Driver** class defines the way how the motor is performing a haptic effect.
+**Actuator Driver** class defines the way in which the motor is performing a haptic effect.
 
 **Hardware Layer**
 
 it ties the software with physical devices. 
-### Pattern
+### Pattern & Step
 
 PWM Pattern and DRV2605L pattern type
-### Step
+
+**Step**
+
 Indivitudual activation of the actuator or wait command.
 
 ### Action
 
+**Action**
 Combines steps
 
 ### Haptic Device

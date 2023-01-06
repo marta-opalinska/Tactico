@@ -89,12 +89,18 @@ bool ActuatorDriverDRV2605LEVM::setWait(int slotNumber, int miliseconds) {
     this->connectToMotor();
     wait_for_motor_available();
     // the wait time need to be setup in 7 bits - therefore the register value
-    // is need to be capped at 127
+    // is need to be capped at 127 (MAX_WAIT_TIME_PER_SLOT)
+    if (miliseconds*10 > MAX_WAIT_TIME_PER_SLOT) {
+      printTactico("WARNING: Wait time for the actuator DRV2605L driver id ");
+      printTactico(std::to_string(m_driverID));
+      printTactico("need to be capped at 1270ms per slot!\n");
+    }
+
     int milisecondsCapped = static_cast<int>(
-        static_cast<int>(miliseconds * WAIT_BETWEEN_EFFECTS_MULTIPLIER) % 127);
+        static_cast<int>(miliseconds * WAIT_BETWEEN_EFFECTS_MULTIPLIER) % MAX_WAIT_TIME_PER_SLOT);
     int timeToSend = WAIT_EFFECT_MSB + milisecondsCapped;
     Serial.println((String) "Configurating Wait. Slot: " + slotNumber +
-                   ", time: " + miliseconds);
+                   ", time: " + milisecondsCapped*10);
     this->writeRegister(DRV2605_REG_WAVESEQ1 + slotNumber, timeToSend);
     return true;
   }

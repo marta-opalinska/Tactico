@@ -111,6 +111,7 @@ void HapticDevice::clearActions() { this->m_deviceActions.clear(); }
 void HapticDevice::testActuators() {
   for (auto &ac : m_actuatorsList) {
     ac->test();
+    waitFor(1000);
   }
 }
 

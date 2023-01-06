@@ -11,6 +11,8 @@
 #include "HardwareLayer.h"
 #include "PatternDRV2605L.h"
 
+#define MAX_WAIT_TIME_PER_SLOT 127
+
 class PatternDRV2605L;
 
 /**
@@ -23,6 +25,7 @@ class PatternDRV2605L;
  * @implements ActuatorDriverI2C
  *
  */
+
 class ActuatorDriverDRV2605LEVM : public ActuatorDriverI2C {
  protected:
   /**

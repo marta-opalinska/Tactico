@@ -37,11 +37,6 @@ class IStep {
    * GO
    */
   bool m_needsPreconfigration;
-  /**
-   * @brief Play the step.
-   *
-   */
-  virtual void play() = 0;
 
   /**
    * @brief Print the step in the serial port (as String)

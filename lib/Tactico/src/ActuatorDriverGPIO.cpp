@@ -55,15 +55,15 @@ bool ActuatorDriverGPIO::play(std::shared_ptr<IPattern> pattern) {
 
 void ActuatorDriverGPIO::test() {
   this->setGPIOHigh();
-  waitFor(150);
+  waitFor(50);
   this->setGPIOLow();
-  waitFor(150);
+  waitFor(50);
   this->setGPIOHigh();
-  waitFor(150);
+  waitFor(50);
   this->setGPIOLow();
-  waitFor(150);
+  waitFor(50);
   this->setGPIOHigh();
-  waitFor(150);
+  waitFor(50);
   this->setGPIOLow();
 }
 
