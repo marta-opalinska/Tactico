@@ -155,7 +155,7 @@ void Action::configure() {
               break;
             }
             actuatorsConfigData[actuator].timeFromLastPattern +=
-                actuatorStep->m_pattern->getPatternTime();
+                actuatorStep->m_pattern->getPatternDuration();
           }
         }
         break;

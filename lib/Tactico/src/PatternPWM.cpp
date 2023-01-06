@@ -37,7 +37,7 @@ std::string PatternPWM::patternToString() {
   return s;
 }
 
-int PatternPWM::getPatternTime() {
+int PatternPWM::getPatternDuration() {
   int total_time = 0;
   for (auto modulation : this->m_modulation_sequence) {
     total_time += modulation.duration;

@@ -46,7 +46,7 @@ class IPattern {
    *
    * @return int
    */
-  virtual int getPatternTime() = 0;
+  virtual int getPatternDuration() = 0;
 
   /**
    * @brief Get the PatternType of the object

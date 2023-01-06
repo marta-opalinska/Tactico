@@ -90,7 +90,7 @@ void i2c_write_reg(int address, int registerAddress, int data);
  * @param registerAddress address of the register you wish to access
  */
 
-void i2c_write(int address, int reg);
+// void i2c_write(int address, int reg);
 
 /**
  * @brief Initiate an I2C transmission ending process.

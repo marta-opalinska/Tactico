@@ -21,7 +21,7 @@ std::string PatternDRV2605L::patternToString() {
   return s;
 }
 
-int PatternDRV2605L::getPatternTime() { return m_patternDuration; }
+int PatternDRV2605L::getPatternDuration() { return m_patternDuration; }
 
 PatternType PatternDRV2605L::getType() { return this->m_type; }
 

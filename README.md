@@ -18,10 +18,24 @@ Tactico is a **haptics framework for embedded devices**. It supports multiple em
 
 **Actuator’s Drivers**: DRV2605LEVM-MD, GPIO Driver thorugh Pulse-Width modulation(PWM)
 
+# Bofore you start
+
+Remember that the platform is **hardware agnostic** so there are some function that you as a user need to implement in order for the framework to work correctly.
+
+Functions to implement are placed in **Tactico\src\HardwareLayer.cpp**:
+
+- void i2c_begin()
+- void i2c_write_reg(int address, int reg, int data)
+- void i2c_write(int address, int reg)
+void i2c_endTransmission()
+- int i2c_read(int address, int reg, int numberBytes)
+
 # Framework Architecture
 
 ![image info](./documentation/class_diagram_with_categories.png)
 *Fig.1. A detailed view of the framework architecture.*
+
+The detailed code documentation can be found in ***documentation\html\index.html***. In there you will find all classes with their methords and fields thoroughly explained. 
 
 ## Classes
 
@@ -41,7 +55,10 @@ Currently two types of Actuators can be created - **ActuatorERM** and **Actuator
 ![image info](./documentation/driver_class.png)
 *Fig.3. Currently supported drivers.*
 
-**Actuator Driver** class defines the way in which the motor is performing a haptic effect.
+**Actuator Driver** class defines the way in which the motor is performing a haptic effect. Currently there are user can choose from two available drivers - simple GPIO driver and driver on DRV2605LEVM-MD.
+
+**GPIO Driver**
+This is the type of a simple driver where the 
 
 **Hardware Layer**
 

@@ -17,7 +17,7 @@
  * @param data data to send
  *
  */
-typedef struct I2CCommands{
+struct I2CCommands{
   int address;
   int registerAddress;
   int data;

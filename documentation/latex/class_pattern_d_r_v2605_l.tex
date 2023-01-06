@@ -1,0 +1,165 @@
+\hypertarget{class_pattern_d_r_v2605_l}{}\doxysection{Pattern\+DRV2605L Class Reference}
+\label{class_pattern_d_r_v2605_l}\index{PatternDRV2605L@{PatternDRV2605L}}
+
+
+Class that stores the DRV2605L effect pattern that can be applied to LRA or ERM actuator controlled to DRV2605L driver.  
+
+
+
+
+{\ttfamily \#include $<$Pattern\+DRV2605\+L.\+h$>$}
+
+Inheritance diagram for Pattern\+DRV2605L\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_pattern_d_r_v2605_l}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_pattern_d_r_v2605_l_a89a3ceeec97750da81d60866c0edaabe}{Pattern\+DRV2605L}} (int pattern\+Index, int pattern\+Duration=AVERAGE\+\_\+\+PATTERN\+\_\+\+TIME)
+\begin{DoxyCompactList}\small\item\em Construct a new DRV2605L Pattern. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_pattern_d_r_v2605_l_a1d2287565975cc2e8c858c3f3b8cbc01}{init}} ()
+\begin{DoxyCompactList}\small\item\em Initiate the pattern. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_pattern_d_r_v2605_l_a577eef59394de112b1b2ef4fd34dcf81}{pattern\+To\+String}} ()
+\begin{DoxyCompactList}\small\item\em Pattern converted to string (helpful for serial output) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_pattern_d_r_v2605_l_a4c4cf83b6003646e777881cf1f1561bc}{get\+Pattern\+Duration}} ()
+\begin{DoxyCompactList}\small\item\em Get the time that takes to perform a pattern. \end{DoxyCompactList}\item 
+Pattern\+Type \mbox{\hyperlink{class_pattern_d_r_v2605_l_a073bc3ce8d22a915e1e9900a96ac5865}{get\+Type}} ()
+\begin{DoxyCompactList}\small\item\em Get the Pattern\+Type object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_i_pattern_aaa7b8d66c716750aa7309e9cc8160ab0}{init}} ()=0
+\begin{DoxyCompactList}\small\item\em Initiate the pattern. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{class_i_pattern_af8541953b8821ed06203c28fd2ff6d17}{pattern\+To\+String}} ()=0
+\begin{DoxyCompactList}\small\item\em Pattern converted to string (helpful for serial output) \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_i_pattern_a2edd877be68280c725ba32dc0baa1f6b}{get\+Pattern\+Duration}} ()=0
+\begin{DoxyCompactList}\small\item\em Get the time that takes to perform a pattern. \end{DoxyCompactList}\item 
+virtual Pattern\+Type \mbox{\hyperlink{class_i_pattern_ab3433a8e042cf0f7b418d95866615af9}{get\+Type}} ()=0
+\begin{DoxyCompactList}\small\item\em Get the Pattern\+Type of the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_pattern_d_r_v2605_l_a459106720b80702eb8c2b013a65d0ff1}{m\+\_\+pattern\+Index}}
+\item 
+\mbox{\Hypertarget{class_pattern_d_r_v2605_l_a866907a2ffab4e1ca4709640f5224b18}\label{class_pattern_d_r_v2605_l_a866907a2ffab4e1ca4709640f5224b18}} 
+int {\bfseries m\+\_\+pattern\+Duration}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_i_pattern}{IPattern}}}
+\begin{DoxyCompactItemize}
+\item 
+Pattern\+Type \mbox{\hyperlink{class_i_pattern_a059f70c5724b61453207b41fcdc5c41e}{m\+\_\+type}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that stores the DRV2605L effect pattern that can be applied to LRA or ERM actuator controlled to DRV2605L driver. 
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{_d_r_v2605_l___e_f_f_e_c_t_s_8h_source}{DRV2605\+L\+\_\+\+EFFECTS.\+h}} header with haptic effects for the Pattern 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_pattern_d_r_v2605_l_a89a3ceeec97750da81d60866c0edaabe}\label{class_pattern_d_r_v2605_l_a89a3ceeec97750da81d60866c0edaabe}} 
+\index{PatternDRV2605L@{PatternDRV2605L}!PatternDRV2605L@{PatternDRV2605L}}
+\index{PatternDRV2605L@{PatternDRV2605L}!PatternDRV2605L@{PatternDRV2605L}}
+\doxysubsubsection{\texorpdfstring{PatternDRV2605L()}{PatternDRV2605L()}}
+{\footnotesize\ttfamily Pattern\+DRV2605\+L\+::\+Pattern\+DRV2605L (\begin{DoxyParamCaption}\item[{int}]{pattern\+Index,  }\item[{int}]{pattern\+Duration = {\ttfamily AVERAGE\+\_\+PATTERN\+\_\+TIME} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new DRV2605L Pattern. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pattern\+Index} & DRV2605L pattern index (based on \mbox{\hyperlink{_d_r_v2605_l___e_f_f_e_c_t_s_8h_source}{DRV2605\+L\+\_\+\+EFFECTS.\+h}}) \\
+\hline
+{\em pattern\+Duration} & there is an average pattern duration that will fit most of the patterns but not every! In case it does not match the real pattern duration please specify the time here.\\
+\hline
+\end{DoxyParams}
+Copyright 2022 $<$\+Marta Opalinska$>$ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_pattern_d_r_v2605_l_a4c4cf83b6003646e777881cf1f1561bc}\label{class_pattern_d_r_v2605_l_a4c4cf83b6003646e777881cf1f1561bc}} 
+\index{PatternDRV2605L@{PatternDRV2605L}!getPatternDuration@{getPatternDuration}}
+\index{getPatternDuration@{getPatternDuration}!PatternDRV2605L@{PatternDRV2605L}}
+\doxysubsubsection{\texorpdfstring{getPatternDuration()}{getPatternDuration()}}
+{\footnotesize\ttfamily int Pattern\+DRV2605\+L\+::get\+Pattern\+Duration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the time that takes to perform a pattern. 
+
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_pattern_a2edd877be68280c725ba32dc0baa1f6b}{IPattern}}.
+
+\mbox{\Hypertarget{class_pattern_d_r_v2605_l_a073bc3ce8d22a915e1e9900a96ac5865}\label{class_pattern_d_r_v2605_l_a073bc3ce8d22a915e1e9900a96ac5865}} 
+\index{PatternDRV2605L@{PatternDRV2605L}!getType@{getType}}
+\index{getType@{getType}!PatternDRV2605L@{PatternDRV2605L}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily Pattern\+Type Pattern\+DRV2605\+L\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the Pattern\+Type object. 
+
+\begin{DoxyReturn}{Returns}
+Pattern\+Type 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_pattern_ab3433a8e042cf0f7b418d95866615af9}{IPattern}}.
+
+\mbox{\Hypertarget{class_pattern_d_r_v2605_l_a1d2287565975cc2e8c858c3f3b8cbc01}\label{class_pattern_d_r_v2605_l_a1d2287565975cc2e8c858c3f3b8cbc01}} 
+\index{PatternDRV2605L@{PatternDRV2605L}!init@{init}}
+\index{init@{init}!PatternDRV2605L@{PatternDRV2605L}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Pattern\+DRV2605\+L\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Initiate the pattern. 
+
+
+
+Implements \mbox{\hyperlink{class_i_pattern_aaa7b8d66c716750aa7309e9cc8160ab0}{IPattern}}.
+
+\mbox{\Hypertarget{class_pattern_d_r_v2605_l_a577eef59394de112b1b2ef4fd34dcf81}\label{class_pattern_d_r_v2605_l_a577eef59394de112b1b2ef4fd34dcf81}} 
+\index{PatternDRV2605L@{PatternDRV2605L}!patternToString@{patternToString}}
+\index{patternToString@{patternToString}!PatternDRV2605L@{PatternDRV2605L}}
+\doxysubsubsection{\texorpdfstring{patternToString()}{patternToString()}}
+{\footnotesize\ttfamily std\+::string Pattern\+DRV2605\+L\+::pattern\+To\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Pattern converted to string (helpful for serial output) 
+
+\begin{DoxyReturn}{Returns}
+std\+::string 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_i_pattern_af8541953b8821ed06203c28fd2ff6d17}{IPattern}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_pattern_d_r_v2605_l_a459106720b80702eb8c2b013a65d0ff1}\label{class_pattern_d_r_v2605_l_a459106720b80702eb8c2b013a65d0ff1}} 
+\index{PatternDRV2605L@{PatternDRV2605L}!m\_patternIndex@{m\_patternIndex}}
+\index{m\_patternIndex@{m\_patternIndex}!PatternDRV2605L@{PatternDRV2605L}}
+\doxysubsubsection{\texorpdfstring{m\_patternIndex}{m\_patternIndex}}
+{\footnotesize\ttfamily int Pattern\+DRV2605\+L\+::m\+\_\+pattern\+Index}
+
+DRV2605L pattern index (based on \mbox{\hyperlink{_d_r_v2605_l___e_f_f_e_c_t_s_8h_source}{DRV2605\+L\+\_\+\+EFFECTS.\+h}}) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Tactico/src/Pattern\+DRV2605\+L.\+h\item 
+lib/\+Tactico/src/Pattern\+DRV2605\+L.\+cpp\end{DoxyCompactItemize}

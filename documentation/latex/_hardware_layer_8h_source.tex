@@ -1,0 +1,57 @@
+\hypertarget{_hardware_layer_8h_source}{}\doxysection{Hardware\+Layer.\+h}
+\label{_hardware_layer_8h_source}\index{lib/Tactico/src/HardwareLayer.h@{lib/Tactico/src/HardwareLayer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ Format\ need\ to\ be\ turned\ off\ -\/\ Arduino\ library\ need\ to\ be\ compiled\ as\ the\ last\ one\ }}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ Arduino\ min\ and\ max\ function\ provides\ errors\ for\ NRF5280\ chipset.}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <Wire.h>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <Arduino.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#undef\ min}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#undef\ max}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ DRV2605L\_REG\_RATED\_VOLTAGE\ 0x16}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ DRV2605L\_REG\_OVERDRIVE\_CLAMP\_VOLTAGE\ 0x17}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ DRV2605L\_REG\_CONTROL\_3\ 0x1D}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ DRV2605L\_REG\_LIBRARY\_SELECTION\ 0x03}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ DRV2605L\_MODE\_SELECTION\ 0x01}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ BOLD\_TEXT\ String("{}\(\backslash\)033[1m"{}})}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ RESET\_TEXT\ String("{}\(\backslash\)033[0m"{}})}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ TCA9548\_adr\ 0x70}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ TCA9554\_adr\ 0x20}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ DRV2605L\_adr\ 0x5A}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ CONF\_IO\_REG\ 0x03}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ OUT\_CHANNEL\_REG\ 0x01}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00035\ \textcolor{keywordtype}{void}\ waitFor(\textcolor{keywordtype}{int}\ miliseconds);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ printTactico(\textcolor{keyword}{const}\ std::string\ s);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{comment}{//****************\ COMMANDS\ NECCESSARY\ FOR\ GPIO\ CONNECTION}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{void}\ setPinStatusTactico(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ pinNumber,\ \textcolor{keywordtype}{int}\ pinStatus);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00060\ \textcolor{keywordtype}{void}\ setPinModeTactico(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ pinNumber,\ \textcolor{keywordtype}{int}\ pinModeStatus);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{comment}{//****************\ COMMANDS\ NECESSAY\ FOR\ I2C\ CONNECTION}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \textcolor{keywordtype}{void}\ i2c\_begin();}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{void}\ i2c\_end();}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00083\ \textcolor{keywordtype}{void}\ i2c\_write\_reg(\textcolor{keywordtype}{int}\ address,\ \textcolor{keywordtype}{int}\ registerAddress,\ \textcolor{keywordtype}{int}\ data);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00093\ \textcolor{keywordtype}{void}\ i2c\_write(\textcolor{keywordtype}{int}\ address,\ \textcolor{keywordtype}{int}\ reg);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00098\ \textcolor{keywordtype}{void}\ i2c\_endTransmission();}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00108\ \textcolor{keywordtype}{int}\ i2c\_read(\textcolor{keywordtype}{int}\ address,\ \textcolor{keywordtype}{int}\ reg,\ \textcolor{keywordtype}{int}\ numberBytes);}
+
+\end{DoxyCode}

@@ -58,7 +58,7 @@ class PatternDRV2605L : public IPattern {
    *
    * @return int
    */
-  int getPatternTime();
+  int getPatternDuration();
   /**
    * @brief Get the PatternType object
    *

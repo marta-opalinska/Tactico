@@ -1,0 +1,56 @@
+\hypertarget{_i_actuator_8h_source}{}\doxysection{IActuator.\+h}
+\label{_i_actuator_8h_source}\index{lib/Tactico/src/Interfaces/IActuator.h@{lib/Tactico/src/Interfaces/IActuator.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Interfaces/IActuatorDriver.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Interfaces/IPattern.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}HardwareLayer.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_i_pattern}{IPattern}};}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_i_actuator_driver}{IActuatorDriver}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{enum}\ ActuatorType\ \{\ eERM,\ eLRA\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_i_actuator}{IActuator}}\ \{}
+\DoxyCodeLine{00028\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00029\ \ \ \textcolor{keywordtype}{int}\ id;}
+\DoxyCodeLine{00034\ \ \ std::shared\_ptr<IActuatorDriver>\ \mbox{\hyperlink{class_i_actuator_ad40c1b57f6d77552eb6e4f354f185f1a}{m\_driver}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00039\ \ \ ActuatorType\ \mbox{\hyperlink{class_i_actuator_a433f03e40e72b51d925a31e1d80cfd22}{m\_type}};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ std::string\ \mbox{\hyperlink{class_i_actuator_ab537416825fa613bf46d8da2b9698394}{m\_name}};}
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_i_actuator_a4371f87859b22b43359ed66754177da2}{m\_ratedVoltage}};}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_i_actuator_ad289e18ad2318f7aa3cdd13bd70ef710}{m\_overdriveVoltage}};}
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{class_i_actuator_ae257b0282d029a5830c0261487260ec7}{IActuator}}(std::shared\_ptr<IActuatorDriver>\ driver,\ \textcolor{keywordtype}{float}\ ratedVoltage,}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ overdriveVoltage,\ \textcolor{keyword}{const}\ std::string\ \&name)}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_i_actuator_ad40c1b57f6d77552eb6e4f354f185f1a}{m\_driver}}(driver),}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_i_actuator_ab537416825fa613bf46d8da2b9698394}{m\_name}}(name),}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_i_actuator_a4371f87859b22b43359ed66754177da2}{m\_ratedVoltage}}(ratedVoltage),}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_i_actuator_ad289e18ad2318f7aa3cdd13bd70ef710}{m\_overdriveVoltage}}(overdriveVoltage)\ \{\}}
+\DoxyCodeLine{00077\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_i_actuator_aac505214a9fc2c5f4998a301fb302e3b}{IActuator}}(std::shared\_ptr<IActuatorDriver>\ driver,}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ ratedVoltage,\ \textcolor{keywordtype}{float}\ overdriveVoltage)}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_i_actuator_ad40c1b57f6d77552eb6e4f354f185f1a}{m\_driver}}(driver),}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_i_actuator_a4371f87859b22b43359ed66754177da2}{m\_ratedVoltage}}(ratedVoltage),}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_i_actuator_ad289e18ad2318f7aa3cdd13bd70ef710}{m\_overdriveVoltage}}(overdriveVoltage)\ \{\}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00090\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_actuator_af3b083249fcc46baf0e89ebc8d7f26ee}{play}}(std::shared\_ptr<IPattern>\ pattern)\ =\ 0;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00096\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_i_actuator_a477807899a0b6b8320ea3a462013b8f6}{test}}()\ =\ 0;}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00103\ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<IActuatorDriver>\ \mbox{\hyperlink{class_i_actuator_a14bab9a6e6da8786af13803fc98d8793}{getDriver}}()\ =\ 0;}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00110\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_i_actuator_ac13d1e5781b9ae09e01d6673ae11fc64}{setDriver}}(std::shared\_ptr<IActuatorDriver>\ driver)\ =\ 0;}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00116\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_i_actuator_abab02ae55c710150cce68a2d340b5eb8}{configDriver}}()\ =\ 0;}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00123\ \ \ \textcolor{keyword}{virtual}\ ActuatorType\ \mbox{\hyperlink{class_i_actuator_a6381ad622486becebca75b5ba3522096}{getType}}()\ =\ 0;}
+\DoxyCodeLine{00124\ \};}
+
+\end{DoxyCode}
