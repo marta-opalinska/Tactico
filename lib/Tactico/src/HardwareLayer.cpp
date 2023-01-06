@@ -27,11 +27,6 @@ void i2c_write_reg(int address, int reg, int data) {
   Wire.endTransmission();
 }
 
-// void i2c_write(int address, int reg) {
-//   Wire.beginTransmission(address);
-//   Wire.write(reg);
-// }
-
 void i2c_endTransmission() { Wire.endTransmission(); }
 
 int i2c_read(int address, int reg, int numberBytes) {

@@ -18,17 +18,22 @@ Tactico is a **haptics framework for embedded devices**. It supports multiple em
 
 **Actuator’s Drivers**: DRV2605LEVM-MD, GPIO Driver thorugh Pulse-Width modulation(PWM)
 
-# Bofore you start
+# Before you start
 
 Remember that the platform is **hardware agnostic** so there are some function that you as a user need to implement in order for the framework to work correctly.
 
 Functions to implement are placed in **Tactico\src\HardwareLayer.cpp**:
 
-- void i2c_begin()
-- void i2c_write_reg(int address, int reg, int data)
-- void i2c_write(int address, int reg)
-void i2c_endTransmission()
-- int i2c_read(int address, int reg, int numberBytes)
+- void **waitFor**(int miliseconds) 
+- void **printTactico**(const std::string s) 
+- void **setPinStatusTactico**(const int pinNumber, int pinStatus) 
+- void **setPinModeTactico**(const int pinNumber, int pinModeStatus) 
+- void **i2c_begin**() 
+- void **i2c_write_reg**(int address, int reg, int data) 
+- void **i2c_endTransmission**() 
+- int **i2c_read**(int address, int reg, int numberBytes) 
+
+All these command tie the framework code to the physical hardware that is used.
 
 # Framework Architecture
 
@@ -58,11 +63,12 @@ Currently two types of Actuators can be created - **ActuatorERM** and **Actuator
 **Actuator Driver** class defines the way in which the motor is performing a haptic effect. Currently there are user can choose from two available drivers - simple GPIO driver and driver on DRV2605LEVM-MD.
 
 **GPIO Driver**
-This is the type of a simple driver where the 
 
-**Hardware Layer**
+This is the type of a simple driver where the motor is connected to a single GPIO output and controlled using **Pulse Width Modulation Pattern**. To use this driver the following functions from **HardwareLayer** need to be implemented: waitFor, printTactico, setPinStatusTactico and setPinModeTactico from (more about it [here](#before-you-start)). 
 
-it ties the software with physical devices. 
+**DRV2605LEVM-MD**
+
+
 ### Pattern & Step
 
 ![image info](./documentation/pattern_step_class.png)

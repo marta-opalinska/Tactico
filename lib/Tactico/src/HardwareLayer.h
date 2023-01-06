@@ -83,16 +83,6 @@ void i2c_end();
 void i2c_write_reg(int address, int registerAddress, int data);
 
 /**
- * @brief Initiate an I2C write operation, array of char. When the transmission
- * is done the i2c_endTransmission() function need to be called.
- *
- * @param address the 7 bit I2C slave address
- * @param registerAddress address of the register you wish to access
- */
-
-// void i2c_write(int address, int reg);
-
-/**
  * @brief Initiate an I2C transmission ending process.
  */
 void i2c_endTransmission();
