@@ -17,11 +17,11 @@
  * @param data data to send
  *
  */
-typedef struct {
+typedef struct I2CCommands{
   int address;
   int registerAddress;
   int data;
-} I2CCommands;
+} ;
 
 class PatternDRV2605L;
 

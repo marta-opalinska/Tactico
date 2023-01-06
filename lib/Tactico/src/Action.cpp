@@ -178,7 +178,7 @@ void Action::configure() {
 
 void Action::resetPreviousConfiguration() {
   for (auto ac : this->m_actuators) {
-    if (ac->getDriver()->m_needsPreconfigration){
+    if (ac->getDriver()->m_needsPreconfigration) {
       ac->getDriver()->resetConfiguration();
     }
   }
@@ -190,8 +190,6 @@ void Action::play() {
   this->deactivateGoPins();
   for (auto step : this->m_activitySteps) {
     if (!step->m_needsPreconfigration) {
-      // TODO make the step class data structure instead of a class!!!! or a
-      // data class!!!!!!
       if (step->getType() == eActuatorStep) {
         auto actuatorStep(std::static_pointer_cast<ActuatorStep>(step));
         actuatorStep->m_actuator->play(actuatorStep->m_pattern);

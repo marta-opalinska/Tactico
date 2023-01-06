@@ -23,13 +23,13 @@
  * when the "go" pin is triggered.
  *
  */
-typedef struct {
+typedef struct actuatorConfigData{
   // the time (in miliseconds) passed from the last time the actuator was
   // configured with play pattern (needed for waitTime preconfiguration)
   int timeFromLastPattern;
   // the latest used actuators patttern slot
   int currentPatternSlot;
-} actuatorConfigData;
+};
 
 /**
  * @class Action
@@ -157,7 +157,7 @@ class Action {
   void configure();
 
   /**
-   * @brief Resets the configuration of the preconfigurable drivers.
+   * @brief Resets the play configuration of the preconfigurable drivers.
    *
    */
   void resetPreviousConfiguration();
