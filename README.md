@@ -83,7 +83,20 @@ Therefore, when this type of actuator is used as a part of the **Action** class 
 
 **Pattern**
 
-PWM Pattern and DRV2605L pattern type
+Not every pattern is suitable for every actuator or even actuator driver. 
+PWM Pattern and DRV2605L pattern type. The table belows presents what patterns are available for each actuator-driver combination.
+
+| Actuator/Driver | Actuator Driver DRV2605LEVM | Actuator Driver GPIO |
+| --------------- | --------------------------- | -------------------- |
+| LRA             | Pattern DRV2605L            | -                    |
+| ERM             | Pattern DRV2605L            | Pattern PWM          |
+
+*Tab. 1. Table representing what available pattern can be used with a specific actuator-driver combination.*
+
+Two available patterns represent entirely different approach. **DRV2605L Pattern** is simply holding an index of the pattern that will be played from the library, while PWM pattern is more complex. PWM pattern is created by hand by the user with Modulation structure. The modulation is defined by the duration of the pulse and if it is a binary 1 or 0 pulse.
+
+![image info](./documentation/modulation_explanation.png)
+*Fig.5. The explanation of ModulationPWM structure.*
 
 **Step**
 
