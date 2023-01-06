@@ -148,6 +148,16 @@ void Action::configure() {
               actuatorStep->m_pattern);
           actuatorsConfigData[actuatorStep->m_actuator].currentPatternSlot++;
         }
+        if (!actuatorStep->m_isParallel) {
+          for (auto actuator : this->m_actuators) {
+            if (actuator == actuatorStep->m_actuator) {
+              // ignore - do not add the wait time
+              break;
+            }
+            actuatorsConfigData[actuator].timeFromLastPattern +=
+                actuatorStep->m_pattern->getPatternTime();
+          }
+        }
         break;
       }
       case eWaitStep: {
@@ -165,6 +175,15 @@ void Action::configure() {
     }
   }
 }
+
+void Action::resetPreviousConfiguration() {
+  for (auto ac : this->m_actuators) {
+    if (ac->getDriver()->m_needsPreconfigration){
+      ac->getDriver()->resetConfiguration();
+    }
+  }
+}
+
 void Action::play() {
   this->activateGoPins();
   waitFor(50);
@@ -186,6 +205,7 @@ void Action::play() {
 }
 
 void Action::ConfigureAndPlay() {
+  this->resetPreviousConfiguration();
   this->configure();
   this->play();
 }

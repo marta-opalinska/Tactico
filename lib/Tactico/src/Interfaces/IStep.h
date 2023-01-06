@@ -37,7 +37,7 @@ class IStep {
    * GO
    */
   bool m_needsPreconfigration;
-
+  
   /**
    * @brief Print the step in the serial port (as String)
    *

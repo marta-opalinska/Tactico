@@ -90,10 +90,10 @@ bool ActuatorDriverDRV2605LEVM::setWait(int slotNumber, int miliseconds) {
     wait_for_motor_available();
     // the wait time need to be setup in 7 bits - therefore the register value
     // is need to be capped at 127 (MAX_WAIT_TIME_PER_SLOT)
-    if (miliseconds*10 > MAX_WAIT_TIME_PER_SLOT) {
+    if (miliseconds/10 > MAX_WAIT_TIME_PER_SLOT) {
       printTactico("WARNING: Wait time for the actuator DRV2605L driver id ");
       printTactico(std::to_string(m_driverID));
-      printTactico("need to be capped at 1270ms per slot!\n");
+      printTactico(" needed to be capped at 1270ms!\n");
     }
 
     int milisecondsCapped = static_cast<int>(
@@ -181,6 +181,10 @@ bool ActuatorDriverDRV2605LEVM::config(ActuatorType type, float ratedVoltage,
   }
 
   return true;
+}
+
+void ActuatorDriverDRV2605LEVM::resetConfiguration(){
+  this->resetSequence();
 }
 
 bool ActuatorDriverDRV2605LEVM::setupLRA(float ratedVoltage,

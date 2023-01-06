@@ -63,7 +63,8 @@
         "iactuator.h": "c",
         "ipattern.h": "c",
         "actuatordriverdrv2605levm.h": "c",
-        "hardwarelayer.h": "c"
+        "hardwarelayer.h": "c",
+        "ACTUATORDRIVERI2C.H": "cpp"
     },
     "editor.tabCompletion": "on",
     "diffEditor.codeLens": true,

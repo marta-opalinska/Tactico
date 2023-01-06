@@ -37,6 +37,14 @@ std::string PatternPWM::patternToString() {
   return s;
 }
 
+int PatternPWM::getPatternTime() {
+  int total_time = 0;
+  for (auto modulation : this->m_modulation_sequence) {
+    total_time += modulation.duration;
+  }
+  return total_time;
+}
+
 PatternType PatternPWM::getType() { return this->m_type; }
 
 // void PatternPWM::stop(std::shared_ptr<Actuator> ac)

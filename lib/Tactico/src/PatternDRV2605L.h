@@ -10,6 +10,8 @@
 #include "DRV2605L_EFFECTS.h"
 #include "HardwareLayer.h"
 
+// average DRV2506L pattern time - not precise for some of the patterns!
+#define AVERAGE_PATTERN_TIME 250
 /**
  * @class PatternDRV2605L
  * @implements IPattern
@@ -26,12 +28,17 @@ class PatternDRV2605L : public IPattern {
    * DRV2605L pattern index (based on DRV2605L_EFFECTS.h)
    */
   int m_patternIndex;
+  int m_patternDuration;
   /**
    * @brief Construct a new DRV2605L Pattern
    *
    * @param patternIndex DRV2605L pattern index (based on DRV2605L_EFFECTS.h)
+   * @param patternDuration there is an average pattern duration that will fit
+   * most of the patterns but not every! In case it does not match the real
+   * pattern duration please specify the time here.
    */
-  explicit PatternDRV2605L(int patternIndex);
+  explicit PatternDRV2605L(int patternIndex,
+                           int patternDuration = AVERAGE_PATTERN_TIME);
   ~PatternDRV2605L() = default;
 
   /**
@@ -46,6 +53,12 @@ class PatternDRV2605L : public IPattern {
    */
   std::string patternToString();
 
+  /**
+   * @brief Get the time that takes to perform a pattern.
+   *
+   * @return int
+   */
+  int getPatternTime();
   /**
    * @brief Get the PatternType object
    *

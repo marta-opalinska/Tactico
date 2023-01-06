@@ -157,6 +157,12 @@ class Action {
   void configure();
 
   /**
+   * @brief Resets the configuration of the preconfigurable drivers.
+   *
+   */
+  void resetPreviousConfiguration();
+
+  /**
    * @brief Clear Action steps.
    *
    */

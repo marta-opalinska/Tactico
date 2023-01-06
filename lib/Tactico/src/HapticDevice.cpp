@@ -66,8 +66,6 @@ void HapticDevice::removeActuator(const std::string &name) {
   }
 }
 
-
-
 // Provides a list of actuators that are a part of the haptics device
 std::vector<std::shared_ptr<IActuator>> HapticDevice::getActuatorsList() {
   return this->m_actuatorsList;
@@ -87,15 +85,30 @@ void HapticDevice::addAction(std::shared_ptr<Action> deviceAction,
 }
 
 void HapticDevice::configure(std::string actionName) {
-  this->m_deviceActions[actionName]->configure();
+  // checking if an action exists
+  if (m_deviceActions.count(actionName)) {
+    this->m_deviceActions[actionName]->configure();
+  } else {
+    printTactico("WARNING: Action not found \n");
+  }
 }
 
 void HapticDevice::configureAndPlayAction(std::string actionName) {
-  this->m_deviceActions[actionName]->ConfigureAndPlay();
+  // checking if an action exists
+  if (m_deviceActions.count(actionName)) {
+    this->m_deviceActions[actionName]->ConfigureAndPlay();
+  } else {
+    printTactico("WARNING: Action not found \n");
+  }
 }
 
 void HapticDevice::playAction(std::string actionName) {
-  this->m_deviceActions[actionName]->play();
+  // checking if an action exists
+  if (m_deviceActions.count(actionName)) {
+    this->m_deviceActions[actionName]->play();
+  } else {
+    printTactico("WARNING: Action not found \n");
+  }
 }
 
 void HapticDevice::removeAction(std::string actionName) {

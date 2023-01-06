@@ -6,8 +6,9 @@
 
 #include "DRV2605L_EFFECTS.h"
 
-PatternDRV2605L::PatternDRV2605L(int patternIndex)
-    : m_patternIndex(patternIndex) {
+PatternDRV2605L::PatternDRV2605L(int patternIndex,
+                                 int patternDuration /*= AVERAGE_PATTERN_TIME*/)
+    : m_patternIndex(patternIndex), m_patternDuration(patternDuration) {
   this->m_type = eDRV2505L;
 }
 
@@ -19,6 +20,8 @@ std::string PatternDRV2605L::patternToString() {
   s.append("\n");
   return s;
 }
+
+int PatternDRV2605L::getPatternTime() { return m_patternDuration; }
 
 PatternType PatternDRV2605L::getType() { return this->m_type; }
 

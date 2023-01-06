@@ -75,4 +75,8 @@ void ActuatorDriverGPIO::setPin(int new_GPIO) {
 
 int ActuatorDriverGPIO::getPin() { return this->m_GPIO_pin; }
 
+void ActuatorDriverGPIO::resetConfiguration() {
+  // can be ignored - no configuration to reset
+}
+
 ActuatorDriverType ActuatorDriverGPIO::getType() { return this->m_type; }

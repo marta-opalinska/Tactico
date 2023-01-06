@@ -17,7 +17,8 @@ enum PatternType { ePWM, eDRV2505L };
 
 /**
  * @interface IPattern
- * @brief An interface for actuator's pattern. The intefrace is implemented by PatternPWM and PatternDRV2605L classes. 
+ * @brief An interface for actuator's pattern. The intefrace is implemented by
+ * PatternPWM and PatternDRV2605L classes.
  *
  */
 class IPattern {
@@ -39,6 +40,13 @@ class IPattern {
    * @return std::string
    */
   virtual std::string patternToString() = 0;
+
+  /**
+   * @brief Get the time that takes to perform a pattern.
+   *
+   * @return int
+   */
+  virtual int getPatternTime() = 0;
 
   /**
    * @brief Get the PatternType of the object

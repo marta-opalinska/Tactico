@@ -127,6 +127,13 @@ class ActuatorDriverDRV2605LEVM : public ActuatorDriverI2C {
               int frequency = 300);
 
   /**
+   * @brief Reseting previously setup configuration for to play - the actuator
+   * configuration will remain the same!.
+   *
+   */
+  void resetConfiguration();
+
+  /**
    * @brief Reset configured sequence of patterns.
    *
    */

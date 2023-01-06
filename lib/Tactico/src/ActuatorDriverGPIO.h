@@ -81,6 +81,13 @@ class ActuatorDriverGPIO : public IActuatorDriver {
   void setPin(int new_GPIO);
 
   /**
+   * @brief No configuration to reset for GPIO driver. Only for drivers with
+   * preconfiguration setup.
+   *
+   */
+  void resetConfiguration();
+
+  /**
    * @brief Get the ActuatorDriverType of the object
    *
    * @return ActuatorDriverType

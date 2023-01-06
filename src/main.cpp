@@ -60,7 +60,8 @@ void loop() {
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(0, driverGoPin2);
     std::shared_ptr<ActuatorLRA> ac_2 =
-        std::make_shared<ActuatorLRA>(driver_2, 2.5, 2.7, 170, "myLRA");
+        // std::make_shared<ActuatorLRA>(driver_2, 2.5, 2.7, 170, "myLRA");
+        std::make_shared<ActuatorLRA>(driver_2, 2, 2.5, 170, "myLRA");
 
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_3 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(1, driverGoPin2);
@@ -70,7 +71,7 @@ void loop() {
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_4 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(2, driverGoPin2);
     std::shared_ptr<ActuatorLRA> ac_4 =
-        std::make_shared<ActuatorLRA>(driver_4, 3.0, 3.2, 220, "myLRA_2");
+        std::make_shared<ActuatorLRA>(driver_4, 2.0, 2.5, 170, "myLRA_2");
 
     std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_5 =
         std::make_shared<ActuatorDriverDRV2605LEVM>(3, driverGoPin2);
@@ -87,42 +88,60 @@ void loop() {
     setPinStatusTactico(driverPin1, HIGH);
 
     std::shared_ptr<ActuatorStep> s_ac2 =
-        std::make_shared<ActuatorStep>(ac_2, p_2);
+        std::make_shared<ActuatorStep>(ac_2, p_2, true);
     std::shared_ptr<ActuatorStep> s_ac3 =
-        std::make_shared<ActuatorStep>(ac_3, p_2);
+        std::make_shared<ActuatorStep>(ac_3, p_2, true);
     std::shared_ptr<ActuatorStep> s_ac4 =
-        std::make_shared<ActuatorStep>(ac_4, p_2);
+        std::make_shared<ActuatorStep>(ac_4, p_2, true);
     std::shared_ptr<ActuatorStep> s_ac5 =
-        std::make_shared<ActuatorStep>(ac_5, p_2);
+        std::make_shared<ActuatorStep>(ac_5, p_2, true);
 
     std::shared_ptr<ActuatorStep> s_PWM =
         std::make_shared<ActuatorStep>(ac_1, p_1);
 
     std::shared_ptr<WaitStep> s_wait = std::make_shared<WaitStep>(250);
+    std::shared_ptr<WaitStep> s_wait_2 = std::make_shared<WaitStep>(200);
 
     std::shared_ptr<Action> test_ac = std::make_shared<Action>();
+    std::shared_ptr<Action> test_ac_2 = std::make_shared<Action>();
 
-    test_ac->setSteps({s_PWM, s_ac2, s_ac3, s_ac4, s_ac5, s_wait, s_ac2, s_wait, s_ac3,
-                       s_wait, s_ac4, s_wait, s_ac5, s_PWM});
+    test_ac->setSteps({s_PWM, s_ac2, s_ac3, s_wait, s_ac4, s_ac5, s_wait, s_ac2,
+                       s_ac3, s_wait, s_ac4, s_wait, s_ac5, s_PWM});
+
+    test_ac_2->setSteps(
+        {s_PWM, s_wait_2, s_ac2, s_wait_2, s_ac5, s_wait_2, s_PWM});
+
+    test_ac_2->setSteps({s_PWM, s_wait_2, s_ac2, s_ac3, s_wait_2, s_ac4, s_ac5,
+                         s_wait_2, s_PWM});
 
     // test_ac->setSteps({s1a, s2, s4, s6, s8, s3});
-    delay(5000);
+    delay(2000);
     // test_ac->setSteps({s1a, s1b, s2, s4, s6, s8, s3});
     test_hand.addAction(test_ac, "test");
-    test_ac->configure();
-    std::shared_ptr<PatternDRV2605L> reset =
-        std::make_shared<PatternDRV2605L>(48);
+    test_hand.addAction(test_ac_2, "test_2");
+    // test_ac->configure();
+
+    // std::shared_ptr<PatternDRV2605L> reset =
+    //     std::make_shared<PatternDRV2605L>(48);
     // driver_2->setWaveform(0, p_2);
     // driver_2->setWait(1, 1000);
     // driver_2->setWaveform(2, p_2);
     // driver_2->setWaveform(3, reset);
-    delay(5000);
+    delay(1000);
 
-    test_ac->play();
+    while (1) {
+      test_hand.configureAndPlayAction("test_2");
 
-    delay(5000);
+      delay(1000);
+    }
 
-    test_hand.configureAndPlayAction("test");
+    // test_hand.configureAndPlayAction("test");
+
+    // delay(3000);
+
+    // delay(5000);
+
+    // test_hand.configureAndPlayAction("test");
 
     // test_ac->ConfigureAndPlay();
 
@@ -168,6 +187,7 @@ void loop() {
 
     setupDone = true;
   }
+
   // if (!setupDone) {
   //   Serial.print("------------------------------------- \n");
   //   Serial.print("Initiating Drivers... \n");

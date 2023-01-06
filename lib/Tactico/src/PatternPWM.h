@@ -67,6 +67,13 @@ class PatternPWM : public IPattern {
   std::string patternToString();
 
   /**
+   * @brief Get the time that takes to perform a pattern.
+   *
+   * @return int
+   */
+  int getPatternTime();
+
+  /**
    * @brief Get the PatternType object
    *
    * @return PatternType

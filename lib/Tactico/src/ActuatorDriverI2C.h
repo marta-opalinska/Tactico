@@ -97,7 +97,7 @@ class ActuatorDriverI2C : public IActuatorDriver {
   void writeRegister(int reg, int data);
 
   /**
-   * @brief Set the I2C address 
+   * @brief Set the I2C address
    *
    * @param address new I2C address
    */
@@ -109,6 +109,12 @@ class ActuatorDriverI2C : public IActuatorDriver {
    * @return int
    */
   int getGoPin();
+
+  /**
+   * @brief Need to be implemented by the implementation class.
+   *
+   */
+  virtual void resetConfiguration() = 0;
 
   /**
    * @brief Get the ActuatorDriverType of the object
