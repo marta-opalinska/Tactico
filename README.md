@@ -48,6 +48,10 @@ Currently two types of Actuators can be created - **ActuatorERM** and **Actuator
 it ties the software with physical devices. 
 ### Pattern & Step
 
+![image info](./documentation/pattern_step_class.png)
+*Fig.4. Haptic Pattern and Step classes.*
+
+
 PWM Pattern and DRV2605L pattern type
 
 **Step**

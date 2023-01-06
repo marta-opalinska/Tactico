@@ -44,12 +44,6 @@ class ActuatorStep : public IStep {
   ~ActuatorStep() = default;
 
   /**
-   * @brief Perform the pattern on the actuator.
-   *
-   */
-  void play();
-
-  /**
    * @brief Print the step in the serial port (as String)
    *
    */

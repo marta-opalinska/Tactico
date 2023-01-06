@@ -35,12 +35,6 @@ class WaitStep : public IStep {
   ~WaitStep() = default;
 
   /**
-   * @brief Perform the wait time.
-   *
-   */
-  void play();
-
-  /**
    * @brief Print the step in the serial port (as String)
    *
    */
