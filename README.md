@@ -48,14 +48,14 @@ Fig.1 presents numerous classes that are involved in the framework. In the follo
 
 ## Actuator Class
 
-![image info](./documentation/actuator_class.png)
-*Fig.2. An example of an actuator alongside the information from the datasheet that will be needed for the implementation.*
-
 **Actuator** class is the centre point of the framework - it can be considered a digital twin of the physical actuator. All the most important properties of an actuator need to be defined in the object of this class - **type** (LRA, ERM etc.), **rated voltage**, **peak voltage**, **resonant frequency** (for LRA) and an **Actuator Driver** instance, that controls it.  
 
 Currently, two types of Actuators can be created - **ActuatorERM** and **ActuatorLRA**. They share most of the properties but also have some specific ones. It is essential to check which actuator you use so that the Actuator Driver is compatible with it (the driver can work differently depending on the actuator type).
 
 The framework supports testing the connected actuators by calling the **test()** command. It will send a single vibration test to the motor. It is highly recommended to test the hardware before processing with further framework implementation. 
+
+![image info](./documentation/actuator_class.png)
+*Fig.2. An example of an actuator alongside the information from the datasheet that will be needed for the implementation.*
 
 ## Creating An Actuator
 
