@@ -42,7 +42,7 @@ An example main file can be found in *src/main.cpp*.
 
 # Framework Architecture
 
-After cloning the repository, the detailed code documentation can be displayed by opening ***docs\html\index.html*** in the web browser. All classes with their methods and fields are thoroughly explained in there.
+The detailed code documentation can be viewed [here](https://marta-opalinska.github.io/Tactico/html/index.html). All classes with their methods and fields are thoroughly explained in there.
 
 Fig.1 presents numerous classes that are involved in the framework. In the following sections you will find a general explanation of each of them.
 
@@ -64,6 +64,11 @@ The framework supports testing the connected actuators by calling the **test()**
 
 - ERM Actuator
 ``` cpp
+
+#include "Tactico.h"
+
+// ...
+
 // the standard DC voltage for the actuator
 float ratedVoltage = 2.0;
 // the maximum allowable DC voltage
@@ -78,6 +83,10 @@ std::shared_ptr<ActuatorERM> actuator_1 = std::make_shared<ActuatorERM>(
 ```
 - LRA Actuator
 ``` cpp
+#include "Tactico.h"
+
+// ...
+
 // the standard DC voltage for the actuator
 float ratedVoltage = 2.0;
 // the maximum allowable DC voltage
@@ -95,9 +104,6 @@ std::shared_ptr<ActuatorLRA> actuator_2 =
 
 ## Actuator Driver Class
 
-![image info](./docs/driver_class.png)
-*Fig.3. Currently supported drivers.*
-
 **Actuator Driver** class defines the way in which the motor performs a haptic effect. Currently, users can choose from two available drivers - a simple GPIO driver and a driver from the DRV2605LEVM-MD board.
 
 **GPIO Driver**
@@ -114,6 +120,9 @@ It **needs pre-run configuration** before any haptic effect is played! The confi
 
 Therefore, when this type of actuator is used as a part of the **Action** class instance, the **configure() function needs to be called before play()** (or configureAndPlay(), which triggers the configuration and then the play of an Action). The advantage of the pre-run configuration is that Action Steps can be triggered in parallel (more about it in [Action Class section](#action)). 
 
+![image info](./docs/driver_class.png)
+*Fig.3. Currently supported drivers.*
+
 ### Creating An Actuator Driver
 
 All the Drivers, Actuators, Patterns and Action instances are created with the use of **shared pointer**. In that way it is easier to manage them as they are passed to various functions in the runtime. 
@@ -121,6 +130,9 @@ All the Drivers, Actuators, Patterns and Action instances are created with the u
 - GPIO Driver
 
 ``` cpp
+#include "Tactico.h"
+
+// ...
 
 // pin that is connected to the actuator and supports Pulse Width-Modulation
 int driverPinGPIO = 2;
@@ -130,6 +142,10 @@ std::shared_ptr<ActuatorDriverGPIO> driver_1 =
 ```
 - I2C Driver - DRV2605LEVM-MD
 ``` cpp
+#include "Tactico.h"
+
+// ...
+
 // DRV2605L evaluation board contains multiple DRV2605L drivers.
 // Therefore the driver ID need to be specified.
 int driverID = 0;
