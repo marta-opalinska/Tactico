@@ -21,18 +21,18 @@ Tactico is a **haptics framework for embedded devices**. It supports multiple em
 
 # Before you start
 
-Remember that the platform is **hardware agnostic**, so there are some functions that you as a user need to implement for the framework to work correctly.
+Remember that the platform is **hardware agnostic**, so there are some functions that you, as a user, need to implement for the framework to work correctly.
 
 Functions to implement can be found in **Tactico\src\HardwareLayer.cpp**:
 
-- void **waitFor**(int miliseconds) 
-- void **printTactico**(const std::string s) 
-- void **setPinStatusTactico**(const int pinNumber, int pinStatus) 
-- void **setPinModeTactico**(const int pinNumber, int pinModeStatus) 
-- void **i2c_begin**() 
-- void **i2c_write_reg**(int address, int reg, int data) 
-- void **i2c_endTransmission**() 
-- int **i2c_read**(int address, int reg, int numberBytes) 
+- void **waitFor**(int miliseconds);
+- void **printTactico**(const std::string s);
+- void **setPinStatusTactico**(const int pinNumber, int pinStatus);
+- void **setPinModeTactico**(const int pinNumber, int pinModeStatus);
+- void **i2c_begin**();
+- void **i2c_write_reg**(int address, int reg, int data);
+- void **i2c_endTransmission**();
+- int **i2c_read**(int address, int reg, int numberBytes);
 
 All these commands tie the framework code to the utilised physical hardware.
 
@@ -41,7 +41,7 @@ All these commands tie the framework code to the utilised physical hardware.
 ![image info](./documentation/class_diagram_with_categories.png)
 *Fig.1. A detailed view of the framework architecture.*
 
-The detailed code documentation can be found in ***documentation\html\index.html***. In there, all classes with their methods and fields are thoroughly explained. 
+After cloning the repository, the detailed code documentation can be found in ***documentation\html\index.html***. All classes with their methods and fields are thoroughly explained in there.
 
 As shown in the above diagram, numerous classes are involved in the framework. Below you will find a general explanation of each of them.
 
@@ -144,7 +144,7 @@ The framework supports the creation of a custom external controller to control t
 
 # Code examples  
 ## Basic
-### Creating an Actuator Driver
+### Creating An Actuator Driver
 
 All the Drivers, Actuators, Patterns and Action instances are created with the use of **shared pointer**. In that way it is easier to manage them as they are passed to various functions in the runtime. 
 
@@ -170,7 +170,7 @@ std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
     std::make_shared<ActuatorDriverDRV2605LEVM>(driverID, driverGoPin);
 ```
 
-### Assiging an Actuator
+### Assiging An Actuator
 
 - ERM Actuator
 ``` cpp
@@ -189,19 +189,22 @@ std::shared_ptr<ActuatorERM> actuator_1 = std::make_shared<ActuatorERM>(
 ```
 - LRA Actuator
 ``` cpp
-
 // the standard DC voltage for the actuator
 float ratedVoltage = 2.0;
 // the maximum allowable DC voltage
 float overdriveVoltage = 2.5;
-// optional - custom name will be prited alongside logs refering to the actuator
+// LRA actuator resonant frequency (can be found in the datasheet)
+int resonantFrequency = 170;
+// optional - custom name will be prited alongside logs refering to the
+// actuator
 std::string customName = "myLRA_1";
 
 std::shared_ptr<ActuatorLRA> actuator_2 =
-    std::make_shared<ActuatorLRA>(driver_2, ratedVoltage, overdriveVoltage, 100, customName);
+    std::make_shared<ActuatorLRA>(driver_2, ratedVoltage, overdriveVoltage,
+                                  resonantFrequency, customName);
 ```
 
-### Assiging a Pattern
+### Creating A Pattern
 
 - PWM Pattern
 ``` cpp

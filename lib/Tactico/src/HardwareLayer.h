@@ -44,7 +44,7 @@ void printTactico(const std::string s);
 //**************** COMMANDS NECCESSARY FOR GPIO CONNECTION
 
 /**
- * @brief Implements hardware pin status setting
+ * @brief Implements hardware pin status setting LOW/HIGH
  *
  * @param pinNumber pin number
  * @param pinStatus expected pin status
@@ -52,7 +52,7 @@ void printTactico(const std::string s);
 void setPinStatusTactico(const int pinNumber, int pinStatus);
 
 /**
- * @brief Implements hardware pin mode setting
+ * @brief Implements hardware pin mode setting - INPUT/OUTPUT
  *
  * @param pinNumber pin number
  * @param pinModeStatus pin status

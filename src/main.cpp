@@ -135,17 +135,16 @@ void loop() {
       delay(1000);
     }
 
-    // the standard DC voltage for the actuator
-    float ratedVoltage = 2.0;
-    // the maximum allowable DC voltage
-    float overdriveVoltage = 2.5;
-    int 
-    // optional - custom name will be prited alongside logs refering to the
-    // actuator
-    std::string customName = "myLRA_1";
+    // Custom Pulse Width Mudulation that specifies duration and status (1 =
+    // true = ON or 0 = false = OFF)
+    std::vector<ModulationPWM> modulationPWM_1 = {
+        {100, true}, {50, false}, {100, true},
+        {50, false}, {100, true}, {50, false},
+    };
 
-    std::shared_ptr<ActuatorLRA> actuator_2 = std::make_shared<ActuatorLRA>(
-        driver_2, ratedVoltage, overdriveVoltage, 100, customName);
+    std::shared_ptr<PatternPWM> pattern_1 =
+        std::make_shared<PatternPWM>(modulationPWM_1);
+
     // test_hand.configureAndPlayAction("test");
 
     // delay(3000);
