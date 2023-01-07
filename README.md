@@ -173,6 +173,12 @@ std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
 
 - ERM Actuator
 ``` cpp
+
+// DRV2605L evaluation board contains multiple DRV2605L drivers.
+// Therefore the driver ID need to be specified.
+int driverID = 0;
+int driverGoPin = 12;
+
 std::shared_ptr<ActuatorERM> actuator_1 =
     std::make_shared<ActuatorERM>(driver_1, 2, 3);
 
