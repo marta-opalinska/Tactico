@@ -20,16 +20,10 @@ Tactico is a **haptics framework for embedded devices**. It supports multiple em
     - [Step](#step)
       - [Creating a Step](#creating-a-step)
   - [Action Class](#action-class)
+      - [Creating An Action](#creating-an-action)
   - [Haptic Device Class](#haptic-device-class)
+      - [Creating A Haptic Device](#creating-a-haptic-device)
   - [Controller Class](#controller-class)
-- [Code examples](#code-examples)
-  - [Basic](#basic)
-    - [Creating An Actuator Driver](#creating-an-actuator-driver-1)
-    - [Assiging An Actuator](#assiging-an-actuator)
-    - [Creating A Pattern](#creating-a-pattern-1)
-    - [Creating an action Step](#creating-an-action-step)
-    - [Creating an Action](#creating-an-action)
-    - [Creating a Haptic Device](#creating-a-haptic-device)
 - [Useful Links](#useful-links)
 
 # Introduction
@@ -86,6 +80,8 @@ The framework supports testing the connected actuators by calling the **test()**
 *Fig.2. An example of an actuator alongside the information from the datasheet that will be needed for the implementation.*
 
 ### Creating An Actuator
+
+Before creating an Actuator object you need to have a Actuator Driver object created - to do that follow [this example](#creating-an-actuator-driver)
 
 - ERM Actuator
 ``` cpp
@@ -208,6 +204,41 @@ The most significant advantage of the Pattern class is that it can be assigned t
 
 #### Creating a Pattern
 
+- Pulse Width Mudulation (PWM) Pattern 
+
+``` cpp
+#include "Tactico.h"
+
+// ...
+
+/*
+    Custom Pulse Width Mudulation that specifies
+    duration in miliseconds (in this example 100ms and 50ms)
+    and status (1 = true = ON or 0 = false = OFF)
+*/
+std::vector<ModulationPWM> modulationPWM_1 = {
+    {100, true}, {50, false}, {100, true},
+    {50, false}, {100, true}, {50, false},
+};
+
+std::shared_ptr<PatternPWM> pattern_1 =
+    std::make_shared<PatternPWM>(modulationPWM_1);
+```
+
+- DRV2605L Pattern (using in-build library of haptic effects)
+
+``` cpp
+#include "Tactico.h"
+
+// ...
+
+/*
+All in-build effect available for the DRV2605L can be found in DRV2605L_EFFECTS.h file
+*/
+std::shared_ptr<PatternDRV2605L> pattern_2 =
+    std::make_shared<PatternDRV2605L>(STRONG_CLICK_30);
+```
+
 ### Step
 
 **Step** can be considered an individual activation of the actuator or a Wait command. Steps are a data class that only stores information about the objects involved in the step, and to play them, they need to be combined into the Action.
@@ -220,6 +251,23 @@ More about Steps implementation combinations can be found in [Action Class secti
 *Fig.5. Step class.*
 
 #### Creating a Step
+
+- Wait Step (pauses all actuators for a specific time duration)
+``` cpp
+#include "Tactico.h"
+
+// ...
+
+// duration of the wait in miliseconds
+int waitTime = 250;
+
+std::shared_ptr<WaitStep> s_wait = std::make_shared<WaitStep>(waitTime);
+
+```
+
+
+- Actuator Step
+  - Non-parallel Step - step will be performed one by one
 
 ## Action Class
 
@@ -242,6 +290,21 @@ An Action can become a part of a Haptic Device.
 ![image info](./docs/action_class.png)
 *Fig.6. Example of creating parallel and non-parallel actions. The step parallelisation property needs to be assigned when the step is created!*
 
+#### Creating An Action
+
+- Wait Step (pauses all actuators for a specific time duration)
+``` cpp
+#include "Tactico.h"
+
+// ...
+
+// duration of the wait in miliseconds
+int waitTime = 250;
+
+std::shared_ptr<WaitStep> s_wait = std::make_shared<WaitStep>(waitTime);
+
+```
+
 ## Haptic Device Class
 
 You can combine all the above classes into one **Haptic Device** entity. In that way, you can control all the actuators and actions simultaneously. 
@@ -251,116 +314,29 @@ As previously explained in the Action section, it is recommended to reset the pr
 ![Haptic Device Class Image](./docs/haptic_device_class.png)
 *Fig.7. A graphical representation of a haptic device with Actuators and Actions assigned.*
 
+
+#### Creating A Haptic Device
+
+- Wait Step (pauses all actuators for a specific time duration)
+``` cpp
+#include "Tactico.h"
+
+// ...
+
+// duration of the wait in miliseconds
+int waitTime = 250;
+
+std::shared_ptr<WaitStep> s_wait = std::make_shared<WaitStep>(waitTime);
+
+```
+
+
 ## Controller Class
 
 The framework supports the creation of a custom external controller to control the Haptic Device behaviour. Currently, no controller is implemented, but the framework's flexibility allows it to be easily added. 
-
-# Code examples  
-## Basic
-### Creating An Actuator Driver
-
-All the Drivers, Actuators, Patterns and Action instances are created with the use of **shared pointer**. In that way it is easier to manage them as they are passed to various functions in the runtime. 
-
-- GPIO Driver
-
-``` cpp
-
-// pin that is connected to the actuator and supports Pulse Width-Modulation
-int driverPinGPIO = 2;
-// GPIO Driver - uses PMW patterns
-std::shared_ptr<ActuatorDriverGPIO> driver_1 = 
-    std::make_shared<ActuatorDriverGPIO>(driverPinGPIO);
-```
-- I2C Driver - DRV2605LEVM-MD
-``` cpp
-// DRV2605L evaluation board contains multiple DRV2605L drivers.
-// Therefore the driver ID need to be specified.
-int driverID = 0;
-int driverGoPin = 12;
-
-// DRV2605L Driver - communicated through I2C and uses DRV2605L effect library pattern
-std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
-    std::make_shared<ActuatorDriverDRV2605LEVM>(driverID, driverGoPin);
-```
-
-### Assiging An Actuator
-
-- ERM Actuator
-``` cpp
-
-// the standard DC voltage for the actuator
-float ratedVoltage = 2.0;
-// the maximum allowable DC voltage
-float overdriveVoltage = 2.5;
-// optional - custom name will be prited alongside logs refering to the
-// actuator
-std::string customName = "myERM_1";
-
-std::shared_ptr<ActuatorERM> actuator_1 = std::make_shared<ActuatorERM>(
-    driver_1, ratedVoltage, overdriveVoltage, customName);
-
-```
-- LRA Actuator
-``` cpp
-// the standard DC voltage for the actuator
-float ratedVoltage = 2.0;
-// the maximum allowable DC voltage
-float overdriveVoltage = 2.5;
-// LRA actuator resonant frequency (can be found in the datasheet)
-int resonantFrequency = 170;
-// optional - custom name will be prited alongside logs refering to the
-// actuator
-std::string customName = "myLRA_1";
-
-std::shared_ptr<ActuatorLRA> actuator_2 =
-    std::make_shared<ActuatorLRA>(driver_2, ratedVoltage, overdriveVoltage,
-                                  resonantFrequency, customName);
-```
-
-### Creating A Pattern
-
-- PWM Pattern
-``` cpp
-function test() {
-  console.log("notice the blank line before this function?");
-}
-```
-- DRV2605L Pattern (based on Texas Intruments Effect Library)
-``` cpp
-function test() {
-  console.log("notice the blank line before this function?");
-}
-```
-### Creating an action Step
-- Actuator Step
-``` cpp
-function test() {
-  console.log("notice the blank line before this function?");
-}
-```
-- Wait Step
-``` cpp
-function test() {
-  console.log("notice the blank line before this function?");
-}
-```
-
-### Creating an Action
-
-
-### Creating a Haptic Device
 
 # Useful Links
  
 - [Platformio for VS](https://docs.platformio.org/en/latest/integration/ide/visualstudio.html)
 
 - [DRV2605L Documentation](https://www.ti.com/lit/ds/symlink/drv2605l.pdf?ts=1672415752878)
-  
-- 
-
-
-``` cpp
-function test() {
-  console.log("notice the blank line before this function?");
-}
-```

@@ -78,8 +78,11 @@ void loop() {
     std::shared_ptr<ActuatorERM> ac_5 =
         std::make_shared<ActuatorERM>(driver_5, 2, 2.5, "myERM_2");
 
+/*
+All in-build effect available for the DRV2605L can be found in DRV2605L_EFFECTS.h file
+*/
     std::shared_ptr<PatternDRV2605L> p_2 =
-        std::make_shared<PatternDRV2605L>(47);
+        std::make_shared<PatternDRV2605L>(STRONG_CLICK_30);
 
     HapticDevice test_hand({ac_1, ac_2, ac_3, ac_4, ac_5});
 
@@ -135,8 +138,11 @@ void loop() {
       delay(1000);
     }
 
-    // Custom Pulse Width Mudulation that specifies duration and status (1 =
-    // true = ON or 0 = false = OFF)
+    /*
+        Custom Pulse Width Mudulation that specifies
+        duration in miliseconds (in this example 100ms and 50ms)
+        and status (1 = true = ON or 0 = false = OFF)
+    */
     std::vector<ModulationPWM> modulationPWM_1 = {
         {100, true}, {50, false}, {100, true},
         {50, false}, {100, true}, {50, false},
