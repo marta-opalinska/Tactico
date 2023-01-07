@@ -1,6 +1,9 @@
 /** Copyright 2022 <Marta Opalinska> **/
 
 // DRV2605L evaluation board registers
+// The file inpired by Adafruit DRV2605 Library available here:
+// https://github.com/adafruit/Adafruit_DRV2605_Library
+
 #ifndef LIB_TACTICO_SRC_DRV2605L_REG_H_
 
 #define LIB_TACTICO_SRC_DRV2605L_REG_H_
@@ -65,6 +68,8 @@
 
 #define WAIT_BETWEEN_EFFECTS_MULTIPLIER 0.1
 #define WAIT_EFFECT_MSB 128
-#define TEST_WAIT_BETWEEN_EFFECTS (WAIT_EFFECT_MSB + WAIT_BETWEEN_EFFECTS_MULTIPLIER * 30)  // MSB + 10ms x 30 = 300 ms delay
+#define TEST_WAIT_BETWEEN_EFFECTS \
+  (WAIT_EFFECT_MSB +              \
+   WAIT_BETWEEN_EFFECTS_MULTIPLIER * 30)  // MSB + 10ms x 30 = 300 ms delay
 
 #endif  // LIB_TACTICO_SRC_DRV2605L_REG_H_

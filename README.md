@@ -2,10 +2,35 @@
 Tactico is a **haptics framework for embedded devices**. It supports multiple embedded platforms and actuator types.
 
 ## Table of Contents
-1. Introduction 
-2. Currently Supported Hardware
-3. Framework Architecture 
-4. Code Examples
+
+- [Tactico Framework](#tactico-framework)
+  - [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Currently Supported Hardware](#currently-supported-hardware)
+- [Before you start](#before-you-start)
+- [Getting Started](#getting-started)
+- [Framework Architecture](#framework-architecture)
+  - [Actuator Class](#actuator-class)
+    - [Creating An Actuator](#creating-an-actuator)
+  - [Actuator Driver Class](#actuator-driver-class)
+    - [Creating An Actuator Driver](#creating-an-actuator-driver)
+  - [Pattern \& Step Classes](#pattern--step-classes)
+    - [Pattern](#pattern)
+      - [Creating a Pattern](#creating-a-pattern)
+    - [Step](#step)
+      - [Creating a Step](#creating-a-step)
+  - [Action Class](#action-class)
+  - [Haptic Device Class](#haptic-device-class)
+  - [Controller Class](#controller-class)
+- [Code examples](#code-examples)
+  - [Basic](#basic)
+    - [Creating An Actuator Driver](#creating-an-actuator-driver-1)
+    - [Assiging An Actuator](#assiging-an-actuator)
+    - [Creating A Pattern](#creating-a-pattern-1)
+    - [Creating an action Step](#creating-an-action-step)
+    - [Creating an Action](#creating-an-action)
+    - [Creating a Haptic Device](#creating-a-haptic-device)
+- [Useful Links](#useful-links)
 
 # Introduction
 
@@ -158,10 +183,7 @@ std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
 
 ## Pattern & Step Classes
 
-![image info](./docs/pattern_step_class.png)
-*Fig.4. Haptic Pattern and Step classes.*
-
-**Pattern**
+### Pattern
 
 Some patterns are only suitable for a specific actuator or an actuator driver (see Tab.1).
 
@@ -174,24 +196,32 @@ Some patterns are only suitable for a specific actuator or an actuator driver (s
 
 Two available patterns represent entirely different approaches. **DRV2605L Pattern** is simply holding an index of the pattern that will be played from the library, while the PWM pattern is more complex. **PWM pattern** is created manually by the user with a ModulationPWM structure. The modulation is defined by the duration of the pulse and if it is a binary 1 or 0 pulse.
 
-The most significant advantage of the Pattern class is that it can be assigned to many actuators simultaneously. The pattern instance is **created once**, and all of the actuators of a suitable type can use it. 
-
 ![image info](./docs/modulation_explanation.png)
 *Fig.5. The explanation of ModulationPWM structure.*
 
 
+The most significant advantage of the Pattern class is that it can be assigned to many actuators simultaneously. The pattern instance is **created once**, and all of the actuators of a suitable type can use it. 
 
-**Step**
+
+![image info](./docs/pattern_class.png)
+*Fig.4. Pattern class.*
+
+#### Creating a Pattern
+
+### Step
 
 **Step** can be considered an individual activation of the actuator or a Wait command. Steps are a data class that only stores information about the objects involved in the step, and to play them, they need to be combined into the Action.
 
 The step can be configured to be played in parallel. This functionality is available only for actuators that drivers allow pre-run configuration (e.g. DRV2605L but **NOT** DriverGPIO). The step parallelisation property needs to be **assigned when the step is created**!
 
 More about Steps implementation combinations can be found in [Action Class section](#action).
-## Action Class
 
-![image info](./docs/action_class.png)
-*Fig.6. Example of creating parallel and non-parallel actions. The step parallelisation property needs to be assigned when the step is created!*
+![image info](./docs/step_class.png)
+*Fig.5. Step class.*
+
+#### Creating a Step
+
+## Action Class
 
 The **Action** class combines previously explained Steps into a sequence of haptic effects. All available actuator types and patterns can be combined to create a new haptic experience. 
 
@@ -209,14 +239,17 @@ To keep the Action clean, it is recommended to call **resetPreviousConfiguration
 
 An Action can become a part of a Haptic Device. 
 
-## Haptic Device Class
+![image info](./docs/action_class.png)
+*Fig.6. Example of creating parallel and non-parallel actions. The step parallelisation property needs to be assigned when the step is created!*
 
-![Haptic Device Class Image](./docs/haptic_device_class.png)
-*Fig.7. A graphical representation of a haptic device with Actuators and Actions assigned.*
+## Haptic Device Class
 
 You can combine all the above classes into one **Haptic Device** entity. In that way, you can control all the actuators and actions simultaneously. 
 
 As previously explained in the Action section, it is recommended to reset the previous pre-run configuration if not used subsequently. When using Haptic Device, you can make sure that all actuators have clean pre-run configuration by using **resetActuatorsPreRunConfiguration()**.
+
+![Haptic Device Class Image](./docs/haptic_device_class.png)
+*Fig.7. A graphical representation of a haptic device with Actuators and Actions assigned.*
 
 ## Controller Class
 
