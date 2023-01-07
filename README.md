@@ -41,7 +41,7 @@ All these commands tie the framework code to the utilised physical hardware.
 ![image info](./documentation/class_diagram_with_categories.png)
 *Fig.1. A detailed view of the framework architecture.*
 
-After cloning the repository, the detailed code documentation can be found in ***documentation\html\index.html***. All classes with their methods and fields are thoroughly explained in there.
+After cloning the repository, the detailed code documentation can be displayed by opening ***documentation\html\index.html*** in the web browser. All classes with their methods and fields are thoroughly explained in there.
 
 As shown in the above diagram, numerous classes are involved in the framework. Below you will find a general explanation of each of them.
 
@@ -55,6 +55,39 @@ As shown in the above diagram, numerous classes are involved in the framework. B
 Currently, two types of Actuators can be created - **ActuatorERM** and **ActuatorLRA**. They share most of the properties but also have some specific ones. It is essential to check which actuator you use so that the Actuator Driver is compatible with it (the driver can work differently depending on the actuator type).
 
 The framework supports testing the connected actuators by calling the **test()** command. It will send a single vibration test to the motor. It is highly recommended to test the hardware before processing with further framework implementation. 
+
+## Creating An Actuator
+
+- ERM Actuator
+``` cpp
+// the standard DC voltage for the actuator
+float ratedVoltage = 2.0;
+// the maximum allowable DC voltage
+float overdriveVoltage = 2.5;
+// optional - custom name will be prited alongside logs refering to the
+// actuator
+std::string customName = "myERM_1";
+
+std::shared_ptr<ActuatorERM> actuator_1 = std::make_shared<ActuatorERM>(
+    driver_1, ratedVoltage, overdriveVoltage, customName);
+
+```
+- LRA Actuator
+``` cpp
+// the standard DC voltage for the actuator
+float ratedVoltage = 2.0;
+// the maximum allowable DC voltage
+float overdriveVoltage = 2.5;
+// LRA actuator resonant frequency (can be found in the datasheet)
+int resonantFrequency = 170;
+// optional - custom name will be prited alongside logs refering to the
+// actuator
+std::string customName = "myLRA_1";
+
+std::shared_ptr<ActuatorLRA> actuator_2 =
+    std::make_shared<ActuatorLRA>(driver_2, ratedVoltage, overdriveVoltage,
+                                  resonantFrequency, customName);
+```
 
 ## Actuator Driver Class
 
@@ -76,6 +109,32 @@ The DRV2605LEVM-MD driver **requires I2C communication** - connection of three p
 It **needs pre-run configuration** before any haptic effect is played! The configuration allows the user to store an effect sequence in the physical DRV2605L driver's memory and play it when the "GO" pin is triggered (the "GO" pin needs to go HIGH). 
 
 Therefore, when this type of actuator is used as a part of the **Action** class instance, the **configure() function needs to be called before play()** (or configureAndPlay(), which triggers the configuration and then the play of an Action). The advantage of the pre-run configuration is that Action Steps can be triggered in parallel (more about it in [Action Class section](#action)). 
+
+### Creating An Actuator Driver
+
+All the Drivers, Actuators, Patterns and Action instances are created with the use of **shared pointer**. In that way it is easier to manage them as they are passed to various functions in the runtime. 
+
+- GPIO Driver
+
+``` cpp
+
+// pin that is connected to the actuator and supports Pulse Width-Modulation
+int driverPinGPIO = 2;
+// GPIO Driver - uses PMW patterns
+std::shared_ptr<ActuatorDriverGPIO> driver_1 = 
+    std::make_shared<ActuatorDriverGPIO>(driverPinGPIO);
+```
+- I2C Driver - DRV2605LEVM-MD
+``` cpp
+// DRV2605L evaluation board contains multiple DRV2605L drivers.
+// Therefore the driver ID need to be specified.
+int driverID = 0;
+int driverGoPin = 12;
+
+// DRV2605L Driver - communicated through I2C and uses DRV2605L effect library pattern
+std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
+    std::make_shared<ActuatorDriverDRV2605LEVM>(driverID, driverGoPin);
+```
 
 ## Pattern & Step Classes
 
