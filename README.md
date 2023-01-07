@@ -1,5 +1,5 @@
 # Tactico Framework
-Tactico is a **haptics framework for embedded devices**. It supports multiple embedded platforms and actuators types.
+Tactico is a **haptics framework for embedded devices**. It supports multiple embedded platforms and actuator types.
 
 ## Table of Contents
 1. Introduction - Introduction covering supported devices
@@ -8,7 +8,7 @@ Tactico is a **haptics framework for embedded devices**. It supports multiple em
 
 # Introduction
 
-**Tactico** is a hardware independent C++  framework for **haptic device setup and control**. It can be used with different types of actuators. Currently the framework  supports LRA and ERM motors, but the modular architecture makes a new hardware integration easy. The control module can be wired or wireless depending on your preference. 
+**Tactico** is a hardware independent C++  framework for **haptic device setup and control**. It is suitable for different types of actuators and actuator drivers. Currently, the framework supports LRA and ERM motors, but the modular architecture makes new hardware integration easy. The control module can be wired or wireless, depending on your preference. 
 
 ## Currently Supported Hardware
 
@@ -20,9 +20,9 @@ Tactico is a **haptics framework for embedded devices**. It supports multiple em
 
 # Before you start
 
-Remember that the platform is **hardware agnostic** so there are some function that you as a user need to implement in order for the framework to work correctly.
+Remember that the platform is **hardware agnostic**, so there are some functions that you as a user need to implement for the framework to work correctly.
 
-Functions to implement are placed in **Tactico\src\HardwareLayer.cpp**:
+Functions to implement can be found in **Tactico\src\HardwareLayer.cpp**:
 
 - void **waitFor**(int miliseconds) 
 - void **printTactico**(const std::string s) 
@@ -33,58 +33,64 @@ Functions to implement are placed in **Tactico\src\HardwareLayer.cpp**:
 - void **i2c_endTransmission**() 
 - int **i2c_read**(int address, int reg, int numberBytes) 
 
-All these command tie the framework code to the physical hardware that is used.
+All these commands tie the framework code to the utilised physical hardware.
 
 # Framework Architecture
 
 ![image info](./documentation/class_diagram_with_categories.png)
 *Fig.1. A detailed view of the framework architecture.*
 
-The detailed code documentation can be found in ***documentation\html\index.html***. In there you will find all classes with their methords and fields thoroughly explained. 
+The detailed code documentation can be found in ***documentation\html\index.html***. In there, all classes with their methods and fields are thoroughly explained. 
 
-## Classes
+As shown in the above diagram, numerous classes are involved in the framework. Below you will find a general explanation of each of them.
 
-As you could see on the above diagram there are multiple classes involved in the framework. Now we will go through all of them one by one.
-
-### Actuator
+## Actuator Class
 
 ![image info](./documentation/actuator_class.png)
-*Fig.2. An example of an actuator alongside the infomration from the datasheet that will be needed for the implementation.*
+*Fig.2. An example of an actuator alongside the information from the datasheet that will be needed for the implementation.*
 
-**Actuator** class is the center point of the framework - it can be consider as a digital twin of the physical actuator. All the most important properties of an actuator need to be defined in the object of this class - **type** (LRA, ERM etc.), **rated voltage**, **peak voltage**, **resonant frequency** (for LRA) and an **Actuator Driver** instance that controls it.  
+**Actuator** class is the centre point of the framework - it can be considered a digital twin of the physical actuator. All the most important properties of an actuator need to be defined in the object of this class - **type** (LRA, ERM etc.), **rated voltage**, **peak voltage**, **resonant frequency** (for LRA) and an **Actuator Driver** instance, that controls it.  
 
-Currently two types of Actuators can be created - **ActuatorERM** and **ActuatorLRA**. They share most of the properties but they also have some specific ones. It is important to check which actuator you use so that the Actuator Driver is compatable with it (the driver can work differently depending on the actuator type).
+Currently, two types of Actuators can be created - **ActuatorERM** and **ActuatorLRA**. They share most of the properties but also have some specific ones. It is essential to check which actuator you use so that the Actuator Driver is compatible with it (the driver can work differently depending on the actuator type).
 
-### Actuator Driver
+The framework supports testing the connected actuators by calling the **test()** command. It will send a single vibration test to the motor. It is highly recommended to test the hardware before processing with further framework implementation. 
+
+## Actuator Driver Class
 
 ![image info](./documentation/driver_class.png)
 *Fig.3. Currently supported drivers.*
 
-**Actuator Driver** class defines the way in which the motor is performing a haptic effect. Currently there are user can choose from two available drivers - simple GPIO driver and driver on DRV2605LEVM-MD.
+**Actuator Driver** class defines the way in which the motor performs a haptic effect. Currently, users can choose from two available drivers - a simple GPIO driver and a driver from the DRV2605LEVM-MD board.
 
 **GPIO Driver**
 
-This is the type of a simple driver where the motor is connected to a single GPIO output and controlled using **Pulse Width Modulation Pattern**. To use this driver the following functions from **HardwareLayer.cpp** need to be implemented: waitFor, printTactico, setPinStatusTactico and setPinModeTactico from (more about it [here](#before-you-start)). 
+GPIO Driver is a simple driver with the motor connected to a single GPIO output and controlled using **Pulse Width Modulation Pattern**. In order to use this driver, the following functions from **HardwareLayer.cpp** need to be implemented: waitFor, printTactico, setPinStatusTactico and setPinModeTactico from (more about it [here](#before-you-start)). 
 
 **DRV2605LEVM-MD**
 
-This type of the driver **requires I2C communication** - connection of three pins (CLC, SDA and GND), as well as implementation of I2C related commands in **HardwareLayer.cpp** file (more about it [here](#before-you-start)). In this particular class there is a forth hardware connection needed - GPIO **"GO" pin** that will trigger the haptic effect. 
+The DRV2605LEVM-MD driver **requires I2C communication** - connection of three pins (CLC, SDA and GND), as well as the implementation of I2C related commands in **HardwareLayer.cpp** file (more about it in [Before you start section](#before-you-start)). In this particular class, a fourth hardware connection is needed - GPIO **"GO" pin** that will trigger the haptic effect. 
 
 **ActuatorDriverDRV2605LEVM** uses the DRV2605L list of registers (specified in **DRV2605L_REG.h**) and the list of haptic effects (**DRV2605L_EFFECTS.h**). 
 
-This type od actuator driver **need preconfiguration** before any haptic effect is played! The preconfiguration allows the user to store an effect sequence in the physical DRV2605L driver's memory and play it when the "GO" pin is triggered ("GO" pin need to go HIGH). 
+It **needs pre-run configuration** before any haptic effect is played! The configuration allows the user to store an effect sequence in the physical DRV2605L driver's memory and play it when the "GO" pin is triggered (the "GO" pin needs to go HIGH). 
 
-Therefore, when this type of actuator is used as a part of the **Action** class instance, **configure() function need to be called before play()** (or configureAndPlay() which triggers the configuration and then the play of an Action). The advantage of the preconfiguration is that in this way Action Steps can be triggered in parallel (more about it [here](#action)). 
+Therefore, when this type of actuator is used as a part of the **Action** class instance, the **configure() function needs to be called before play()** (or configureAndPlay(), which triggers the configuration and then the play of an Action). The advantage of the pre-run configuration is that Action Steps can be triggered in parallel (more about it in [Action Class section](#action)). 
 
-### Pattern & Step
+## Pattern & Step Classes
+
+![image info](./documentation/pattern_step_class.png)
+*Fig.4. Haptic Pattern and Step classes.*
+
+
+## Pattern & Step Classes
 
 ![image info](./documentation/pattern_step_class.png)
 *Fig.4. Haptic Pattern and Step classes.*
 
 **Pattern**
 
-Not every pattern is suitable for every actuator or even actuator driver. 
-PWM Pattern and DRV2605L pattern type. The table belows presents what patterns are available for each actuator-driver combination.
+Not every pattern is suitable for every actuator or even the actuator's driver. 
+The table below presents what patterns are available for each actuator-driver combination.
 
 | Actuator/Driver | Actuator Driver DRV2605LEVM | Actuator Driver GPIO |
 | --------------- | --------------------------- | -------------------- |
@@ -93,23 +99,42 @@ PWM Pattern and DRV2605L pattern type. The table belows presents what patterns a
 
 *Tab. 1. Table representing what available pattern can be used with a specific actuator-driver combination.*
 
-Two available patterns represent entirely different approach. **DRV2605L Pattern** is simply holding an index of the pattern that will be played from the library, while PWM pattern is more complex. PWM pattern is created by hand by the user with Modulation structure. The modulation is defined by the duration of the pulse and if it is a binary 1 or 0 pulse.
+Two available patterns represent entirely different approaches. **DRV2605L Pattern** is simply holding an index of the pattern that will be played from the library, while the PWM pattern is more complex. **PWM pattern** is created manually by the user with a ModulationPWM structure. The modulation is defined by the duration of the pulse and if it is a binary 1 or 0 pulse.
+
+The most significant advantage of the Pattern class is that it can be assigned to many actuators simultaneously. The pattern instance is **created once**, and all of the actuators of a suitable type can use it. 
 
 ![image info](./documentation/modulation_explanation.png)
 *Fig.5. The explanation of ModulationPWM structure.*
 
 **Step**
 
-Indivitudual activation of the actuator or wait command.
+**Step** can be considered an individual activation of the actuator or a Wait command. Steps are a data class that only stores information about the objects involved in the step, and to play them, they need to be combined into the Action.
 
-### Action
+The step can be configured to be played in parallel. This functionality is available only for actuators that drivers allow pre-run configuration (e.g. DRV2605L but **NOT** DriverGPIO). The step parallelisation property needs to be **assigned when the step is created**!
 
-**Action**
+More about Steps implementation combinations can be found in [Action Class section](#action).
+
+## Action Class
+
+![image info](./documentation/action_class.png)
+*Fig.6. Example of creating parallel and non-parallel actions. The step parallelisation property needs to be assigned when the step is created!*
+
+The **Action** class combines previously explained Steps into a sequence of haptic effects. All actuator types and patterns can be combined to create a new haptic experience. 
+
+It is necessary to configure the actuator with pre-run configuration before the run! 
+
+The step parallelisation property needs to be assigned when the step is created!
+
 Combines steps
 
-### Haptic Device
-You can combine all the above classes into one device. In that way you can control all the actuators and action at the same time.
+The advantage of having actions is that it is easier to repeat them and assign them meaning.
 
+## Haptic Device Class
+You can combine all the above classes into one device. In that way, you can control all the actuators and actions simultaneously.
+
+## Controller Class
+
+The framework supports the creation of a custom external controller to control the Haptic Device behaviour. Currently, no controller is implemented, but the framework's flexibility allows it to be easily added. 
 
 # Code examples  
 ## Basic
@@ -189,6 +214,11 @@ function test() {
 # Useful Links
  
 - [Platformio for VS](https://docs.platformio.org/en/latest/integration/ide/visualstudio.html)
+
+- [DRV2605L Documentation](https://www.ti.com/lit/ds/symlink/drv2605l.pdf?ts=1672415752878)
+  
+- 
+
 
 ``` cpp
 function test() {
