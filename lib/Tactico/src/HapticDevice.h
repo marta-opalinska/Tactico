@@ -167,11 +167,11 @@ class HapticDevice {
    *
    * @param actionName name of the action to configure
    */
-  void configure(std::string actionName);
+  void configureAction(std::string actionName);
 
   /**
    * @brief Play the action. If any drivers with m_needsPreconfigration flag
-   * set up, a configure() need to be called first!
+   * set up, a configureAction() need to be called first!
    *
    * @param actionName ame of the action to play
    */
@@ -180,7 +180,7 @@ class HapticDevice {
   /**
    * @brief Configures the action and plays it.
    *
-   * @param actionName ame of the action to configure and play
+   * @param actionName ame of the action to configureAction and play
    */
   void configureAndPlayAction(std::string actionName);
 

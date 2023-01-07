@@ -84,7 +84,7 @@ void HapticDevice::addAction(std::shared_ptr<Action> deviceAction,
   this->m_deviceActions[actionName] = deviceAction;
 }
 
-void HapticDevice::configure(std::string actionName) {
+void HapticDevice::configureAction(std::string actionName) {
   // checking if an action exists
   if (m_deviceActions.count(actionName)) {
     this->m_deviceActions[actionName]->configure();

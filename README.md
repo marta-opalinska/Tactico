@@ -90,17 +90,34 @@ Before creating an Actuator object you need to have a Actuator Driver object cre
 
 // ...
 
+// ----------------- ERM WITH GPIO DRIVER
 // the standard DC voltage for the actuator
-float ratedVoltage = 2.0;
+float ratedVoltage_ERM_1 = 2.0;
 // the maximum allowable DC voltage
-float overdriveVoltage = 2.5;
+float overdriveVoltage_ERM_1 = 2.5;
 // optional - custom name will be prited alongside logs refering to the
 // actuator
-std::string customName = "myERM_1";
+std::string customName_ERM_1 = "myERM_1";
 
-std::shared_ptr<ActuatorERM> actuator_1 = std::make_shared<ActuatorERM>(
-    driver_1, ratedVoltage, overdriveVoltage, customName);
+std::shared_ptr<ActuatorERM> actuator_ERM_1 = std::make_shared<ActuatorERM>(
+    driver_GPIO, ratedVoltage_ERM_1, overdriveVoltage_ERM_1, customName_ERM_1);
 
+// It is recommended to test the connection with the actuator before
+// developing the code further - the actuator should vibrate
+actuator_ERM_1->test();
+
+// ----------------- ERM WITH DRV2605LEVM DRIVER
+float ratedVoltage_ERM_2 = 2.0;
+float overdriveVoltage_ERM_2 = 2.5;
+
+std::string customName_ERM_2 = "myERM_2";
+
+std::shared_ptr<ActuatorERM> actuator_ERM_2 = std::make_shared<ActuatorERM>(
+    driver_DRV2605L_1, ratedVoltage_ERM_2, overdriveVoltage_ERM_2, customName_ERM_2);
+
+// It is recommended to test the connection with the actuator before
+// developing the code further - the actuator should vibrate
+actuator_ERM_2->test();
 ```
 - LRA Actuator
 ``` cpp
@@ -109,18 +126,23 @@ std::shared_ptr<ActuatorERM> actuator_1 = std::make_shared<ActuatorERM>(
 // ...
 
 // the standard DC voltage for the actuator
-float ratedVoltage = 2.0;
+float ratedVoltage_LRA = 2.0;
 // the maximum allowable DC voltage
-float overdriveVoltage = 2.5;
+float overdriveVoltage_LRA = 2.5;
 // LRA actuator resonant frequency (can be found in the datasheet)
-int resonantFrequency = 170;
+int resonantFrequency_LRA = 170;
 // optional - custom name will be prited alongside logs refering to the
 // actuator
-std::string customName = "myLRA_1";
+std::string customName_LRA = "myLRA_1";
 
-std::shared_ptr<ActuatorLRA> actuator_2 =
-    std::make_shared<ActuatorLRA>(driver_2, ratedVoltage, overdriveVoltage,
-                                  resonantFrequency, customName);
+std::shared_ptr<ActuatorLRA> actuator_LRA = std::make_shared<ActuatorLRA>(
+    driver_DRV2605L_2, ratedVoltage_LRA, overdriveVoltage_LRA,
+    resonantFrequency_LRA, customName_LRA);
+
+// It is recommended to test the connection with the actuator before
+// developing the code further - the actuator should vibrate
+actuator_LRA->test();
+
 ```
 
 ## Actuator Driver Class
@@ -156,25 +178,35 @@ All the Drivers, Actuators, Patterns and Action instances are created with the u
 // ...
 
 // pin that is connected to the actuator and supports Pulse Width-Modulation
-int driverPinGPIO = 2;
+int driverPinGPIO = 22;
 // GPIO Driver - uses PMW patterns
-std::shared_ptr<ActuatorDriverGPIO> driver_1 = 
+std::shared_ptr<ActuatorDriverGPIO> driver_GPIO =
     std::make_shared<ActuatorDriverGPIO>(driverPinGPIO);
 ```
+
 - I2C Driver - DRV2605LEVM-MD
 ``` cpp
+
 #include "Tactico.h"
 
 // ...
 
 // DRV2605L evaluation board contains multiple DRV2605L drivers.
 // Therefore the driver ID need to be specified.
-int driverID = 0;
+int driverID_1 = 0;
+// the pin connected to DRV2605LEVM-MD board that triggers the haptic effects
 int driverGoPin = 12;
 
-// DRV2605L Driver - communicated through I2C and uses DRV2605L effect library pattern
-std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
-    std::make_shared<ActuatorDriverDRV2605LEVM>(driverID, driverGoPin);
+// DRV2605L Driver - communicated through I2C
+//                    uses DRV2605L effect library pattern
+std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_DRV2605L_1 =
+    std::make_shared<ActuatorDriverDRV2605LEVM>(driverID_1, driverGoPin);
+
+// Another driver from DRV2605LEVM board - this time with driver ID 1
+int driverID_2 = 1;
+
+std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_DRV2605L_2 =
+    std::make_shared<ActuatorDriverDRV2605LEVM>(driverID_2, driverGoPin);
 ```
 
 ## Pattern & Step Classes
@@ -221,8 +253,9 @@ std::vector<ModulationPWM> modulationPWM_1 = {
     {50, false}, {100, true}, {50, false},
 };
 
-std::shared_ptr<PatternPWM> pattern_1 =
+std::shared_ptr<PatternPWM> pattern_PWM_1 =
     std::make_shared<PatternPWM>(modulationPWM_1);
+
 ```
 
 - DRV2605L Pattern (using in-build library of haptic effects)
@@ -232,20 +265,25 @@ std::shared_ptr<PatternPWM> pattern_1 =
 
 // ...
 
+
 /*
-All in-build effect available for the DRV2605L can be found in DRV2605L_EFFECTS.h file
+All in-build effect available for the DRV2605L can be found in
+DRV2605L_EFFECTS.h file
 */
-std::shared_ptr<PatternDRV2605L> pattern_2 =
-    std::make_shared<PatternDRV2605L>(STRONG_CLICK_30);
+std::shared_ptr<PatternDRV2605L> pattern_DRV2605L_CLICK =
+    std::make_shared<PatternDRV2605L>(STRONG_CLICK_100);
+
+std::shared_ptr<PatternDRV2605L> pattern_DRV2605L_BUZZ =
+    std::make_shared<PatternDRV2605L>(STRONG_BUZZ_100);
 ```
 
 ### Step
 
-**Step** can be considered an individual activation of the actuator or a Wait command. Steps are a data class that only stores information about the objects involved in the step, and to play them, they need to be combined into the Action.
+**Step** can be considered an individual activation of the actuator or a Wait command. Steps are a data class that only stores information about the objects involved in the step, and to play them, they need to be combined into the Action - more about it in the [Action Class section](#action).
 
-The step can be configured to be played in parallel. This functionality is available only for actuators that drivers allow pre-run configuration (e.g. DRV2605L but **NOT** DriverGPIO). The step parallelisation property needs to be **assigned when the step is created**!
+The Step can be configured to be **played in parallel** with other steps. This functionality is available only for actuators that drivers allow pre-run configuration (e.g. DRV2605L but **NOT** DriverGPIO). That means that the software will store the activation sequence in the physical driver's memory and simply triggers it with a GO pin. The value of driver's **m_needsPreconfigration** field indicates if the driver can be configered priour the run. The Step parallelisation property needs to be set during the Step creation by assigning *true* to **isParallel** field. 
 
-More about Steps implementation combinations can be found in [Action Class section](#action).
+More about Steps sequences can be found in [Action Class section](#action).
 
 ![image info](./docs/step_class.png)
 *Fig.5. Step class.*
@@ -258,16 +296,54 @@ More about Steps implementation combinations can be found in [Action Class secti
 
 // ...
 
-// duration of the wait in miliseconds
-int waitTime = 250;
+// duration of the wait in miliseconds - 200ms
+int waitTime_200 = 200;
 
-std::shared_ptr<WaitStep> s_wait = std::make_shared<WaitStep>(waitTime);
+std::shared_ptr<WaitStep> s_wait_200 =
+    std::make_shared<WaitStep>(waitTime_200);
 
+// duration of the wait in miliseconds - 400ms
+int waitTime_400 = 200;
+
+std::shared_ptr<WaitStep> s_wait_400 =
+    std::make_shared<WaitStep>(waitTime_400);
 ```
 
 
-- Actuator Step
-  - Non-parallel Step - step will be performed one by one
+- Non-parallel Actuator Steps - step will be performed one after another
+``` cpp
+#include "Tactico.h"
+
+// ...
+
+// step that combines actuator_ERM_1 with pattern pattern_PWM_1 -
+// This step is not parallel. Step's constructor field 'isParallel' is FALSE
+// by default. No need to specify it.
+std::shared_ptr<ActuatorStep> s_ERM_1_PWM_1 =
+    std::make_shared<ActuatorStep>(actuator_ERM_1, pattern_PWM_1);
+
+// step that combines s_ERM_2_DRV2605L_BUZZ with pattern_DRV2605L_CLICK
+// This step is not parallel.
+std::shared_ptr<ActuatorStep> s_ERM_2_DRV2605L_BUZZ =
+    std::make_shared<ActuatorStep>(actuator_ERM_2, pattern_DRV2605L_BUZZ);
+```
+- Parallel Actuator Steps - steps will be performed in parallel (simutanously) to other parallel steps.
+
+``` cpp
+#include "Tactico.h"
+
+// ...
+bool isParallel_yes = true;
+// step that combines actuator_ERM_2 with pattern_DRV2605L_CLICK - this step
+// is run in parallel
+std::shared_ptr<ActuatorStep> s_ERM_2_DRV2605L_CLICK =
+    std::make_shared<ActuatorStep>(actuator_ERM_2, pattern_DRV2605L_CLICK,
+                                    isParallel_yes);
+
+std::shared_ptr<ActuatorStep> s_LRA_DRV2605L_CLICK =
+    std::make_shared<ActuatorStep>(actuator_LRA, pattern_DRV2605L_CLICK,
+                                    isParallel_yes);
+```
 
 ## Action Class
 
@@ -288,20 +364,19 @@ To keep the Action clean, it is recommended to call **resetPreviousConfiguration
 An Action can become a part of a Haptic Device. 
 
 ![image info](./docs/action_class.png)
-*Fig.6. Example of creating parallel and non-parallel actions. The step parallelisation property needs to be assigned when the step is created!*
+*Fig.6. Example of creating parallel and non-parallel actions. The step parallelisation property needs to be assigned when the step is created.*
 
 #### Creating An Action
 
-- Wait Step (pauses all actuators for a specific time duration)
 ``` cpp
 #include "Tactico.h"
 
 // ...
 
-// duration of the wait in miliseconds
-int waitTime = 250;
+    std::shared_ptr<Action> go_forward = std::make_shared<Action>();
 
-std::shared_ptr<WaitStep> s_wait = std::make_shared<WaitStep>(waitTime);
+    test_ac->setSteps({s_PWM, s_ac2, s_ac3, s_wait, s_ac4, s_ac5, s_wait, s_ac2,
+                       s_ac3, s_wait, s_ac4, s_wait, s_ac5, s_PWM});
 
 ```
 
@@ -317,7 +392,7 @@ As previously explained in the Action section, it is recommended to reset the pr
 
 #### Creating A Haptic Device
 
-- Wait Step (pauses all actuators for a specific time duration)
+- Wait Step (pauses all actuators for a specific duration of time)
 ``` cpp
 #include "Tactico.h"
 
