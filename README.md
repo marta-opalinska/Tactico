@@ -163,8 +163,7 @@ std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
 
 **Pattern**
 
-Not every pattern is suitable for every actuator or even the actuator's driver. 
-The table below presents what patterns are available for each actuator-driver combination.
+Some patterns are only suitable for a specific actuator or an actuator driver (see Tab.1).
 
 | Actuator/Driver | Actuator Driver DRV2605LEVM | Actuator Driver GPIO |
 | --------------- | --------------------------- | -------------------- |
