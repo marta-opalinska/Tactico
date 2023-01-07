@@ -36,8 +36,11 @@ Functions to implement can be found in **Tactico\src\HardwareLayer.cpp**:
 
 All these commands tie the framework code to the utilised physical hardware.
 
-# Framework Architecture
+# Getting Started 
 
+An example main file can be found in *src/main.cpp*.
+
+# Framework Architecture
 
 After cloning the repository, the detailed code documentation can be displayed by opening ***documentation\html\index.html*** in the web browser. All classes with their methods and fields are thoroughly explained in there.
 
@@ -57,7 +60,7 @@ The framework supports testing the connected actuators by calling the **test()**
 ![image info](./documentation/actuator_class.png)
 *Fig.2. An example of an actuator alongside the information from the datasheet that will be needed for the implementation.*
 
-## Creating An Actuator
+### Creating An Actuator
 
 - ERM Actuator
 ``` cpp
