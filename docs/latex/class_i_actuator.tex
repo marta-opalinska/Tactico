@@ -1,0 +1,237 @@
+\hypertarget{class_i_actuator}{}\doxysection{IActuator Class Reference}
+\label{class_i_actuator}\index{IActuator@{IActuator}}
+Inheritance diagram for IActuator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_i_actuator}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_i_actuator_ae257b0282d029a5830c0261487260ec7}{IActuator}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}} $>$ driver, float rated\+Voltage, float overdrive\+Voltage, const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_i_actuator}{IActuator}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_i_actuator_aac505214a9fc2c5f4998a301fb302e3b}{IActuator}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}} $>$ driver, float rated\+Voltage, float overdrive\+Voltage)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_i_actuator}{IActuator}} object. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_i_actuator_af3b083249fcc46baf0e89ebc8d7f26ee}{play}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_pattern}{IPattern}} $>$ pattern)=0
+\begin{DoxyCompactList}\small\item\em play a specific pattern on the actuator \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_i_actuator_a477807899a0b6b8320ea3a462013b8f6}{test}} ()=0
+\begin{DoxyCompactList}\small\item\em play a test pattern to check if the actuator works. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}} $>$ \mbox{\hyperlink{class_i_actuator_a14bab9a6e6da8786af13803fc98d8793}{get\+Driver}} ()=0
+\begin{DoxyCompactList}\small\item\em Return a pointer to the actuator\textquotesingle{}s Actuator\+Driver. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_i_actuator_ac13d1e5781b9ae09e01d6673ae11fc64}{set\+Driver}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}} $>$ driver)=0
+\begin{DoxyCompactList}\small\item\em Assign a new Actuator\+Driver object to the actuator. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_i_actuator_abab02ae55c710150cce68a2d340b5eb8}{config\+Driver}} ()=0
+\begin{DoxyCompactList}\small\item\em Trigger driver configuration. \end{DoxyCompactList}\item 
+virtual Actuator\+Type \mbox{\hyperlink{class_i_actuator_a6381ad622486becebca75b5ba3522096}{get\+Type}} ()=0
+\begin{DoxyCompactList}\small\item\em Get the object type (Actuator\+Type enum) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_i_actuator_ab537416825fa613bf46d8da2b9698394}{m\+\_\+name}}
+\item 
+float \mbox{\hyperlink{class_i_actuator_a4371f87859b22b43359ed66754177da2}{m\+\_\+rated\+Voltage}}
+\item 
+float \mbox{\hyperlink{class_i_actuator_ad289e18ad2318f7aa3cdd13bd70ef710}{m\+\_\+overdrive\+Voltage}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_i_actuator_a46a2c9418d4d36c1afd343a9df586167}\label{class_i_actuator_a46a2c9418d4d36c1afd343a9df586167}} 
+int {\bfseries id}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}} $>$ \mbox{\hyperlink{class_i_actuator_ad40c1b57f6d77552eb6e4f354f185f1a}{m\+\_\+driver}}
+\item 
+Actuator\+Type \mbox{\hyperlink{class_i_actuator_a433f03e40e72b51d925a31e1d80cfd22}{m\+\_\+type}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_i_actuator_ae257b0282d029a5830c0261487260ec7}\label{class_i_actuator_ae257b0282d029a5830c0261487260ec7}} 
+\index{IActuator@{IActuator}!IActuator@{IActuator}}
+\index{IActuator@{IActuator}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{IActuator()}{IActuator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily IActuator\+::\+IActuator (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}} $>$}]{driver,  }\item[{float}]{rated\+Voltage,  }\item[{float}]{overdrive\+Voltage,  }\item[{const std\+::string \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \mbox{\hyperlink{class_i_actuator}{IActuator}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver} & an shared pointer to the implementation of a Actuator\+Driver instance \\
+\hline
+{\em rated\+Voltage} & actuator\textquotesingle{}s rated voltage \\
+\hline
+{\em overdrive\+Voltage} & actuator\textquotesingle{}s peak voltag \\
+\hline
+{\em name} & actuator name (optional) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_i_actuator_aac505214a9fc2c5f4998a301fb302e3b}\label{class_i_actuator_aac505214a9fc2c5f4998a301fb302e3b}} 
+\index{IActuator@{IActuator}!IActuator@{IActuator}}
+\index{IActuator@{IActuator}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{IActuator()}{IActuator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily IActuator\+::\+IActuator (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}} $>$}]{driver,  }\item[{float}]{rated\+Voltage,  }\item[{float}]{overdrive\+Voltage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct a new \mbox{\hyperlink{class_i_actuator}{IActuator}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver} & an shared pointer to the implementation of a Actuator\+Driver instance \\
+\hline
+{\em rated\+Voltage} & actuator\textquotesingle{}s rated voltage \\
+\hline
+{\em overdrive\+Voltage} & actuator\textquotesingle{}s peak voltag \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_i_actuator_abab02ae55c710150cce68a2d340b5eb8}\label{class_i_actuator_abab02ae55c710150cce68a2d340b5eb8}} 
+\index{IActuator@{IActuator}!configDriver@{configDriver}}
+\index{configDriver@{configDriver}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{configDriver()}{configDriver()}}
+{\footnotesize\ttfamily virtual void IActuator\+::config\+Driver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Trigger driver configuration. 
+
+
+
+Implemented in \mbox{\hyperlink{class_actuator_e_r_m_a2fae5fc9169758644983ec5fc24bc6a0}{Actuator\+ERM}}, and \mbox{\hyperlink{class_actuator_l_r_a_a8a1e2032b994b9cec13ef51f0f3b7a9a}{Actuator\+LRA}}.
+
+\mbox{\Hypertarget{class_i_actuator_a14bab9a6e6da8786af13803fc98d8793}\label{class_i_actuator_a14bab9a6e6da8786af13803fc98d8793}} 
+\index{IActuator@{IActuator}!getDriver@{getDriver}}
+\index{getDriver@{getDriver}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{getDriver()}{getDriver()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}} $>$ IActuator\+::get\+Driver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Return a pointer to the actuator\textquotesingle{}s Actuator\+Driver. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver} & shared pointer to the implementation of an Actuator\+Driver \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_actuator_e_r_m_a993b494cf98600c9912877cbf70810fe}{Actuator\+ERM}}, and \mbox{\hyperlink{class_actuator_l_r_a_a66be7153647ca0e5c796dd7f12e4daf0}{Actuator\+LRA}}.
+
+\mbox{\Hypertarget{class_i_actuator_a6381ad622486becebca75b5ba3522096}\label{class_i_actuator_a6381ad622486becebca75b5ba3522096}} 
+\index{IActuator@{IActuator}!getType@{getType}}
+\index{getType@{getType}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily virtual Actuator\+Type IActuator\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the object type (Actuator\+Type enum) 
+
+\begin{DoxyReturn}{Returns}
+Actuator\+Type 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_actuator_e_r_m_ad966ef187980bf5f06c9233dbabcf089}{Actuator\+ERM}}, and \mbox{\hyperlink{class_actuator_l_r_a_abbaaa452f14ae90861d7c14a0dab2384}{Actuator\+LRA}}.
+
+\mbox{\Hypertarget{class_i_actuator_af3b083249fcc46baf0e89ebc8d7f26ee}\label{class_i_actuator_af3b083249fcc46baf0e89ebc8d7f26ee}} 
+\index{IActuator@{IActuator}!play@{play}}
+\index{play@{play}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{play()}{play()}}
+{\footnotesize\ttfamily virtual bool IActuator\+::play (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_pattern}{IPattern}} $>$}]{pattern }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+play a specific pattern on the actuator 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pattern} & shared pointer to the implementation of a Pattern instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_actuator_e_r_m_a9c59d9a8a7da7c8259841dca5e4fe139}{Actuator\+ERM}}, and \mbox{\hyperlink{class_actuator_l_r_a_a020a34896f1325616f947899b1b16b8e}{Actuator\+LRA}}.
+
+\mbox{\Hypertarget{class_i_actuator_ac13d1e5781b9ae09e01d6673ae11fc64}\label{class_i_actuator_ac13d1e5781b9ae09e01d6673ae11fc64}} 
+\index{IActuator@{IActuator}!setDriver@{setDriver}}
+\index{setDriver@{setDriver}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{setDriver()}{setDriver()}}
+{\footnotesize\ttfamily virtual void IActuator\+::set\+Driver (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}} $>$}]{driver }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Assign a new Actuator\+Driver object to the actuator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em driver} & shared pointer to the implementation of an Actuator\+Driver \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_actuator_e_r_m_a6ec3121622279e248db5db555441d976}{Actuator\+ERM}}, and \mbox{\hyperlink{class_actuator_l_r_a_ad972ed60e90ab06edf64f30da12dfdcb}{Actuator\+LRA}}.
+
+\mbox{\Hypertarget{class_i_actuator_a477807899a0b6b8320ea3a462013b8f6}\label{class_i_actuator_a477807899a0b6b8320ea3a462013b8f6}} 
+\index{IActuator@{IActuator}!test@{test}}
+\index{test@{test}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{test()}{test()}}
+{\footnotesize\ttfamily virtual void IActuator\+::test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+play a test pattern to check if the actuator works. 
+
+
+
+Implemented in \mbox{\hyperlink{class_actuator_e_r_m_ac5d29b9fa4d8b771fa35628a1f2dd6db}{Actuator\+ERM}}, and \mbox{\hyperlink{class_actuator_l_r_a_ab89ceec8bec90968af70cd2db6e2d15c}{Actuator\+LRA}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_i_actuator_ad40c1b57f6d77552eb6e4f354f185f1a}\label{class_i_actuator_ad40c1b57f6d77552eb6e4f354f185f1a}} 
+\index{IActuator@{IActuator}!m\_driver@{m\_driver}}
+\index{m\_driver@{m\_driver}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{m\_driver}{m\_driver}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}}$>$ IActuator\+::m\+\_\+driver\hspace{0.3cm}{\ttfamily [protected]}}
+
+an shared pointer to the implementation of a Actuator\+Driver instance \mbox{\Hypertarget{class_i_actuator_ab537416825fa613bf46d8da2b9698394}\label{class_i_actuator_ab537416825fa613bf46d8da2b9698394}} 
+\index{IActuator@{IActuator}!m\_name@{m\_name}}
+\index{m\_name@{m\_name}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{m\_name}{m\_name}}
+{\footnotesize\ttfamily std\+::string IActuator\+::m\+\_\+name}
+
+actuator name (optional) \mbox{\Hypertarget{class_i_actuator_ad289e18ad2318f7aa3cdd13bd70ef710}\label{class_i_actuator_ad289e18ad2318f7aa3cdd13bd70ef710}} 
+\index{IActuator@{IActuator}!m\_overdriveVoltage@{m\_overdriveVoltage}}
+\index{m\_overdriveVoltage@{m\_overdriveVoltage}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{m\_overdriveVoltage}{m\_overdriveVoltage}}
+{\footnotesize\ttfamily float IActuator\+::m\+\_\+overdrive\+Voltage}
+
+actuator\textquotesingle{}s peak voltage \mbox{\Hypertarget{class_i_actuator_a4371f87859b22b43359ed66754177da2}\label{class_i_actuator_a4371f87859b22b43359ed66754177da2}} 
+\index{IActuator@{IActuator}!m\_ratedVoltage@{m\_ratedVoltage}}
+\index{m\_ratedVoltage@{m\_ratedVoltage}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{m\_ratedVoltage}{m\_ratedVoltage}}
+{\footnotesize\ttfamily float IActuator\+::m\+\_\+rated\+Voltage}
+
+actuator\textquotesingle{}s rated voltage \mbox{\Hypertarget{class_i_actuator_a433f03e40e72b51d925a31e1d80cfd22}\label{class_i_actuator_a433f03e40e72b51d925a31e1d80cfd22}} 
+\index{IActuator@{IActuator}!m\_type@{m\_type}}
+\index{m\_type@{m\_type}!IActuator@{IActuator}}
+\doxysubsubsection{\texorpdfstring{m\_type}{m\_type}}
+{\footnotesize\ttfamily Actuator\+Type IActuator\+::m\+\_\+type\hspace{0.3cm}{\ttfamily [protected]}}
+
+actuator type based on enum Actuator\+Type 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Tactico/src/\+Interfaces/IActuator.\+h\end{DoxyCompactItemize}

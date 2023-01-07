@@ -1,0 +1,30 @@
+\hypertarget{_i_pattern_8h_source}{}\doxysection{IPattern.\+h}
+\label{_i_pattern_8h_source}\index{lib/Tactico/src/Interfaces/IPattern.h@{lib/Tactico/src/Interfaces/IPattern.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}IActuator.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ class\ IActuator;}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{enum}\ PatternType\ \{\ ePWM,\ eDRV2505L\ \};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_i_pattern}{IPattern}}\ \{}
+\DoxyCodeLine{00025\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00029\ \ \ PatternType\ \mbox{\hyperlink{class_i_pattern_a059f70c5724b61453207b41fcdc5c41e}{m\_type}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_i_pattern_aaa7b8d66c716750aa7309e9cc8160ab0}{init}}()\ =\ 0;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{class_i_pattern_af8541953b8821ed06203c28fd2ff6d17}{patternToString}}()\ =\ 0;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_i_pattern_a2edd877be68280c725ba32dc0baa1f6b}{getPatternDuration}}()\ =\ 0;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00056\ \ \ \textcolor{keyword}{virtual}\ PatternType\ \mbox{\hyperlink{class_i_pattern_ab3433a8e042cf0f7b418d95866615af9}{getType}}()\ =\ 0;}
+\DoxyCodeLine{00057\ \};}
+
+\end{DoxyCode}

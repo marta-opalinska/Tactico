@@ -1,0 +1,57 @@
+\hypertarget{_actuator_driver_i2_c_8h_source}{}\doxysection{Actuator\+Driver\+I2\+C.\+h}
+\label{_actuator_driver_i2_c_8h_source}\index{lib/Tactico/src/ActuatorDriverI2C.h@{lib/Tactico/src/ActuatorDriverI2C.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Interfaces/IActuatorDriver.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}HardwareLayer.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}PatternDRV2605L.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_i2_c_commands}{I2CCommands}}\{}
+\DoxyCodeLine{00021\ \ \ \textcolor{keywordtype}{int}\ address;}
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordtype}{int}\ registerAddress;}
+\DoxyCodeLine{00023\ \ \ \textcolor{keywordtype}{int}\ data;}
+\DoxyCodeLine{00024\ \}\ ;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_pattern_d_r_v2605_l}{PatternDRV2605L}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_actuator_driver_i2_c}{ActuatorDriverI2C}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_i_actuator_driver}{IActuatorDriver}}\ \{}
+\DoxyCodeLine{00036\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_actuator_driver_i2_c_ad17ff750f076a38aa76fb80e5a3d2c1a}{m\_I2C\_Initialised}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_actuator_driver_i2_c_ac3cabaccfa543fe19c2cf908e68fd46c}{m\_address}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_actuator_driver_i2_c_a3fdaffd38f7af21d4045519e475dabd5}{m\_goPin}};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00053\ \ \ \mbox{\hyperlink{class_actuator_driver_i2_c}{ActuatorDriverI2C}}();}
+\DoxyCodeLine{00054\ \ \ \mbox{\hyperlink{class_actuator_driver_i2_c}{\string~ActuatorDriverI2C}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_actuator_driver_i2_c_a945ee623197195ea211677be22180095}{initI2CBus}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_actuator_driver_i2_c_a2da4048223de48844aad8bca6cf2aaf7}{init}}();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_actuator_driver_i2_c_aa8ad8ebda09e264e5baea1cce1a195bb}{play}}(std::shared\_ptr<IPattern>\ pattern)\ =\ 0;}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_actuator_driver_i2_c_a0e72ac12757422f7a64fcd4556574b28}{test}}()\ =\ 0;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00089\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_actuator_driver_i2_c_aed88439743e407a8054a683fb0c59e7c}{readRegister}}(\textcolor{keywordtype}{int}\ reg);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_actuator_driver_i2_c_a087cd50631347f73437d2d5d3945751d}{writeRegister}}(\textcolor{keywordtype}{int}\ reg,\ \textcolor{keywordtype}{int}\ data);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_actuator_driver_i2_c_ac6dfa3453353944149fbf0ab80634da7}{setAddress}}(\textcolor{keywordtype}{int}\ address);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_actuator_driver_i2_c_af6c1f10d16e9333bc74bfec2b4abb194}{getGoPin}}();}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00117\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_actuator_driver_i2_c_aede2bc42a7a92f9da5001939a671a26c}{resetConfiguration}}()\ =\ 0;}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00124\ \ \ ActuatorDriverType\ \mbox{\hyperlink{class_actuator_driver_i2_c_a15d7e0fcccdbb5604b8c41b9fb5ce40a}{getType}}();}
+\DoxyCodeLine{00125\ \};}
+
+\end{DoxyCode}

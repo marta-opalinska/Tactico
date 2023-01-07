@@ -1,0 +1,31 @@
+\hypertarget{_i_actuator_driver_8h_source}{}\doxysection{IActuator\+Driver.\+h}
+\label{_i_actuator_driver_8h_source}\index{lib/Tactico/src/Interfaces/IActuatorDriver.h@{lib/Tactico/src/Interfaces/IActuatorDriver.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}HardwareLayer.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Interfaces/IPattern.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{enum}\ ActuatorDriverType\ \{\ eGPIO,\ eI2C,\ eDRV2505L\_EVBOARD\ \};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_i_actuator_driver}{IActuatorDriver}}\ \{}
+\DoxyCodeLine{00023\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00027\ \ \ ActuatorDriverType\ \mbox{\hyperlink{class_i_actuator_driver_a9aa5dab645340400c8175177210e6489}{m\_type}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_actuator_driver_a1893ad367e7ac3f3696fe5df34a16e10}{m\_needsPreconfigration}};}
+\DoxyCodeLine{00039\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_i_actuator_driver_a7c214db996fbfca6a51325a531342001}{init}}()\ =\ 0;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_actuator_driver_ac4cc863bf46900041cf0a03aed5edce1}{play}}(std::shared\_ptr<IPattern>\ pattern)\ =\ 0;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_i_actuator_driver_a96a92e535e2c3ff72c174973e554f2c5}{test}}()\ =\ 0;}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ resetConfiguration()\ =\ 0;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{keyword}{virtual}\ ActuatorDriverType\ \mbox{\hyperlink{class_i_actuator_driver_a591fd8c0e1a54639a29ff6d6d56a5a29}{getType}}()\ =\ 0;}
+\DoxyCodeLine{00064\ \};}
+
+\end{DoxyCode}

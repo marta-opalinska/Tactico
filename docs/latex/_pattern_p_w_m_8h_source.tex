@@ -1,0 +1,41 @@
+\hypertarget{_pattern_p_w_m_8h_source}{}\doxysection{Pattern\+PWM.\+h}
+\label{_pattern_p_w_m_8h_source}\index{lib/Tactico/src/PatternPWM.h@{lib/Tactico/src/PatternPWM.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Interfaces/IActuator.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <Interfaces/IPattern.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}HardwareLayer.h"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}Tactico.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_modulation_p_w_m}{ModulationPWM}}\ \{}
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordtype}{int}\ duration;}
+\DoxyCodeLine{00023\ \ \ \textcolor{keywordtype}{bool}\ isOn;}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_pattern_p_w_m}{PatternPWM}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_i_pattern}{IPattern}}\ \{}
+\DoxyCodeLine{00033\ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{class_pattern_p_w_m}{PatternPWM}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ std::vector<ModulationPWM>\ \mbox{\hyperlink{class_pattern_p_w_m_a0a4ced615794f995f458b74ea646dec1}{m\_modulation\_sequence}};}
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_pattern_p_w_m}{PatternPWM}}(std::vector<ModulationPWM>\ switching\_modulation);}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{class_pattern_p_w_m}{\string~PatternPWM}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pattern_p_w_m_aaecef677d9d5cbe09abecec7fcc3a3b3}{setModulation}}(std::vector<ModulationPWM>\ switching\_modulation);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pattern_p_w_m_a92e26e1e84f5badfd143049273cfb6ac}{init}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00067\ \ \ std::string\ \mbox{\hyperlink{class_pattern_p_w_m_af5a318da8da678c4e3a5dca2c66cb9a1}{patternToString}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_pattern_p_w_m_a1c2b6014c97241c85b0a1ef281110c77}{getPatternDuration}}();}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00081\ \ \ PatternType\ \mbox{\hyperlink{class_pattern_p_w_m_a23793997efe7809c969527eed4cf4daa}{getType}}();}
+\DoxyCodeLine{00082\ \};}
+
+\end{DoxyCode}

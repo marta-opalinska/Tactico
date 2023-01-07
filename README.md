@@ -42,11 +42,11 @@ An example main file can be found in *src/main.cpp*.
 
 # Framework Architecture
 
-After cloning the repository, the detailed code documentation can be displayed by opening ***documentation\html\index.html*** in the web browser. All classes with their methods and fields are thoroughly explained in there.
+After cloning the repository, the detailed code documentation can be displayed by opening ***docs\html\index.html*** in the web browser. All classes with their methods and fields are thoroughly explained in there.
 
 Fig.1 presents numerous classes that are involved in the framework. In the following sections you will find a general explanation of each of them.
 
-![image info](./documentation/class_diagram_with_categories.png)
+![image info](./docs/class_diagram_with_categories.png)
 *Fig.1. A detailed view of the framework architecture.*
 
 ## Actuator Class
@@ -57,7 +57,7 @@ Currently, two types of Actuators can be created - **ActuatorERM** and **Actuato
 
 The framework supports testing the connected actuators by calling the **test()** command. It will send a single vibration test to the motor. It is highly recommended to test the hardware before processing with further framework implementation. 
 
-![image info](./documentation/actuator_class.png)
+![image info](./docs/actuator_class.png)
 *Fig.2. An example of an actuator alongside the information from the datasheet that will be needed for the implementation.*
 
 ### Creating An Actuator
@@ -95,7 +95,7 @@ std::shared_ptr<ActuatorLRA> actuator_2 =
 
 ## Actuator Driver Class
 
-![image info](./documentation/driver_class.png)
+![image info](./docs/driver_class.png)
 *Fig.3. Currently supported drivers.*
 
 **Actuator Driver** class defines the way in which the motor performs a haptic effect. Currently, users can choose from two available drivers - a simple GPIO driver and a driver from the DRV2605LEVM-MD board.
@@ -142,7 +142,7 @@ std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
 
 ## Pattern & Step Classes
 
-![image info](./documentation/pattern_step_class.png)
+![image info](./docs/pattern_step_class.png)
 *Fig.4. Haptic Pattern and Step classes.*
 
 **Pattern**
@@ -161,7 +161,7 @@ Two available patterns represent entirely different approaches. **DRV2605L Patte
 
 The most significant advantage of the Pattern class is that it can be assigned to many actuators simultaneously. The pattern instance is **created once**, and all of the actuators of a suitable type can use it. 
 
-![image info](./documentation/modulation_explanation.png)
+![image info](./docs/modulation_explanation.png)
 *Fig.5. The explanation of ModulationPWM structure.*
 
 **Step**
@@ -173,7 +173,7 @@ The step can be configured to be played in parallel. This functionality is avail
 More about Steps implementation combinations can be found in [Action Class section](#action).
 ## Action Class
 
-![image info](./documentation/action_class.png)
+![image info](./docs/action_class.png)
 *Fig.6. Example of creating parallel and non-parallel actions. The step parallelisation property needs to be assigned when the step is created!*
 
 The **Action** class combines previously explained Steps into a sequence of haptic effects. All available actuator types and patterns can be combined to create a new haptic experience. 
@@ -194,7 +194,7 @@ An Action can become a part of a Haptic Device.
 
 ## Haptic Device Class
 
-![Haptic Device Class Image](./documentation/haptic_device_class.png)
+![Haptic Device Class Image](./docs/haptic_device_class.png)
 *Fig.7. A graphical representation of a haptic device with Actuators and Actions assigned.*
 
 You can combine all the above classes into one **Haptic Device** entity. In that way, you can control all the actuators and actions simultaneously. 

@@ -1,0 +1,24 @@
+\doxysection{Class List}
+Here are the classes, structs, unions and interfaces with brief descriptions\+:\begin{DoxyCompactList}
+\item\contentsline{section}{\mbox{\hyperlink{class_action}{Action}} \\*Class that stores multistep activity that can be performed on multiple actuators }{\pageref{class_action}}{}
+\item\contentsline{section}{\mbox{\hyperlink{structactuator_config_data}{actuator\+Config\+Data}} \\*Structure for actuator configuation data. It contains the time (in miliseconds) that passed from the last time the actuator was configured with play pattern (needed for wait\+Time preconfiguration) and the latest used actuators patttern slot. Actuator driver can have limited number of pattern slots that can be hold in the memory. Each driver slots are played one by one when the \char`\"{}go\char`\"{} pin is triggered }{\pageref{structactuator_config_data}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_actuator_driver_d_r_v2605_l_e_v_m}{Actuator\+Driver\+DRV2605\+LEVM}} \\*Class that stores configuration and methods for DRV2605L evalution board actuator\textquotesingle{}s driver (controlled through I2C) }{\pageref{class_actuator_driver_d_r_v2605_l_e_v_m}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_actuator_driver_g_p_i_o}{Actuator\+Driver\+GPIO}} \\*Class that stores information and methods for Actuator Driver controlled using GPI pin }{\pageref{class_actuator_driver_g_p_i_o}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_actuator_driver_i2_c}{Actuator\+Driver\+I2C}} \\*Class that stores configuration and methods for actuator driver controlled through I2C
+
+= }{\pageref{class_actuator_driver_i2_c}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_actuator_e_r_m}{Actuator\+ERM}} \\*Class that stores information and methods for ERM actuator type. It implements \mbox{\hyperlink{class_i_actuator}{IActuator}} interface }{\pageref{class_actuator_e_r_m}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_actuator_l_r_a}{Actuator\+LRA}} \\*Class that stores information and methods for LRA actuator type. It implements \mbox{\hyperlink{class_i_actuator}{IActuator}} interface }{\pageref{class_actuator_l_r_a}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_actuator_step}{Actuator\+Step}} \\*Class that store information and methods for an individual actuator activation }{\pageref{class_actuator_step}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_haptic_device}{Haptic\+Device}} \\*Class that stores parameters and methods of haptic device that consists of multiple actuators }{\pageref{class_haptic_device}}{}
+\item\contentsline{section}{\mbox{\hyperlink{struct_i2_c_commands}{I2\+CCommands}} \\*I2C Command structure }{\pageref{struct_i2_c_commands}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_i_actuator}{IActuator}} }{\pageref{class_i_actuator}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}} \\*Interface for actuator driver -\/ the interface is implemented by the \mbox{\hyperlink{class_actuator_driver_g_p_i_o}{Actuator\+Driver\+GPIO}}, \mbox{\hyperlink{class_actuator_driver_i2_c}{Actuator\+Driver\+I2C}} and \mbox{\hyperlink{class_actuator_driver_d_r_v2605_l_e_v_m}{Actuator\+Driver\+DRV2605\+LEVM}} classes }{\pageref{class_i_actuator_driver}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_i_controller}{IController}} \\*Interface for a external controller class }{\pageref{class_i_controller}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_i_pattern}{IPattern}} \\*An interface for actuator\textquotesingle{}s pattern. The intefrace is implemented by \mbox{\hyperlink{class_pattern_p_w_m}{Pattern\+PWM}} and \mbox{\hyperlink{class_pattern_d_r_v2605_l}{Pattern\+DRV2605L}} classes }{\pageref{class_i_pattern}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_i_step}{IStep}} \\*Interface for \mbox{\hyperlink{class_action}{Action}} Step. Step is just one activity of a given Actuator or a wait/delay }{\pageref{class_i_step}}{}
+\item\contentsline{section}{\mbox{\hyperlink{struct_modulation_p_w_m}{Modulation\+PWM}} \\*Structure for PWM modulation }{\pageref{struct_modulation_p_w_m}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_pattern_d_r_v2605_l}{Pattern\+DRV2605L}} \\*Class that stores the DRV2605L effect pattern that can be applied to LRA or ERM actuator controlled to DRV2605L driver }{\pageref{class_pattern_d_r_v2605_l}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_pattern_p_w_m}{Pattern\+PWM}} \\*Class that stores the Pulse-\/\+Width Mudulation pattern (effect) that can be applied to the actuator that support this type of driver }{\pageref{class_pattern_p_w_m}}{}
+\item\contentsline{section}{\mbox{\hyperlink{class_wait_step}{Wait\+Step}} \\*Class that stores the wait time between steps in the \mbox{\hyperlink{class_action}{Action}} }{\pageref{class_wait_step}}{}
+\end{DoxyCompactList}
