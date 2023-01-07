@@ -109,6 +109,8 @@ void Action::configure() {
   // creating a map linking each actuator in the action with the time (in
   // miliseconds) passed from the last time the actuator was played (needed for
   // waitTime preconfiguration) and the latest used actuator's patttern slot
+  void resetPreviousConfiguration();
+
   std::map<std::shared_ptr<IActuator>, actuatorConfigData> actuatorsConfigData;
 
   for (auto actuator : this->m_actuators) {

@@ -157,6 +157,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aefb5fd2c50ff3f4468b8f319329a6ae1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_haptic_device.html#aefb5fd2c50ff3f4468b8f319329a6ae1">configureAndPlayAction</a> (std::string actionName)</td></tr>
 <tr class="memdesc:aefb5fd2c50ff3f4468b8f319329a6ae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the action and plays it.  <br /></td></tr>
 <tr class="separator:aefb5fd2c50ff3f4468b8f319329a6ae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a362cb4006ebc6b38227945deb12fbf53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_haptic_device.html#a362cb4006ebc6b38227945deb12fbf53">resetActuatorsPreRunConfiguration</a> ()</td></tr>
+<tr class="memdesc:a362cb4006ebc6b38227945deb12fbf53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reseting pre-run configuration of all attached actuators so that the actuators won't be mistakenly triggered. Especially important with many actuators with the same GO pin attached.  <br /></td></tr>
+<tr class="separator:a362cb4006ebc6b38227945deb12fbf53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0433b6c941a1d4f631ce1b925e0480ec"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, std::shared_ptr&lt; <a class="el" href="class_action.html">Action</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_haptic_device.html#a0433b6c941a1d4f631ce1b925e0480ec">getActions</a> ()</td></tr>
 <tr class="memdesc:a0433b6c941a1d4f631ce1b925e0480ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Actions object.  <br /></td></tr>
 <tr class="separator:a0433b6c941a1d4f631ce1b925e0480ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -643,6 +646,25 @@ Static Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a362cb4006ebc6b38227945deb12fbf53" name="a362cb4006ebc6b38227945deb12fbf53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a362cb4006ebc6b38227945deb12fbf53">&#9670;&#160;</a></span>resetActuatorsPreRunConfiguration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void HapticDevice::resetActuatorsPreRunConfiguration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reseting pre-run configuration of all attached actuators so that the actuators won't be mistakenly triggered. Especially important with many actuators with the same GO pin attached. </p>
 
 </div>
 </div>

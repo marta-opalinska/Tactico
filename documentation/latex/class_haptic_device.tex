@@ -46,6 +46,8 @@ void \mbox{\hyperlink{class_haptic_device_a21ff8379a2bb1c5d80a23952cc9234cd}{pla
 \begin{DoxyCompactList}\small\item\em Play the action. If any drivers with m\+\_\+needs\+Preconfigration flag set up, a \mbox{\hyperlink{class_haptic_device_a02b59473723b0c64a4c2ea31ba65b8cd}{configure()}} need to be called first! \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_haptic_device_aefb5fd2c50ff3f4468b8f319329a6ae1}{configure\+And\+Play\+Action}} (std\+::string action\+Name)
 \begin{DoxyCompactList}\small\item\em Configures the action and plays it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_haptic_device_a362cb4006ebc6b38227945deb12fbf53}{reset\+Actuators\+Pre\+Run\+Configuration}} ()
+\begin{DoxyCompactList}\small\item\em Reseting pre-\/run configuration of all attached actuators so that the actuators won\textquotesingle{}t be mistakenly triggered. Especially important with many actuators with the same GO pin attached. \end{DoxyCompactList}\item 
 std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_action}{Action}} $>$ $>$ \mbox{\hyperlink{class_haptic_device_a0433b6c941a1d4f631ce1b925e0480ec}{get\+Actions}} ()
 \begin{DoxyCompactList}\small\item\em Get the Actions object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
@@ -342,6 +344,16 @@ Remove actuator from the haptic device.
 {\em actuator} & actuator to remove \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_haptic_device_a362cb4006ebc6b38227945deb12fbf53}\label{class_haptic_device_a362cb4006ebc6b38227945deb12fbf53}} 
+\index{HapticDevice@{HapticDevice}!resetActuatorsPreRunConfiguration@{resetActuatorsPreRunConfiguration}}
+\index{resetActuatorsPreRunConfiguration@{resetActuatorsPreRunConfiguration}!HapticDevice@{HapticDevice}}
+\doxysubsubsection{\texorpdfstring{resetActuatorsPreRunConfiguration()}{resetActuatorsPreRunConfiguration()}}
+{\footnotesize\ttfamily void Haptic\+Device\+::reset\+Actuators\+Pre\+Run\+Configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reseting pre-\/run configuration of all attached actuators so that the actuators won\textquotesingle{}t be mistakenly triggered. Especially important with many actuators with the same GO pin attached. 
+
 \mbox{\Hypertarget{class_haptic_device_a22c29568362c80da1087c9dd04390f6c}\label{class_haptic_device_a22c29568362c80da1087c9dd04390f6c}} 
 \index{HapticDevice@{HapticDevice}!testActuators@{testActuators}}
 \index{testActuators@{testActuators}!HapticDevice@{HapticDevice}}

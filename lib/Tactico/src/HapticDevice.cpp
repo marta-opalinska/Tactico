@@ -95,7 +95,7 @@ void HapticDevice::configure(std::string actionName) {
 
 void HapticDevice::configureAndPlayAction(std::string actionName) {
   // checking if an action exists
-  if (m_deviceActions.count(actionName)) {
+  if (this->m_deviceActions.count(actionName)) {
     this->m_deviceActions[actionName]->configureAndPlay();
   } else {
     printTactico("WARNING: Action not found \n");
@@ -104,10 +104,16 @@ void HapticDevice::configureAndPlayAction(std::string actionName) {
 
 void HapticDevice::playAction(std::string actionName) {
   // checking if an action exists
-  if (m_deviceActions.count(actionName)) {
+  if (this->m_deviceActions.count(actionName)) {
     this->m_deviceActions[actionName]->play();
   } else {
     printTactico("WARNING: Action not found \n");
+  }
+}
+
+void HapticDevice::resetActuatorsPreRunConfiguration() {
+  for (auto actuator : this->m_actuatorsList) {
+    actuator->getDriver()->resetConfiguration();
   }
 }
 

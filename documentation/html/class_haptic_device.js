@@ -17,6 +17,7 @@ var class_haptic_device =
     [ "removeActuator", "class_haptic_device.html#a91ec16aa07955895b1b183ea07c1afc4", null ],
     [ "removeActuator", "class_haptic_device.html#aba54ca282d5a1747c2c736273036027a", null ],
     [ "removeActuator", "class_haptic_device.html#a0d8ca6fe81400346209b671b067bba66", null ],
+    [ "resetActuatorsPreRunConfiguration", "class_haptic_device.html#a362cb4006ebc6b38227945deb12fbf53", null ],
     [ "testActuators", "class_haptic_device.html#a22c29568362c80da1087c9dd04390f6c", null ],
     [ "id", "class_haptic_device.html#a19f549f697ea87620f23933663a431b0", null ],
     [ "m_actuatorsList", "class_haptic_device.html#a4dffe9ff4d1102b499b4250309411297", null ],

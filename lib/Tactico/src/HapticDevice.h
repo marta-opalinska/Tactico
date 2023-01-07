@@ -185,6 +185,14 @@ class HapticDevice {
   void configureAndPlayAction(std::string actionName);
 
   /**
+   * @brief Reseting pre-run configuration of all attached actuators so that the
+   * actuators won't be mistakenly triggered. Especially important with many
+   * actuators with the same GO pin attached.
+   *
+   */
+  void resetActuatorsPreRunConfiguration();
+
+  /**
    * @brief Get the Actions object
    *
    * @return std::map<std::string, std::shared_ptr<Action>>

@@ -81,12 +81,6 @@ Therefore, when this type of actuator is used as a part of the **Action** class 
 ![image info](./documentation/pattern_step_class.png)
 *Fig.4. Haptic Pattern and Step classes.*
 
-
-## Pattern & Step Classes
-
-![image info](./documentation/pattern_step_class.png)
-*Fig.4. Haptic Pattern and Step classes.*
-
 **Pattern**
 
 Not every pattern is suitable for every actuator or even the actuator's driver. 
@@ -113,7 +107,6 @@ The most significant advantage of the Pattern class is that it can be assigned t
 The step can be configured to be played in parallel. This functionality is available only for actuators that drivers allow pre-run configuration (e.g. DRV2605L but **NOT** DriverGPIO). The step parallelisation property needs to be **assigned when the step is created**!
 
 More about Steps implementation combinations can be found in [Action Class section](#action).
-
 ## Action Class
 
 ![image info](./documentation/action_class.png)
@@ -129,14 +122,20 @@ OR
 
 - **configureAndPlay()**, which will configure all involved actuators and immediately play the Action
 
-The Action can involve some of the steps played in parallel. The step parallelisation property can be assigned just when the Step object is created. However, it is limited to the specific motor drivers that allow pre-run configuration(e.g. works with DRV2605L, but **NOT** with GPIO driver). 
+The Action can involve some of the steps played in parallel. The step parallelisation property can be assigned only during the Step object creation. However, it is limited to the specific motor drivers that allow pre-run configuration(e.g. works with DRV2605L, but **NOT** with GPIO driver). 
 
-//TODO Add action resetting - cleaning pre-run memory so that the actuator is not accidentally triggered by the same GO pin as assigned to the other actuators (which is the case when using one DRV2605L evaluation board.)
+To keep the Action clean, it is recommended to call **resetPreviousConfiguration()** each time after the action is played (unless it will be repeated). In that way, pre-run memory will be reset, and non of the previously played actuator will be accidentally triggered by the same GO pin as assigned to the other actuators (which is the case when using the DRV2605LEVM board). This function is not automatically activated if the Action is set up once and used multiple times in a row. 
 
-The advantage of having actions is the ease of repeating them and assigning them meaning. An Action can become a part of a Haptic Device and be referred to using simply its name. 
+An Action can become a part of a Haptic Device. 
 
 ## Haptic Device Class
-You can combine all the above classes into one device. In that way, you can control all the actuators and actions simultaneously.
+
+![Haptic Device Class Image](./documentation/haptic_device_class.png)
+*Fig.7. A graphical representation of a haptic device with Actuators and Actions assigned.*
+
+You can combine all the above classes into one **Haptic Device** entity. In that way, you can control all the actuators and actions simultaneously. 
+
+As previously explained in the Action section, it is recommended to reset the previous pre-run configuration if not used subsequently. When using Haptic Device, you can make sure that all actuators have clean pre-run configuration by using **resetActuatorsPreRunConfiguration()**.
 
 ## Controller Class
 
