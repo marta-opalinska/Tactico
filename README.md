@@ -119,15 +119,21 @@ More about Steps implementation combinations can be found in [Action Class secti
 ![image info](./documentation/action_class.png)
 *Fig.6. Example of creating parallel and non-parallel actions. The step parallelisation property needs to be assigned when the step is created!*
 
-The **Action** class combines previously explained Steps into a sequence of haptic effects. All actuator types and patterns can be combined to create a new haptic experience. 
+The **Action** class combines previously explained Steps into a sequence of haptic effects. All available actuator types and patterns can be combined to create a new haptic experience. 
 
-It is necessary to configure the actuator with pre-run configuration before the run! 
+As mentioned in [Actuator Driver Class section](#actuator-driver-class), **some drivers require pre-run configuration** to play a pattern. Therefore it is necessary for each Action to either call:
 
-The step parallelisation property needs to be assigned when the step is created!
+- **configure()** and **play()** consecutively
 
-Combines steps
+OR
 
-The advantage of having actions is that it is easier to repeat them and assign them meaning.
+- **configureAndPlay()**, which will configure all involved actuators and immediately play the Action
+
+The Action can involve some of the steps played in parallel. The step parallelisation property can be assigned just when the Step object is created. However, it is limited to the specific motor drivers that allow pre-run configuration(e.g. works with DRV2605L, but **NOT** with GPIO driver). 
+
+//TODO Add action resetting - cleaning pre-run memory so that the actuator is not accidentally triggered by the same GO pin as assigned to the other actuators (which is the case when using one DRV2605L evaluation board.)
+
+The advantage of having actions is the ease of repeating them and assigning them meaning. An Action can become a part of a Haptic Device and be referred to using simply its name. 
 
 ## Haptic Device Class
 You can combine all the above classes into one device. In that way, you can control all the actuators and actions simultaneously.
