@@ -196,7 +196,7 @@ var NAVTREEINDEX0 =
 "hierarchy.html":[0,2],
 "index.html":[],
 "pages.html":[],
+"struct_actuator_config_data.html":[0,0,1],
 "struct_i2_c_commands.html":[0,0,9],
-"struct_modulation_p_w_m.html":[0,0,15],
-"structactuator_config_data.html":[0,0,1]
+"struct_modulation_p_w_m.html":[0,0,15]
 };

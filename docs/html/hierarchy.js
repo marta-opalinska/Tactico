@@ -1,7 +1,7 @@
 var hierarchy =
 [
     [ "Action", "class_action.html", null ],
-    [ "actuatorConfigData", "structactuator_config_data.html", null ],
+    [ "ActuatorConfigData", "struct_actuator_config_data.html", null ],
     [ "HapticDevice", "class_haptic_device.html", null ],
     [ "I2CCommands", "struct_i2_c_commands.html", null ],
     [ "IActuator", "class_i_actuator.html", [

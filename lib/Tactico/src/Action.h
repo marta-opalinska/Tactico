@@ -23,7 +23,7 @@
  * when the "go" pin is triggered.
  *
  */
-struct actuatorConfigData {
+struct ActuatorConfigData {
   // the time (in miliseconds) passed from the last time the actuator was
   // configured with play pattern (needed for waitTime preconfiguration)
   int timeFromLastPattern;

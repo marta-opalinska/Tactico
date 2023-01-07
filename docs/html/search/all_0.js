@@ -1,7 +1,7 @@
 var searchData=
 [
   ['action_0',['Action',['../class_action.html',1,'Action'],['../class_action.html#a4f457ccfc8336b565cadca56b36e0271',1,'Action::Action()']]],
-  ['actuatorconfigdata_1',['actuatorConfigData',['../structactuator_config_data.html',1,'']]],
+  ['actuatorconfigdata_1',['ActuatorConfigData',['../struct_actuator_config_data.html',1,'']]],
   ['actuatordriverdrv2605levm_2',['ActuatorDriverDRV2605LEVM',['../class_actuator_driver_d_r_v2605_l_e_v_m.html',1,'ActuatorDriverDRV2605LEVM'],['../class_actuator_driver_d_r_v2605_l_e_v_m.html#a1f9ea06c156985fe78ec257f1dff5916',1,'ActuatorDriverDRV2605LEVM::ActuatorDriverDRV2605LEVM()']]],
   ['actuatordrivergpio_3',['ActuatorDriverGPIO',['../class_actuator_driver_g_p_i_o.html',1,'ActuatorDriverGPIO'],['../class_actuator_driver_g_p_i_o.html#a8e4db66a99480b4d64bf325e3be64870',1,'ActuatorDriverGPIO::ActuatorDriverGPIO()']]],
   ['actuatordriveri2c_4',['ActuatorDriverI2C',['../class_actuator_driver_i2_c.html',1,'']]],

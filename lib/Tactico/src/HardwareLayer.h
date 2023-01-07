@@ -1,5 +1,10 @@
 /** Copyright 2022 <Marta Opalinska> **/
 
+/**
+ * @brief This file need to be implemented by the user.
+ * 
+ */
+
 #pragma once
 // clang-format off
 // Format need to be turned off - Arduino library need to be compiled as the last one 
@@ -11,21 +16,6 @@
 #include <Arduino.h>
 #undef min
 #undef max
-
-
-#define DRV2605L_REG_RATED_VOLTAGE 0x16
-#define DRV2605L_REG_OVERDRIVE_CLAMP_VOLTAGE 0x17
-#define DRV2605L_REG_CONTROL_3 0x1D
-#define DRV2605L_REG_LIBRARY_SELECTION 0x03
-#define DRV2605L_MODE_SELECTION 0x01
-#define BOLD_TEXT String("\033[1m")
-#define RESET_TEXT String("\033[0m")
-
-#define TCA9548_adr 0x70
-#define TCA9554_adr 0x20
-#define DRV2605L_adr 0x5A
-#define CONF_IO_REG 0x03
-#define OUT_CHANNEL_REG 0x01
 
 /**
  * @brief Implements hardware wait/delay function

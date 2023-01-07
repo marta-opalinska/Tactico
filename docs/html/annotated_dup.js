@@ -1,7 +1,7 @@
 var annotated_dup =
 [
     [ "Action", "class_action.html", "class_action" ],
-    [ "actuatorConfigData", "structactuator_config_data.html", null ],
+    [ "ActuatorConfigData", "struct_actuator_config_data.html", null ],
     [ "ActuatorDriverDRV2605LEVM", "class_actuator_driver_d_r_v2605_l_e_v_m.html", "class_actuator_driver_d_r_v2605_l_e_v_m" ],
     [ "ActuatorDriverGPIO", "class_actuator_driver_g_p_i_o.html", "class_actuator_driver_g_p_i_o" ],
     [ "ActuatorDriverI2C", "class_actuator_driver_i2_c.html", "class_actuator_driver_i2_c" ],

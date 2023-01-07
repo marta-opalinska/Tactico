@@ -111,7 +111,7 @@ void Action::configure() {
   // waitTime preconfiguration) and the latest used actuator's patttern slot
   void resetPreviousConfiguration();
 
-  std::map<std::shared_ptr<IActuator>, actuatorConfigData> actuatorsConfigData;
+  std::map<std::shared_ptr<IActuator>, ActuatorConfigData> actuatorsConfigData;
 
   for (auto actuator : this->m_actuators) {
     actuatorsConfigData[actuator] = {0, 0};

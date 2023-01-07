@@ -9,7 +9,7 @@ Tactico is a **haptics framework for embedded devices**. It supports multiple em
 
 # Introduction
 
-**Tactico** is a hardware independent C++  framework for **haptic device setup and control**. It is suitable for different types of actuators and actuator drivers. Currently, the framework supports LRA and ERM motors, but the modular architecture makes new hardware integration easy. The control module can be wired or wireless, depending on your preference. 
+**Tactico** is a hardware independent C++ open-sourced framework for **haptic device setup and control**. It is suitable for different types of actuators and actuator drivers. Currently, the framework supports LRA and ERM motors, but the modular architecture makes new hardware integration easy. The control module can be wired or wireless, depending on your preference. 
 
 # Currently Supported Hardware
 
@@ -179,6 +179,8 @@ The most significant advantage of the Pattern class is that it can be assigned t
 
 ![image info](./docs/modulation_explanation.png)
 *Fig.5. The explanation of ModulationPWM structure.*
+
+
 
 **Step**
 
