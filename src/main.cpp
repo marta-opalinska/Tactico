@@ -135,6 +135,17 @@ void loop() {
       delay(1000);
     }
 
+    // the standard DC voltage for the actuator
+    float ratedVoltage = 2.0;
+    // the maximum allowable DC voltage
+    float overdriveVoltage = 2.5;
+    int 
+    // optional - custom name will be prited alongside logs refering to the
+    // actuator
+    std::string customName = "myLRA_1";
+
+    std::shared_ptr<ActuatorLRA> actuator_2 = std::make_shared<ActuatorLRA>(
+        driver_2, ratedVoltage, overdriveVoltage, 100, customName);
     // test_hand.configureAndPlayAction("test");
 
     // delay(3000);

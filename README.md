@@ -2,15 +2,16 @@
 Tactico is a **haptics framework for embedded devices**. It supports multiple embedded platforms and actuator types.
 
 ## Table of Contents
-1. Introduction - Introduction covering supported devices
-2. Framework Architecture - Framework architecture and classes
-3. Code examples - Examples of code usage
+1. Introduction 
+2. Currently Supported Hardware
+3. Framework Architecture 
+4. Code Examples
 
 # Introduction
 
 **Tactico** is a hardware independent C++  framework for **haptic device setup and control**. It is suitable for different types of actuators and actuator drivers. Currently, the framework supports LRA and ERM motors, but the modular architecture makes new hardware integration easy. The control module can be wired or wireless, depending on your preference. 
 
-## Currently Supported Hardware
+# Currently Supported Hardware
 
 **Actuators**: Linear Resonant Actuator (LRA), Eccentric Rotating Mass (ERM)
 
@@ -174,19 +175,30 @@ std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_2 =
 - ERM Actuator
 ``` cpp
 
-// DRV2605L evaluation board contains multiple DRV2605L drivers.
-// Therefore the driver ID need to be specified.
-int driverID = 0;
-int driverGoPin = 12;
+// the standard DC voltage for the actuator
+float ratedVoltage = 2.0;
+// the maximum allowable DC voltage
+float overdriveVoltage = 2.5;
+// optional - custom name will be prited alongside logs refering to the
+// actuator
+std::string customName = "myERM_1";
 
-std::shared_ptr<ActuatorERM> actuator_1 =
-    std::make_shared<ActuatorERM>(driver_1, 2, 3);
+std::shared_ptr<ActuatorERM> actuator_1 = std::make_shared<ActuatorERM>(
+    driver_1, ratedVoltage, overdriveVoltage, customName);
 
 ```
 - LRA Actuator
 ``` cpp
+
+// the standard DC voltage for the actuator
+float ratedVoltage = 2.0;
+// the maximum allowable DC voltage
+float overdriveVoltage = 2.5;
+// optional - custom name will be prited alongside logs refering to the actuator
+std::string customName = "myLRA_1";
+
 std::shared_ptr<ActuatorLRA> actuator_2 =
-    std::make_shared<ActuatorLRA>(driver_2, 2.5, 2.7, 100, "myLRA");
+    std::make_shared<ActuatorLRA>(driver_2, ratedVoltage, overdriveVoltage, 100, customName);
 ```
 
 ### Assiging a Pattern
