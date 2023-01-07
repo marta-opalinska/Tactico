@@ -38,12 +38,13 @@ All these commands tie the framework code to the utilised physical hardware.
 
 # Framework Architecture
 
-![image info](./documentation/class_diagram_with_categories.png)
-*Fig.1. A detailed view of the framework architecture.*
 
 After cloning the repository, the detailed code documentation can be displayed by opening ***documentation\html\index.html*** in the web browser. All classes with their methods and fields are thoroughly explained in there.
 
-As shown in the above diagram, numerous classes are involved in the framework. Below you will find a general explanation of each of them.
+Fig.1 presents numerous classes that are involved in the framework. In the following sections you will find a general explanation of each of them.
+
+![image info](./documentation/class_diagram_with_categories.png)
+*Fig.1. A detailed view of the framework architecture.*
 
 ## Actuator Class
 
