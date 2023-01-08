@@ -1,14 +1,13 @@
 /** Copyright 2022 <Marta Opalinska> **/
 
+/**
+The example code creates a haptic device providing haptic feedback for
+navigation while walking. In here, two feedback actions are created and
+played: "go-forward" and "go-right".
+*/
+
 // Tactico framework imports
 #include <Tactico.h>
-
-#include <map>
-#include <memory>
-#include <set>
-#include <string>
-#include <utility>
-#include <vector>
 
 // clang-format off
 // Format need to be turned off - Arduino library need to be compiled as the last one 
@@ -28,12 +27,6 @@ void setup() {
 }
 
 void loop() {
-  /*
- 
- WSTEP!!!!!!!
- 
-   */
-
   // ----------------- GPIO DRIVER SETUP
   // pin that is connected to the actuator and supports Pulse Width-Modulation
   int driverPinGPIO = 22;
@@ -66,7 +59,7 @@ void loop() {
   float ratedVoltage_ERM_1 = 2.0;
   // the maximum allowable DC voltage
   float overdriveVoltage_ERM_1 = 2.5;
-  // optional - custom name will be printed alongside logs referring to the 
+  // optional - custom name will be printed alongside logs referring to the
   // actuator
   std::string customName_ERM_1 = "myERM_1";
 
@@ -181,7 +174,7 @@ void loop() {
 
   // creating Action objects
   std::shared_ptr<Action> a_forward = std::make_shared<Action>();
-  std::shared_ptr<Action> a_forward_and_right = std::make_shared<Action>();
+  std::shared_ptr<Action> a_go_right = std::make_shared<Action>();
 
   // adding Action steps - all together
   //  Remember that the order in which you write Actions will be the order of
@@ -191,12 +184,12 @@ void loop() {
   // adding Action steps - one by one
   //  Remember that the order in which you add Actions will be the order of
   //  playing them
-  a_forward_and_right->addStep(s_ERM_1_PWM_1);
-  a_forward_and_right->addStep(s_wait_400);
+  a_go_right->addStep(s_ERM_1_PWM_1);
+  a_go_right->addStep(s_wait_400);
   // These two last steps will be played in parallel as their Step field
   // isParallel was set to TRUE
-  a_forward_and_right->addStep(s_LRA_DRV2605L_CLICK_PARALLEL);
-  a_forward_and_right->addStep(s_ERM_2_DRV2605L_CLICK_PARALLEL);
+  a_go_right->addStep(s_LRA_DRV2605L_CLICK_PARALLEL);
+  a_go_right->addStep(s_ERM_2_DRV2605L_CLICK_PARALLEL);
 
   // ----------------- HAPTIC DEVICE SETUP
 
@@ -205,13 +198,13 @@ void loop() {
 
   // Adding Action and assigning it a "go-forward" name
   haptic_band.addAction(a_forward, "go-forward");
-  // Adding Action and assigning it a "go-forward-and-right" name
-  haptic_band.addAction(a_forward_and_right, "go-forward-and-right");
+  // Adding Action and assigning it a "go_right" name
+  haptic_band.addAction(a_go_right, "go_right");
 
   while (1) {
     // a function to reset pre-run configuration of all the actuators in the
-    // Haptic Device - that clears the memory, so there is no unintended actuator
-    // triggering
+    // Haptic Device - that clears the memory, so there is no unintended
+    // actuator triggering
     haptic_band.resetActuatorsPreRunConfiguration();
     // pre-run configuration of actuators for Action "go-forward"
     haptic_band.configureAction("go-forward");
@@ -222,8 +215,8 @@ void loop() {
     delay(1000);
     // call pre-run configuration and then play actuators
     // equivalent of the code:
-    // haptic_band.configureAction("go-forward-and-right");
-    // haptic_band.playAction("go-forward-and-right");
-    haptic_band.configureAndPlayAction("go-forward-and-right");
+    // haptic_band.configureAction("go_right");
+    // haptic_band.playAction("go_right");
+    haptic_band.configureAndPlayAction("go_right");
   }
 }

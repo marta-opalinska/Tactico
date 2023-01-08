@@ -82,7 +82,7 @@ bool ActuatorDriverDRV2605LEVM::setWaveform(int slotNumber,
   return false;
 }
 
-bool ActuatorDriverDRV2605LEVM::setWait(int slotNumber, int miliseconds) {
+bool ActuatorDriverDRV2605LEVM::setWait(int slotNumber, int milliseconds) {
   if (slotNumber <= MAX_WAVEFORMS) {
     this->connectToMotor();
     wait_for_motor_available();

@@ -58,7 +58,7 @@ All these commands tie the framework code to the utilised physical hardware.
 
 # Getting Started 
 
-An example [*PlatformIO*](https://platformio.org/) project containing the Tactico framework for Arduino Nano 33 BLE and NRF52840-DK can be found in the *examples* folder. The example code creates a haptic device providing haptic feedback for navigation while walking. In there, two feedback actions are created and played: "go-forward" and "go-forward-and-right". **I recommend briefly checking the example code before reading the rest of the documentation.** [[link]](https://github.com/marta-opalinska/Tactico/tree/main/examples)
+An example [*PlatformIO*](https://platformio.org/) project containing the Tactico framework for Arduino Nano 33 BLE and NRF52840-DK can be found in the *examples* folder. The example code creates a haptic device providing haptic feedback for navigation while walking. In there, two feedback actions are created and played: "go-forward" and "go-right". **I recommend briefly checking the example code before reading the rest of the documentation.** [[link]](https://github.com/marta-opalinska/Tactico/tree/main/examples)
 
 I also recommend installing PlatformIO! 
 
@@ -402,7 +402,7 @@ An Action can become a part of a Haptic Device.
 
 // creating Action objects
 std::shared_ptr<Action> a_forward = std::make_shared<Action>();
-std::shared_ptr<Action> a_forward_and_right = std::make_shared<Action>();
+std::shared_ptr<Action> a_go_right = std::make_shared<Action>();
 
 // adding Action steps - all together
 //  Remember that the order in which you write Actions will be the order of
@@ -412,12 +412,12 @@ a_forward->setSteps({s_ERM_1_PWM_1, s_wait_200, s_ERM_2_DRV2605L_BUZZ});
 // adding Action steps - one by one
 //  Remember that the order in which you add Actions will be the order of
 //  playing them
-a_forward_and_right->addStep(s_ERM_1_PWM_1);
-a_forward_and_right->addStep(s_wait_400);
+a_go_right->addStep(s_ERM_1_PWM_1);
+a_go_right->addStep(s_wait_400);
 // These two last steps will be played in parallel as their Step field
 // isParallel was set to TRUE
-a_forward_and_right->addStep(s_LRA_DRV2605L_CLICK_PARALLEL);
-a_forward_and_right->addStep(s_ERM_2_DRV2605L_CLICK_PARALLEL);
+a_go_right->addStep(s_LRA_DRV2605L_CLICK_PARALLEL);
+a_go_right->addStep(s_ERM_2_DRV2605L_CLICK_PARALLEL);
 ```
 
 ## Haptic Device Class
@@ -446,8 +446,8 @@ HapticDevice haptic_band({actuator_ERM_1, actuator_ERM_2, actuator_LRA});
 
 // Adding Action and assigning it a "go-forward" name
 haptic_band.addAction(a_forward, "go-forward");
-// Adding Action and assigning it a "go-forward-and-right" name
-haptic_band.addAction(a_forward_and_right, "go-forward-and-right");
+// Adding Action and assigning it a "go_right" name
+haptic_band.addAction(a_go_right, "go_right");
 ```
 - Use
 ``` cpp
@@ -467,9 +467,9 @@ haptic_band.resetActuatorsPreRunConfiguration();
 delay(1000);
 // call pre-run configuration and then play actuators
 // equivalent of the code:
-// haptic_band.configureAction("go-forward-and-right");
-// haptic_band.playAction("go-forward-and-right");
-haptic_band.configureAndPlayAction("go-forward-and-right");
+// haptic_band.configureAction("go_right");
+// haptic_band.playAction("go_right");
+haptic_band.configureAndPlayAction("go_right");
 
 ```
 
