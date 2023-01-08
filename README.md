@@ -58,7 +58,11 @@ All these commands tie the framework code to the utilised physical hardware.
 
 # Getting Started 
 
-An example [*PlatformIO*](https://platformio.org/) project containing the Tactico framework for Arduino Nano 33 BLE and NRF52840-DK can be found in the *examples* folder. I highly recommend installing PlatformIO and checking out the examples ;)
+An example [*PlatformIO*](https://platformio.org/) project containing the Tactico framework for Arduino Nano 33 BLE and NRF52840-DK can be found in the *examples* folder. The example code creates a haptic device providing haptic feedback for navigation while walking. In there, two feedback actions are created and played: "go-forward" and "go-forward-and-right". **I recommend briefly checking the example code before reading the rest of the documentation.** [[link]](https://github.com/marta-opalinska/Tactico/tree/main/examples)
+
+I also recommend installing PlatformIO! 
+
+Feel free to extend the example and add the action "left"! :)
 
 # Framework Architecture
 
@@ -124,6 +128,9 @@ actuator_ERM_2->test();
 ``` cpp
 #include "Tactico.h"
 
+// Full examples available at:
+// https://github.com/marta-opalinska/Tactico/tree/main/examples
+
 // ...
 
 // the standard DC voltage for the actuator
@@ -175,6 +182,9 @@ All the Drivers, Actuators, Patterns and Action instances are created with the u
 
 ``` cpp
 #include "Tactico.h"
+
+// Full examples available at:
+// https://github.com/marta-opalinska/Tactico/tree/main/examples
 
 // ...
 
@@ -242,6 +252,9 @@ The most significant advantage of the Pattern class is that it can be assigned t
 ``` cpp
 #include "Tactico.h"
 
+// Full examples available at:
+// https://github.com/marta-opalinska/Tactico/tree/main/examples
+
 // ...
 
 /*
@@ -262,6 +275,9 @@ std::shared_ptr<PatternPWM> pattern_PWM_1 =
 
 ``` cpp
 #include "Tactico.h"
+
+// Full examples available at:
+// https://github.com/marta-opalinska/Tactico/tree/main/examples
 
 // ...
 
@@ -294,6 +310,9 @@ More about using a sequence of Steps can be found in [Action Class section](#act
 ``` cpp
 #include "Tactico.h"
 
+// Full examples available at:
+// https://github.com/marta-opalinska/Tactico/tree/main/examples
+
 // ...
 
 // duration of the wait in milliseconds - 200ms
@@ -314,6 +333,9 @@ std::shared_ptr<WaitStep> s_wait_400 =
 ``` cpp
 #include "Tactico.h"
 
+// Full examples available at:
+// https://github.com/marta-opalinska/Tactico/tree/main/examples
+
 // ...
 
 // step that combines actuator_ERM_1 with pattern pattern_PWM_1 -
@@ -331,6 +353,9 @@ std::shared_ptr<ActuatorStep> s_ERM_2_DRV2605L_BUZZ =
 
 ``` cpp
 #include "Tactico.h"
+
+// Full examples available at:
+// https://github.com/marta-opalinska/Tactico/tree/main/examples
 
 // ...
 const bool isParallel_yes = true;
@@ -370,6 +395,9 @@ An Action can become a part of a Haptic Device.
 ``` cpp
 #include "Tactico.h"
 
+// Full examples available at:
+// https://github.com/marta-opalinska/Tactico/tree/main/examples
+
 // ...
 
 // creating Action objects
@@ -407,6 +435,9 @@ As previously explained in the Action section, it is recommended to reset the pr
 - Create
 ``` cpp
 #include "Tactico.h"
+
+// Full examples available at:
+// https://github.com/marta-opalinska/Tactico/tree/main/examples
 
 // ...
 

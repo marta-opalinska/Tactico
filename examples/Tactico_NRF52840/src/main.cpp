@@ -29,8 +29,10 @@ void setup() {
 
 void loop() {
   /*
-  Drivers, Actuators, Patterns and Action setup
-  */
+ 
+ WSTEP!!!!!!!
+ 
+   */
 
   // ----------------- GPIO DRIVER SETUP
   // pin that is connected to the actuator and supports Pulse Width-Modulation
