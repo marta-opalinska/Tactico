@@ -22,7 +22,7 @@ Tactico is a **haptics framework for embedded devices**. It supports multiple em
   - [Action Class](#action-class)
       - [Creating An Action](#creating-an-action)
   - [Haptic Device Class](#haptic-device-class)
-      - [Creating A Haptic Device](#creating-a-haptic-device)
+      - [Creating And Using A Haptic Device](#creating-and-using-a-haptic-device)
   - [Controller Class](#controller-class)
 - [Useful Links](#useful-links)
 
@@ -373,10 +373,16 @@ An Action can become a part of a Haptic Device.
 
 // ...
 
-    std::shared_ptr<Action> go_forward = std::make_shared<Action>();
+  std::shared_ptr<Action> a_forward = std::make_shared<Action>();
 
-    test_ac->setSteps({s_PWM, s_ac2, s_ac3, s_wait, s_ac4, s_ac5, s_wait, s_ac2,
-                       s_ac3, s_wait, s_ac4, s_wait, s_ac5, s_PWM});
+  a_forward->setSteps({s_ERM_1_PWM_1, s_wait_200, s_ERM_2_DRV2605L_BUZZ});
+
+  std::shared_ptr<Action> a_forward_and_right = std::make_shared<Action>();
+
+  a_forward_and_right->addStep(s_ERM_1_PWM_1);
+  a_forward_and_right->addStep(s_wait_400);
+  a_forward_and_right->addStep(s_LRA_DRV2605L_CLICK_PARALLEL);
+  a_forward_and_right->addStep(s_ERM_2_DRV2605L_CLICK_PARALLEL);
 
 ```
 
@@ -390,21 +396,36 @@ As previously explained in the Action section, it is recommended to reset the pr
 *Fig.7. A graphical representation of a haptic device with Actuators and Actions assigned.*
 
 
-#### Creating A Haptic Device
+#### Creating And Using A Haptic Device
 
-- Wait Step (pauses all actuators for a specific duration of time)
+- Create
 ``` cpp
 #include "Tactico.h"
 
 // ...
 
-// duration of the wait in miliseconds
-int waitTime = 250;
+  HapticDevice haptic_band({actuator_ERM_1, actuator_ERM_2, actuator_LRA});
+  haptic_band.addAction(a_forward, "go-forward");
 
-std::shared_ptr<WaitStep> s_wait = std::make_shared<WaitStep>(waitTime);
+  haptic_band.addAction(a_forward_and_right, "go-forward-and-right");
+
+  haptic_band.testActuators();
+
 
 ```
+- Use
+``` cpp
 
+// ...
+
+haptic_band.configureAction("go-forward");
+delay(2000);
+haptic_band.playAction("go-forward");
+haptic_band.resetActuatorsPreRunConfiguration();
+delay(1000);
+haptic_band.configureAndPlayAction("go-forward-and-right");
+
+```
 
 ## Controller Class
 
