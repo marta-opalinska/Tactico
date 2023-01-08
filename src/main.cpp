@@ -155,6 +155,11 @@ void loop() {
   std::shared_ptr<ActuatorStep> s_ERM_1_PWM_1 =
       std::make_shared<ActuatorStep>(actuator_ERM_1, pattern_PWM_1);
 
+  // step that combines s_ERM_2_DRV2605L_BUZZ with pattern_DRV2605L_CLICK
+  // This step is not parallel.
+  std::shared_ptr<ActuatorStep> s_ERM_2_DRV2605L_BUZZ =
+      std::make_shared<ActuatorStep>(actuator_ERM_2, pattern_DRV2605L_BUZZ);
+
   bool isParallel_yes = true;
   // step that combines actuator_ERM_2 with pattern_DRV2605L_CLICK - this step
   // is run in parallel
@@ -165,12 +170,6 @@ void loop() {
   std::shared_ptr<ActuatorStep> s_LRA_DRV2605L_CLICK_PARALLEL =
       std::make_shared<ActuatorStep>(actuator_LRA, pattern_DRV2605L_CLICK,
                                      isParallel_yes);
-
-  // step that combines s_ERM_2_DRV2605L_BUZZ with pattern_DRV2605L_CLICK
-  // This step is not parallel.
-  std::shared_ptr<ActuatorStep> s_ERM_2_DRV2605L_BUZZ =
-      std::make_shared<ActuatorStep>(actuator_ERM_2, pattern_DRV2605L_BUZZ);
-
   // ----------------- ACTIONS SETUP
 
   std::shared_ptr<Action> a_forward = std::make_shared<Action>();
