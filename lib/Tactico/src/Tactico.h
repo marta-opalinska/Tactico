@@ -17,7 +17,6 @@
 #include "ActuatorDriverI2C.h"
 #include "ActuatorERM.h"
 #include "ActuatorLRA.h"
-#include "Arduino.h"
 #include "HapticDevice.h"
 #include "HardwareLayer.h"
 #include "PatternDRV2605L.h"

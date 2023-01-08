@@ -1,7 +1,9 @@
 /** Copyright 2022 <Marta Opalinska> **/
 #pragma once
 
-#include <Arduino.h>#include <SPI.h>
+#include <Arduino.h>
+#undef min
+#undef max
 #include <Wire.h>
 
 #include <string>

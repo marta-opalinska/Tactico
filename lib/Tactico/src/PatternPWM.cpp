@@ -14,18 +14,6 @@ void PatternPWM::setModulation(
   this->m_modulation_sequence = switching_modulation;
 }
 
-// void PatternPWM::play(std::shared_ptr<IActuator> ac) {
-//   for (auto m : this->m_modulation_sequence) {
-//     // if()
-//     if (m.isOn) {
-//       ac->play();
-//     } else {
-//       ac->stop();
-//     }
-//     waitFor(m.duration);
-//   }
-// }
-
 std::string PatternPWM::patternToString() {
   std::string s = "";
   for (auto m : this->m_modulation_sequence) {
