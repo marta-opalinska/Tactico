@@ -58,13 +58,13 @@ All these commands tie the framework code to the utilised physical hardware.
 
 # Getting Started 
 
-An example [*PlatformIO*](https://platformio.org/) project containing Tactico framework for Arduino Nano 33 BLE and NRF52840-DK can be found in *examples* folder. I highly recommending installing PlatformIO and checking out the examples ;)
+An example [*PlatformIO*](https://platformio.org/) project containing the Tactico framework for Arduino Nano 33 BLE and NRF52840-DK can be found in the *examples* folder. I highly recommend installing PlatformIO and checking out the examples ;)
 
 # Framework Architecture
 
-The detailed code documentation can be viewed [here](https://marta-opalinska.github.io/Tactico/html/index.html). All classes with their methods and fields are thoroughly explained in there.
+The detailed code documentation can be viewed [here](https://marta-opalinska.github.io/Tactico/html/index.html). All classes with their methods and fields are thoroughly explained there.
 
-Fig.1 presents numerous classes that are involved in the framework. In the following sections you will find a general explanation of each of them.
+Fig.1 presents numerous classes that are involved in the framework. In the following sections, you will find a general explanation of each of them.
 
 ![image info](./docs/class_diagram_with_categories.png)
 *Fig.1. A detailed view of the framework architecture.*
@@ -82,7 +82,7 @@ The framework supports testing the connected actuators by calling the **test()**
 
 ### Creating An Actuator
 
-Before creating an Actuator object you need to have a Actuator Driver object created - to do that follow [this example](#creating-an-actuator-driver)
+Before creating an Actuator object, you need to have an Actuator Driver object available - to create one, follow [this example](#creating-an-actuator-driver).
 
 - ERM Actuator
 ``` cpp
@@ -96,7 +96,7 @@ Before creating an Actuator object you need to have a Actuator Driver object cre
 float ratedVoltage_ERM_1 = 2.0;
 // the maximum allowable DC voltage
 float overdriveVoltage_ERM_1 = 2.5;
-// optional - custom name will be prited alongside logs refering to the
+// optional - custom name will be printed alongside logs referring to the 
 // actuator
 std::string customName_ERM_1 = "myERM_1";
 
@@ -297,13 +297,13 @@ More about using a sequence of Steps can be found in [Action Class section](#act
 // ...
 
 // duration of the wait in miliseconds - 200ms
-int waitTime_200 = 200;
+const int waitTime_200 = 200;
 
 std::shared_ptr<WaitStep> s_wait_200 =
     std::make_shared<WaitStep>(waitTime_200);
 
 // duration of the wait in miliseconds - 400ms
-int waitTime_400 = 200;
+const int waitTime_400 = 400;
 
 std::shared_ptr<WaitStep> s_wait_400 =
     std::make_shared<WaitStep>(waitTime_400);
@@ -322,7 +322,7 @@ std::shared_ptr<WaitStep> s_wait_400 =
 std::shared_ptr<ActuatorStep> s_ERM_1_PWM_1 =
     std::make_shared<ActuatorStep>(actuator_ERM_1, pattern_PWM_1);
 
-// step that combines s_ERM_2_DRV2605L_BUZZ with pattern_DRV2605L_CLICK
+// step that combines actuator_ERM_2 with pattern_DRV2605L_CLICK
 // This step is not parallel.
 std::shared_ptr<ActuatorStep> s_ERM_2_DRV2605L_BUZZ =
     std::make_shared<ActuatorStep>(actuator_ERM_2, pattern_DRV2605L_BUZZ);
@@ -333,7 +333,7 @@ std::shared_ptr<ActuatorStep> s_ERM_2_DRV2605L_BUZZ =
 #include "Tactico.h"
 
 // ...
-bool isParallel_yes = true;
+const bool isParallel_yes = true;
 // step that combines actuator_ERM_2 with pattern_DRV2605L_CLICK - this step
 // is run in parallel
 std::shared_ptr<ActuatorStep> s_ERM_2_DRV2605L_CLICK =

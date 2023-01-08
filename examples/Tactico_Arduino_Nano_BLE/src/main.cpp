@@ -58,7 +58,7 @@ void loop() {
   float ratedVoltage_ERM_1 = 2.0;
   // the maximum allowable DC voltage
   float overdriveVoltage_ERM_1 = 2.5;
-  // optional - custom name will be prited alongside logs refering to the
+  // optional - custom name will be printed alongside logs referring to the 
   // actuator
   std::string customName_ERM_1 = "myERM_1";
 
@@ -135,13 +135,13 @@ void loop() {
   // ----------------- WAIT STEPS
 
   // duration of the wait in miliseconds - 200ms
-  int waitTime_200 = 200;
+  const int waitTime_200 = 200;
 
   std::shared_ptr<WaitStep> s_wait_200 =
       std::make_shared<WaitStep>(waitTime_200);
 
   // duration of the wait in miliseconds - 400ms
-  int waitTime_400 = 200;
+  const int waitTime_400 = 400;
 
   std::shared_ptr<WaitStep> s_wait_400 =
       std::make_shared<WaitStep>(waitTime_400);
@@ -154,12 +154,12 @@ void loop() {
   std::shared_ptr<ActuatorStep> s_ERM_1_PWM_1 =
       std::make_shared<ActuatorStep>(actuator_ERM_1, pattern_PWM_1);
 
-  // step that combines s_ERM_2_DRV2605L_BUZZ with pattern_DRV2605L_CLICK
+  // step that combines actuator_ERM_2 with pattern_DRV2605L_CLICK
   // This step is not parallel.
   std::shared_ptr<ActuatorStep> s_ERM_2_DRV2605L_BUZZ =
       std::make_shared<ActuatorStep>(actuator_ERM_2, pattern_DRV2605L_BUZZ);
 
-  bool isParallel_yes = true;
+const bool isParallel_yes = true;
   // step that combines actuator_ERM_2 with pattern_DRV2605L_CLICK - this step
   // is run in parallel
   std::shared_ptr<ActuatorStep> s_ERM_2_DRV2605L_CLICK_PARALLEL =
