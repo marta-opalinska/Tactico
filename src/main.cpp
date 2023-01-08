@@ -202,12 +202,21 @@ void loop() {
   haptic_band.addAction(a_forward_and_right, "go-forward-and-right");
 
   while (1) {
+    // a function to reset pr-run configuration of all the actuators in the
+    // Haptic Device - that clears the memory so there is no unintended actuator
+    // triggering
     haptic_band.resetActuatorsPreRunConfiguration();
+    // pre-run configuration of actuators for Action "go-forward"
     haptic_band.configureAction("go-forward");
     delay(2000);
+    // triggering Action "go-forward"
     haptic_band.playAction("go-forward");
     haptic_band.resetActuatorsPreRunConfiguration();
     delay(1000);
+    // call pre-run configuration and then play actuators
+    // equivalent of the code:
+    // haptic_band.configureAction("go-forward-and-right");
+    // haptic_band.playAction("go-forward-and-right");
     haptic_band.configureAndPlayAction("go-forward-and-right");
   }
 }
