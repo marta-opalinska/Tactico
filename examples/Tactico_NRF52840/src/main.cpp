@@ -41,7 +41,7 @@ void loop() {
 
   // ----------------- DRV2605LEVM DRIVER SETUP
   // DRV2605L evaluation board contains multiple DRV2605L drivers.
-  // Therefore the driver ID need to be specified.
+  // Therefore, the driver ID need to be specified.
   int driverID_1 = 0;
   // the pin connected to DRV2605LEVM-MD board that triggers the haptic effects
   int driverGoPin = 12;
@@ -98,7 +98,7 @@ void loop() {
   float overdriveVoltage_LRA = 3.0;
   // LRA actuator resonant frequency (can be found in the datasheet)
   int resonantFrequency_LRA = 170;
-  // optional - custom name will be prited alongside logs refering to the
+  // optional - custom name will be printed alongside logs referring  to the
   // actuator
   std::string customName_LRA = "myLRA_1";
 
@@ -114,7 +114,7 @@ void loop() {
 
   /*
       Custom Pulse Width Mudulation that specifies
-      duration in miliseconds (in this example 100ms and 50ms)
+      duration in milliseconds (in this example 100ms and 50ms)
       and status (1 = true = ON or 0 = false = OFF)
   */
   std::vector<ModulationPWM> modulationPWM_1 = {
@@ -127,7 +127,7 @@ void loop() {
   // ----------------- DRV2605L PATTERN SETUP
 
   /*
-  All in-build effect available for the DRV2605L can be found in
+  All in-build effects available for the DRV2605L can be found in
   DRV2605L_EFFECTS.h file
   */
   std::shared_ptr<PatternDRV2605L> pattern_DRV2605L_CLICK =
@@ -140,13 +140,13 @@ void loop() {
 
   // ----------------- WAIT STEPS
 
-  // duration of the wait in miliseconds - 200ms
+  // duration of the wait in milliseconds - 200ms
   const int waitTime_200 = 200;
 
   std::shared_ptr<WaitStep> s_wait_200 =
       std::make_shared<WaitStep>(waitTime_200);
 
-  // duration of the wait in miliseconds - 400ms
+  // duration of the wait in milliseconds - 400ms
   const int waitTime_400 = 400;
 
   std::shared_ptr<WaitStep> s_wait_400 =
@@ -198,7 +198,7 @@ void loop() {
 
   // ----------------- HAPTIC DEVICE SETUP
 
-  // Creating haptic device with certain Actuators
+  // Creating a haptic device with certain Actuators
   HapticDevice haptic_band({actuator_ERM_1, actuator_ERM_2, actuator_LRA});
 
   // Adding Action and assigning it a "go-forward" name
@@ -208,7 +208,7 @@ void loop() {
 
   while (1) {
     // a function to reset pre-run configuration of all the actuators in the
-    // Haptic Device - that clears the memory so there is no unintended actuator
+    // Haptic Device - that clears the memory, so there is no unintended actuator
     // triggering
     haptic_band.resetActuatorsPreRunConfiguration();
     // pre-run configuration of actuators for Action "go-forward"

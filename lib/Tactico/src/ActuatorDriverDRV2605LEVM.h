@@ -156,7 +156,7 @@ class ActuatorDriverDRV2605LEVM : public ActuatorDriverI2C {
    *
    * @param slotNumber waveform sequence slot number - the driver has max. 7
    * slots.
-   * @param miliseconds time to wait (in miliseconds)
+   * @param milliseconds time to wait (in miliseconds)
    * @return true
    * @return false
    */

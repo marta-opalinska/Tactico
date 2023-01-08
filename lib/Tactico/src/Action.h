@@ -125,7 +125,7 @@ class Action {
   /**
    * @brief Add wait time to the Action
    *
-   * @param miliseconds time to wait (in miliseconds)
+   * @param milliseconds time to wait (in miliseconds)
    */
   void addWait(int miliseconds);
 

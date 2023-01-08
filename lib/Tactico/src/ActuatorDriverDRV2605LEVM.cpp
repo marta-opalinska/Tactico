@@ -21,7 +21,7 @@ void ActuatorDriverDRV2605LEVM::init() {
   // Enabling communication with servo 1-8
   i2c_write_reg(TCA9554_ADDR, CONF_IO_REG, 0xFF);
 
-  // Activating all servos - in that way it is not necessarly to keep track of
+  // Activating all servos - That way it is not necessarly to keep track of
   // all the servos that need to be activate and mistakenly distctivate some of
   // them
   i2c_write_reg(TCA9554_ADDR, OUT_CHANNEL_REG, 0xFF);
@@ -88,14 +88,14 @@ bool ActuatorDriverDRV2605LEVM::setWait(int slotNumber, int miliseconds) {
     wait_for_motor_available();
     // the wait time need to be setup in 7 bits - therefore the register value
     // is need to be capped at 127 (MAX_WAIT_TIME_PER_SLOT)
-    if (miliseconds / 10 > MAX_WAIT_TIME_PER_SLOT) {
+    if (milliseconds / 10 > MAX_WAIT_TIME_PER_SLOT) {
       printTactico("WARNING: Wait time for the actuator DRV2605L driver id ");
       printTactico(std::to_string(m_driverID));
       printTactico(" needed to be capped at 1270ms!\n");
     }
 
     int milisecondsCapped = static_cast<int>(
-        static_cast<int>(miliseconds * WAIT_BETWEEN_EFFECTS_MULTIPLIER) %
+        static_cast<int>(milliseconds * WAIT_BETWEEN_EFFECTS_MULTIPLIER) %
         MAX_WAIT_TIME_PER_SLOT);
     int timeToSend = WAIT_EFFECT_MSB + milisecondsCapped;
     this->writeRegister(DRV2605_REG_WAVESEQ1 + slotNumber, timeToSend);

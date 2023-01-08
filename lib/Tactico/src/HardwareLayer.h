@@ -15,7 +15,7 @@
 /**
  * @brief Implements hardware wait/delay function
  *
- * @param miliseconds time of the wait
+ * @param milliseconds time of the wait
  */
 void waitFor(int miliseconds);
 

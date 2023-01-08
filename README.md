@@ -132,7 +132,7 @@ float ratedVoltage_LRA = 2.0;
 float overdriveVoltage_LRA = 2.5;
 // LRA actuator resonant frequency (can be found in the datasheet)
 int resonantFrequency_LRA = 170;
-// optional - custom name will be prited alongside logs refering to the
+// optional - custom name will be printed alongside logs referring  to the
 // actuator
 std::string customName_LRA = "myLRA_1";
 
@@ -169,7 +169,7 @@ Therefore, when this type of actuator is used as a part of the **Action** class 
 
 ### Creating An Actuator Driver
 
-All the Drivers, Actuators, Patterns and Action instances are created with the use of **shared pointer**. In that way it is easier to manage them as they are passed to various functions in the runtime. 
+All the Drivers, Actuators, Patterns and Action instances are created with the use of **shared pointer**. That way it is easier to manage them as they are passed to various functions in the runtime. 
 
 - GPIO Driver
 
@@ -193,7 +193,7 @@ std::shared_ptr<ActuatorDriverGPIO> driver_GPIO =
 // ...
 
 // DRV2605L evaluation board contains multiple DRV2605L drivers.
-// Therefore the driver ID need to be specified.
+// Therefore, the driver ID need to be specified.
 int driverID_1 = 0;
 // the pin connected to DRV2605LEVM-MD board that triggers the haptic effects
 int driverGoPin = 12;
@@ -246,7 +246,7 @@ The most significant advantage of the Pattern class is that it can be assigned t
 
 /*
     Custom Pulse Width Mudulation that specifies
-    duration in miliseconds (in this example 100ms and 50ms)
+    duration in milliseconds (in this example 100ms and 50ms)
     and status (1 = true = ON or 0 = false = OFF)
 */
 std::vector<ModulationPWM> modulationPWM_1 = {
@@ -258,7 +258,7 @@ std::shared_ptr<PatternPWM> pattern_PWM_1 =
 
 ```
 
-- DRV2605L Pattern (using in-build library of haptic effects)
+- DRV2605L Pattern (using an in-build library of haptic effects)
 
 ``` cpp
 #include "Tactico.h"
@@ -267,7 +267,7 @@ std::shared_ptr<PatternPWM> pattern_PWM_1 =
 
 
 /*
-All in-build effect available for the DRV2605L can be found in
+All in-build effects available for the DRV2605L can be found in
 DRV2605L_EFFECTS.h file
 */
 std::shared_ptr<PatternDRV2605L> pattern_DRV2605L_CLICK =
@@ -296,13 +296,13 @@ More about using a sequence of Steps can be found in [Action Class section](#act
 
 // ...
 
-// duration of the wait in miliseconds - 200ms
+// duration of the wait in milliseconds - 200ms
 const int waitTime_200 = 200;
 
 std::shared_ptr<WaitStep> s_wait_200 =
     std::make_shared<WaitStep>(waitTime_200);
 
-// duration of the wait in miliseconds - 400ms
+// duration of the wait in milliseconds - 400ms
 const int waitTime_400 = 400;
 
 std::shared_ptr<WaitStep> s_wait_400 =
@@ -327,7 +327,7 @@ std::shared_ptr<ActuatorStep> s_ERM_1_PWM_1 =
 std::shared_ptr<ActuatorStep> s_ERM_2_DRV2605L_BUZZ =
     std::make_shared<ActuatorStep>(actuator_ERM_2, pattern_DRV2605L_BUZZ);
 ```
-- Parallel Actuator Steps - steps will be performed in parallel (simutanously) to other parallel steps.
+- Parallel Actuator Steps - steps will be performed in parallel (simultaneously) to other parallel steps.
 
 ``` cpp
 #include "Tactico.h"
@@ -359,7 +359,7 @@ OR
 
 The Action can involve some of the steps played in parallel. The step parallelisation property can be assigned only during the Step object creation. However, it is limited to the specific motor drivers that allow pre-run configuration(e.g. works with DRV2605L, but **NOT** with GPIO driver). 
 
-To keep the Action clean, it is recommended to call **resetPreviousConfiguration()** each time after the Action is played (unless it will be repeated). In that way, pre-run memory will be reset, and non of the previously played actuator will be accidentally triggered by the same GO pin as assigned to the other actuators (which is the case when using the DRV2605LEVM board). This function is not automatically activated if the Action is set up once and used multiple times in a row. 
+To keep the Action clean, it is recommended to call **resetPreviousConfiguration()** each time after the Action is played (unless it will be repeated). In that way, pre-run configuration will be reset, and non of the previously played actuator will be accidentally triggered by the GO pin (which can be the case when using the DRV2605LEVM board). **resetPreviousConfiguration()**  function is not automatically executed - the user need to do that when needed.
 
 An Action can become a part of a Haptic Device. 
 ![image info](./docs/action_class.png)
@@ -410,7 +410,7 @@ As previously explained in the Action section, it is recommended to reset the pr
 
 // ...
 
-// Creating haptic device with certain Actuators
+// Creating a haptic device with certain Actuators
 HapticDevice haptic_band({actuator_ERM_1, actuator_ERM_2, actuator_LRA});
 
 // Adding Action and assigning it a "go-forward" name
@@ -424,7 +424,7 @@ haptic_band.addAction(a_forward_and_right, "go-forward-and-right");
 // ...
 
 // a function to reset pr-run configuration of all the actuators in the
-// Haptic Device - that clears the memory so there is no unintended actuator
+// Haptic Device - that clears the memory, so there is no unintended actuator
 // triggering
 haptic_band.resetActuatorsPreRunConfiguration();
 // pre-run configuration of actuators for Action "go-forward"
