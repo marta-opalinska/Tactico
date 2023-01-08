@@ -373,17 +373,24 @@ An Action can become a part of a Haptic Device.
 
 // ...
 
-  std::shared_ptr<Action> a_forward = std::make_shared<Action>();
+// creating Action objects
+std::shared_ptr<Action> a_forward = std::make_shared<Action>();
+std::shared_ptr<Action> a_forward_and_right = std::make_shared<Action>();
 
-  a_forward->setSteps({s_ERM_1_PWM_1, s_wait_200, s_ERM_2_DRV2605L_BUZZ});
+// adding Action steps - all together
+//  Remember that the order in which you write Actions will be the order of
+//  playing them
+a_forward->setSteps({s_ERM_1_PWM_1, s_wait_200, s_ERM_2_DRV2605L_BUZZ});
 
-  std::shared_ptr<Action> a_forward_and_right = std::make_shared<Action>();
-
-  a_forward_and_right->addStep(s_ERM_1_PWM_1);
-  a_forward_and_right->addStep(s_wait_400);
-  a_forward_and_right->addStep(s_LRA_DRV2605L_CLICK_PARALLEL);
-  a_forward_and_right->addStep(s_ERM_2_DRV2605L_CLICK_PARALLEL);
-
+// adding Action steps - one by one
+//  Remember that the order in which you add Actions will be the order of
+//  playing them
+a_forward_and_right->addStep(s_ERM_1_PWM_1);
+a_forward_and_right->addStep(s_wait_400);
+// These two last steps will be played in parallel as their Step field
+// isParallel was set to TRUE
+a_forward_and_right->addStep(s_LRA_DRV2605L_CLICK_PARALLEL);
+a_forward_and_right->addStep(s_ERM_2_DRV2605L_CLICK_PARALLEL);
 ```
 
 ## Haptic Device Class
@@ -404,14 +411,13 @@ As previously explained in the Action section, it is recommended to reset the pr
 
 // ...
 
-  HapticDevice haptic_band({actuator_ERM_1, actuator_ERM_2, actuator_LRA});
-  haptic_band.addAction(a_forward, "go-forward");
+// Creating haptic device with certain Actuators
+HapticDevice haptic_band({actuator_ERM_1, actuator_ERM_2, actuator_LRA});
 
-  haptic_band.addAction(a_forward_and_right, "go-forward-and-right");
-
-  haptic_band.testActuators();
-
-
+// Adding Action and assigning it a "go-forward" name
+haptic_band.addAction(a_forward, "go-forward");
+// Adding Action and assigning it a "go-forward-and-right" name
+haptic_band.addAction(a_forward_and_right, "go-forward-and-right");
 ```
 - Use
 ``` cpp
@@ -436,3 +442,4 @@ The framework supports the creation of a custom external controller to control t
 - [Platformio for VS](https://docs.platformio.org/en/latest/integration/ide/visualstudio.html)
 
 - [DRV2605L Documentation](https://www.ti.com/lit/ds/symlink/drv2605l.pdf?ts=1672415752878)
+- [DRV2604 and DRV2605 Design Equation Tool](https://www.ti.com/tool/DRV2604-2605_DESIGN_TOOL)

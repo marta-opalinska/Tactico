@@ -172,25 +172,34 @@ void loop() {
                                      isParallel_yes);
   // ----------------- ACTIONS SETUP
 
+  // creating Action objects
   std::shared_ptr<Action> a_forward = std::make_shared<Action>();
-
-  a_forward->setSteps({s_ERM_1_PWM_1, s_wait_200, s_ERM_2_DRV2605L_BUZZ});
-
   std::shared_ptr<Action> a_forward_and_right = std::make_shared<Action>();
 
+  // adding Action steps - all together
+  //  Remember that the order in which you write Actions will be the order of
+  //  playing them
+  a_forward->setSteps({s_ERM_1_PWM_1, s_wait_200, s_ERM_2_DRV2605L_BUZZ});
+
+  // adding Action steps - one by one
+  //  Remember that the order in which you add Actions will be the order of
+  //  playing them
   a_forward_and_right->addStep(s_ERM_1_PWM_1);
   a_forward_and_right->addStep(s_wait_400);
+  // These two last steps will be played in parallel as their Step field
+  // isParallel was set to TRUE
   a_forward_and_right->addStep(s_LRA_DRV2605L_CLICK_PARALLEL);
   a_forward_and_right->addStep(s_ERM_2_DRV2605L_CLICK_PARALLEL);
 
   // ----------------- HAPTIC DEVICE SETUP
 
+  // Creating haptic device with certain Actuators
   HapticDevice haptic_band({actuator_ERM_1, actuator_ERM_2, actuator_LRA});
+
+  // Adding Action and assigning it a "go-forward" name
   haptic_band.addAction(a_forward, "go-forward");
-
+  // Adding Action and assigning it a "go-forward-and-right" name
   haptic_band.addAction(a_forward_and_right, "go-forward-and-right");
-
-  haptic_band.testActuators();
 
   while (1) {
     haptic_band.resetActuatorsPreRunConfiguration();
