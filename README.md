@@ -58,7 +58,7 @@ All these commands tie the framework code to the utilised physical hardware.
 
 # Getting Started 
 
-An example main file can be found in *src/main.cpp*.
+An example [*PlatformIO*](https://platformio.org/) project containing Tactico framework for Arduino Nano 33 BLE and NRF52840-DK can be found in *examples* folder. I highly recommending installing PlatformIO and checking out the examples ;)
 
 # Framework Architecture
 
