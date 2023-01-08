@@ -14,7 +14,7 @@ Tactico is a **haptics framework for embedded devices**. It supports multiple em
     - [Creating An Actuator](#creating-an-actuator)
   - [Actuator Driver Class](#actuator-driver-class)
     - [Creating An Actuator Driver](#creating-an-actuator-driver)
-  - [Pattern \& Step Classes](#pattern--step-classes)
+  - [Pattern And Step Classes](#pattern-and-step-classes)
     - [Pattern](#pattern)
       - [Creating a Pattern](#creating-a-pattern)
     - [Step](#step)
@@ -28,7 +28,7 @@ Tactico is a **haptics framework for embedded devices**. It supports multiple em
 
 # Introduction
 
-**Tactico** is a hardware independent C++ open-sourced framework for **haptic device setup and control**. It is suitable for different types of actuators and actuator drivers. Currently, the framework supports LRA and ERM motors, but the modular architecture makes new hardware integration easy. The control module can be wired or wireless, depending on your preference. 
+**Tactico** is a hardware independent C++ open-sourced framework for **haptic device setup and control**. It is suitable for different types of actuators and actuator drivers. Currently, the framework supports Linear Resonant Actuator (LRA) and Eccentric Rotating Mass (ERM) motors, but the modular architecture makes new hardware integration easy. The control module can be wired or wireless, depending on your preference. 
 
 # Currently Supported Hardware
 
@@ -210,7 +210,7 @@ std::shared_ptr<ActuatorDriverDRV2605LEVM> driver_DRV2605L_2 =
     std::make_shared<ActuatorDriverDRV2605LEVM>(driverID_2, driverGoPin);
 ```
 
-## Pattern & Step Classes
+## Pattern And Step Classes
 
 ### Pattern
 
@@ -279,11 +279,11 @@ std::shared_ptr<PatternDRV2605L> pattern_DRV2605L_BUZZ =
 
 ### Step
 
-**Step** can be considered an individual activation of the actuator or a Wait command. Steps are a data class that only stores information about the objects involved in the step, and to play them, they need to be combined into the Action - more about it in the [Action Class section](#action).
+**Step** can be considered an individual activation of the actuator or a Wait command. Steps are a data class that only stores information about the objects involved in the Step, and to play them, they need to be combined into the Action - more about it in the [Action Class section](#action).
 
-The Step can be configured to be **played in parallel** with other steps. This functionality is available only for actuators that drivers allow pre-run configuration (e.g. DRV2605L but **NOT** DriverGPIO). That means that the software will store the activation sequence in the physical driver's memory and simply triggers it with a GO pin. The value of driver's **m_needsPreconfigration** field indicates if the driver can be configered priour the run. The Step parallelisation property needs to be set during the Step creation by assigning *true* to **isParallel** field. 
+The Step can be configured to be **played in parallel** with other steps. This functionality is available only for certain actuator drivers that allow pre-run configuration (e.g. DRV2605L but **NOT** DriverGPIO). That means that the software will store the activation sequence in the physical driver's memory and simply triggers it with a GO pin. The value of the driver's **m_needsPreconfigration** field indicates if the driver can be configured prior to the run. The Step parallelisation property needs to be set during the Step creation by assigning *true* to the **isParallel** field. 
 
-More about Steps sequences can be found in [Action Class section](#action).
+More about using a sequence of Steps can be found in [Action Class section](#action).
 
 ![image info](./docs/step_class.png)
 *Fig.5. Step class.*
@@ -359,10 +359,9 @@ OR
 
 The Action can involve some of the steps played in parallel. The step parallelisation property can be assigned only during the Step object creation. However, it is limited to the specific motor drivers that allow pre-run configuration(e.g. works with DRV2605L, but **NOT** with GPIO driver). 
 
-To keep the Action clean, it is recommended to call **resetPreviousConfiguration()** each time after the action is played (unless it will be repeated). In that way, pre-run memory will be reset, and non of the previously played actuator will be accidentally triggered by the same GO pin as assigned to the other actuators (which is the case when using the DRV2605LEVM board). This function is not automatically activated if the Action is set up once and used multiple times in a row. 
+To keep the Action clean, it is recommended to call **resetPreviousConfiguration()** each time after the Action is played (unless it will be repeated). In that way, pre-run memory will be reset, and non of the previously played actuator will be accidentally triggered by the same GO pin as assigned to the other actuators (which is the case when using the DRV2605LEVM board). This function is not automatically activated if the Action is set up once and used multiple times in a row. 
 
 An Action can become a part of a Haptic Device. 
-
 ![image info](./docs/action_class.png)
 *Fig.6. Example of creating parallel and non-parallel actions. The step parallelisation property needs to be assigned when the step is created.*
 
