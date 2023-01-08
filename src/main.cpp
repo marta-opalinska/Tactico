@@ -111,11 +111,10 @@ void loop() {
       duration in miliseconds (in this example 100ms and 50ms)
       and status (1 = true = ON or 0 = false = OFF)
   */
-  std::vector<ModulationPWM> modulationPWM = {
-      {100, true}, {50, false}, {100, true},
-      {50, false}, {100, true}, {50, false},
-  };
+  std::vector<ModulationPWM> modulationPWM_1 = {
+      {100, true}, {50, false}, {100, true}, {50, false}};
 
+// Assigning modulationPWM_1 to the pattern
   std::shared_ptr<PatternPWM> pattern_PWM_1 =
       std::make_shared<PatternPWM>(modulationPWM);
 
