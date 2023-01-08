@@ -423,7 +423,7 @@ haptic_band.addAction(a_forward_and_right, "go-forward-and-right");
 
 // ...
 
-// a function to reset pr-run configuration of all the actuators in the
+// a function to reset pre-run configuration of all the actuators in the
 // Haptic Device - that clears the memory, so there is no unintended actuator
 // triggering
 haptic_band.resetActuatorsPreRunConfiguration();
