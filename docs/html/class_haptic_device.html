@@ -148,11 +148,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a96ab311be5112d8fe26847cfba59aa21"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_haptic_device.html#a96ab311be5112d8fe26847cfba59aa21">clearActions</a> ()</td></tr>
 <tr class="memdesc:a96ab311be5112d8fe26847cfba59aa21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear m_deviceActions list.  <br /></td></tr>
 <tr class="separator:a96ab311be5112d8fe26847cfba59aa21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02b59473723b0c64a4c2ea31ba65b8cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_haptic_device.html#a02b59473723b0c64a4c2ea31ba65b8cd">configure</a> (std::string actionName)</td></tr>
-<tr class="memdesc:a02b59473723b0c64a4c2ea31ba65b8cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures an <a class="el" href="class_action.html" title="Class that stores multistep activity that can be performed on multiple actuators.">Action</a> if any of the drivers has m_needsPreconfigration flag set up.  <br /></td></tr>
-<tr class="separator:a02b59473723b0c64a4c2ea31ba65b8cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a277a2f853beded1363309e6d60e35980"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_haptic_device.html#a277a2f853beded1363309e6d60e35980">configureAction</a> (std::string actionName)</td></tr>
+<tr class="memdesc:a277a2f853beded1363309e6d60e35980"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures an <a class="el" href="class_action.html" title="Class that stores multistep activity that can be performed on multiple actuators.">Action</a> if any of the drivers has m_needsPreconfigration flag set up.  <br /></td></tr>
+<tr class="separator:a277a2f853beded1363309e6d60e35980"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21ff8379a2bb1c5d80a23952cc9234cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_haptic_device.html#a21ff8379a2bb1c5d80a23952cc9234cd">playAction</a> (std::string actionName)</td></tr>
-<tr class="memdesc:a21ff8379a2bb1c5d80a23952cc9234cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play the action. If any drivers with m_needsPreconfigration flag set up, a <a class="el" href="class_haptic_device.html#a02b59473723b0c64a4c2ea31ba65b8cd" title="Configures an Action if any of the drivers has m_needsPreconfigration flag set up.">configure()</a> need to be called first!  <br /></td></tr>
+<tr class="memdesc:a21ff8379a2bb1c5d80a23952cc9234cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play the action. If any drivers with m_needsPreconfigration flag set up, a <a class="el" href="class_haptic_device.html#a277a2f853beded1363309e6d60e35980" title="Configures an Action if any of the drivers has m_needsPreconfigration flag set up.">configureAction()</a> need to be called first!  <br /></td></tr>
 <tr class="separator:a21ff8379a2bb1c5d80a23952cc9234cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefb5fd2c50ff3f4468b8f319329a6ae1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_haptic_device.html#aefb5fd2c50ff3f4468b8f319329a6ae1">configureAndPlayAction</a> (std::string actionName)</td></tr>
 <tr class="memdesc:aefb5fd2c50ff3f4468b8f319329a6ae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the action and plays it.  <br /></td></tr>
@@ -427,14 +427,14 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a02b59473723b0c64a4c2ea31ba65b8cd" name="a02b59473723b0c64a4c2ea31ba65b8cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02b59473723b0c64a4c2ea31ba65b8cd">&#9670;&#160;</a></span>configure()</h2>
+<a id="a277a2f853beded1363309e6d60e35980" name="a277a2f853beded1363309e6d60e35980"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a277a2f853beded1363309e6d60e35980">&#9670;&#160;</a></span>configureAction()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void HapticDevice::configure </td>
+          <td class="memname">void HapticDevice::configureAction </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>actionName</em></td><td>)</td>
@@ -472,7 +472,7 @@ Static Protected Attributes</h2></td></tr>
 <p>Configures the action and plays it. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">actionName</td><td>ame of the action to configure and play </td></tr>
+    <tr><td class="paramname">actionName</td><td>ame of the action to configureAction and play </td></tr>
   </table>
   </dd>
 </dl>
@@ -535,7 +535,7 @@ Static Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Play the action. If any drivers with m_needsPreconfigration flag set up, a <a class="el" href="class_haptic_device.html#a02b59473723b0c64a4c2ea31ba65b8cd" title="Configures an Action if any of the drivers has m_needsPreconfigration flag set up.">configure()</a> need to be called first! </p>
+<p>Play the action. If any drivers with m_needsPreconfigration flag set up, a <a class="el" href="class_haptic_device.html#a277a2f853beded1363309e6d60e35980" title="Configures an Action if any of the drivers has m_needsPreconfigration flag set up.">configureAction()</a> need to be called first! </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">actionName</td><td>ame of the action to play </td></tr>

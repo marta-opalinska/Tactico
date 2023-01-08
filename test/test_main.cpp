@@ -1,9 +1,12 @@
 // clang-format off
 // Format need to be turned off - Arduino library need to be compiled as the last one 
 // Arduino min and max function provides errors for NRF5280 chipset.
+#include <Arduino.h>
+#undef min
+#undef max
+
 #include <unity.h>
 #include "Tactico.h"
-#include <Arduino.h>
 // clang-format on
 
 void setUp(void) {

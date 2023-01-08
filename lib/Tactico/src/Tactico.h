@@ -23,9 +23,9 @@
 #include "PatternDRV2605L.h"
 #include "PatternPWM.h"
 
-/** 
+/**
  * Needs for NRF52840 - min and max are ovewritten by Arduino library which
  * does not work with std library.
  */
-#undef min
-#undef max
+// #undef min
+// #undef max

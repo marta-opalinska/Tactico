@@ -55,13 +55,13 @@ void Action::setSteps(std::vector<std::shared_ptr<IStep>> activitySteps) {
 
 void Action::activateGoPins() {
   for (int pin : this->m_goPins) {
-    setPinStatusTactico(pin, HIGH);
+    setPinStatusTactico(pin, 1);
   }
 }
 
 void Action::deactivateGoPins() {
   for (int pin : this->m_goPins) {
-    setPinStatusTactico(pin, LOW);
+    setPinStatusTactico(pin, 0);
   }
 }
 
@@ -181,7 +181,7 @@ void Action::configure() {
 void Action::resetPreviousConfiguration() {
   for (auto ac : this->m_actuators) {
     if (ac->getDriver()->m_needsPreconfigration) {
-      ac->getDriver()->resetConfiguration();
+      ac->getDriver()->resetPreRunConfiguration();
     }
   }
 }

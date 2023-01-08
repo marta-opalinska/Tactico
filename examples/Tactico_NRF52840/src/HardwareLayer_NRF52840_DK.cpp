@@ -1,10 +1,14 @@
 /** Copyright 2022 <Marta Opalinska> **/
+#pragma once
+
+#include <Arduino.h>#include <SPI.h>
+#include <Wire.h>
+
+#include <string>
 
 #include "HardwareLayer.h"
 
-void waitFor(int miliseconds) {
-  delay(miliseconds);
-}
+void waitFor(int miliseconds) { delay(miliseconds); }
 
 void printTactico(const std::string s) { Serial.print(s.c_str()); }
 
@@ -16,14 +20,18 @@ void setPinModeTactico(const int pinNumber, int pinModeStatus) {
   pinMode(pinNumber, pinModeStatus);
 }
 
-void i2c_begin() {
-  Wire.begin();
-}
+void i2c_begin() { Wire.begin(); }
 
 void i2c_write_reg(int address, int reg, int data) {
   Wire.beginTransmission(address);
   Wire.write(reg);
   Wire.write(data);
+  Wire.endTransmission();
+}
+
+void i2c_write(int address, int reg) {
+  Wire.beginTransmission(address);
+  Wire.write(reg);
   Wire.endTransmission();
 }
 

@@ -2,6 +2,7 @@
 #pragma once
 #include <Interfaces/IActuatorDriver.h>
 
+#include <cmath>
 #include <memory>
 #include <string>
 #include <vector>
@@ -131,7 +132,7 @@ class ActuatorDriverDRV2605LEVM : public ActuatorDriverI2C {
    * configuration will remain the same!.
    *
    */
-  void resetConfiguration();
+  void resetPreRunConfiguration();
 
   /**
    * @brief Reset configured sequence of patterns.

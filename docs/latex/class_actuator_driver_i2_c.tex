@@ -36,7 +36,7 @@ void \mbox{\hyperlink{class_actuator_driver_i2_c_ac6dfa3453353944149fbf0ab80634d
 \begin{DoxyCompactList}\small\item\em Set the I2C address. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_actuator_driver_i2_c_af6c1f10d16e9333bc74bfec2b4abb194}{get\+Go\+Pin}} ()
 \begin{DoxyCompactList}\small\item\em Get the \char`\"{}go\char`\"{} GPIO pin. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{class_actuator_driver_i2_c_aede2bc42a7a92f9da5001939a671a26c}{reset\+Configuration}} ()=0
+virtual void \mbox{\hyperlink{class_actuator_driver_i2_c_aafd7bfcb7d52f50a4a910beed8875e5f}{reset\+Pre\+Run\+Configuration}} ()=0
 \begin{DoxyCompactList}\small\item\em Need to be implemented by the implementation class. \end{DoxyCompactList}\item 
 Actuator\+Driver\+Type \mbox{\hyperlink{class_actuator_driver_i2_c_a15d7e0fcccdbb5604b8c41b9fb5ce40a}{get\+Type}} ()
 \begin{DoxyCompactList}\small\item\em Get the Actuator\+Driver\+Type of the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -48,7 +48,7 @@ virtual bool \mbox{\hyperlink{class_i_actuator_driver_ac4cc863bf46900041cf0a03ae
 \begin{DoxyCompactList}\small\item\em Play a pattern. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_i_actuator_driver_a96a92e535e2c3ff72c174973e554f2c5}{test}} ()=0
 \begin{DoxyCompactList}\small\item\em Driver testing. \end{DoxyCompactList}\item 
-virtual void \mbox{\hyperlink{class_i_actuator_driver_a39257280e844754aae03d22fe1f25e75}{reset\+Configuration}} ()=0
+virtual void \mbox{\hyperlink{class_i_actuator_driver_ad16a12279f2ef8a9ecf009ac56856db8}{reset\+Pre\+Run\+Configuration}} ()=0
 \item 
 virtual Actuator\+Driver\+Type \mbox{\hyperlink{class_i_actuator_driver_a591fd8c0e1a54639a29ff6d6d56a5a29}{get\+Type}} ()=0
 \begin{DoxyCompactList}\small\item\em Get the driver\textquotesingle{}s type. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -183,11 +183,11 @@ Read a specific register.
 \begin{DoxyReturn}{Returns}
 int 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_actuator_driver_i2_c_aede2bc42a7a92f9da5001939a671a26c}\label{class_actuator_driver_i2_c_aede2bc42a7a92f9da5001939a671a26c}} 
-\index{ActuatorDriverI2C@{ActuatorDriverI2C}!resetConfiguration@{resetConfiguration}}
-\index{resetConfiguration@{resetConfiguration}!ActuatorDriverI2C@{ActuatorDriverI2C}}
-\doxysubsubsection{\texorpdfstring{resetConfiguration()}{resetConfiguration()}}
-{\footnotesize\ttfamily virtual void Actuator\+Driver\+I2\+C\+::reset\+Configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+\mbox{\Hypertarget{class_actuator_driver_i2_c_aafd7bfcb7d52f50a4a910beed8875e5f}\label{class_actuator_driver_i2_c_aafd7bfcb7d52f50a4a910beed8875e5f}} 
+\index{ActuatorDriverI2C@{ActuatorDriverI2C}!resetPreRunConfiguration@{resetPreRunConfiguration}}
+\index{resetPreRunConfiguration@{resetPreRunConfiguration}!ActuatorDriverI2C@{ActuatorDriverI2C}}
+\doxysubsubsection{\texorpdfstring{resetPreRunConfiguration()}{resetPreRunConfiguration()}}
+{\footnotesize\ttfamily virtual void Actuator\+Driver\+I2\+C\+::reset\+Pre\+Run\+Configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -199,7 +199,7 @@ Implements \mbox{\hyperlink{class_i_actuator_driver}{IActuator\+Driver}}.
 
 
 
-Implemented in \mbox{\hyperlink{class_actuator_driver_d_r_v2605_l_e_v_m_a23779563a058541e4f2c959d7771a2be}{Actuator\+Driver\+DRV2605\+LEVM}}.
+Implemented in \mbox{\hyperlink{class_actuator_driver_d_r_v2605_l_e_v_m_ade838dfbb281d4b11417cd48a92b2a00}{Actuator\+Driver\+DRV2605\+LEVM}}.
 
 \mbox{\Hypertarget{class_actuator_driver_i2_c_ac6dfa3453353944149fbf0ab80634da7}\label{class_actuator_driver_i2_c_ac6dfa3453353944149fbf0ab80634da7}} 
 \index{ActuatorDriverI2C@{ActuatorDriverI2C}!setAddress@{setAddress}}

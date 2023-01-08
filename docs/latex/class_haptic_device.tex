@@ -40,10 +40,10 @@ void \mbox{\hyperlink{class_haptic_device_ab80da6cbafbcf2a546c91cab5b48e744}{rem
 \begin{DoxyCompactList}\small\item\em Remove the action from m\+\_\+device\+Actions list. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_haptic_device_a96ab311be5112d8fe26847cfba59aa21}{clear\+Actions}} ()
 \begin{DoxyCompactList}\small\item\em Clear m\+\_\+device\+Actions list. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_haptic_device_a02b59473723b0c64a4c2ea31ba65b8cd}{configure}} (std\+::string action\+Name)
+void \mbox{\hyperlink{class_haptic_device_a277a2f853beded1363309e6d60e35980}{configure\+Action}} (std\+::string action\+Name)
 \begin{DoxyCompactList}\small\item\em Configures an \mbox{\hyperlink{class_action}{Action}} if any of the drivers has m\+\_\+needs\+Preconfigration flag set up. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_haptic_device_a21ff8379a2bb1c5d80a23952cc9234cd}{play\+Action}} (std\+::string action\+Name)
-\begin{DoxyCompactList}\small\item\em Play the action. If any drivers with m\+\_\+needs\+Preconfigration flag set up, a \mbox{\hyperlink{class_haptic_device_a02b59473723b0c64a4c2ea31ba65b8cd}{configure()}} need to be called first! \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Play the action. If any drivers with m\+\_\+needs\+Preconfigration flag set up, a \mbox{\hyperlink{class_haptic_device_a277a2f853beded1363309e6d60e35980}{configure\+Action()}} need to be called first! \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_haptic_device_aefb5fd2c50ff3f4468b8f319329a6ae1}{configure\+And\+Play\+Action}} (std\+::string action\+Name)
 \begin{DoxyCompactList}\small\item\em Configures the action and plays it. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_haptic_device_a362cb4006ebc6b38227945deb12fbf53}{reset\+Actuators\+Pre\+Run\+Configuration}} ()
@@ -213,11 +213,11 @@ Clear m\+\_\+device\+Actions list.
 
 Clear the list of actuators. 
 
-\mbox{\Hypertarget{class_haptic_device_a02b59473723b0c64a4c2ea31ba65b8cd}\label{class_haptic_device_a02b59473723b0c64a4c2ea31ba65b8cd}} 
-\index{HapticDevice@{HapticDevice}!configure@{configure}}
-\index{configure@{configure}!HapticDevice@{HapticDevice}}
-\doxysubsubsection{\texorpdfstring{configure()}{configure()}}
-{\footnotesize\ttfamily void Haptic\+Device\+::configure (\begin{DoxyParamCaption}\item[{std\+::string}]{action\+Name }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{class_haptic_device_a277a2f853beded1363309e6d60e35980}\label{class_haptic_device_a277a2f853beded1363309e6d60e35980}} 
+\index{HapticDevice@{HapticDevice}!configureAction@{configureAction}}
+\index{configureAction@{configureAction}!HapticDevice@{HapticDevice}}
+\doxysubsubsection{\texorpdfstring{configureAction()}{configureAction()}}
+{\footnotesize\ttfamily void Haptic\+Device\+::configure\+Action (\begin{DoxyParamCaption}\item[{std\+::string}]{action\+Name }\end{DoxyParamCaption})}
 
 
 
@@ -240,7 +240,7 @@ Configures the action and plays it.
 
 
 \begin{DoxyParams}{Parameters}
-{\em action\+Name} & ame of the action to configure and play \\
+{\em action\+Name} & ame of the action to configure\+Action and play \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_haptic_device_a0433b6c941a1d4f631ce1b925e0480ec}\label{class_haptic_device_a0433b6c941a1d4f631ce1b925e0480ec}} 
@@ -277,7 +277,7 @@ std\+::vector$<$std\+::shared\+\_\+ptr$<$\+IActuator$>$$>$
 
 
 
-Play the action. If any drivers with m\+\_\+needs\+Preconfigration flag set up, a \mbox{\hyperlink{class_haptic_device_a02b59473723b0c64a4c2ea31ba65b8cd}{configure()}} need to be called first! 
+Play the action. If any drivers with m\+\_\+needs\+Preconfigration flag set up, a \mbox{\hyperlink{class_haptic_device_a277a2f853beded1363309e6d60e35980}{configure\+Action()}} need to be called first! 
 
 
 \begin{DoxyParams}{Parameters}

@@ -113,7 +113,7 @@ void HapticDevice::playAction(std::string actionName) {
 
 void HapticDevice::resetActuatorsPreRunConfiguration() {
   for (auto actuator : this->m_actuatorsList) {
-    actuator->getDriver()->resetConfiguration();
+    actuator->getDriver()->resetPreRunConfiguration();
   }
 }
 

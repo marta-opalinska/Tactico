@@ -8,7 +8,7 @@ var class_haptic_device =
     [ "addActuators", "class_haptic_device.html#acbbf48b0899126f1a490d4a4bb2c624b", null ],
     [ "clearActions", "class_haptic_device.html#a96ab311be5112d8fe26847cfba59aa21", null ],
     [ "clearActuatorsList", "class_haptic_device.html#a55ef6bda6f6f8acb51cd9b7cde673342", null ],
-    [ "configure", "class_haptic_device.html#a02b59473723b0c64a4c2ea31ba65b8cd", null ],
+    [ "configureAction", "class_haptic_device.html#a277a2f853beded1363309e6d60e35980", null ],
     [ "configureAndPlayAction", "class_haptic_device.html#aefb5fd2c50ff3f4468b8f319329a6ae1", null ],
     [ "getActions", "class_haptic_device.html#a0433b6c941a1d4f631ce1b925e0480ec", null ],
     [ "getActuatorsList", "class_haptic_device.html#ad9400c0a94fc332751f411e3b1bd3bdc", null ],

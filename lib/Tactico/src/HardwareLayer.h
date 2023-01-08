@@ -1,21 +1,16 @@
 /** Copyright 2022 <Marta Opalinska> **/
 
-/**
- * @brief This file need to be implemented by the user.
- * 
- */
-
-#pragma once
-// clang-format off
-// Format need to be turned off - Arduino library need to be compiled as the last one 
-// Arduino min and max function provides errors for NRF5280 chipset.
-#include <Wire.h>
-
 #include <string>
 
-#include <Arduino.h>
-#undef min
-#undef max
+#ifndef TACTICO_PIN_MODES
+#define TACTICO_INPUT 0x0
+#define TACTICO_OUTPUT 0x1
+#endif
+
+/**
+ * @brief This file need to be implemented by the user.
+ *
+ */
 
 /**
  * @brief Implements hardware wait/delay function
@@ -42,7 +37,7 @@ void printTactico(const std::string s);
 void setPinStatusTactico(const int pinNumber, int pinStatus);
 
 /**
- * @brief Implements hardware pin mode setting - INPUT/OUTPUT
+ * @brief Implements hardware pin mode setting -TACTICO_INPUT/TACTICO_OUTPUT
  *
  * @param pinNumber pin number
  * @param pinModeStatus pin status
@@ -71,6 +66,16 @@ void i2c_end();
  * @param data array of characters
  */
 void i2c_write_reg(int address, int registerAddress, int data);
+
+/**
+ * @brief Initiate an I2C write operation, array of char. When the transmission
+ * is done the i2c_endTransmission() function need to be called.
+ *
+ * @param address the 7 bit I2C slave address
+ * @param registerAddress address of the register you wish to access
+ */
+
+void i2c_write(int address, int reg);
 
 /**
  * @brief Initiate an I2C transmission ending process.

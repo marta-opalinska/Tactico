@@ -85,7 +85,7 @@ class ActuatorDriverGPIO : public IActuatorDriver {
    * preconfiguration setup.
    *
    */
-  void resetConfiguration();
+  void resetPreRunConfiguration();
 
   /**
    * @brief Get the ActuatorDriverType of the object

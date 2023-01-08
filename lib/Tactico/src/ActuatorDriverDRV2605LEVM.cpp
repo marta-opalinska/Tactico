@@ -1,7 +1,9 @@
 /** Copyright 2022 <Marta Opalinska> **/
 #include "ActuatorDriverDRV2605LEVM.h"
 
-// bool ActuatorDriverDRV2605LEVM::m_I2C_Initialised = false;
+#ifndef bit(b)
+#define bit(b) (1UL << (b))
+#endif
 
 ActuatorDriverDRV2605LEVM::ActuatorDriverDRV2605LEVM(int driverID, int goPin)
     : m_driverID(driverID) {
@@ -9,7 +11,7 @@ ActuatorDriverDRV2605LEVM::ActuatorDriverDRV2605LEVM(int driverID, int goPin)
   this->m_type = eDRV2505L_EVBOARD;
   this->m_address = DRV2605_ADDR;
   this->m_needsPreconfigration = true;
-  setPinModeTactico(this->m_goPin, OUTPUT);
+  setPinModeTactico(this->m_goPin, TACTICO_OUTPUT);
   this->init();
 }
 
@@ -51,9 +53,6 @@ void ActuatorDriverDRV2605LEVM::initDRV2605L() {
   // turn off open loop for both LRA & ERM - uses close loop
   this->writeRegister(DRV2605_REG_CONTROL3, 0x81);
 
-  // setting open-loop control drive
-  this->writeRegister(DRV2605_REG_CONTROL3, 0x81);
-
   // setting external trigger
   this->writeRegister(DRV2605_REG_MODE, DRV2605_MODE_EXTTRIGEDGE);
   // resetting waveform
@@ -66,7 +65,6 @@ bool ActuatorDriverDRV2605LEVM::setWaveform(int slotNumber,
     if (pattern->getType() == eDRV2505L) {
       this->connectToMotor();
       wait_for_motor_available();
-      Serial.println((String) "Configurating Pattern.On slot " + slotNumber);
       auto DRV2605LPattern(std::static_pointer_cast<PatternDRV2605L>(pattern));
       this->writeRegister(DRV2605_REG_WAVESEQ1 + slotNumber,
                           DRV2605LPattern->m_patternIndex);
@@ -90,17 +88,16 @@ bool ActuatorDriverDRV2605LEVM::setWait(int slotNumber, int miliseconds) {
     wait_for_motor_available();
     // the wait time need to be setup in 7 bits - therefore the register value
     // is need to be capped at 127 (MAX_WAIT_TIME_PER_SLOT)
-    if (miliseconds/10 > MAX_WAIT_TIME_PER_SLOT) {
+    if (miliseconds / 10 > MAX_WAIT_TIME_PER_SLOT) {
       printTactico("WARNING: Wait time for the actuator DRV2605L driver id ");
       printTactico(std::to_string(m_driverID));
       printTactico(" needed to be capped at 1270ms!\n");
     }
 
     int milisecondsCapped = static_cast<int>(
-        static_cast<int>(miliseconds * WAIT_BETWEEN_EFFECTS_MULTIPLIER) % MAX_WAIT_TIME_PER_SLOT);
+        static_cast<int>(miliseconds * WAIT_BETWEEN_EFFECTS_MULTIPLIER) %
+        MAX_WAIT_TIME_PER_SLOT);
     int timeToSend = WAIT_EFFECT_MSB + milisecondsCapped;
-    Serial.println((String) "Configurating Wait. Slot: " + slotNumber +
-                   ", time: " + milisecondsCapped*10);
     this->writeRegister(DRV2605_REG_WAVESEQ1 + slotNumber, timeToSend);
     return true;
   }
@@ -121,7 +118,7 @@ bool ActuatorDriverDRV2605LEVM::play(std::shared_ptr<IPattern> pattern) {
 
 void ActuatorDriverDRV2605LEVM::test() {
   std::shared_ptr<PatternDRV2605L> testPattern =
-      std::make_shared<PatternDRV2605L>(48);
+      std::make_shared<PatternDRV2605L>(BUZZ_1_100);
   this->setWaveform(0, testPattern);
   this->setWait(1, 300);
   this->setWaveform(2, testPattern);
@@ -131,9 +128,9 @@ void ActuatorDriverDRV2605LEVM::test() {
 }
 
 void ActuatorDriverDRV2605LEVM::go() {
-  digitalWrite(this->m_goPin, HIGH);
-  delay(100);
-  digitalWrite(this->m_goPin, LOW);
+  setPinStatusTactico(this->m_goPin, 1);
+  waitFor(100);
+  setPinStatusTactico(this->m_goPin, 0);
   while (this->readRegister(0x0C)) {
   }
 }
@@ -148,9 +145,7 @@ void ActuatorDriverDRV2605LEVM::resetSequence() {
 
 void ActuatorDriverDRV2605LEVM::connectToMotor() {
   int motor_bit = bit(this->m_driverID);
-  Wire.beginTransmission(TCA9548_ADDR);
-  Wire.write(motor_bit);
-  Wire.endTransmission();
+  i2c_write(TCA9548_ADDR, motor_bit);
 }
 
 void ActuatorDriverDRV2605LEVM::wait_for_motor_available() {
@@ -183,18 +178,12 @@ bool ActuatorDriverDRV2605LEVM::config(ActuatorType type, float ratedVoltage,
   return true;
 }
 
-void ActuatorDriverDRV2605LEVM::resetConfiguration(){
-  this->resetSequence();
-}
+void ActuatorDriverDRV2605LEVM::resetPreRunConfiguration() { this->resetSequence(); }
 
 bool ActuatorDriverDRV2605LEVM::setupLRA(float ratedVoltage,
                                          float overdriveVoltage,
                                          int frequency) {
-  this->writeRegister(DRV2605_REG_FEEDBACK,
-                      this->readRegister(DRV2605_REG_FEEDBACK) | 0x80);
-  // library type selection - only one LRA library available
-  this->writeRegister(DRV2605_REG_LIBRARY, 0x06);
-  // CLOSE LOOP setup
+  this->connectToMotor();
   this->writeRegister(DRV2605_REG_FEEDBACK,
                       this->readRegister(DRV2605_REG_FEEDBACK) | 0x80);
   // library type selection - only one LRA library available
@@ -206,6 +195,7 @@ bool ActuatorDriverDRV2605LEVM::setupLRA(float ratedVoltage,
   int ratedVoltageReg = static_cast<int>((voltage_abs * 255) / 5.28);
   // setting rated voltage
   this->writeRegister(DRV2605_REG_RATEDV, ratedVoltageReg);
+
   // calculating overdrive voltage clamp
   int overdriveClamp = static_cast<int>((overdriveVoltage * 255) / 5.6);
   // setting max voltage
@@ -214,6 +204,7 @@ bool ActuatorDriverDRV2605LEVM::setupLRA(float ratedVoltage,
 }
 bool ActuatorDriverDRV2605LEVM::setupERM(float ratedVoltage,
                                          float overdriveVoltage) {
+  this->connectToMotor();
   this->writeRegister(DRV2605_REG_FEEDBACK,
                       this->readRegister(DRV2605_REG_FEEDBACK) & 0x7F);
   /** simplified library type selection - different categories depending on

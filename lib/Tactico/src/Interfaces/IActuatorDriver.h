@@ -53,7 +53,7 @@ class IActuatorDriver {
    */
   virtual void test() = 0;
 
-  virtual void resetConfiguration() = 0;
+  virtual void resetPreRunConfiguration() = 0;
 
   /**
    * @brief Get the driver's type

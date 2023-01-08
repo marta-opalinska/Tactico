@@ -5,7 +5,7 @@ var class_actuator_driver_g_p_i_o =
     [ "getType", "class_actuator_driver_g_p_i_o.html#ab4eb846cfe0bc47279e0c94003c2f14e", null ],
     [ "init", "class_actuator_driver_g_p_i_o.html#aa9739b678b0c6ba5589faf93873c2876", null ],
     [ "play", "class_actuator_driver_g_p_i_o.html#a0501cfa6e66eafab6276591785f7ede8", null ],
-    [ "resetConfiguration", "class_actuator_driver_g_p_i_o.html#a828311dc9f98c2298cbc73bc0b159626", null ],
+    [ "resetPreRunConfiguration", "class_actuator_driver_g_p_i_o.html#a73db8af4bacb9dcd6c7aeb5f8df4d4e4", null ],
     [ "setGPIOHigh", "class_actuator_driver_g_p_i_o.html#a47a544bc74a19f46ac7a68d4cc93e30e", null ],
     [ "setGPIOLow", "class_actuator_driver_g_p_i_o.html#a97bad6915c500f31a870346c75cd284d", null ],
     [ "setPin", "class_actuator_driver_g_p_i_o.html#a3500159afd6ca2b7fffba45eefe184d3", null ],

@@ -132,9 +132,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3500159afd6ca2b7fffba45eefe184d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_actuator_driver_g_p_i_o.html#a3500159afd6ca2b7fffba45eefe184d3">setPin</a> (int new_GPIO)</td></tr>
 <tr class="memdesc:a3500159afd6ca2b7fffba45eefe184d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the control GPIO pin.  <br /></td></tr>
 <tr class="separator:a3500159afd6ca2b7fffba45eefe184d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a828311dc9f98c2298cbc73bc0b159626"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_actuator_driver_g_p_i_o.html#a828311dc9f98c2298cbc73bc0b159626">resetConfiguration</a> ()</td></tr>
-<tr class="memdesc:a828311dc9f98c2298cbc73bc0b159626"><td class="mdescLeft">&#160;</td><td class="mdescRight">No configuration to reset for GPIO driver. Only for drivers with preconfiguration setup.  <br /></td></tr>
-<tr class="separator:a828311dc9f98c2298cbc73bc0b159626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73db8af4bacb9dcd6c7aeb5f8df4d4e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_actuator_driver_g_p_i_o.html#a73db8af4bacb9dcd6c7aeb5f8df4d4e4">resetPreRunConfiguration</a> ()</td></tr>
+<tr class="memdesc:a73db8af4bacb9dcd6c7aeb5f8df4d4e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">No configuration to reset for GPIO driver. Only for drivers with preconfiguration setup.  <br /></td></tr>
+<tr class="separator:a73db8af4bacb9dcd6c7aeb5f8df4d4e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4eb846cfe0bc47279e0c94003c2f14e"><td class="memItemLeft" align="right" valign="top">ActuatorDriverType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_actuator_driver_g_p_i_o.html#ab4eb846cfe0bc47279e0c94003c2f14e">getType</a> ()</td></tr>
 <tr class="memdesc:ab4eb846cfe0bc47279e0c94003c2f14e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ActuatorDriverType of the object.  <br /></td></tr>
 <tr class="separator:ab4eb846cfe0bc47279e0c94003c2f14e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,8 +147,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a96a92e535e2c3ff72c174973e554f2c5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_actuator_driver.html#a96a92e535e2c3ff72c174973e554f2c5">test</a> ()=0</td></tr>
 <tr class="memdesc:a96a92e535e2c3ff72c174973e554f2c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Driver testing.  <br /></td></tr>
 <tr class="separator:a96a92e535e2c3ff72c174973e554f2c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39257280e844754aae03d22fe1f25e75"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_actuator_driver.html#a39257280e844754aae03d22fe1f25e75">resetConfiguration</a> ()=0</td></tr>
-<tr class="separator:a39257280e844754aae03d22fe1f25e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad16a12279f2ef8a9ecf009ac56856db8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_actuator_driver.html#ad16a12279f2ef8a9ecf009ac56856db8">resetPreRunConfiguration</a> ()=0</td></tr>
+<tr class="separator:ad16a12279f2ef8a9ecf009ac56856db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a591fd8c0e1a54639a29ff6d6d56a5a29"><td class="memItemLeft" align="right" valign="top">virtual ActuatorDriverType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_actuator_driver.html#a591fd8c0e1a54639a29ff6d6d56a5a29">getType</a> ()=0</td></tr>
 <tr class="memdesc:a591fd8c0e1a54639a29ff6d6d56a5a29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the driver's type.  <br /></td></tr>
 <tr class="separator:a591fd8c0e1a54639a29ff6d6d56a5a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -331,8 +331,8 @@ false </dd></dl>
 
 </div>
 </div>
-<a id="a828311dc9f98c2298cbc73bc0b159626" name="a828311dc9f98c2298cbc73bc0b159626"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a828311dc9f98c2298cbc73bc0b159626">&#9670;&#160;</a></span>resetConfiguration()</h2>
+<a id="a73db8af4bacb9dcd6c7aeb5f8df4d4e4" name="a73db8af4bacb9dcd6c7aeb5f8df4d4e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73db8af4bacb9dcd6c7aeb5f8df4d4e4">&#9670;&#160;</a></span>resetPreRunConfiguration()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -341,7 +341,7 @@ false </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void ActuatorDriverGPIO::resetConfiguration </td>
+          <td class="memname">void ActuatorDriverGPIO::resetPreRunConfiguration </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

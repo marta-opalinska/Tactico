@@ -6,7 +6,7 @@ var class_actuator_driver_i2_c =
     [ "initI2CBus", "class_actuator_driver_i2_c.html#a945ee623197195ea211677be22180095", null ],
     [ "play", "class_actuator_driver_i2_c.html#aa8ad8ebda09e264e5baea1cce1a195bb", null ],
     [ "readRegister", "class_actuator_driver_i2_c.html#aed88439743e407a8054a683fb0c59e7c", null ],
-    [ "resetConfiguration", "class_actuator_driver_i2_c.html#aede2bc42a7a92f9da5001939a671a26c", null ],
+    [ "resetPreRunConfiguration", "class_actuator_driver_i2_c.html#aafd7bfcb7d52f50a4a910beed8875e5f", null ],
     [ "setAddress", "class_actuator_driver_i2_c.html#ac6dfa3453353944149fbf0ab80634da7", null ],
     [ "test", "class_actuator_driver_i2_c.html#a0e72ac12757422f7a64fcd4556574b28", null ],
     [ "writeRegister", "class_actuator_driver_i2_c.html#a087cd50631347f73437d2d5d3945751d", null ],

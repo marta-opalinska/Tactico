@@ -114,7 +114,7 @@ class ActuatorDriverI2C : public IActuatorDriver {
    * @brief Need to be implemented by the implementation class.
    *
    */
-  virtual void resetConfiguration() = 0;
+  virtual void resetPreRunConfiguration() = 0;
 
   /**
    * @brief Get the ActuatorDriverType of the object

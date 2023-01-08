@@ -50,6 +50,7 @@ Functions to implement can be found in **Tactico\src\HardwareLayer.cpp**:
 - void **setPinModeTactico**(const int pinNumber, int pinModeStatus);
 - void **i2c_begin**();
 - void **i2c_write_reg**(int address, int reg, int data);
+- void **i2c_write**(int address, int reg);
 - void **i2c_endTransmission**();
 - int **i2c_read**(int address, int reg, int numberBytes);
 

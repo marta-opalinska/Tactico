@@ -5,71 +5,70 @@
 \DoxyCodeLine{00001\ }
 \DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <Interfaces/IActuator.h>}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <SPI.h>}}
-\DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <algorithm>}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <map>}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}Action.h"{}}}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_haptic_device}{HapticDevice}}\ \{}
-\DoxyCodeLine{00027\ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_haptic_device_acd007ad146fb2d5d919812ba5e644a5d}{nextID}};}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ \mbox{\hyperlink{class_haptic_device_ae5ca88644e8309a70e002f3311991823}{defaultName}};}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_haptic_device_a19f549f697ea87620f23933663a431b0}{id}};}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00048\ \ \ std::vector<std::shared\_ptr<IActuator>>\ \mbox{\hyperlink{class_haptic_device_a4dffe9ff4d1102b499b4250309411297}{m\_actuatorsList}};}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00053\ \ \ std::map<std::string,\ std::shared\_ptr<Action>>\ \mbox{\hyperlink{class_haptic_device_a4e4ede8286f1f1cdedbe4c0450a58878}{m\_deviceActions}};}
-\DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00059\ \ \ std::string\ \mbox{\hyperlink{class_haptic_device_ae57a649eb983d6450b992429e748621a}{m\_name}};}
-\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{class_haptic_device}{HapticDevice}}()\ =\ \textcolor{keywordflow}{default};}
-\DoxyCodeLine{00061\ \ \ \mbox{\hyperlink{class_haptic_device}{\string~HapticDevice}}()\ =\ \textcolor{keywordflow}{default};}
-\DoxyCodeLine{00068\ \ \ \mbox{\hyperlink{class_haptic_device}{HapticDevice}}(std::vector<std::shared\_ptr<IActuator>>\ actuatorsList,}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{00070\ }
-\DoxyCodeLine{00077\ \ \ \mbox{\hyperlink{class_haptic_device}{HapticDevice}}(std::shared\_ptr<IActuator>\ singleActuator,}
-\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{00079\ }
-\DoxyCodeLine{00085\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a906f01c9d0ba1995a838249d6667615b}{addActuator}}(std::shared\_ptr<IActuator>\ actuator);}
-\DoxyCodeLine{00086\ }
-\DoxyCodeLine{00092\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_acbbf48b0899126f1a490d4a4bb2c624b}{addActuators}}(std::vector<std::shared\_ptr<IActuator>>\ actuatorsVector);}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00099\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a0d8ca6fe81400346209b671b067bba66}{removeActuator}}(std::shared\_ptr<IActuator>\ actuator);}
-\DoxyCodeLine{00100\ }
-\DoxyCodeLine{00107\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a0d8ca6fe81400346209b671b067bba66}{removeActuator}}(\textcolor{keywordtype}{int}\ actuatorPosition);}
-\DoxyCodeLine{00108\ }
-\DoxyCodeLine{00114\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a0d8ca6fe81400346209b671b067bba66}{removeActuator}}(\textcolor{keyword}{const}\ std::string\&\ name);}
-\DoxyCodeLine{00115\ }
-\DoxyCodeLine{00121\ \ \ std::vector<std::shared\_ptr<IActuator>>\ \mbox{\hyperlink{class_haptic_device_ad9400c0a94fc332751f411e3b1bd3bdc}{getActuatorsList}}();}
-\DoxyCodeLine{00122\ }
-\DoxyCodeLine{00128\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a22c29568362c80da1087c9dd04390f6c}{testActuators}}();}
-\DoxyCodeLine{00129\ }
-\DoxyCodeLine{00134\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a55ef6bda6f6f8acb51cd9b7cde673342}{clearActuatorsList}}();}
-\DoxyCodeLine{00135\ }
-\DoxyCodeLine{00141\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a795a255f10fe35a0b1d147e177ae58ae}{addActions}}(std::map<std::string,\ std::shared\_ptr<Action>>\ deviceActions);}
-\DoxyCodeLine{00142\ }
-\DoxyCodeLine{00149\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a2c3afb038f08a29812edc0a55f35e352}{addAction}}(std::shared\_ptr<Action>\ deviceAction,\ std::string\ actionName);}
-\DoxyCodeLine{00150\ }
-\DoxyCodeLine{00156\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_ab80da6cbafbcf2a546c91cab5b48e744}{removeAction}}(std::string\ actionName);}
-\DoxyCodeLine{00157\ }
-\DoxyCodeLine{00162\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a96ab311be5112d8fe26847cfba59aa21}{clearActions}}();}
-\DoxyCodeLine{00163\ }
-\DoxyCodeLine{00170\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a02b59473723b0c64a4c2ea31ba65b8cd}{configure}}(std::string\ actionName);}
-\DoxyCodeLine{00171\ }
-\DoxyCodeLine{00178\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a21ff8379a2bb1c5d80a23952cc9234cd}{playAction}}(std::string\ actionName);}
-\DoxyCodeLine{00179\ }
-\DoxyCodeLine{00185\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_aefb5fd2c50ff3f4468b8f319329a6ae1}{configureAndPlayAction}}(std::string\ actionName);}
-\DoxyCodeLine{00186\ }
-\DoxyCodeLine{00193\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a362cb4006ebc6b38227945deb12fbf53}{resetActuatorsPreRunConfiguration}}();}
-\DoxyCodeLine{00194\ }
-\DoxyCodeLine{00200\ \ \ std::map<std::string,\ std::shared\_ptr<Action>>\ \mbox{\hyperlink{class_haptic_device_a0433b6c941a1d4f631ce1b925e0480ec}{getActions}}();}
-\DoxyCodeLine{00201\ \};}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}Action.h"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_haptic_device}{HapticDevice}}\ \{}
+\DoxyCodeLine{00026\ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_haptic_device_acd007ad146fb2d5d919812ba5e644a5d}{nextID}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ \mbox{\hyperlink{class_haptic_device_ae5ca88644e8309a70e002f3311991823}{defaultName}};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_haptic_device_a19f549f697ea87620f23933663a431b0}{id}};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ std::vector<std::shared\_ptr<IActuator>>\ \mbox{\hyperlink{class_haptic_device_a4dffe9ff4d1102b499b4250309411297}{m\_actuatorsList}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \ \ std::map<std::string,\ std::shared\_ptr<Action>>\ \mbox{\hyperlink{class_haptic_device_a4e4ede8286f1f1cdedbe4c0450a58878}{m\_deviceActions}};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00058\ \ \ std::string\ \mbox{\hyperlink{class_haptic_device_ae57a649eb983d6450b992429e748621a}{m\_name}};}
+\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{class_haptic_device}{HapticDevice}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{class_haptic_device}{\string~HapticDevice}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{class_haptic_device}{HapticDevice}}(std::vector<std::shared\_ptr<IActuator>>\ actuatorsList,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{class_haptic_device}{HapticDevice}}(std::shared\_ptr<IActuator>\ singleActuator,}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a906f01c9d0ba1995a838249d6667615b}{addActuator}}(std::shared\_ptr<IActuator>\ actuator);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_acbbf48b0899126f1a490d4a4bb2c624b}{addActuators}}(std::vector<std::shared\_ptr<IActuator>>\ actuatorsVector);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a0d8ca6fe81400346209b671b067bba66}{removeActuator}}(std::shared\_ptr<IActuator>\ actuator);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a0d8ca6fe81400346209b671b067bba66}{removeActuator}}(\textcolor{keywordtype}{int}\ actuatorPosition);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00113\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a0d8ca6fe81400346209b671b067bba66}{removeActuator}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00120\ \ \ std::vector<std::shared\_ptr<IActuator>>\ \mbox{\hyperlink{class_haptic_device_ad9400c0a94fc332751f411e3b1bd3bdc}{getActuatorsList}}();}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00127\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a22c29568362c80da1087c9dd04390f6c}{testActuators}}();}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00133\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a55ef6bda6f6f8acb51cd9b7cde673342}{clearActuatorsList}}();}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00140\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a795a255f10fe35a0b1d147e177ae58ae}{addActions}}(std::map<std::string,\ std::shared\_ptr<Action>>\ deviceActions);}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00148\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a2c3afb038f08a29812edc0a55f35e352}{addAction}}(std::shared\_ptr<Action>\ deviceAction,\ std::string\ actionName);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00155\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_ab80da6cbafbcf2a546c91cab5b48e744}{removeAction}}(std::string\ actionName);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00161\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a96ab311be5112d8fe26847cfba59aa21}{clearActions}}();}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00169\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a277a2f853beded1363309e6d60e35980}{configureAction}}(std::string\ actionName);}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a21ff8379a2bb1c5d80a23952cc9234cd}{playAction}}(std::string\ actionName);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00184\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_aefb5fd2c50ff3f4468b8f319329a6ae1}{configureAndPlayAction}}(std::string\ actionName);}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00192\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_haptic_device_a362cb4006ebc6b38227945deb12fbf53}{resetActuatorsPreRunConfiguration}}();}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00199\ \ \ std::map<std::string,\ std::shared\_ptr<Action>>\ \mbox{\hyperlink{class_haptic_device_a0433b6c941a1d4f631ce1b925e0480ec}{getActions}}();}
+\DoxyCodeLine{00200\ \};}
 
 \end{DoxyCode}
