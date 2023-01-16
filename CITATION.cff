@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+title: Tactico - A software framework for wireless control of body-worn haptics
+abstract: Tactico is a hardware independent C++ open-sourced framework for haptic device setup and control. 
+          It is suitable for different types of actuators and actuator drivers.Currently, the framework supports Linear Resonant Actuator (LRA) and 
+          Eccentric Rotating Mass (ERM) motors, but the modular architecture makes new hardware integration easy. The control module can be wired or wireless, 
+          depending on your preference.
+authors:
+  - family-names: Opalinska
+    given-names: Marta
+version: v1.3
+date-released: "2022-01-08"
+license: MIT License
+repository-code: "https://github.com/marta-opalinska/Tactico"
